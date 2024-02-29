@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;600;700&family=Rubik:wght@300;400;500;600&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #666666;
+}
+.logo {
+  margin-left: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-family: "Montserrat";
+  font-size: 15px;
+  font-weight: 700;
+}
+.logo img {
+  margin-right: 15px;
+  width: 40px;
+}
+nav {
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  height: 100%;
+  width: 250px;
+  padding: 12px 20px;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  overflow-y: scroll;
+  transition: all 0.5s ease;
+}
+nav::-webkit-scrollbar {
+  display: none;
+}
+.menu-bar {
+  margin-top: 20px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.menu-items {
+  padding: 0;
+  list-style: none;
+}
+.side-bar .navlink span {
+  font-family: "Lato";
+  font-size: 17px;
+  font-weight: 700;
+  transition: 0.5s ease;
+}
+.side-bar .navlink {
+  display: flex;
+  text-decoration: none;
+  padding: 15px 20px;
+  width: 100%;
+  user-select: none;
+  white-space: nowrap;
+  margin-top: 7px;
+  align-items: center;
+  border-radius: 7px;
+}
+.navlink:hover {
+  background: #4b4b4b;
+  color: #fff;
+  cursor: pointer;
+}
+nav i {
+  position: relative;
+  min-width: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  text-align: center;
+}
+.menu-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 250px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.content {
+  padding: 30px 50px;
+  position: absolute;
+  width: calc(100% - 250px);
+  left: 250px;
+  transition: all 0.5s ease;
+}
+.side-bar.close {
+  padding: 75px 0;
+  width: 80px;
+}
+.side-bar.close .navlink span,
+.side-bar.close .logo h1 {
+  display: none;
+}
+.side-bar.close .logo {
+  margin-left: 10px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: -50px;
+}
+.side-bar.close .logo img {
+  width: 50px;
+}
+.side-bar.close ~ .content {
+  left: 78px;
+  width: calc(100% - 78px);
+}
+.side-bar.close ~ .footer {
+  left: 0px;
+}
+.footer {
+  position: fixed;
+  bottom: 30px;
+  left: 100px;
+  width: 250px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+input[type="checkbox"]:checked ~ .borgar .top {
+  transform: rotate(-45deg);
+  width: 70px;
+  transform-origin: right;
+  top: -25px;
+}
+.icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 35px;
+  width: 35px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.icon i {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+}
+.icon.active i.close {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+.icon.active i.open {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+.icon i.close {
+  opacity: 0;
+}
+.footer .icon.active {
+  background: red;
+}
+.footer .icon.active i {
+  color: white;
+}
+/*
+nav.close ul li.active {
+  transform: translateX(30px);
+}
+nav ul li.active {
+  transform: translateX(10px);
+}
+nav ul li i {
+  padding: 15px;
+  border-radius: 10px;
+}
+nav ul li.active i {
+  background: yellow;
+  color: white;
+}
+*/

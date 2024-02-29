@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Olivarez College Tagaytay</title>
+    <link rel="stylesheet" href="generate.css" />
+    <link
+      rel="icon"
+      type="x-icon"
+      href="./img/olivarez-college-tagaytay-logo.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <img src="./img/olivarez-college-tagaytay-logo.png" alt="" />
+          <span
+            >Olivarez College <br />
+            Tagaytay</span
+          >
+        </div>
+        <ul>
+          <li class="list-items">
+            <a href="./generate.html" class="active"
+              ><i class="fa-solid fa-circle-plus"></i
+              ><span class="nav-lists">Generate Schedule</span></a
+            >
+          </li>
+          <li class="list-items">
+            <a href="./dashboard.html"
+              ><i class="fa-solid fa-tv"></i
+              ><span class="nav-lists">Dashboard</span></a
+            >
+          </li>
+          <li class="list-items">
+            <a href="./teachers.html"
+              ><i class="fa-solid fa-chalkboard-user"></i
+              ><span class="nav-lists">Teachers</span></a
+            >
+          </li>
+          <li class="list-items">
+            <a href="./section.html"
+              ><i class="fa-solid fa-users-rectangle"></i
+              ><span class="nav-lists">Sections</span></a
+            >
+          </li>
+          <li class="list-items">
+            <a href="./subject.html"
+              ><i class="fa-solid fa-book"></i
+              ><span class="nav-lists">Subjects</span></a
+            >
+          </li>
+          <li>
+            <a href="./login.html" class="logout"
+              ><i class="fa-solid fa-right-from-bracket"></i
+              ><span class="nav-lists">Logout</span></a
+            >
+          </li>
+        </ul>
+      </nav>
+      <div class="bg-modal">
+        <div class="modal-content">
+          <div class="close-window"><i class="fa-solid fa-xmark"></i></div>
+          <div class="modal-container">
+            <div class="progress-bar">
+              <div class="step">
+                <p>Section</p>
+                <div class="bullet">
+                  <span>1</span>
+                </div>
+                <div class="check fas fa-check"></div>
+              </div>
+              <div class="step">
+                <p>Subjects</p>
+                <div class="bullet">
+                  <span>2</span>
+                </div>
+                <div class="check fas fa-check"></div>
+              </div>
+              <div class="step">
+                <p>Instructors</p>
+                <div class="bullet">
+                  <span>3</span>
+                </div>
+                <div class="check fas fa-check"></div>
+              </div>
+              <div class="step">
+                <p>Finalize</p>
+                <div class="bullet">
+                  <span>4</span>
+                </div>
+                <div class="check fas fa-check"></div>
+              </div>
+              <div class="step">
+                <p>Submit</p>
+                <div class="bullet">
+                  <span>5</span>
+                </div>
+                <div class="check fas fa-check"></div>
+              </div>
+            </div>
+            <div class="form-outer">
+              <form action="#">
+                <div class="page slide-page">
+                  <div class="title">Select sections</div>
+                  <h1>Basta table dito</h1>
+                  <div class="field">
+                    <button class="firstNext next">Next</button>
+                  </div>
+                </div>
+
+                <div class="page">
+                  <div class="title">Apply Subjects</div>
+                  <h1>Dito din ata</h1>
+                  <div class="field btns">
+                    <button class="prev-1 prev">Previous</button>
+                    <button class="next-1 next">Next</button>
+                  </div>
+                </div>
+                <div class="page">
+                  <div class="title">Apply Instructors</div>
+                  <h1>Baka dito din na may unting inputs</h1>
+                  <div class="field btns">
+                    <button class="prev-2 prev">Previous</button>
+                    <button class="next-2 next">Next</button>
+                  </div>
+                </div>
+                <div class="page">
+                  <div class="title">Finalize the schedule:</div>
+
+                  <div class="field btns">
+                    <button class="prev-3 prev">Previous</button>
+                    <button class="next-3 next">Next</button>
+                  </div>
+                </div>
+
+                <div class="page">
+                  <div class="title">Di ko na alam ano ilalagay</div>
+                  <div class="field btns">
+                    <button class="prev-4 prev">Previous</button>
+                    <button class="submit">Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="main-logo">
+          <h1>Generate a <span>Schedule</span></h1>
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="button-container">
+          <button class="modal-button"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="generate-lists">
+          <div class="generate-table">
+            <div class="table-header">
+              <h1>List of Instructors</h1>
+              <div class="table-search">
+                <form class="search-container">
+                  <input
+                    id="search-box"
+                    type="text"
+                    class="search-box"
+                    name=""
+                  />
+                  <label for="search-box"
+                    ><i class="fa-solid fa-magnifying-glass search-icon"></i
+                  ></label>
+                  <input type="submit" id="search-submit" />
+                </form>
+              </div>
+            </div>
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Section</th>
+                    <th>Strand</th>
+                    <th>Schedule</th>
+                    <th>Time</th>
+                    <th>Adviser</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tues,Fri</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td>
+                    <td>
+                      <button>
+                        <span>View</span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./generate.js"></script>
+  </body>
+</html>

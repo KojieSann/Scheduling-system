@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;600;700&family=Rubik:wght@300;400;500;600&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.logo {
+  margin: 20px 0 40px 20px;
+  align-items: center;
+  display: flex;
+  transition: all 0, 5s ease;
+}
+.logo img {
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  right: 50px;
+}
+.logo span {
+  color: #4b4b4b;
+  margin-left: 30px;
+  font-weight: 700;
+  font-size: 20px;
+}
+nav a {
+  text-decoration: none;
+  color: #4b4b4b;
+  font-size: 15px;
+  width: 300px;
+  padding: 10px;
+  position: relative;
+  display: table;
+  font-family: "montserrat";
+  font-weight: 600;
+}
+nav {
+  border-top-right-radius: 20px;
+  outline: none;
+  text-decoration: none;
+  background: #d8f3dc;
+  font-family: "Montserrat";
+  height: 100%;
+  width: 100px;
+  position: absolute;
+  transition: width 0.2s linear;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 10px 0 0 #fff;
+  overflow: hidden;
+}
+
+nav i {
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 14px;
+  font-size: 20px;
+  text-align: center;
+}
+.nav-lists {
+  position: relative;
+  top: 12px;
+  margin-left: 20px;
+}
+nav a:hover {
+  transition: all 0.5s ease;
+  background: linear-gradient(to right, #95d5b2, transparent);
+  color: #4b4b4b;
+  border-left: 7px solid #2d6a4f;
+  color: white;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+.logout {
+  bottom: 5px;
+  position: absolute;
+}
