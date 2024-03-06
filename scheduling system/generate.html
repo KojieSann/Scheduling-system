@@ -67,6 +67,14 @@
           </li>
         </ul>
       </nav>
+      <div class="bg-modal-subject">
+        <div class="modal-content-subject">
+          <div class="close-subject"><i class="fa-solid fa-xmark"></i></div>
+          <!-- <header class="dragable">
+            <i class="fa-solid fa-up-down-left-right"></i>
+          </header> -->
+        </div>
+      </div>
       <div class="bg-modal">
         <div class="modal-content">
           <div class="close-window"><i class="fa-solid fa-xmark"></i></div>
@@ -111,16 +119,138 @@
             <div class="form-outer">
               <form action="#">
                 <div class="page slide-page">
-                  <div class="title">Select sections</div>
-                  <h1>Basta table dito</h1>
-                  <div class="field">
-                    <button class="firstNext next">Next</button>
+                  <div class="title">Select section</div>
+                  <div class="table-container-modal">
+                    <table class="section-table">
+                      <thead>
+                        <tr>
+                          <th>Section</th>
+                          <th>Strand</th>
+                          <th>Grade lvl</th>
+                          <th>Schedule</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Sampaguita</td>
+                          <td>HUMSS</td>
+                          <td>Grade 11</td>
+                          <td>None</td>
+                          <td>
+                            <button class="firstNext next">
+                              Next <i class="fa-solid fa-angle-right"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Sampaguita</td>
+                          <td>HUMSS</td>
+                          <td>Grade 11</td>
+                          <td>None</td>
+                          <td>
+                            <button class="firstNext next">
+                              Next <i class="fa-solid fa-angle-right"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
 
                 <div class="page">
                   <div class="title">Apply Subjects</div>
-                  <h1>Dito din ata</h1>
+                  <div class="input-container">
+                    <div class="input-wrapper">
+                      <span>Section</span>
+                      <input
+                        readonly
+                        type="text"
+                        class="input"
+                        placeholder="Sampaguita
+                        "
+                      />
+                    </div>
+                    <div class="input-wrapper">
+                      <span>Strand</span>
+                      <input
+                        readonly
+                        type="text"
+                        class="input"
+                        placeholder="HUMSS
+                        "
+                      />
+                    </div>
+                    <div class="input-wrapper">
+                      <span>Grade level</span>
+                      <input
+                        readonly
+                        type="text"
+                        class="input"
+                        placeholder="Grade 11
+                        "
+                      />
+                    </div>
+                  </div>
+                  <table class="section-table">
+                    <thead>
+                      <tr>
+                        <th>Subjects</th>
+                        <th>Code</th>
+                        <th>Strand</th>
+                        <th>Grade lvl</th>
+
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>English</td>
+                        <td>SR 519</td>
+                        <td>HUMSS</td>
+                        <td>Grade 11</td>
+
+                        <td class="status">
+                          <div class="done">
+                            <i class="fa-regular fa-circle-check"></i> Done
+                          </div>
+                        </td>
+                        <td>
+                          <button class="open-modal">Apply</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>loving me 101</td>
+                        <td>IT 201</td>
+                        <td>HUMSS</td>
+                        <td>Grade 11</td>
+                        <td class="status">
+                          <div class="in-progress">
+                            <i class="fa-regular fa-clock"></i> In Progress
+                          </div>
+                        </td>
+                        <td>
+                          <button class="open-modal">Apply</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>8 Ball Pool</td>
+                        <td>08 Bol</td>
+                        <td>HUMSS</td>
+                        <td>Grade 11</td>
+                        <td class="status">
+                          <div class="in-progress">
+                            <i class="fa-regular fa-clock"></i> In Progress
+                          </div>
+                        </td>
+                        <td>
+                          <button class="open-modal">Apply</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                   <div class="field btns">
                     <button class="prev-1 prev">Previous</button>
                     <button class="next-1 next">Next</button>
@@ -128,7 +258,7 @@
                 </div>
                 <div class="page">
                   <div class="title">Apply Instructors</div>
-                  <h1>Baka dito din na may unting inputs</h1>
+
                   <div class="field btns">
                     <button class="prev-2 prev">Previous</button>
                     <button class="next-2 next">Next</button>
@@ -166,14 +296,14 @@
         <div class="generate-lists">
           <div class="generate-table">
             <div class="list-strands">
-              <button>ALL</button>
+              <button class="active">ALL</button>
               <button>STEM</button>
               <button>HUMSS</button>
               <button>ABM</button><button>ICT</button>
               <button>HE</button>
             </div>
             <div class="table-header">
-              <h1>List of Instructors</h1>
+              <h1>Schedules</h1>
               <div class="table-search">
                 <form class="search-container">
                   <input
@@ -196,6 +326,8 @@
                     <th>Section</th>
                     <th>Strand</th>
                     <th>Schedule</th>
+                    <th>Sem</th>
+                    <th>SY</th>
                     <th>Time</th>
                     <th>Adviser</th>
                     <th>Action</th>
@@ -206,6 +338,8 @@
                     <td>Sampaguita</td>
                     <td>HUMSS</td>
                     <td>Mon,Tues,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
                     <td>AM</td>
                     <td>Papa Andrei</td>
                     <td>

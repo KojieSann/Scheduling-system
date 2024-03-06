@@ -6,9 +6,31 @@ modalButton.addEventListener("click", function () {
 closeModal.addEventListener("click", function () {
   document.querySelector(".bg-modal").style.display = "none";
 });
+const modalSubject = document.querySelector(".open-modal");
+const closeModalSubject = document.querySelector(".close-subject");
+modalSubject.addEventListener("click", function () {
+  document.querySelector(".bg-modal-subject").style.display = "flex";
+});
+closeModalSubject.addEventListener("click", function () {
+  document.querySelector(".bg-modal-subject").style.display = "none";
+});
+// modal for subject
+// to make it draggable hehe
+// const modalSubject = document.querySelector(".modal-content-subject"),
+//   drag = modalSubject.querySelector(".dragable");
+// function ondrag({ movementX, movementY }) {
+//   let getStyle = window.getComputedStyle(modalSubject);
+//   let left = parseInt(getStyle.left);
+//   let top = parseInt(getStyle.top);
+
+//   modalSubject.style.left = `${left + movementX}px`;
+//   modalSubject.style.top = `${top + movementY}px`;
+// }
+// drag.addEventListener("mousedown", () => {
+//   drag.addEventListener("mousemove", ondrag);
+// });
 
 initMultiStepForm();
-
 function initMultiStepForm() {
   const progressNumber = document.querySelectorAll(".step").length;
   const slidePage = document.querySelector(".slide-page");
