@@ -4,11 +4,10 @@
   --secondary: #333;
   --errorColor: red;
   --stepNumber: 6;
-  --containerWidth: 600px;
+  --containerWidth: 300px;
   --bgColor: #333;
   --inputBorderColor: lightgray;
 }
-
 * {
   user-select: none;
   padding: 0;
@@ -192,25 +191,64 @@ ul .list-items:hover i::after {
   font-family: "montserrat";
   font-size: 12px;
 }
-.table button span {
-  text-transform: uppercase;
-  color: #fff;
-  font-size: 13px;
-  font-family: "Poppins";
-  font-weight: 700;
-  text-align: center;
-  align-items: center;
+.table .toggleDropdown span {
+  color: rgb(0, 0, 0, 0.6);
+  font-size: 11px;
 }
-.table td button:hover {
-  background: #2d6a4f;
-}
-.table td button {
+.table td .toggleDropdown {
+  border-radius: 7px;
   transition: all 0.5s ease;
   border: none;
   cursor: pointer;
+  background-color: rgb(0, 0, 0, 0.05);
+  padding: 8px 13px;
+}
+.table td .toggleDropdown:hover {
+  background-color: rgb(0, 0, 0, 0.1);
+}
+.dropdown-table {
+  height: 25px;
+  width: 25px;
+  border: 1px solid #eeeeee;
+}
+.dropdown-table.activeShow .option-table {
+  display: block;
+}
+.dropdown-table.activeShow .icon-down {
+  transform: rotate(180deg);
+}
+.dropdown-table .icon-down {
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.dropdown-table .option-table i {
+  font-size: 13px;
+  margin-right: 3px;
+}
+.dropdown-table .option-table {
+  position: absolute;
+  display: none;
+  padding: 3px;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  color: #4b4b4b;
+  z-index: 100;
+  border: 0.5px solid #dddddd;
+}
+.dropdown-table .option-table div {
+  font-family: "montserrat";
+  font-size: 14px;
+  padding: 10px 15px;
+}
+.dropdown-table .option-table div:hover {
   background-color: #74c69d;
-  padding: 3px 15px;
-  border-radius: 3px;
+  color: #fff;
 }
 .table th,
 .table td {
@@ -228,9 +266,7 @@ ul .list-items:hover i::after {
   border-radius: 5px 5px 0 0;
   width: 100%;
 }
-.fa-chevron-down {
-  color: #4b4b4b;
-}
+
 /* search function for table */
 .search-box {
   transition: width 0.6s, border-radius 0.6s, background 0.6s, box-shadow 0.6s;
@@ -319,9 +355,14 @@ ul .list-items:hover i::after {
   font-size: 20px;
   cursor: pointer;
   transition: 0.3s;
+  padding: 5px 7px;
+  border-radius: 50%;
+  transition: 0.3s;
 }
 .close-window i:hover {
-  color: red;
+  color: #ff9b85;
+  background: #eeeeee;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 /* button */
 .button-container {
@@ -349,15 +390,7 @@ ul .list-items:hover i::after {
   background-color: #95d5b2;
 }
 /* modal content */
-:root {
-  --primary: #333;
-  --secondary: #333;
-  --errorColor: red;
-  --stepNumber: 6;
-  --containerWidth: 300px;
-  --bgColor: #333;
-  --inputBorderColor: lightgray;
-}
+
 .modal-container {
   height: 580px;
   width: 800px;
@@ -558,7 +591,6 @@ form .page .btns button.next {
   background: #2d6a4f;
 }
 /* table for section */
-
 .section-table thead th {
   font-family: "poppins";
   background-color: #74c69d;
@@ -612,7 +644,6 @@ form .page .btns button.next {
   border-radius: 5px 5px 0 0;
   width: 100%;
   height: 30px;
-
 }
 .status {
   width: 120px;
@@ -643,7 +674,7 @@ form .page .btns button.next {
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  /* display: none; */
+  display: none;
 }
 .bg-modal-subject .modal-content-subject {
   height: 400px;
@@ -668,12 +699,16 @@ form .page .btns button.next {
   align-items: center;
   font-size: 20px;
   cursor: pointer;
+  padding: 5px 7px;
+  border-radius: 50%;
   transition: 0.3s;
 }
 .close-subject i:hover {
-  color: red;
+  color: #ff9b85;
+  background: #eeeeee;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
-.modal-content-subject input{
+.modal-content-subject input {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   font-family: "montserrat";
   font-size: 13px;
@@ -684,7 +719,11 @@ form .page .btns button.next {
   border: 0.5px solid #dddddd;
   transition: border-color 150ms ease;
 }
-.input-wrapper{
+
+.modal-content-subject .input-container {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+.modal-content-subject .input-wrapper {
   padding: 20px 30px;
   display: flex;
   flex-direction: column;

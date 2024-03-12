@@ -67,27 +67,39 @@
           </li>
         </ul>
       </nav>
-      <div class="bg-modal-subject">
-        <div class="modal-content-subject">
-          <div class="close-subject"><i class="fa-solid fa-xmark"></i></div>
-          <!-- <header class="dragable">
-            <i class="fa-solid fa-up-down-left-right"></i>
-          </header> -->
-          <div class="input-container">
-            <div class="input-wrapper">
-              <span>Subject</span>
-              <input
-                readonly
-                type="text"
-                class="input"
-                placeholder="English
-                "
-              />
+      <div class="listsOfModal">
+        <div class="bg-modal-subject">
+          <div class="modal-content-subject">
+            <div class="close-subject"><i class="fa-solid fa-xmark"></i></div>
+            <!-- <header class="dragable">
+              <i class="fa-solid fa-up-down-left-right"></i>
+            </header> -->
+            <div class="input-container">
+              <div class="input-wrapper">
+                <span>Subject</span>
+                <input
+                  readonly
+                  type="text"
+                  class="input"
+                  placeholder="English
+                  "
+                />
+              </div>
+              <div class="input-wrapper">
+                <span>Subject Code</span>
+                <input
+                  readonly
+                  type="text"
+                  class="input"
+                  placeholder="SR 519
+                  "
+                />
+              </div>
             </div>
           </div>
-          
         </div>
       </div>
+
       <div class="bg-modal">
         <div class="modal-content">
           <div class="close-window"><i class="fa-solid fa-xmark"></i></div>
@@ -343,7 +355,7 @@
                     <th>SY</th>
                     <th>Time</th>
                     <th>Adviser</th>
-                    <th>Action</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -356,9 +368,43 @@
                     <td>AM</td>
                     <td>Papa Andrei</td>
                     <td>
-                      <button>
-                        <span>View</span>
-                      </button>
+                      <div class="dropdown-table">
+                        <span class="icon-down"
+                          ><i class="fa-solid fa-chevron-right"></i
+                        ></span>
+                        <div class="option-table">
+                          <div><i class="fa-regular fa-sun"></i> View</div>
+                          <div><i class="fa-regular fa-moon"></i> Edit</div>
+                          <div>
+                            <i class="fa-solid fa-cloud-sun"></i> Delete
+                          </div>
+                          <div><i class="fa-solid fa-cloud-sun"></i> Print</div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tues,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td>
+                    <td>
+                      <div class="dropdown-table">
+                        <span class="icon-down"
+                          ><i class="fa-solid fa-chevron-down"></i
+                        ></span>
+                        <div class="option-table">
+                          <div><i class="fa-regular fa-sun"></i> View</div>
+                          <div><i class="fa-regular fa-moon"></i> Edit</div>
+                          <div>
+                            <i class="fa-solid fa-cloud-sun"></i> Delete
+                          </div>
+                          <div><i class="fa-solid fa-cloud-sun"></i> Print</div>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 </tbody>

@@ -14,6 +14,16 @@ modalSubject.addEventListener("click", function () {
 closeModalSubject.addEventListener("click", function () {
   document.querySelector(".bg-modal-subject").style.display = "none";
 });
+
+const dropdownTable = document.querySelector(".dropdown-table");
+dropdownTable.onclick = function () {
+  dropdownTable.classList.toggle("activeShow");
+};
+document.addEventListener("click", (e) => {
+  if (!dropdownTable.contains(e.target) && e.target !== dropdownTable) {
+    dropdownTable.classList.remove("activeShow");
+  }
+});
 // modal for subject
 // to make it draggable hehe
 // const modalSubject = document.querySelector(".modal-content-subject"),
