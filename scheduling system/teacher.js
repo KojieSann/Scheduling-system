@@ -256,7 +256,15 @@ function MultiselectDropdown(options) {
 window.addEventListener("load", () => {
   MultiselectDropdown(window.MultiselectDropdownOptions);
 });
-
+// modal for edit
+const modalButton = document.querySelector(".edit");
+const closeModal = document.querySelector(".close-page");
+modalButton.addEventListener("click", function () {
+  document.querySelector(".bg-modal-edit").style.display = "flex";
+});
+closeModal.addEventListener("click", function () {
+  document.querySelector(".bg-modal-edit").style.display = "none";
+});
 // search function for table
 // document.addEventListener("touchstart", function () {}, true);
 // const dropdownStrand = document.querySelector(".strand-list");

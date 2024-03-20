@@ -253,12 +253,10 @@
                     <td>ICT,GAS,STEM</td>
                     <td>IT209,GER321,TYI027</td>
                     <td>
-                      <button>
+                      <button class="edit" type="button">
                         <i class="fa-solid fa-pen"></i>
                       </button>
-                      <button>
-                        <i class="fa-solid fa-trash-can"></i>
-                      </button>
+                      
                     </td>
                   </tr>
                   
@@ -268,7 +266,102 @@
           </div>
         </div>
       </section>
+      <div class="bg-modal-edit">
+        <div class="modal-content">
+          <div class="close-page"><i class="fa-solid fa-xmark"></i></div>
+          <form action="">
+            <div class="names">
+              <div class="teacher-name">
+                <span
+                  >First name</span
+                >
+                <input
+                required
+                  type="text"
+                  class="first-name input"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="teacher-name">
+                <span>Middle name</span>
+                <input
+                  type="text"
+                  class="middle-name input"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="teacher-name">
+                <span
+                  >Last name</span
+                >
+                <input
+                  required
+                  type="text"
+                  class="last-name input"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+            <div class="day-time">
+              <div class="dropdown-time">
+                <span class="input-info"
+                  >Select time<span style="color: red; font-size: 1.3em"
+                    >*</span
+                  ></span>
+                <input
+                required
+                  type="text"
+                  class="textbox-time input"
+                  placeholder="No time selected"
+                  readonly
+                /> 
+                <span class="icon-down"
+                ><i class="fa-solid fa-chevron-down"></i
+               ></span>
+
+                <div class="option-time">
+                  <div onclick="show('AM')">
+                    <i class="fa-regular fa-sun"></i> AM
+                  </div>
+                  <div onclick="show('PM')">
+                    <i class="fa-regular fa-moon"></i> PM
+                  </div>
+                  <div onclick="show('AM-PM')">
+                    <i class="fa-solid fa-cloud-sun"></i> AM-PM
+                  </div>
+                </div>
+              </div>
+              <div class="dropdown-day">
+                <span class="input-info"
+                >Select day<span style="color: red; font-size: 1.3em"
+                  >*</span
+                ></span>
+                <select 
+                class="subject-select"
+                  name="select"
+                  multiple
+                  multiselect-select-all="true"
+                  
+                >
+                  <option>Monday</option>
+                  <option>Tuesday</option>
+                  <option>Wednesday</option>
+                  <option>Thursday</option>
+                  <option>Friday</option>
+                </select>
+
+              </div>
+            </div>
+          </form>
+          <div class="modal-btns">
+            <button><i class="fa-regular fa-trash-can"></i> Delete</button>
+            <button>Save <i class="fa-regular fa-floppy-disk"></i></button>
+            
+          </div>
+        </div>
+      </div>
     </div>
+
     <script src="./teacher.js"></script>
   </body>
 </html>

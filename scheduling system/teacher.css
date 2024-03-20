@@ -137,7 +137,7 @@ ul .list-items:hover i::after {
   text-shadow: 0 5px 20px rgba(216, 243, 220, 0.1);
 }
 .main-content .inputs {
-  margin-top: 60px;
+  margin-top: 40px;
   border-radius: 30px;
   width: 100%;
   display: flex;
@@ -173,7 +173,7 @@ ul .list-items:hover i::after {
   font-family: "montserrat";
 }
 /* dropdown for time */
-.inputs .day-time {
+.day-time {
   position: relative;
   flex-direction: column;
   display: flex;
@@ -184,7 +184,7 @@ ul .list-items:hover i::after {
   margin-top: -20px;
   gap: 30px;
 }
-.inputs .dropdown-time {
+.dropdown-time {
   position: relative;
   width: 200px;
   height: 35px;
@@ -200,7 +200,7 @@ ul .list-items:hover i::after {
   top: -20px;
   font-size: 20px;
 }
-.inputs .dropdown-time .input {
+.dropdown-time .input {
   cursor: pointer;
   position: absolute;
   top: 0;
@@ -246,12 +246,12 @@ ul .list-items:hover i::after {
   z-index: 100;
   border: 0.5px solid #dddddd;
 }
-.inputs .dropdown-time .option-time div {
+.dropdown-time .option-time div {
   font-family: "montserrat";
   font-size: 14px;
   padding: 10px 15px;
 }
-.inputs .dropdown-time .option-time div:hover {
+.dropdown-time .option-time div:hover {
   background-color: #74c69d;
   color: #fff;
 }
@@ -307,7 +307,7 @@ ul .list-items:hover i::after {
 }
 .strand-list .input-info {
   position: absolute;
-  top: -23px;
+  top: -27px;
   font-size: 20px;
 }
 /* subject dropdown */
@@ -317,7 +317,7 @@ ul .list-items:hover i::after {
 .subject-list .input-info {
   font-size: 20px;
   position: absolute;
-  top: 60px;
+  top: 55px;
 }
 .subject-list option {
   padding: 5px;
@@ -457,6 +457,7 @@ ul .list-items:hover i::after {
   font-family: "poppins";
   align-items: center;
   position: absolute;
+  cursor: pointer;
 }
 button.btn-submit {
   color: rgba(45, 106, 79, 0.6);
@@ -473,6 +474,7 @@ button.btn-submit:hover {
   overflow-y: auto;
 }
 .teachers-lists {
+  margin-top: -40px;
   margin-left: 100px;
   position: relative;
   text-transform: capitalize;
@@ -500,7 +502,7 @@ button.btn-submit:hover {
 }
 .table thead th {
   font-family: "poppins";
-  background-color: #74c69d;
+  background-color: #2d6a4f;
   color: #fff;
   text-align: center;
   position: sticky;
@@ -514,6 +516,7 @@ button.btn-submit:hover {
 .table button i {
   color: #fff;
   font-size: 10px;
+  padding: 3px 7px;
 }
 .table td button:hover {
   background: #74c69d;
@@ -522,7 +525,7 @@ button.btn-submit:hover {
   transition: all 0.5s ease;
   border: none;
   cursor: pointer;
-  background-color: #b7e4c7;
+  background-color: #2d6a4f;
   padding: 3px 15px;
   border-radius: 3px;
 }
@@ -544,6 +547,100 @@ button.btn-submit:hover {
 }
 .fa-chevron-down {
   color: #4b4b4b;
+}
+/* modal for edit in table */
+.bg-modal-edit {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  /* display: none; */
+}
+.bg-modal-edit .modal-content {
+  height: 450px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  background-color: #fff;
+  z-index: 100;
+  border-radius: 20px;
+  position: absolute;
+  padding: 20px;
+}
+.close-page i {
+  position: absolute;
+  top: -12px;
+  right: -10px;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 7px;
+  border-radius: 50%;
+  transition: 0.3s;
+  color: #fff;
+  background-color: #52b788;
+}
+.close-page i:hover {
+  color: #ff9b85;
+  background: #eeeeee;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+.bg-modal-edit .modal-content .names {
+  display: flex;
+  border-bottom: 1px solid #dddddd;
+  padding: 0 0 20px 0;
+}
+.bg-modal-edit .modal-content .names input {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  font-family: "montserrat";
+  font-size: 13px;
+  padding: 10px 15px;
+  width: 200px;
+  height: 35px;
+  border-radius: 7px;
+  border: 0.5px solid #dddddd;
+}
+.bg-modal-edit .modal-content .names span {
+  font-family: "poppins";
+  font-size: 13px;
+}
+.bg-modal-edit .modal-content .modal-btns {
+  position: absolute;
+  bottom: 20px;
+  margin: 0 0 5px 10px;
+  display: flex;
+}
+.bg-modal-edit .modal-content .modal-btns button:nth-child(1) {
+  margin-right: 400px;
+}
+.bg-modal-edit .modal-content .modal-btns button {
+  cursor: pointer;
+  border: 1px solid #5f5f5f;
+  font-family: "poppins";
+  padding: 5px 30px;
+  border-radius: 3px;
+  background: #fff;
+  color: #5f5f5f;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.bg-modal-edit .modal-content .modal-btns button:nth-child(2):hover {
+  border: 1px solid #52b788;
+  color: #52b788;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.09);
+}
+.bg-modal-edit .modal-content .modal-btns button:nth-child(1):hover {
+  border: 1px solid #ff9b85;
+  color: #ff9b85;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.09);
 }
 /* search function for table */
 .search-box {

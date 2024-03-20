@@ -258,6 +258,7 @@ button {
   color: #2d6a4f;
 }
 .btn-submit {
+  cursor: pointer;
   top: 65px;
   font-size: 15px;
   font-weight: 600;

@@ -266,6 +266,7 @@ button {
   font-family: "poppins";
   align-items: center;
   position: absolute;
+  cursor: pointer;
 }
 button.btn-submit {
   color: rgba(45, 106, 79, 0.6);
