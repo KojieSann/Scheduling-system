@@ -68,7 +68,9 @@
         </ul>
       </nav>
       <section class="main-content">
-        <div class="main-logo"><h1>Add An <span>Instructor</span></h1><i class="fa-solid fa-user"></i>
+        <div class="main-logo">
+          <h1>Add An <span>Instructor</span></h1>
+          <i class="fa-solid fa-user"></i>
         </div>
         <div class="inputs">
           <form action="">
@@ -80,7 +82,7 @@
                   ></span
                 >
                 <input
-                required
+                  required
                   type="text"
                   class="first-name input"
                   autocomplete="off"
@@ -106,7 +108,6 @@
                   class="last-name input"
                   autocomplete="off"
                 />
-                <div class="button-submit"><button href="" class="btn-submit">Submit</button></div>
               </div>
             </div>
             <div class="day-time">
@@ -114,17 +115,18 @@
                 <span class="input-info"
                   >Select time<span style="color: red; font-size: 1.3em"
                     >*</span
-                  ></span>
+                  ></span
+                >
                 <input
-                required
+                  required
                   type="text"
                   class="textbox-time input"
                   placeholder="No time selected"
                   readonly
-                /> 
+                />
                 <span class="icon-down"
-                ><i class="fa-solid fa-chevron-down"></i
-               ></span>
+                  ><i class="fa-solid fa-chevron-down"></i
+                ></span>
 
                 <div class="option-time">
                   <div onclick="show('AM')">
@@ -140,15 +142,15 @@
               </div>
               <div class="dropdown-day">
                 <span class="input-info"
-                >Select day<span style="color: red; font-size: 1.3em"
-                  >*</span
-                ></span>
-                <select 
-                class="subject-select"
+                  >Select day<span style="color: red; font-size: 1.3em"
+                    >*</span
+                  ></span
+                >
+                <select
+                  class="subject-select"
                   name="select"
                   multiple
                   multiselect-select-all="true"
-                  
                 >
                   <option>Monday</option>
                   <option>Tuesday</option>
@@ -156,53 +158,51 @@
                   <option>Thursday</option>
                   <option>Friday</option>
                 </select>
-
+              </div>
+              <div class="button-submit">
+                <button href="" class="btn-submit">Submit</button>
               </div>
             </div>
             <div class="subject-strand">
               <div class="strand-list">
                 <span class="input-info"
-                >Select strand<span style="color: red; font-size: 1.3em"
-                  >*</span
-                ></span>
+                  >Select strand<span style="color: red; font-size: 1.3em"
+                    >*</span
+                  ></span
+                >
                 <input
                   type="text"
                   class="textbox-strands input"
                   placeholder="No strand selected"
                   readonly
                   required
-                /> 
-                
-                  <span class="icon-down"
+                />
+
+                <span class="icon-down"
                   ><i class="fa-solid fa-chevron-down"></i
-                                 ></span>
+                ></span>
 
                 <div class="options-strand">
-                  <div onclick="reveal('GAS')">GAS                  
-                  </div>
-                  <div onclick="reveal('STEM')">STEM                 
-                  </div>
-                  <div onclick="reveal('TVL')">TVL                    
-                  </div>
-                  <div onclick="reveal('ICT')">ICT                    
-                  </div>
-                  <div onclick="reveal('ABM')">ABM                    
-                  </div>
+                  <div onclick="reveal('GAS')">GAS</div>
+                  <div onclick="reveal('STEM')">STEM</div>
+                  <div onclick="reveal('TVL')">TVL</div>
+                  <div onclick="reveal('ICT')">ICT</div>
+                  <div onclick="reveal('ABM')">ABM</div>
                 </div>
               </div>
               <div class="subject-list">
                 <span class="input-info"
-                >Select subject<span style="color: red; font-size: 1.3em"
-                  >*</span
-                ></span>
-                <select 
-                class="subject-select"
+                  >Select subject<span style="color: red; font-size: 1.3em"
+                    >*</span
+                  ></span
+                >
+                <select
+                  class="subject-select"
                   name="select"
                   multiple
                   multiselect-search="true"
-                  multiselect-select-all="true"                 
+                  multiselect-select-all="true"
                 >
-                
                   <option>Option 1</option>
                   <option>Option 2</option>
                   <option>Option 3</option>
@@ -211,22 +211,39 @@
                   <option>Option 7</option>
                 </select>
               </div>
-              
-              </div>
-            </div>
             </div>
           </form>
         </div>
+
         <div class="teachers-lists">
           <div class="teachers-table">
             <div class="table-header">
               <h1>List of Instructors</h1>
-              <div class="table-search">
-                <form class="search-container">
-                  <input id="search-box" type="text" class="search-box" name="" />
-                  <label for="search-box"><i class="fa-solid fa-magnifying-glass search-icon"></i></label>
-                  <input type="submit" id="search-submit" />
-                </form>
+              <div class="table-navigation">
+                <div class="table-search">
+                  <form class="search-container">
+                    <input
+                      id="search-box"
+                      type="text"
+                      class="search-box"
+                      name=""
+                    />
+                    <label for="search-box"
+                      ><i class="fa-solid fa-magnifying-glass search-icon"></i
+                    ></label>
+                    <input type="submit" id="search-submit" />
+                  </form>
+                </div>
+                <div class="filterNav">
+                  <div class="icon-filter">
+                    <i class="fa-solid fa-filter"></i>
+                  </div>
+                  <div class="filter-options">
+                    <div class="filter-wrapper">
+                      <!-- <span>Diko pa alam ano ilalagay</span> -->
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="table-container">
@@ -256,10 +273,8 @@
                       <button class="edit" type="button">
                         <i class="fa-solid fa-pen"></i>
                       </button>
-                      
                     </td>
                   </tr>
-                  
                 </tbody>
               </table>
             </div>
@@ -272,11 +287,9 @@
           <form action="">
             <div class="names">
               <div class="teacher-name">
-                <span
-                  >First name</span
-                >
+                <span>First name</span>
                 <input
-                required
+                  required
                   type="text"
                   class="first-name input"
                   autocomplete="off"
@@ -291,9 +304,7 @@
                 />
               </div>
               <div class="teacher-name">
-                <span
-                  >Last name</span
-                >
+                <span>Last name</span>
                 <input
                   required
                   type="text"
@@ -307,17 +318,18 @@
                 <span class="input-info"
                   >Select time<span style="color: red; font-size: 1.3em"
                     >*</span
-                  ></span>
+                  ></span
+                >
                 <input
-                required
+                  required
                   type="text"
                   class="textbox-time input"
                   placeholder="No time selected"
                   readonly
-                /> 
+                />
                 <span class="icon-down"
-                ><i class="fa-solid fa-chevron-down"></i
-               ></span>
+                  ><i class="fa-solid fa-chevron-down"></i
+                ></span>
 
                 <div class="option-time">
                   <div onclick="show('AM')">
@@ -333,15 +345,15 @@
               </div>
               <div class="dropdown-day">
                 <span class="input-info"
-                >Select day<span style="color: red; font-size: 1.3em"
-                  >*</span
-                ></span>
-                <select 
-                class="subject-select"
+                  >Select day<span style="color: red; font-size: 1.3em"
+                    >*</span
+                  ></span
+                >
+                <select
+                  class="subject-select"
                   name="select"
                   multiple
                   multiselect-select-all="true"
-                  
                 >
                   <option>Monday</option>
                   <option>Tuesday</option>
@@ -349,14 +361,12 @@
                   <option>Thursday</option>
                   <option>Friday</option>
                 </select>
-
               </div>
             </div>
           </form>
           <div class="modal-btns">
             <button><i class="fa-regular fa-trash-can"></i> Delete</button>
             <button>Save <i class="fa-regular fa-floppy-disk"></i></button>
-            
           </div>
         </div>
       </div>

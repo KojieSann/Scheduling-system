@@ -95,7 +95,7 @@
               </div>
             </div>
             <div class="form-wrapper">
-              <div class="form1 data-info" style="display: none">
+              <div class="form1 data-info">
                 <form action="">
                   <div class="input-wrap">
                     <span class="input-header">Choose preferred date</span>
@@ -164,17 +164,31 @@
                   </button>
                 </div>
               </div>
-              <div class="form2 data-info">
-                <div class="day-selection">
-                  <button class="active-day">Monday</button>
-                  <button>Tuesday</button>
-                  <button>Wednesday</button>
-                  <button class="not-selected">Thursday</button>
-                  <button>Friday</button>
-                </div>
-                <div class="time-selection">
-                  <input type="time" />
-                </div>
+              <div class="form2 data-info" style="display: none">
+                <form action="">
+                  <div class="day-selection">
+                    <button type="button" class="active-day">Monday</button>
+                    <button type="button" class="not-active">Tuesday</button>
+                    <button type="button" class="not-active">Wednesday</button>
+                    <button class="not-selected" disabled>Thursday</button>
+                    <button type="button" class="not-active">Friday</button>
+                  </div>
+                  <div class="time-selection">
+                    <div class="inTime time">
+                      <span>In time</span>
+                      <input type="time" />
+                    </div>
+                    <div class="outTime time">
+                      <span>Out time</span>
+                      <input type="time" />
+                    </div>
+                    <div class="repeat">
+                      <input type="checkbox" name="repeat" />
+                      <label for="repeat">Same as last schedule</label>
+                    </div>
+                  </div>
+                </form>
+
                 <div class="btns-wrap">
                   <button type="button" class="subj-btn-back2 subjBtn">
                     Back

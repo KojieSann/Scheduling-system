@@ -114,7 +114,7 @@ ul .list-items:hover i::after {
   position: relative;
   width: 100%;
   padding: 20px;
-  margin-left: 100px;
+  margin-left: 90px;
 }
 .main-content .main-logo {
   font-family: "montserrat";
@@ -137,7 +137,7 @@ ul .list-items:hover i::after {
   text-shadow: 0 5px 20px rgba(216, 243, 220, 0.1);
 }
 .main-content .inputs {
-  margin-top: 40px;
+  margin-top: -10px;
   border-radius: 30px;
   width: 100%;
   display: flex;
@@ -222,7 +222,7 @@ ul .list-items:hover i::after {
   align-items: center;
   justify-content: center;
   display: flex;
-  left: 170px;
+  left: 210px;
   top: 8px;
   transition: all 0.3s ease;
   position: absolute;
@@ -307,7 +307,7 @@ ul .list-items:hover i::after {
 }
 .strand-list .input-info {
   position: absolute;
-  top: -27px;
+  top: 40px;
   font-size: 20px;
 }
 /* subject dropdown */
@@ -317,7 +317,7 @@ ul .list-items:hover i::after {
 .subject-list .input-info {
   font-size: 20px;
   position: absolute;
-  top: 55px;
+  top: 122px;
 }
 .subject-list option {
   padding: 5px;
@@ -432,7 +432,7 @@ ul .list-items:hover i::after {
   border-bottom: solid 1px #999;
 }
 /* button for submit */
-.names button {
+button {
   border: none;
   background: #fff;
 }
@@ -448,7 +448,7 @@ ul .list-items:hover i::after {
 }
 .button-submit {
   position: absolute;
-  bottom: 80px;
+  top: 10px;
 }
 .btn-submit {
   top: 110px;
@@ -474,8 +474,7 @@ button.btn-submit:hover {
   overflow-y: auto;
 }
 .teachers-lists {
-  margin-top: -40px;
-  margin-left: 100px;
+  margin-top: -5px;
   position: relative;
   text-transform: capitalize;
 }
@@ -558,7 +557,7 @@ button.btn-submit:hover {
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  /* display: none; */
+  display: none;
 }
 .bg-modal-edit .modal-content {
   height: 450px;
@@ -642,8 +641,32 @@ button.btn-submit:hover {
   color: #ff9b85;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.09);
 }
+.table-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.table-navigation .filterNav .icon-filter {
+  right: 25px;
+  cursor: pointer;
+  position: relative;
+  height: 33px;
+  width: 33px;
+  border-radius: 50%;
+  display: flex;
+  color: #999;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s ease;
+}
+.table-navigation .filterNav .icon-filter:hover {
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+  color: #bec4ca;
+}
 /* search function for table */
-.search-box {
+.table-navigation .search-box {
   transition: width 0.6s, border-radius 0.6s, background 0.6s, box-shadow 0.6s;
   width: 40px;
   height: 40px;
@@ -652,10 +675,10 @@ button.btn-submit:hover {
   cursor: pointer;
   background: rgb(235, 235, 235);
 }
-.search-box + label .search-icon {
+.table-navigation .search-box + label .search-icon {
   color: black;
 }
-.search-box:hover {
+.table-navigation .search-box:hover {
   color: white;
   background: rgb(200, 200, 200);
   box-shadow: 0 0 0 5px rgb(183, 228, 199);
@@ -690,7 +713,7 @@ button.btn-submit:hover {
 
 .search-icon {
   position: relative;
-  left: -30px;
+  left: -27px;
   color: white;
   cursor: pointer;
 }
