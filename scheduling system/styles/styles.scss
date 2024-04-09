@@ -1,97 +1,119 @@
-button {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  outline: none;
-  border: 0;
-  vertical-align: middle;
-  text-decoration: none;
-  background: transparent;
-  padding: 0;
-  font-size: inherit;
-  font-family: inherit;
-  &.learn-more {
-    width: 12rem;
-    height: auto;
-    .circle {
-      @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
-      position: relative;
-      display: block;
-      margin: 0;
-      width: 3rem;
-      height: 3rem;
-      background: $black;
-      border-radius: 1.625rem;
-      .icon {
-        @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-        background: $white;
-        &.arrow {
-          @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
-          left: 0.625rem;
-          width: 1.125rem;
-          height: 0.125rem;
-          background: none;
-          &::before {
-            position: absolute;
-            content: "";
-            top: -0.25rem;
-            right: 0.0625rem;
-            width: 0.625rem;
-            height: 0.625rem;
-            border-top: 0.125rem solid #fff;
-            border-right: 0.125rem solid #fff;
-            transform: rotate(45deg);
-          }
-        }
-      }
-    }
-    .button-text {
-      @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 0.75rem 0;
-      margin: 0 0 0 1.85rem;
-      color: $black;
-      font-weight: 700;
-      line-height: 1.6;
-      text-align: center;
-      text-transform: uppercase;
-    }
+$size: 50px;
+$thickness: 5px;
+$angle: 40deg;
+$angleHover: 30deg;
+$angleActive: 25deg;
+
+@mixin arrowTransform($angle, $x: 0, $y: 0) {
+  i:first-child {
+    transform: translate($x, $y) rotate($angle);
   }
-  &:hover {
-    .circle {
-      width: 100%;
-      .icon {
-        &.arrow {
-          background: $white;
-          transform: translate(1rem, 0);
-        }
-      }
-    }
-    .button-text {
-      color: $white;
-    }
+
+  i:last-child {
+    transform: translate($x, -$y) rotate(-$angle);
   }
 }
 
-@supports (display: grid) {
-  body {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 0.625rem;
-    grid-template-areas: ". main main ." ". main main .";
+body {
+  background: #33ab83;
+}
+
+button {
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.paginate {
+  position: relative;
+  margin: 10px;
+  width: $size;
+  height: $size;
+  cursor: pointer;
+  transform: translate3d(0, 0, 0); // fixes flicker in webkit
+
+  position: absolute;
+  top: 50%;
+  margin-top: -20px;
+
+  i {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    width: $size;
+    height: $thickness;
+    border-radius: $thickness / 2;
+    background: #fff;
+
+    transition: all 0.15s ease;
   }
 
-  #container {
-    grid-area: main;
-    align-self: center;
-    justify-self: center;
+  &.left {
+    right: 58%;
+
+    i {
+      transform-origin: 0% 50%;
+    }
+
+    @include arrowTransform($angle, 0, -1px);
+
+    &:hover {
+      @include arrowTransform($angleHover, 0, -1px);
+    }
+
+    &:active {
+      @include arrowTransform($angleActive, 1px, -1px);
+    }
+
+    &[data-state="disabled"] {
+      @include arrowTransform(0deg, -5px, 0);
+
+      &:hover {
+        @include arrowTransform(0deg, -5px, 0);
+      }
+    }
   }
+
+  &.right {
+    left: 58%;
+
+    i {
+      transform-origin: 100% 50%;
+    }
+
+    @include arrowTransform($angle, 0, 1px);
+
+    &:hover {
+      @include arrowTransform($angleHover, 0, 1px);
+    }
+
+    &:active {
+      @include arrowTransform($angleActive, 1px, 1px);
+    }
+
+    &[data-state="disabled"] {
+      @include arrowTransform(0deg, 5px, 0);
+
+      &:hover {
+        @include arrowTransform(0deg, 5px, 0);
+      }
+    }
+  }
+
+  &[data-state="disabled"] {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
+
+.counter {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  margin-top: -15px;
+  font-size: 30px;
+  font-family: Helvetica, sans-serif;
+  text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.2);
+  color: #fff;
 }

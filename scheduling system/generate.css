@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:wght@300&display=swap");
+
 :root {
   --primary: #333;
   --secondary: #333;
@@ -129,7 +130,7 @@ ul .list-items:hover i::after {
 }
 .main-content .main-logo {
   font-family: "montserrat";
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   width: 100%;
   display: flex;
@@ -144,12 +145,12 @@ ul .list-items:hover i::after {
 }
 .main-content .main-logo span {
   color: #95d5b2;
-  font-size: 33px;
+  font-size: 30px;
   text-shadow: 0 5px 20px rgba(216, 243, 220, 0.1);
 }
 /* table */
 .table-container {
-  height: 65vh;
+  height: 73vh;
   overflow-y: auto;
 }
 .generate-lists {
@@ -171,12 +172,17 @@ ul .list-items:hover i::after {
 }
 .table-header {
   position: relative;
-  bottom: 15px;
+  bottom: 5px;
   justify-content: space-between;
   display: flex;
   font-family: "montserrat";
   font-weight: 500;
   color: #666;
+  align-items: center;
+  justify-content: space-between;
+}
+.table-wrapper {
+  height: 55vh;
 }
 .table thead th {
   font-family: "poppins";
@@ -260,6 +266,7 @@ ul .list-items:hover i::after {
   width: 100%;
 }
 /* search function for table */
+
 .search-box {
   transition: width 0.6s, border-radius 0.6s, background 0.6s, box-shadow 0.6s;
   width: 40px;
@@ -312,6 +319,149 @@ ul .list-items:hover i::after {
   color: white;
   cursor: pointer;
 }
+/* print and delete button for table */
+.table-nav button {
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  background: #fff;
+  border: 1px solid #52b788;
+  font-family: "poppins";
+  font-size: 12px;
+  font-weight: 500;
+  color: #4b4b4b;
+  transition: 0.3s;
+}
+.table-nav button:hover {
+  opacity: 0.6;
+}
+/* pagination */
+.pagination-container {
+  right: 20px;
+  bottom: 20px;
+  padding: 30px;
+  width: 20%;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  border-radius: 30px;
+}
+button {
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.paginate {
+  position: relative;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transform: translate3d(0, 0, 0);
+  position: absolute;
+  margin-top: -20px;
+}
+.paginate i {
+  position: absolute;
+  top: 40%;
+  left: 15px;
+  width: 30px;
+  height: 4px;
+  border-radius: 2.5px;
+  background: #d8f3dc;
+  box-shadow: 0 5px 20px rgba(183, 228, 199, 0.5);
+  transition: all 0.15s ease;
+}
+.counter {
+  right: 0px;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  margin-top: -15px;
+  font-size: 20px;
+  font-family: "poppins";
+  text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
+  color: #eeeeee;
+}
+.paginate.left {
+  right: 58%;
+}
+.paginate.left i {
+  transform-origin: 0% 50%;
+}
+.paginate.left i:first-child {
+  transform: translate(0, -1px) rotate(40deg);
+}
+.paginate.left i:last-child {
+  transform: translate(0, 1px) rotate(-40deg);
+}
+.paginate.left:hover i:first-child {
+  transform: translate(0, -1px) rotate(30deg);
+}
+.paginate.left:hover i:last-child {
+  transform: translate(0, 1px) rotate(-30deg);
+}
+.paginate.left:active i:first-child {
+  transform: translate(1px, -1px) rotate(25deg);
+}
+.paginate.left:active i:last-child {
+  transform: translate(1px, 1px) rotate(-25deg);
+}
+.paginate.left[data-state="disabled"] i:first-child {
+  transform: translate(-5px, 0) rotate(0deg);
+}
+.paginate.left[data-state="disabled"] i:last-child {
+  transform: translate(-5px, 0) rotate(0deg);
+}
+.paginate.left[data-state="disabled"]:hover i:first-child {
+  transform: translate(-5px, 0) rotate(0deg);
+}
+.paginate.left[data-state="disabled"]:hover i:last-child {
+  transform: translate(-5px, 0) rotate(0deg);
+}
+.paginate.right {
+  left: 58%;
+}
+.paginate.right i {
+  transform-origin: 100% 50%;
+}
+.paginate.right i:first-child {
+  transform: translate(0, 1px) rotate(40deg);
+}
+.paginate.right i:last-child {
+  transform: translate(0, -1px) rotate(-40deg);
+}
+.paginate.right:hover i:first-child {
+  transform: translate(0, 1px) rotate(30deg);
+}
+.paginate.right:hover i:last-child {
+  transform: translate(0, -1px) rotate(-30deg);
+}
+.paginate.right:active i:first-child {
+  transform: translate(1px, 1px) rotate(25deg);
+}
+.paginate.right:active i:last-child {
+  transform: translate(1px, -1px) rotate(-25deg);
+}
+.paginate.right[data-state="disabled"] i:first-child {
+  transform: translate(5px, 0) rotate(0deg);
+}
+.paginate.right[data-state="disabled"] i:last-child {
+  transform: translate(5px, 0) rotate(0deg);
+}
+.paginate.right[data-state="disabled"]:hover i:first-child {
+  transform: translate(5px, 0) rotate(0deg);
+}
+.paginate.right[data-state="disabled"]:hover i:last-child {
+  transform: translate(5px, 0) rotate(0deg);
+}
+.paginate[data-state="disabled"] {
+  opacity: 0.3;
+  cursor: default;
+}
+
 /* modal */
 .bg-modal {
   width: 100%;
@@ -356,11 +506,10 @@ ul .list-items:hover i::after {
   background: #eeeeee;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
+
 /* button */
 .button-container {
-  position: absolute;
-
-  right: 50px;
+  float: left;
 }
 .button-container .modal-button {
   cursor: pointer;
@@ -370,7 +519,8 @@ ul .list-items:hover i::after {
   background-color: #74c69d;
   font-size: 1em;
   color: #fff;
-  font-weight: 800;
+  font-weight: 500;
+  font-family: "poppins";
   transition: all 0.3s ease;
   position: relative;
 }
@@ -382,7 +532,6 @@ ul .list-items:hover i::after {
   background-color: #95d5b2;
 }
 /* modal content */
-
 .modal-container {
   height: 580px;
   width: 800px;
@@ -556,33 +705,7 @@ form .page .btns button.next {
   display: block;
   color: #fff;
 }
-/* buttons for list of strands */
-.list-strands {
-  display: flex;
-  position: relative;
-  bottom: 50px;
-  gap: 5px;
-  width: 50%;
-}
-.list-strands button {
-  padding: 7px 25px;
-  font-family: "montserrat";
-  font-weight: 600;
-  font-size: 0.7em;
-  border: none;
-  background: #74c69d;
-  border-radius: 5px;
-  cursor: pointer;
-  color: #fff;
-  transition: 0.5s;
-}
-.list-strands button:hover {
-  background: #2d6a4f;
-}
-.list-strands .active {
-  background: #2d6a4f;
-}
-/* table for section */
+/*section page*/
 .section-table thead th {
   font-family: "poppins";
   background-color: #74c69d;
@@ -637,6 +760,26 @@ form .page .btns button.next {
   width: 100%;
   height: 30px;
 }
+/* section page */
+.titleSection-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.titleSection-header .searchSection {
+  align-items: center;
+  position: relative;
+  right: 0;
+}
+.titleSection-header .searchSection input {
+  width: 300px;
+}
+.titleSection-header .searchSection i {
+  position: relative;
+  right: 28px;
+  pointer-events: none;
+}
+/* done and in progress in subject tab */
 .status {
   width: 120px;
   font-family: "poppins";
@@ -1040,7 +1183,6 @@ form .page .btns button.next {
   width: 100%;
 }
 /* radio button for subject select */
-
 .modal-content-subject .radio-item [type="radio"] {
   display: none;
 }

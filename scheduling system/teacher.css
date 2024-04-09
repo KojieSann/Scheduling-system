@@ -181,7 +181,7 @@ ul .list-items:hover i::after {
   margin-bottom: 45px;
   padding: 0px 50px;
   margin-right: 30px;
-  margin-top: -20px;
+  margin-top: -50px;
   gap: 30px;
 }
 .dropdown-time {
@@ -190,10 +190,15 @@ ul .list-items:hover i::after {
   height: 35px;
   margin-bottom: 20px;
 }
-.dropdown-day .input-info {
+.dropdown-day {
   position: absolute;
   top: 65px;
+}
+.dropdown-day .input-info {
+  position: absolute;
+  top: -20px;
   font-size: 20px;
+  white-space: nowrap;
 }
 .dropdown-time .input-info {
   position: relative;
@@ -303,11 +308,11 @@ ul .list-items:hover i::after {
   margin-top: -10px;
 }
 .subject-strand {
-  margin-top: -45px;
+  margin-top: -52px;
 }
 .strand-list .input-info {
   position: absolute;
-  top: 40px;
+  top: 36px;
   font-size: 20px;
 }
 /* subject dropdown */
@@ -317,7 +322,7 @@ ul .list-items:hover i::after {
 .subject-list .input-info {
   font-size: 20px;
   position: absolute;
-  top: 122px;
+  top: 117px;
 }
 .subject-list option {
   padding: 5px;

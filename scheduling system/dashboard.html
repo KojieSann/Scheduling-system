@@ -17,6 +17,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    
   </head>
   <body>
     <div class="container">
@@ -36,13 +37,13 @@
             >
           </li>
           <li class="list-items">
-            <a href="./dashboard.html" class="active" target="_self"
+            <a href="./dashboard.html" class="active"
               ><i class="fa-solid fa-tv"></i
               ><span class="nav-lists">Dashboard</span></a
             >
           </li class="list-items">
           <li class="list-items">
-            <a href="./teachers.html" target="_self"
+            <a href="./teachers.html"
               ><i class="fa-solid fa-chalkboard-user"></i
               ><span class="nav-lists">Teachers</span></a
             >
@@ -69,7 +70,72 @@
       </nav>
       <section class="main-content">
         <div class="header-logo">
-          <h1>Dashboard</h1>
+          <div class="text-logo">
+            <h1>Start your  <span> Monday,</span></h1>
+            <p>An OCT Schedule maker</p>
+          </div>
+          <div class="create-schedule">
+            <button><i class="fa-solid fa-plus"></i> Create new</button>
+          </div>
+        </div>
+        <div class="content-container">
+          <div class="infos-container">
+            <div class="infos-wrapper">
+              <div class="info-title">
+                <a href="./generate.html">Schedules created</a>
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+              </div>
+              <div class="info">
+                <span>0</span>
+              </div>
+              <div class="info-img">
+                <img src="./img/undraw_schedule_re_2vro.svg" alt="">
+              </div>
+            </div>
+            <div class="infos-wrapper">
+              <div class="info-title">
+                <a href="./subject.html">Subjects in total</a>
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+              </div>
+              <div class="info">
+                <span>0</span>
+              </div>
+              <div class="info-img">
+                <img src="./img/undraw_content_structure_re_ebkv.svg" alt="">
+              </div>
+            </div>
+            <div class="infos-wrapper">
+              <div class="info-title">
+                <a href="./section.html">Sections applied</a>
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+              </div>
+              <div class="info">
+                <span>0</span>
+              </div>
+              <div class="info-img">
+                <img src="./img/undraw_community_re_cyrm.svg" alt="">
+              </div>
+            </div>
+            <div class="infos-wrapper">
+              <div class="info-title">
+                <a href="./teachers.html">Teachers added</a>
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+              </div>
+              <div class="info">
+                <span>0</span>
+              </div>
+              <div class="info-img">
+                <img src="./img/undraw_teacher_re_sico.svg" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="calendar">
+            <div id="calendar">
+              
+            </div>
+
+          </div>
+    
         </div>
       </section>
     </div>

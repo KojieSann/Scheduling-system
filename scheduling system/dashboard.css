@@ -1,12 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;600;700&family=Rubik:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:wght@300&display=swap");
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+* {
+  user-select: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  box-sizing: border-box;
+}
 body {
   background: #fff;
 }
+
 .logo {
   margin: 20px 0 40px 20px;
   align-items: center;
@@ -24,7 +32,7 @@ body {
   text-align: center;
   white-space: nowrap;
   color: #4b4b4b;
-  margin-left: 25px;
+  margin-left: 20px;
   font-weight: 700;
   font-size: 17px;
 }
@@ -40,20 +48,19 @@ nav a {
   font-weight: 600;
 }
 nav {
-  z-index: 100;
+  z-index: 10000;
   border-top-right-radius: 20px;
   outline: none;
   text-decoration: none;
   background: #d8f3dc;
   font-family: "Montserrat";
   height: 100vh;
-  width: 100px;
-  position: sticky;
+  width: 90px;
+  position: absolute;
   transition: width 0.2s linear;
   top: 0;
   bottom: 0;
   left: 0;
-
   overflow: hidden;
 }
 .logout {
@@ -71,7 +78,7 @@ nav i {
 .nav-lists {
   position: relative;
   top: 12px;
-  margin-left: 15px;
+  margin-left: 10px;
 }
 nav a:hover {
   transition: all 0.1s ease;
@@ -82,7 +89,7 @@ nav a:hover {
   border-bottom-left-radius: 7px;
 }
 nav:hover {
-  width: 310px;
+  width: 260px;
   transition: all 0.5s ease;
 }
 .active i {
@@ -102,7 +109,7 @@ ul .list-items i::after {
   background-color: #2d6a4f;
   border-radius: 5px;
 }
-ul li:hover i::after {
+ul .list-items:hover i::after {
   width: 8px;
   transition: 0.3s;
 }
@@ -110,7 +117,105 @@ ul li:hover i::after {
   display: flex;
 }
 .main-content {
+  height: 100vh;
   position: relative;
   width: 100%;
-  padding: 20px;
+  padding: 30px;
+  margin-left: 90px;
 }
+.header-logo {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  bottom: 15px;
+}
+.header-logo .text-logo {
+  position: relative;
+  font-family: "poppins";
+  align-items: center;
+  justify-content: center;
+}
+.header-logo .text-logo span {
+  font-size: 30px;
+  color: #95d5b2;
+}
+.header-logo .text-logo {
+  font-size: 13px;
+  font-weight: 500;
+  color: #4b4b4b;
+}
+.header-logo .text-logo p {
+  letter-spacing: 3px;
+}
+.header-logo .create-schedule button i {
+  margin-right: 3px;
+}
+.header-logo .create-schedule button {
+  cursor: pointer;
+  padding: 7px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #74c69d;
+  font-size: 1em;
+  color: #fff;
+  font-weight: 400;
+  font-family: "poppins";
+  transition: all 0.3s ease;
+  position: relative;
+  border: 1px solid #74c69d;
+}
+.header-logo .create-schedule button:hover {
+  background-color: rgb(116, 198, 157, 0.8);
+  border: 1px solid #4b4b4b;
+}
+/* header info */
+.infos-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 10px;
+}
+.infos-container .infos-wrapper {
+  height: 150px;
+  width: 200px;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+  font-family: "montserrat";
+  overflow: hidden;
+  transition: 0.3s;
+}
+.infos-container .infos-wrapper:hover {
+  box-shadow: 0 5px 60px rgba(0, 0, 0, 0.2);
+}
+.infos-container img {
+  height: 80px;
+  float: right;
+  position: relative;
+  bottom: 10px;
+}
+.infos-container .infos-wrapper .info {
+  font-size: 40px;
+  font-weight: 600;
+  color: #4b4b4b;
+  position: relative;
+  left: 30px;
+  top: 25px;
+}
+.infos-container .infos-wrapper .info-title {
+  margin: 10px 0 0 15px;
+  position: relative;
+  font-size: 15px;
+}
+.infos-container .infos-wrapper .info-title:hover i {
+  display: contents;
+}
+.infos-container .infos-wrapper .info-title i {
+  display: none;
+  color: #747474;
+}
+.infos-container .infos-wrapper .info-title a {
+  text-decoration: none;
+  color: #081c15;
+}
+/* calendar */
