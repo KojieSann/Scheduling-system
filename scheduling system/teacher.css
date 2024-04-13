@@ -312,7 +312,7 @@ ul .list-items:hover i::after {
 }
 .strand-list .input-info {
   position: absolute;
-  top: 36px;
+  top: 30px;
   font-size: 20px;
 }
 /* subject dropdown */
@@ -322,7 +322,7 @@ ul .list-items:hover i::after {
 .subject-list .input-info {
   font-size: 20px;
   position: absolute;
-  top: 117px;
+  top: 112px;
 }
 .subject-list option {
   padding: 5px;
