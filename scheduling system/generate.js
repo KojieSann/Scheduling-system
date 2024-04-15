@@ -24,7 +24,15 @@ document.addEventListener("click", (e) => {
     dropdownTable.classList.remove("activeShow");
   }
 });
-
+// popout for the logout
+const logoutButton = document.querySelector(".logout");
+const closePopup = document.querySelector(".noBtn");
+logoutButton.addEventListener("click", function () {
+  document.querySelector(".bg-content-logout").style.display = "flex";
+});
+closePopup.addEventListener("click", function () {
+  document.querySelector(".bg-content-logout").style.display = "none";
+});
 // select all for table
 const selectAll = document.getElementById("selectAll");
 const select = document.getElementsByClassName("select");

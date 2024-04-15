@@ -61,7 +61,7 @@
             >
           </li>
           <li>
-            <a href="#" class="logout"
+            <a class="logout"
               ><i class="fa-solid fa-right-from-bracket"></i
               ><span class="nav-lists">Logout</span></a
             >
@@ -70,6 +70,7 @@
       </nav>
       <div class="bg-content-logout">
         <div class="content-logout">
+          <img src="./img/shs-logo.png" alt="shs logo" class="shs-logo">
           <div class="header-text">
             <span>Confirm Logout</span>
             <p style="font-size: 13px;">Are you sure you want to logout?</p>
@@ -84,11 +85,21 @@
         </div>
       </div>
       <section class="main-content">
-        
         <div class="header-logo">
           <div class="text-logo">
-            <h1>Start your  <span> Monday,</span></h1>
-            <p>An OCT Schedule maker</p>
+            <div class="main-logo">
+              <h1>Start your   <input type="text" id="myDay" readonly></h1>
+              <p>An OCT Schedule maker</p>
+            </div>
+            <div class="date">
+              <input type="text" id="myDate" readonly>
+              <div class="year-month">                               
+                <input type="text" id="myYear" readonly style="color: #747474;">               
+                <input type="text" id="myMonth" readonly>
+
+              </div>
+            </div>            
+
           </div>
           <div class="create-schedule">
             <button><a href="./generate.html"><i class="fa-solid fa-plus"></i> Create new</a></button>
@@ -122,7 +133,7 @@
             </div>
             <div class="infos-wrapper">
               <div class="info-title">
-                <a href="./section.html">Sections applied</a>
+                <a href="./section.html">Sections added</a>
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
               </div>
               <div class="info">
@@ -145,11 +156,157 @@
               </div>
             </div>
           </div>
-          <div class="calendar">
-            <div id="calendar">
-              
+          <div class="schedule-table">
+            <div class="table-header">
+              <span>Schedules</span>
+              <div class="table-search">
+                <form class="search-container">
+                  <input
+                    id="search-box"
+                    type="text"
+                    class="search-box"
+                    name=""
+                  />
+                  <label for="search-box"
+                    ><i class="fa-solid fa-magnifying-glass search-icon"></i
+                  ></label>
+                  <input type="submit" id="search-submit" />
+                </form>
+              </div>
             </div>
-
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Section</th>
+                    <th>Strand</th>
+                    <th>Schedule</th>
+                    <th>Sem</th>
+                    <th>SY</th>
+                    <th>Time</th>
+                    <th>Adviser</th>
+                  </tr>
+                  
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tue,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td>
+                  </tr>
+                  <tr><td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tue,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td></tr>
+                  <tr><td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tue,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td></tr>
+                  <tr><td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tue,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td></tr>
+                  <tr><td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tue,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td></tr>
+                  <tr><td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tue,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td></tr>
+                  <tr> <td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tue,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td></tr>
+                  <tr><td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tue,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td></tr>
+                  <tr><td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tue,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td></tr>
+                  <tr><td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tue,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td></tr>
+                  <tr><td>Sampaguita</td>
+                    <td>HUMSS</td>
+                    <td>Mon,Tue,Fri</td>
+                    <td>2nd</td>
+                    <td>2024-2025</td>
+                    <td>AM</td>
+                    <td>Papa Andrei</td></tr>
+                  <tr><td>Sampaguita</td>
+                      <td>HUMSS</td>
+                      <td>Mon,Tue,Fri</td>
+                      <td>2nd</td>
+                      <td>2024-2025</td>
+                      <td>AM</td>
+                      <td>Papa Andrei</td></tr>
+                  <tr><td>Sampaguita</td>
+                        <td>HUMSS</td>
+                        <td>Mon,Tue,Fri</td>
+                        <td>2nd</td>
+                        <td>2024-2025</td>
+                        <td>AM</td>
+                        <td>Papa Andrei</td></tr>
+                        <tr><td>Sampaguita</td>
+                          <td>HUMSS</td>
+                          <td>Mon,Tue,Fri</td>
+                          <td>2nd</td>
+                          <td>2024-2025</td>
+                          <td>AM</td>
+                          <td>Papa Andrei</td></tr>
+                          <tr><td>Sampaguita</td>
+                            <td>HUMSS</td>
+                            <td>Mon,Tue,Fri</td>
+                            <td>2nd</td>
+                            <td>2024-2025</td>
+                            <td>AM</td>
+                            <td>Papa Andrei</td></tr>
+                            <tr><td>Sampaguita</td>
+                              <td>HUMSS</td>
+                              <td>Mon,Tue,Fri</td>
+                              <td>2nd</td>
+                              <td>2024-2025</td>
+                              <td>AM</td>
+                              <td>Papa Andrei</td></tr>
+                </tbody>
+              </table>  
+            </div>            
+                       
           </div>
     
         </div>
