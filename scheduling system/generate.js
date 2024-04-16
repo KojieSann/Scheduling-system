@@ -162,28 +162,28 @@ function initMultiStepForm() {
   }
 }
 // multistep for modal subject
+const bgModalSubject = document.querySelector(".bg-modal-subject");
 const form1 = document.querySelector(".form1");
 const form2 = document.querySelector(".form2");
 const form3 = document.querySelector(".form3");
 const form1NxtBtn = document.querySelector(".subj-btn-next");
-const form2NxtBtn = document.querySelector(".subj-btn-next2");
 const form2BckBtn = document.querySelector(".subj-btn-back2");
-const form3BckBtn = document.querySelector(".subj-btn-back3");
+const submitBtnSubj = document.querySelector(".subj-btn-submit");
+const doneStatus = document.querySelector(".done"),
+  inProgress = document.querySelector(".in-progress");
 form1NxtBtn.addEventListener("click", function () {
   form1.style.display = "none";
   form2.style.display = "block";
-});
-form2NxtBtn.addEventListener("click", function () {
-  form2.style.display = "none";
-  form3.style.display = "block";
 });
 form2BckBtn.addEventListener("click", function () {
   form2.style.display = "none";
   form1.style.display = "block";
 });
-form3BckBtn.addEventListener("click", function () {
-  form3.style.display = "none";
-  form2.style.display = "block";
+submitBtnSubj.addEventListener("click", function () {
+  doneStatus.style.display = "block";
+  bgModalSubject.style.display = "none";
+  inProgress.style.display = "none";
+  console.log("hahahah");
 });
 // dropdown for subject
 var style = document.createElement("style");

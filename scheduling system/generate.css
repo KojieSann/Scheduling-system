@@ -566,7 +566,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  display: none;
+  /* display: none; */
 }
 .bg-modal .modal-content {
   height: 630px;
@@ -880,14 +880,15 @@ form .page .btns button.next {
 .status .done {
   border-radius: 5px;
   padding: 4px 0;
-  width: 100%;
+  width: 120px;
   color: #52b788;
   background: #c9ffe2;
+  display: none;
 }
 .status .in-progress {
   padding: 4px 0;
   border-radius: 5px;
-  width: 100%;
+  width: 120px;
   background: #fae0e4;
   color: #ff8fa3;
 }
@@ -1123,7 +1124,7 @@ form .page .btns button.next {
 }
 .modal-content-subject .form2 .time-selection {
   padding: 20px;
-  width: 300px;
+  width: 400px;
   border: 1px solid #dddddd;
   align-items: center;
   justify-content: center;
@@ -1131,7 +1132,7 @@ form .page .btns button.next {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
   position: absolute;
-  top: 110px;
+  top: 105px;
   left: 130px;
   border-radius: 5px;
 }

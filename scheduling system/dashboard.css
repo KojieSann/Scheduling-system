@@ -1,10 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:wght@300&display=swap");
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-* {
   user-select: none;
   padding: 0;
   margin: 0;
@@ -207,15 +202,28 @@ ul .list-items:hover i::after {
   font-size: 20px;
   color: #4b4b4b;
 }
+/* waray upay na details */
+.content-container {
+  display: flex;
+  gap: 50px;
+}
+.content-container .section-teacher {
+  width: 21vw;
+  background-color: red;
+}
+.content-container .info-date {
+  width: 65vw;
+}
 /* header info */
 .infos-container {
   display: flex;
   gap: 30px;
   margin-top: 10px;
+  width: 100%;
 }
 .infos-container .infos-wrapper {
   height: 150px;
-  width: 200px;
+  width: 250px;
   border: 1px solid #dddddd;
   border-radius: 10px;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
@@ -258,7 +266,7 @@ ul .list-items:hover i::after {
 }
 /* table */
 .schedule-table {
-  width: 60vw;
+  width: 100%;
   margin-top: 30px;
   padding: 10px;
   border-radius: 10px;
@@ -295,8 +303,9 @@ ul .list-items:hover i::after {
 }
 .schedule-table table th,
 .schedule-table table td {
-  padding: 6px 8px;
+  padding: 8px;
   text-align: center;
+  border-radius: 1px;
 }
 
 .schedule-table table th {
