@@ -165,7 +165,7 @@ ul .list-items:hover i::after {
 /* dates */
 .header-logo .text-logo .date {
   position: absolute;
-  left: 240px;
+  left: 300px;
   display: flex;
   align-items: center;
 }
@@ -205,14 +205,10 @@ ul .list-items:hover i::after {
 /* waray upay na details */
 .content-container {
   display: flex;
-  gap: 50px;
-}
-.content-container .section-teacher {
-  width: 21vw;
-  background-color: red;
+  gap: 40px;
 }
 .content-container .info-date {
-  width: 65vw;
+  width: 68vw;
 }
 /* header info */
 .infos-container {
@@ -263,6 +259,32 @@ ul .list-items:hover i::after {
 .infos-container .infos-wrapper .info-title a {
   text-decoration: none;
   color: #081c15;
+}
+/* sections and teachers schedules */
+.content-container .section-teacher {
+  width: 19vw;
+  font-family: "poppins";
+}
+.content-container .section-teacher .contents {
+  height: 85%;
+  width: 95%;
+  border-radius: 3px;
+  margin: 5px;
+  border: 1px solid #dddddd;
+  align-items: center;
+  justify-content: center;
+}
+.section-teacher .section-container,
+.section-teacher .teacher-container {
+  height: 40vh;
+  width: 100%;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  border: 1px solid #dddddd;
+  padding: 20px;
+}
+.section-teacher .teacher-container {
+  margin-top: 30px;
 }
 /* table */
 .schedule-table {
