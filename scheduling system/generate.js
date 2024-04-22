@@ -84,7 +84,7 @@ slide(0);
 // drag.addEventListener("mousedown", () => {
 //   drag.addEventListener("mousemove", ondrag);
 // });
-
+// multistep process
 initMultiStepForm();
 function initMultiStepForm() {
   const progressNumber = document.querySelectorAll(".step").length;
@@ -185,6 +185,14 @@ submitBtnSubj.addEventListener("click", function () {
   inProgress.style.display = "none";
   console.log("hahahah");
 });
+// dropdown for school year
+function show(anything) {
+  document.querySelector(".textbox-sy").value = anything;
+}
+let dropdownStrand = document.querySelector(".dropdown-sem");
+dropdownStrand.onclick = function () {
+  dropdownStrand.classList.toggle("activeShow");
+};
 // dropdown for subject
 var style = document.createElement("style");
 style.setAttribute("id", "multiselect_dropdown_styles");

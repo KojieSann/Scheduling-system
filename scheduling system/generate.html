@@ -238,23 +238,9 @@
                 <div class="check fas fa-check"></div>
               </div>
               <div class="step">
-                <p>Instructors</p>
-                <div class="bullet">
-                  <span>3</span>
-                </div>
-                <div class="check fas fa-check"></div>
-              </div>
-              <div class="step">
                 <p>Finalize</p>
                 <div class="bullet">
-                  <span>4</span>
-                </div>
-                <div class="check fas fa-check"></div>
-              </div>
-              <div class="step">
-                <p>Submit</p>
-                <div class="bullet">
-                  <span>5</span>
+                  <span>3</span>
                 </div>
                 <div class="check fas fa-check"></div>
               </div>
@@ -415,27 +401,72 @@
                     <button class="next-1 next">Next</button>
                   </div>
                 </div>
-                <div class="page">
-                  <div class="title">Ano ba maganda ilagay</div>
+                <div class="page details">
+                  <div class="title">Finalize the schedule</div>
+                  <div class="input-container">
+                    <div class="input-wrapper">
+                      <span>Section</span>
+                      <input
+                        readonly
+                        type="text"
+                        class="input"
+                        placeholder="Sampaguita
+                        "
+                      />
+                    </div>
+                    <div class="input-wrapper">
+                      <span>Strand</span>
+                      <input
+                        readonly
+                        type="text"
+                        class="input"
+                        placeholder="HUMSS
+                        "
+                      />
+                    </div>
+                    <div class="input-wrapper">
+                      <span>Grade level</span>
+                      <input
+                        readonly
+                        type="text"
+                        class="input"
+                        placeholder="Grade 11
+                        "
+                      />
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="additional-inputs">
+                    <div class="sy-container">
+                      <span class="title">School year</span>
+                      <div class="sy">
+                        <input type="text" maxlength="4" name="sy" /><span
+                          >-</span
+                        ><input type="text" maxlength="4" name="sy2" />
+                      </div>
+                    </div>
+                    <div class="sem-container">
+                      <span class="title">Semester</span>
+                      <div class="dropdown-sem">
+                        <input
+                          type="text"
+                          class="textbox-sy"
+                          placeholder="Select semester"
+                          readonly
+                        />
+                        <span class="icon-down"
+                          ><i class="fa-solid fa-chevron-down"></i
+                        ></span>
 
+                        <div class="option">
+                          <div onclick="show('1st')">1st</div>
+                          <div onclick="show('2nd')">2nd</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="field btns">
                     <button class="prev-2 prev">Previous</button>
-                    <button class="next-2 next">Next</button>
-                  </div>
-                </div>
-                <div class="page">
-                  <div class="title">Delete ko nalang ata to</div>
-
-                  <div class="field btns">
-                    <button class="prev-3 prev">Previous</button>
-                    <button class="next-3 next">Next</button>
-                  </div>
-                </div>
-
-                <div class="page">
-                  <div class="title">Di ko na alam ano ilalagay</div>
-                  <div class="field btns">
-                    <button class="prev-4 prev">Previous</button>
                     <button class="submit">Submit</button>
                   </div>
                 </div>

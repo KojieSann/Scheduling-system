@@ -1,14 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:wght@300&display=swap");
 
-:root {
-  --primary: #333;
-  --secondary: #333;
-  --errorColor: red;
-  --stepNumber: 6;
-  --containerWidth: 300px;
-  --bgColor: #333;
-  --inputBorderColor: lightgray;
-}
 * {
   user-select: none;
   padding: 0;
@@ -555,6 +546,10 @@ button {
 }
 
 /* modal */
+:root {
+  --stepNumber: 3;
+  --containerWidth: 300px;
+}
 .bg-modal {
   width: 100%;
   height: 100vh;
@@ -636,10 +631,10 @@ button {
 }
 .modal-container .form-outer form {
   display: flex;
-  width: calc(100% * 5);
+  width: calc(100% * var(--stepNumber));
 }
 .form-outer form .page {
-  width: calc(100% / 5);
+  width: calc(100% / var(--stepNumber));
   transition: margin-left 0.3s ease-in-out;
 }
 .form-outer form .page .title {
@@ -677,7 +672,7 @@ form .page input {
   font-size: 12px;
 }
 form .page .field input.invalid-input {
-  border-color: var(--errorColor);
+  border-color: red;
 }
 form .page .field button {
   position: relative;
@@ -891,6 +886,110 @@ form .page .btns button.next {
   width: 120px;
   background: #fae0e4;
   color: #ff8fa3;
+}
+/* input for additional details  */
+.modal-content .form-outer .additional-inputs {
+  display: flex;
+}
+.modal-content .form-outer .details hr {
+  margin-top: 30px;
+  background: #4b4b4b;
+}
+.modal-content .form-outer .additional-inputs .title {
+  font-family: "montserrat";
+  font-size: 12px;
+  font-weight: 500;
+  position: relative;
+  right: 70px;
+  top: -32px;
+  background: #fff;
+  padding: 3px;
+  color: #bec4ca;
+}
+.modal-content .form-outer .additional-inputs .sy-container {
+  margin: 30px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  width: 250px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+}
+.modal-content .form-outer .additional-inputs .sy {
+  gap: 5px;
+  display: flex;
+  align-items: center;
+}
+.modal-content .form-outer .additional-inputs .sy input {
+  width: 70px;
+}
+.modal-content .form-outer .additional-inputs .sem-container {
+  margin: 30px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  width: 250px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+}
+.modal-content .form-outer .additional-inputs .sem-container .option {
+  position: absolute;
+  display: none;
+  top: 40px;
+  width: 60%;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  color: #4b4b4b;
+  z-index: 100;
+  border: 0.5px solid #dddddd;
+}
+.modal-content .form-outer .additional-inputs .sem-container .option div {
+  font-family: "montserrat";
+  font-size: 14px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.modal-content .form-outer .additional-inputs .sem-container .option div:hover {
+  background: #dfdfdf;
+}
+.additional-inputs .sem-container .dropdown-sem input {
+  cursor: pointer;
+}
+.additional-inputs .sem-container .dropdown-sem .icon-down {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  left: 165px;
+  top: 8px;
+  transition: all 0.3s ease;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  pointer-events: none;
+}
+.modal-content .form-outer .additional-inputs .sem-container .dropdown-sem {
+  position: relative;
+  width: 200px;
+  height: 35px;
+}
+.modal-content
+  .form-outer
+  .additional-inputs
+  .sem-container
+  .dropdown-sem.activeShow
+  .option {
+  display: block;
+}
+.additional-inputs .sem-container .dropdown-sem.activeShow .icon-down {
+  transform: rotate(180deg);
 }
 /* modal for subject */
 .bg-modal-subject {
