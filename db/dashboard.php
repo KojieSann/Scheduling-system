@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 include ('connect.php');
 
 $sql_count = "SELECT COUNT(*) AS total FROM sections";
@@ -6,7 +6,7 @@ $result_count = $conn->query($sql_count);
 $row_count = $result_count->fetch_assoc();
 $total_sections = $row_count['total'];
 
-?> -->
+?>
 
 <!DOCTYPE html>
 <html lang="en">

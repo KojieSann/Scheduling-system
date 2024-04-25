@@ -134,28 +134,28 @@ function initMultiStepForm() {
   }
 }
 // multistep for modal subject
+const bgModalSubject = document.querySelector(".bg-modal-subject");
 const form1 = document.querySelector(".form1");
 const form2 = document.querySelector(".form2");
 const form3 = document.querySelector(".form3");
 const form1NxtBtn = document.querySelector(".subj-btn-next");
-const form2NxtBtn = document.querySelector(".subj-btn-next2");
 const form2BckBtn = document.querySelector(".subj-btn-back2");
-const form3BckBtn = document.querySelector(".subj-btn-back3");
+const submitBtnSubj = document.querySelector(".subj-btn-submit");
+const doneStatus = document.querySelector(".done"),
+  inProgress = document.querySelector(".in-progress");
 form1NxtBtn.addEventListener("click", function () {
   form1.style.display = "none";
   form2.style.display = "block";
-});
-form2NxtBtn.addEventListener("click", function () {
-  form2.style.display = "none";
-  form3.style.display = "block";
 });
 form2BckBtn.addEventListener("click", function () {
   form2.style.display = "none";
   form1.style.display = "block";
 });
-form3BckBtn.addEventListener("click", function () {
-  form3.style.display = "none";
-  form2.style.display = "block";
+submitBtnSubj.addEventListener("click", function () {
+  doneStatus.style.display = "block";
+  bgModalSubject.style.display = "none";
+  inProgress.style.display = "none";
+  console.log("hahahah");
 });
 // dropdown for subject
 var style = document.createElement("style");
@@ -364,3 +364,40 @@ function MultiselectDropdown(options) {
 window.addEventListener("load", () => {
   MultiselectDropdown(window.MultiselectDropdownOptions);
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  var nextButtons = document.querySelectorAll('.next');
+
+  nextButtons.forEach(function(button) {
+      button.addEventListener('click', function(event) {
+          event.preventDefault();
+
+          var section = this.getAttribute('data-section');
+          var strand = this.getAttribute('data-strand');
+          var gradeLevel = this.getAttribute('data-grade-level');
+
+          document.getElementById('inputSection').value = section;
+          document.getElementById('inputStrand').value = strand;
+          document.getElementById('inputGradeLevel').value = gradeLevel;
+      });
+  });
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var applyButtons = document.querySelectorAll('.open-modal');
+
+    applyButtons.forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            var subjectName = this.getAttribute('data-subject-name');
+            var subjectCode = this.getAttribute('data-subject-code');
+
+            document.getElementById('modalSubjectName').value = subjectName;
+            document.getElementById('modalSubjectCode').value = subjectCode;
+        });
+    });
+});
+

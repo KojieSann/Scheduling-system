@@ -68,11 +68,11 @@ $result_teachers = $conn->query($sql_teachers);
           <div class="subject-header">
             <div class="subject-info">
               <span>Subject</span>
-              <input type="text" class="headerInput" readonly placeholder="English" />
+              <input type="text" id="modalSubjectName" class="headerInput" readonly placeholder="" />
             </div>
             <div class="subject-info">
               <span>Subject code</span>
-              <input type="text" class="headerInput" readonly placeholder="">
+              <input type="text" id="modalSubjectCode" class="headerInput" readonly placeholder="" />
             </div>
           </div>
           <div class="form-wrapper">
@@ -142,56 +142,40 @@ $result_teachers = $conn->query($sql_teachers);
               </div>
             </div>
             <div class="form2 data-info" style="display: none">
-              <form action="">
-                <div class="day-selection">
-                  <button type="button" class="active-day">Monday</button>
-                  <button type="button" class="not-active">Tuesday</button>
-                  <button type="button" class="not-active">Wednesday</button>
-                  <button class="not-selected" disabled>Thursday</button>
-                  <button type="button" class="not-active">Friday</button>
-                </div>
-                <div class="time-selection">
-                  <div class="inTime time">
-                    <span>In time</span>
-                    <input type="time" />
+                <form action="">
+                  <div class="day-selection">
+                    <button type="button" class="active-day">Monday</button>
+                    <button type="button" class="not-active">Tuesday</button>
+                    <button type="button" class="not-active">Wednesday</button>
+                    <button class="not-selected" disabled>Thursday</button>
+                    <button type="button" class="not-active">Friday</button>
                   </div>
-                  <div class="outTime time">
-                    <span>Out time</span>
-                    <input type="time" />
+                  <div class="time-selection">
+                    <div class="inTime time">
+                      <span>In time</span>
+                      <input type="time" />
+                    </div>
+                    <div class="outTime time">
+                      <span>Out time</span>
+                      <input type="time" />
+                    </div>
+                    <div class="repeat">
+                      <input type="checkbox" name="repeat" />
+                      <label for="repeat">Same as last schedule</label>
+                    </div>
                   </div>
-                  <div class="repeat">
-                    <input type="checkbox" name="repeat" />
-                    <label for="repeat">Same as last schedule</label>
-                  </div>
-                </div>
-              </form>
+                </form>
 
-              <div class="btns-wrap">
-                <button type="button" class="subj-btn-back2 subjBtn">
-                  Back
-                </button>
-                <button type="button" class="subj-btn-next2 subjBtn">
-                  Next
-                </button>
-              </div>
-            </div>
-            <div class="form3 data-info" style="display: none">
-              <h1>Page 3</h1>
-              <form action="">
-                <div class="input-wrap">
-                  <label for="">hahah</label>
-                  <input type="text" />
+                <div class="btns-wrap">
+                  <button type="button" class="subj-btn-back2 subjBtn">
+                    Back
+                  </button>
+                  <button type="submit" class="subj-btn-submit subjBtn">
+                    <i class="fa-regular fa-floppy-disk"></i> <span> Save</span>
+                  </button>
                 </div>
-              </form>
-              <div class="btns-wrap">
-                <button type="button" class="subj-btn-back3 subjBtn">
-                  Back
-                </button>
-                <button type="submit" class="subj-btn-submit subjBtn">
-                  <i class="fa-regular fa-floppy-disk"></i> <span> Save</span>
-                </button>
               </div>
-            </div>
+           
           </div>
         </div>
       </div>
@@ -200,43 +184,29 @@ $result_teachers = $conn->query($sql_teachers);
       <div class="modal-content">
         <div class="close-window"><i class="fa-solid fa-xmark"></i></div>
         <div class="modal-container">
-          <div class="progress-bar">
-            <div class="step">
-              <p>Section</p>
-              <div class="bullet">
-                <span>1</span>
+        <div class="progress-bar">
+              <div class="step">
+                <p>Section</p>
+                <div class="bullet">
+                  <span>1</span>
+                </div>
+                <div class="check fas fa-check"></div>
               </div>
-              <div class="check fas fa-check"></div>
-            </div>
-            <div class="step">
-              <p>Subjects</p>
-              <div class="bullet">
-                <span>2</span>
+              <div class="step">
+                <p>Subjects</p>
+                <div class="bullet">
+                  <span>2</span>
+                </div>
+                <div class="check fas fa-check"></div>
               </div>
-              <div class="check fas fa-check"></div>
-            </div>
-            <div class="step">
-              <p>Instructors</p>
-              <div class="bullet">
-                <span>3</span>
+              <div class="step">
+                <p>Finalize</p>
+                <div class="bullet">
+                  <span>3</span>
+                </div>
+                <div class="check fas fa-check"></div>
               </div>
-              <div class="check fas fa-check"></div>
             </div>
-            <div class="step">
-              <p>Finalize</p>
-              <div class="bullet">
-                <span>4</span>
-              </div>
-              <div class="check fas fa-check"></div>
-            </div>
-            <div class="step">
-              <p>Submit</p>
-              <div class="bullet">
-                <span>5</span>
-              </div>
-              <div class="check fas fa-check"></div>
-            </div>
-          </div>
           <div class="form-outer">
             <form action="#">
               <div class="page slide-page">
@@ -263,11 +233,11 @@ $result_teachers = $conn->query($sql_teachers);
                       <?php
                       while ($row = $result_sections->fetch_assoc()) {
                         echo "<tr>";
-                        echo "<td>" . $row['section_name'] . "</td>";
-                        echo "<td>" . $row['strand'] . "</td>";
-                        echo "<td>" . $row['grade_level'] . "</td>";
+                        echo "<td>" . htmlspecialchars($row['section_name']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['strand']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['grade_level']) . "</td>";
                         echo "<td>None</td>";
-                        echo "<td><button class='firstNext next'>Next <i class='fa-solid fa-angle-right'></i></button></td>";
+                        echo "<td><button class='firstNext next' data-section='" . htmlspecialchars($row['section_name'], ENT_QUOTES) . "' data-strand='" . htmlspecialchars($row['strand'], ENT_QUOTES) . "' data-grade-level='" . htmlspecialchars($row['grade_level'], ENT_QUOTES) . "'>Next <i class='fa-solid fa-angle-right'></i></button></td>";
                         echo "</tr>";
                       }
                       ?>
@@ -280,15 +250,15 @@ $result_teachers = $conn->query($sql_teachers);
                 <div class="input-container">
                   <div class="input-wrapper">
                     <span>Section</span>
-                    <input readonly type="text" class="input" value="" />
+                    <input readonly type="text" id="inputSection" class="input" value="" />
                   </div>
                   <div class="input-wrapper">
                     <span>Strand</span>
-                    <input readonly type="text" class="input" value="" />
+                    <input readonly type="text" id="inputStrand" class="input" value="" />
                   </div>
                   <div class="input-wrapper">
                     <span>Grade level</span>
-                    <input readonly type="text" class="input" value="" />
+                    <input readonly type="text" id="inputGradeLevel" class="input" value="" />
                   </div>
                 </div>
                 <table class="section-table">
@@ -312,16 +282,19 @@ $result_teachers = $conn->query($sql_teachers);
                       echo "<td>" . $row['grade_level'] . "</td>";
                       echo "<td class=\"status\">";
                       echo "<div class=\"subject-progress\">";
-                      echo "<div class=\"done subject-status\">";
-                      echo "<i class=\"fa-regular fa-circle-check\"></i> Done";
+
+                      $statusClass = ($row['status'] == 'done') ? 'done' : 'in-progress';
+                      $statusIcon = ($row['status'] == 'done') ? 'fa-circle-check' : 'fa-clock';
+                      $statusText = ($row['status'] == 'done') ? 'Done' : 'In Progress';
+
+                      echo "<div class=\"$statusClass subject-status\">";
+                      echo "<i class=\"fa-regular $statusIcon\"></i> $statusText";
                       echo "</div>";
-                      echo "<div class=\"in-progress subject-status\">";
-                      echo "<i class=\"fa-regular fa-clock\"></i> In Progress";
-                      echo "</div>";
+
                       echo "</div>";
                       echo "</td>";
                       echo "<td>";
-                      echo "<button type=\"button\" class=\"open-modal\">";
+                      echo "<button type=\"button\" class=\"open-modal\" data-subject-name=\"" . htmlspecialchars($row['subject_name'], ENT_QUOTES) . "\" data-subject-code=\"" . htmlspecialchars($row['subject_code'], ENT_QUOTES) . "\" data-strand=\"" . htmlspecialchars($row['strand'], ENT_QUOTES) . "\" data-grade-level=\"" . htmlspecialchars($row['grade_level'], ENT_QUOTES) . "\">";
                       echo "Apply";
                       echo "</button>";
                       echo "</td>";
@@ -335,30 +308,76 @@ $result_teachers = $conn->query($sql_teachers);
                   <button class="next-1 next">Next</button>
                 </div>
               </div>
-              <div class="page">
-                <div class="title">Ano ba maganda ilagay</div>
+              <div class="page details">
+                  <div class="title">Finalize the schedule</div>
+                  <div class="input-container">
+                    <div class="input-wrapper">
+                      <span>Section</span>
+                      <input
+                        readonly
+                        type="text"
+                        class="input"
+                        placeholder="Sampaguita
+                        "
+                      />
+                    </div>
+                    <div class="input-wrapper">
+                      <span>Strand</span>
+                      <input
+                        readonly
+                        type="text"
+                        class="input"
+                        placeholder="HUMSS
+                        "
+                      />
+                    </div>
+                    <div class="input-wrapper">
+                      <span>Grade level</span>
+                      <input
+                        readonly
+                        type="text"
+                        class="input"
+                        placeholder="Grade 11
+                        "
+                      />
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="additional-inputs">
+                    <div class="sy-container">
+                      <span class="title">School year</span>
+                      <div class="sy">
+                        <input type="text" maxlength="4" name="sy" /><span
+                          >-</span
+                        ><input type="text" maxlength="4" name="sy2" />
+                      </div>
+                    </div>
+                    <div class="sem-container">
+                      <span class="title">Semester</span>
+                      <div class="dropdown-sem">
+                        <input
+                          type="text"
+                          class="textbox-sy"
+                          placeholder="Select semester"
+                          readonly
+                        />
+                        <span class="icon-down"
+                          ><i class="fa-solid fa-chevron-down"></i
+                        ></span>
 
-                <div class="field btns">
-                  <button class="prev-2 prev">Previous</button>
-                  <button class="next-2 next">Next</button>
+                        <div class="option">
+                          <div onclick="show('1st')">1st</div>
+                          <div onclick="show('2nd')">2nd</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field btns">
+                    <button class="prev-2 prev">Previous</button>
+                    <button class="submit">Submit</button>
+                  </div>
                 </div>
-              </div>
-              <div class="page">
-                <div class="title">Delete ko nalang ata to</div>
-
-                <div class="field btns">
-                  <button class="prev-3 prev">Previous</button>
-                  <button class="next-3 next">Next</button>
-                </div>
-              </div>
-
-              <div class="page">
-                <div class="title">Di ko na alam ano ilalagay</div>
-                <div class="field btns">
-                  <button class="prev-4 prev">Previous</button>
-                  <button class="submit">Submit</button>
-                </div>
-              </div>
+              
             </form>
           </div>
         </div>
@@ -493,7 +512,7 @@ $result_teachers = $conn->query($sql_teachers);
               </table>
             </div>
 
-    
+
           </div>
         </div>
       </div>

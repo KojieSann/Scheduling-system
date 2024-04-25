@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2024 at 09:45 PM
+-- Generation Time: Apr 24, 2024 at 11:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,7 +40,7 @@ CREATE TABLE `sections` (
 
 INSERT INTO `sections` (`id`, `section_name`, `grade_level`, `strand`) VALUES
 (6, 'tyrtydawdw', 'nbbb', 'TVL'),
-(7, 'bsit311', '3rdDAWD', 'GAS'),
+(7, 'bsit311daw', '3rdDAWD', 'GAS'),
 (8, 'dad', 'dwadADWA', 'STEM'),
 (9, 'dawd', 'awdaww', 'STEM'),
 (10, 'dawdaaaaaaaaa', 'awdawdaadwdaDAWD', 'TVL'),
@@ -63,16 +63,20 @@ CREATE TABLE `subjects` (
   `subject_code` varchar(255) NOT NULL,
   `school_year` varchar(255) NOT NULL,
   `grade_level` varchar(255) NOT NULL,
-  `strand` varchar(255) NOT NULL
+  `strand` varchar(255) NOT NULL,
+  `status` enum('done','in_progress') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `subjects`
 --
 
-INSERT INTO `subjects` (`id`, `subject_name`, `subject_code`, `school_year`, `grade_level`, `strand`) VALUES
-(55, 'tewtwet', 'tweew', '1232', 'Grade 11', 'GAS'),
-(56, 'tewtwet', 'tweew', '1232', 'Grade 11', 'STEM');
+INSERT INTO `subjects` (`id`, `subject_name`, `subject_code`, `school_year`, `grade_level`, `strand`, `status`) VALUES
+(60, 'dawd', 'awd', '2004', 'Grade 11', 'STEM', NULL),
+(61, 'dawd', 'awd', '2004', 'Grade 11', 'TVL, ICT', NULL),
+(62, 'dawd', 'awd', '2004', 'Grade 11', 'ABM', NULL),
+(63, 'dawd', 'awd', '2004', 'Grade 11', 'HUMSS', NULL),
+(64, 'dawd', 'awd', '2004', 'Grade 11', 'HE', NULL);
 
 -- --------------------------------------------------------
 
@@ -85,7 +89,7 @@ CREATE TABLE `teachers` (
   `first_name` varchar(50) NOT NULL,
   `middle_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) NOT NULL,
-  `day` enum('Monday','Tuesday','Wednesday','Thursday','Friday') NOT NULL,
+  `day` varchar(50) DEFAULT NULL,
   `time` varchar(255) NOT NULL,
   `strand` enum('GAS','STEM','TVL','ICT','ABM') NOT NULL,
   `subject` varchar(255) NOT NULL
@@ -96,10 +100,7 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `first_name`, `middle_name`, `last_name`, `day`, `time`, `strand`, `subject`) VALUES
-(118, 'daw', 'daw', 'dawd', '', 'AM-PM', 'TVL', 'tewtwet, tewtwet'),
-(119, 'daw', 'daw', 'dawd', 'Thursday', 'AM-PM', 'TVL', 'dawd'),
-(120, 'daw', 'daw', 'dawd', 'Thursday', 'AM-PM', 'TVL', 'hhhhhh'),
-(121, 'daw', 'daw', 'dawd', 'Friday', 'AM-PM', 'TVL', 'dawd'),
+(121, 'daw', 'daw', 'dawd', 'Monday, Friday', 'AM-PM', 'TVL', 'tewtwet, tewtwet'),
 (122, 'daw', 'daw', 'dawd', 'Friday', 'AM-PM', 'TVL', 'hhhhhh'),
 (123, 'dawd', 'dawda', 'dawd', 'Monday', 'PM', 'GAS', 'hhhhhh'),
 (124, 'dawd', 'dawda', 'dawd', 'Monday', 'PM', 'GAS', 'ENGLISH'),
@@ -107,13 +108,10 @@ INSERT INTO `teachers` (`id`, `first_name`, `middle_name`, `last_name`, `day`, `
 (127, 'dawd', 'dawda', 'dawd', 'Tuesday', 'PM', 'GAS', 'ENGLISH'),
 (128, 'dawd', 'dawda', 'dawd', 'Tuesday', 'PM', 'GAS', 'ENGLISH'),
 (129, 'dawd', 'awd', 'daw', 'Monday', 'PM', 'STEM', 'tewtwet, tewtwet'),
-(130, 'ewrqr', 'rqew', 'rewqwaer', 'Monday', 'AM', 'GAS', 'tewtwet, tewtwet'),
-(131, 'daw', 'daw', 'dawd', '', 'PM', 'STEM', 'tewtwet'),
-(132, 'dwa', 'dawd', 'awdaw', '', 'PM', 'TVL', 'tewtwet'),
-(133, 'dawd', 'dwa', 'dawdwa', '', 'AM-PM', 'STEM', 'tewtwet'),
-(134, 'adw', 'dawd', 'dawdwa', '', 'AM-PM', 'STEM', 'tewtwet, tewtwet'),
-(135, 'dawd', 'dawd', 'dawd', '', 'PM', 'STEM', 'tewtwet, tewtwet'),
-(136, 'rwer', 'wteet', 'etwwet', '', 'AM', 'STEM', 'tewtwet, tewtwet');
+(137, 'daw', 'dawd', 'wadw', 'Monday, Tuesday', 'PM', 'STEM', 'tewtwet, tewtwet, English, Math'),
+(138, 'dwa', 'adwaw', 'dawdwa', 'Monday, Tuesday, Wednesday, Thursday, Friday', 'AM-PM', 'TVL', 'tewtwet, tewtwet, English, Math'),
+(139, 'dawd', 'awdaw', 'dawda', 'Monday, Tuesday', 'PM', 'TVL', 'tewtwet, tewtwet, English'),
+(140, 'Aldrin', '', 'Dayuta', 'Monday, Tuesday', 'PM', 'STEM', 'English, Math');
 
 -- --------------------------------------------------------
 
@@ -177,13 +175,13 @@ ALTER TABLE `sections`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT for table `users`

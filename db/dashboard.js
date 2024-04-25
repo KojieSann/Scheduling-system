@@ -1,4 +1,3 @@
-
 // popout for the logout
 const logoutButton = document.querySelector(".logout");
 const closePopup = document.querySelector(".noBtn");
@@ -9,13 +8,11 @@ closePopup.addEventListener("click", function () {
   document.querySelector(".bg-content-logout").style.display = "none";
 });
 // date for the header
-
 var myDate = new Date(),
   day = myDate.getDay(),
   date = myDate.getDate(),
   month = myDate.getMonth(),
   year = myDate.getFullYear();
-  
 var days = [
   "Sunday",
   "Monday",

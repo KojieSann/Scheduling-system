@@ -262,7 +262,7 @@ ul .list-items:hover i::after {
 }
 /* sections and teachers schedules */
 .content-container .section-teacher {
-  width: 18vw;
+  width: 19vw;
   font-family: "poppins";
 }
 .content-container .section-teacher .contents {
@@ -307,7 +307,7 @@ ul .list-items:hover i::after {
   color: #4b4b4b;
 }
 .schedule-table .table-container {
-  max-height: 45vh;
+  max-height: 50vh;
   overflow-y: scroll;
   margin-top: 5px;
 }

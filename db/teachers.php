@@ -184,9 +184,7 @@ if(isset($_GET['search'])) {
                   >*</span
                 ></span>
                 <select name="day[]" multiple  multiselect-select-all="true" style="width:200px;">
-                  <option value="Mond
-                  
-                  ay">MONDAY</option>
+                  <option value="Monday">MONDAY</option>
                   <option value="Tuesday">TUESDAY</option>
                   <option value="Wednesday">WEDNESDAY</option>
                   <option value="Thursday">THURSDAY</option>
@@ -234,7 +232,9 @@ if(isset($_GET['search'])) {
                 ></span>
                 <select class="subject-select"
                         name="subject[]"
-                        multiple multiselect-select-all="true">
+                        multiple multiselect-select-all="true"
+                        multiselect-search="true"
+                        >
                         <?php
                 
                 $sql_subjects = "SELECT * FROM subjects";
