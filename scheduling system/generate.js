@@ -24,6 +24,23 @@ document.addEventListener("click", (e) => {
     dropdownTable.classList.remove("activeShow");
   }
 });
+// table to excel
+function tableToExcel() {
+  var table2excel = new Table2Excel();
+  table2excel.export(document.querySelectorAll(".table"));
+}
+// table to pdf
+function tableToPDF() {
+  var table2pdf = document.querySelector(".table");
+  var opt = {
+    margin: 1,
+    filename: "octScheduleMaker.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+  };
+  html2pdf(table2pdf, opt);
+}
 // popout for the logout
 const logoutButton = document.querySelector(".logout");
 const closePopup = document.querySelector(".noBtn");

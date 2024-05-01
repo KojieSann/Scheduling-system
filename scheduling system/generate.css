@@ -10,7 +10,21 @@
 body {
   background: #fff;
 }
-
+@media print {
+  nav {
+    display: none;
+  }
+  .checkboxTbl {
+    display: none;
+  }
+  body {
+    visibility: hidden;
+  }
+  .table-container,
+  .table-container * {
+    visibility: visible;
+  }
+}
 .logo {
   margin: 20px 0 40px 20px;
   align-items: center;
@@ -561,7 +575,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* display: none; */
+  display: none;
 }
 .bg-modal .modal-content {
   height: 630px;
@@ -631,10 +645,10 @@ button {
 }
 .modal-container .form-outer form {
   display: flex;
-  width: calc(100% * var(--stepNumber));
+  width: calc(100% * 3);
 }
 .form-outer form .page {
-  width: calc(100% / var(--stepNumber));
+  width: calc(100% / 3);
   transition: margin-left 0.3s ease-in-out;
 }
 .form-outer form .page .title {
@@ -645,7 +659,7 @@ button {
   color: #333;
 }
 .form-outer form .page .field {
-  width: var(--containerWidth);
+  width: 300px;
   height: 45px;
   margin: 45px 0;
   display: flex;
