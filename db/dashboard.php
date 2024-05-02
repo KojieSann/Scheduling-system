@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login_page.php");
+    exit;
+}
+
+$username = $_SESSION['username'];
 include ('connect.php');
 
 $sql_count = "SELECT COUNT(*) AS total FROM sections";
@@ -68,7 +76,7 @@ $total_sections = $row_count['total'];
           </div>
           <div class="btn">
             <button class="noBtn">Cancel</button>
-            <a href="./login_page.php"><button class="yesBtn">Logout</button></a>
+            <a href="logout.php"><button class="yesBtn">Logout</button></a>
           </div>
         </div>
       </div>

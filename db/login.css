@@ -5,6 +5,16 @@
   padding: 0px;
   box-sizing: border-box;
 }
+
+
+.error {
+  color: yellowgreen;
+  position: relative;
+  top: 53px;
+  font-weight: bold;
+  text-align: center;
+  font-family: "montserrat";
+}
 .area {
   background: #a3b18a;
   background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
@@ -145,7 +155,7 @@ form {
   display: flex;
 }
 .info {
-  margin-bottom: 30px;
+  margin-bottom: 3  0px;
   font-family: "rubik";
 }
 .info p {

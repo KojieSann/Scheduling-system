@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login_page.php");
+    exit;
+}
+
 include ('connect.php');
 
 $sql_sections = "SELECT * FROM sections";
@@ -53,11 +60,30 @@ $result_teachers = $conn->query($sql_teachers);
           <a href="./subject.php"><i class="fa-solid fa-book"></i><span class="nav-lists">Subjects</span></a>
         </li>
         <li>
-          <a href="./login_page.php" class="logout"><i class="fa-solid fa-right-from-bracket"></i><span
-              class="nav-lists">Logout</span></a>
-        </li>
+            <a class="logout"
+              ><i class="fa-solid fa-right-from-bracket"></i
+              ><span class="nav-lists">Logout</span></a
+            >
+          </li>
       </ul>
     </nav>
+    
+    <div class="bg-content-logout">
+        <div class="content-logout">
+          <img src="./img/shs-logo.png" alt="shs logo" class="shs-logo" />
+          <div class="header-text">
+            <span>Confirm Logout</span>
+            <p style="font-size: 13px">Are you sure you want to logout?</p>
+          </div>
+          <div class="header-img">
+            <img src="./img/undraw_login_re_4vu2.svg" alt="" />
+          </div>
+          <div class="btn">
+            <button class="noBtn">Cancel</button>
+            <a href="./login.php"><button class="yesBtn">Logout</button></a>
+          </div>
+        </div>
+      </div>
     <div class="bg-modal-subject">
       <div class="modal-content-subject">
         <div class="close-subject"><i class="fa-solid fa-xmark"></i></div>
@@ -262,47 +288,48 @@ $result_teachers = $conn->query($sql_teachers);
                   </div>
                 </div>
                 <table class="section-table">
-                  <thead>
-                    <tr>
-                      <th>Subjects</th>
-                      <th>Code</th>
-                      <th>Strand</th>
-                      <th>Grade lvl</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    while ($row = $result_subjects->fetch_assoc()) {
-                      echo "<tr>";
-                      echo "<td>" . $row['subject_name'] . "</td>";
-                      echo "<td>" . $row['subject_code'] . "</td>";
-                      echo "<td>" . $row['strand'] . "</td>";
-                      echo "<td>" . $row['grade_level'] . "</td>";
-                      echo "<td class=\"status\">";
-                      echo "<div class=\"subject-progress\">";
+    <thead>
+        <tr>
+            <th>Subjects</th>
+            <th>Code</th>
+            <th>Strand</th>
+            <th>Grade lvl</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        while ($row = $result_subjects->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row['subject_name'] . "</td>";
+            echo "<td>" . $row['subject_code'] . "</td>";
+            echo "<td>" . $row['strand'] . "</td>";
+            echo "<td>" . $row['grade_level'] . "</td>";
+            echo "<td class=\"status\">";
+            echo "<div class=\"subject-progress\">";
 
-                      $statusClass = ($row['status'] == 'done') ? 'done' : 'in-progress';
-                      $statusIcon = ($row['status'] == 'done') ? 'fa-circle-check' : 'fa-clock';
-                      $statusText = ($row['status'] == 'done') ? 'Done' : 'In Progress';
+            $statusClass = ($row['status'] == 'done') ? 'done' : 'in-progress';
+            $statusIcon = ($row['status'] == 'done') ? 'fa-circle-check' : 'fa-clock';
+            $statusText = ($row['status'] == 'done') ? 'Done' : 'In Progress';
 
-                      echo "<div class=\"$statusClass subject-status\">";
-                      echo "<i class=\"fa-regular $statusIcon\"></i> $statusText";
-                      echo "</div>";
+            echo "<div class=\"$statusClass subject-status\">";
+            echo "<i class=\"fa-regular $statusIcon\"></i> $statusText";
+            echo "</div>";
 
-                      echo "</div>";
-                      echo "</td>";
-                      echo "<td>";
-                      echo "<button type=\"button\" class=\"open-modal\" data-subject-name=\"" . htmlspecialchars($row['subject_name'], ENT_QUOTES) . "\" data-subject-code=\"" . htmlspecialchars($row['subject_code'], ENT_QUOTES) . "\" data-strand=\"" . htmlspecialchars($row['strand'], ENT_QUOTES) . "\" data-grade-level=\"" . htmlspecialchars($row['grade_level'], ENT_QUOTES) . "\">";
-                      echo "Apply";
-                      echo "</button>";
-                      echo "</td>";
-                      echo "</tr>";
-                    }
-                    ?>
-                  </tbody>
-                </table>
+            echo "</div>";
+            echo "</td>";
+            echo "<td>";
+            echo "<button type=\"button\" class=\"open-modal\" data-subject-name=\"" . htmlspecialchars($row['subject_name'], ENT_QUOTES) . "\" data-subject-code=\"" . htmlspecialchars($row['subject_code'], ENT_QUOTES) . "\" data-strand=\"" . htmlspecialchars($row['strand'], ENT_QUOTES) . "\" data-grade-level=\"" . htmlspecialchars($row['grade_level'], ENT_QUOTES) . "\">";
+            echo "Apply";
+            echo "</button>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        ?>
+    </tbody>
+</table>
+
                 <div class="field btns">
                   <button class="prev-1 prev">Previous</button>
                   <button class="next-1 next">Next</button>
@@ -398,9 +425,17 @@ $result_teachers = $conn->query($sql_teachers);
           <div class="table-header">
             <h1>Schedules</h1>
             <div class="table-nav" style="display: none">
-              <button><i class="fa-solid fa-print"></i> Print</button>
-              <button><i class="fa-solid fa-trash-can"></i> Delete</button>
-            </div>
+                <button onclick="window.print()">
+                  <i class="fa-solid fa-print"></i> Print
+                </button>
+                <button onclick="tableToPDF()">
+                  <i class="fa-regular fa-file-pdf"></i> PDF
+                </button>
+                <button onclick="tableToExcel()">
+                  <i class="fa-regular fa-file-excel"></i> EXCEL
+                </button>
+                <button><i class="fa-solid fa-trash-can"></i> Delete</button>
+              </div>
             <div class="table-search">
               <form class="search-container">
                 <input id="search-box" type="text" class="search-box" name="" />
@@ -414,7 +449,7 @@ $result_teachers = $conn->query($sql_teachers);
               <table class="table">
                 <thead>
                   <tr>
-                    <th><input type="checkbox" id="selectAll" /></th>
+                    <th class="checkboxTbl"><input type="checkbox" id="selectAll" /></th>
                     <th>Section</th>
                     <th>Strand</th>
                     <th>Schedule</th>
@@ -427,7 +462,7 @@ $result_teachers = $conn->query($sql_teachers);
                 </thead>
                 <tbody>
                   <tr>
-                    <td><input type="checkbox" class="select" /></td>
+                    <td class="checkboxTbl"><input type="checkbox" class="select" /></td>
                     <td>Sampaguita</td>
                     <td>HUMSS</td>
                     <td>Mon,Tues,Fri</td>
@@ -435,7 +470,7 @@ $result_teachers = $conn->query($sql_teachers);
                     <td>2024-2025</td>
                     <td>AM</td>
                     <td>Papa Andrei</td>
-                    <td>
+                    <td class="checkboxTbl">
                       <div class="dropdown-table">
                         <span class="icon-right"><i class="fa-solid fa-chevron-right"></i></span>
                         <div class="option-table">
@@ -468,7 +503,7 @@ $result_teachers = $conn->query($sql_teachers);
                     </td>
                   </tr>
                   <tr>
-                    <td><input type="checkbox" class="select" /></td>
+                    <td class="checkboxTbl"><input type="checkbox" class="select" /></td>
                     <td>Santol</td>
                     <td>GAS</td>
                     <td>Mon,Tues,Fri</td>
@@ -476,7 +511,7 @@ $result_teachers = $conn->query($sql_teachers);
                     <td>2024-2025</td>
                     <td>AM</td>
                     <td>Papa Andrei</td>
-                    <td>
+                    <td class="checkboxTbl">
                       <div class="dropdown-table">
                         <span class="icon-right"><i class="fa-solid fa-chevron-right"></i></span>
                         <div class="option-table">
@@ -518,6 +553,8 @@ $result_teachers = $conn->query($sql_teachers);
       </div>
     </div>
   </div>
+  <script src="./libraries/html2pdf.bundle.min.js"></script>
+    <script src="./libraries/table2excel.js"></script>
   <script src="./generate.js"></script>
 </body>
 

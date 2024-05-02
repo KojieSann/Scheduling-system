@@ -51,7 +51,7 @@ nav {
   font-family: "Montserrat";
   height: 100vh;
   width: 90px;
-  position: absolute;
+  position: fixed;
   transition: width 0.2s linear;
   top: 0;
   bottom: 0;
@@ -214,7 +214,7 @@ ul .list-items:hover i::after {
 .infos-container {
   display: flex;
   gap: 30px;
-  margin-top: 10px;
+
   width: 100%;
 }
 .infos-container .infos-wrapper {
@@ -288,8 +288,8 @@ ul .list-items:hover i::after {
 }
 /* table */
 .schedule-table {
+  margin-top: 10px;
   width: 100%;
-  margin-top: 30px;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #dddddd;

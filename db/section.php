@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login_page.php");
+    exit;
+}
+
 include('connect.php');
 
 $sql = "SELECT * FROM sections";
@@ -98,7 +105,7 @@ if(isset($_GET['search'])) {
           </div>
           <div class="btn">
             <button class="noBtn">Cancel</button>
-            <a href="./login_page.php"><button class="yesBtn">Logout</button></a>
+            <a href="logout.php"><button class="yesBtn">Logout</button></a>
           </div>
         </div>
       </div>
@@ -178,14 +185,15 @@ if(isset($_GET['search'])) {
             <div class="table-header">
               <h1>List of Sections</h1>
               <div class="table-search">
-              <form class="search-container" method="GET">
+                <form class="search-container" method="GET">
                   <input id="search-box" type="text" class="search-box" name="search" placeholder="Search...">
                   <label for="search-box"><i class="fa-solid fa-magnifying-glass search-icon"></i></label>
                   <input type="submit" id="search-submit" value="Search">
-              </form>
+                </form>
               </div>
             </div>
-            <table class="table">
+            <div class="table-container">
+                <table class="table">
               <thead>
                 <tr>
                   <th>Section Name</th>
@@ -208,8 +216,10 @@ if(isset($_GET['search'])) {
                   echo "</tr>";
               }
               ?>
-        </tbody>
+                </tbody>
             </table>
+            </div>
+            
           </div>
 
         </div>
