@@ -11,7 +11,6 @@ include ('connect.php');
 $sql_sections = "SELECT * FROM sections";
 $result_sections = $conn->query($sql_sections);
 
-
 $sql_subjects = "SELECT * FROM subjects";
 $result_subjects = $conn->query($sql_subjects);
 
@@ -67,7 +66,12 @@ $result_teachers = $conn->query($sql_teachers);
           </li>
       </ul>
     </nav>
-    
+    <div class="bg-content-view">
+      <div class="content-view">
+        <div class="close-subject"><i class="fa-solid fa-xmark"></i></div>
+        
+      </div>
+    </div>
     <div class="bg-content-logout">
         <div class="content-logout">
           <img src="./img/shs-logo.png" alt="shs logo" class="shs-logo" />
@@ -87,9 +91,6 @@ $result_teachers = $conn->query($sql_teachers);
     <div class="bg-modal-subject">
       <div class="modal-content-subject">
         <div class="close-subject"><i class="fa-solid fa-xmark"></i></div>
-        <!-- <header class="dragable">
-              <i class="fa-solid fa-up-down-left-right"></i>
-            </header> -->
         <div class="modal-subject-container">
           <div class="subject-header">
             <div class="subject-info">
@@ -132,7 +133,6 @@ $result_teachers = $conn->query($sql_teachers);
                   </span>
                   <select class="subject-select" name="select" multiselect-search="true">
                     <?php
-
                     if ($result_teachers) {
                       while ($row = $result_teachers->fetch_assoc()) {
                         $full_name = $row['last_name'] . ' , ' . $row['first_name'];
@@ -398,15 +398,6 @@ $result_teachers = $conn->query($sql_teachers);
                         </div>
                       </div>
                     </div>
-                    <div class="teacher-container">
-                      <span class="title">Adviser</span>
-                      <select multiple multiselect-search="true" style="width:230px;">
-                       <option value="Monday">sir</option>
-                        <option value="Tuesday">maam</option>
-                        <option value="Wednesday">yeyyyyy</option>
-                        
-                      </select>
-                    </div>
                   </div>
                   <div class="field btns">
                     <button class="prev-2 prev">Previous</button>
@@ -555,13 +546,12 @@ $result_teachers = $conn->query($sql_teachers);
                 </tbody>
               </table>
             </div>
-
-
           </div>
         </div>
       </div>
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./libraries/html2pdf.bundle.min.js"></script>
     <script src="./libraries/table2excel.js"></script>
   <script src="./generate.js"></script>

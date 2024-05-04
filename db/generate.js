@@ -42,20 +42,6 @@ function tableToPDF() {
   };
   html2pdf(table2pdf, opt);
 }
-// dropdown for sem
-const textboxtime = document.querySelector(".textbox-sy");
-const dropdown = document.querySelector(".dropdown-sem");
-function show(anything) {
-  document.querySelector(".textbox-sy").value = anything;
-}
-dropdown.onclick = function () {
-  dropdown.classList.toggle("activeShow");
-};
-document.addEventListener("click", (e) => {
-  if (!textboxtime.contains(e.target) && e.target !== dropdown) {
-    dropdown.classList.remove("activeShow");
-  }
-});
 // popout for the logout
 const logoutButton = document.querySelector(".logout");
 const closePopup = document.querySelector(".noBtn");
@@ -441,3 +427,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+$(document).ready(function(){
+  $('.open-modal').click(function(){
+      var subjectName = $(this).data('subject-name');
+      var subjectCode = $(this).data('subject-code');
+      var strand = $(this).data('strand');
+      var gradeLevel = $(this).data('grade-level');
+
+      $('#modalSubjectName').val(subjectName);
+      $('#modalSubjectCode').val(subjectCode);
+
+      $('.bg-modal-subject').show();
+  });
+
+  $('.close-subject').click(function(){
+      $('.bg-modal-subject').hide();
+  });
+});
