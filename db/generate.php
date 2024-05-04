@@ -398,6 +398,15 @@ $result_teachers = $conn->query($sql_teachers);
                         </div>
                       </div>
                     </div>
+                    <div class="teacher-container">
+                      <span class="title">Adviser</span>
+                      <select multiple multiselect-search="true" style="width:230px;">
+                       <option value="Monday">sir</option>
+                        <option value="Tuesday">maam</option>
+                        <option value="Wednesday">yeyyyyy</option>
+                        
+                      </select>
+                    </div>
                   </div>
                   <div class="field btns">
                     <button class="prev-2 prev">Previous</button>

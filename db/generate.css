@@ -576,7 +576,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  display: none;
+  /* display: none; */
 }
 .bg-modal .modal-content {
   height: 630px;
@@ -671,7 +671,7 @@ button {
   gap: 30px;
   margin-top: 15px;
 }
-form .page input {
+form .page input[type="text"]{
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   font-family: "montserrat";
   font-size: 13px;
@@ -903,6 +903,29 @@ form .page .btns button.next {
   color: #ff8fa3;
 }
 /* input for additional details  */
+.teacher-container{
+  margin: 30px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  width: 300px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+}
+.teacher-container .title{
+  font-family: "montserrat";
+  font-size: 10px;
+  font-weight: 500;
+  position: absolute;
+  right: 70px;
+  top: 40px;
+  background: #fff;
+  padding: 3px;
+  color: #bec4ca;
+}
 .modal-content .form-outer .additional-inputs {
   display: flex;
 }
@@ -948,7 +971,7 @@ form .page .btns button.next {
   display: flex;
   flex-direction: column;
   height: 100px;
-  width: 250px;
+  width: 290px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   border: 1px solid #dddddd;
   border-radius: 10px;
@@ -1267,6 +1290,7 @@ form .page .btns button.next {
   font-size: 10px;
   gap: 5px;
 }
+
 /* dropdown for subject */
 .subject-inputLists {
   display: flex;

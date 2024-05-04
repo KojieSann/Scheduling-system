@@ -42,6 +42,20 @@ function tableToPDF() {
   };
   html2pdf(table2pdf, opt);
 }
+// dropdown for sem
+const textboxtime = document.querySelector(".textbox-sy");
+const dropdown = document.querySelector(".dropdown-sem");
+function show(anything) {
+  document.querySelector(".textbox-sy").value = anything;
+}
+dropdown.onclick = function () {
+  dropdown.classList.toggle("activeShow");
+};
+document.addEventListener("click", (e) => {
+  if (!textboxtime.contains(e.target) && e.target !== dropdown) {
+    dropdown.classList.remove("activeShow");
+  }
+});
 // popout for the logout
 const logoutButton = document.querySelector(".logout");
 const closePopup = document.querySelector(".noBtn");
