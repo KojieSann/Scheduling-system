@@ -276,87 +276,78 @@ button.btn-submit:hover {
   box-shadow: rgba(45, 106, 79, 0.7) 0 0px 0px 40px inset;
 }
 /* table */
-.teachers-lists {
-  margin-top: 10px;
+.section-table{
+  margin-top: 40px;
   width: 100%;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #dddddd;
-  height: 70vh;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
 }
-.table-container::-webkit-scrollbar {
-  width: 6px;
- 
-}
-.table-container::-webkit-scrollbar-thumb {
-  background-color: #cacaca;
-  border-radius: 5px;
-}
-.table-container {
-  max-height: 50vh;
-  overflow-y: scroll;
-  margin-top: 5px;
-}
-.teachers-table {
-  width: 100%;
-  border-collapse: collapse;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  overflow-y: auto;
-  height: 100%;  
-}
-.table-header {
+.section-table .table-header {
   display: flex;
   font-family: "poppins";
   justify-content: space-between;
   align-items: center;
-  
 }
-.table thead th {
+.section-table .table-header span {
+  font-size: 30px;
+  font-weight: 600;
+  color: #4b4b4b;
+}
+.section-table .table-container {
+  max-height: 50vh;
+  overflow-y: scroll;
+  margin-top: 5px;
+}
+.section-table .table-container::-webkit-scrollbar {
+  width: 6px;
+}
+.section-table .table-container::-webkit-scrollbar-thumb {
+  background-color: #cacaca;
+  border-radius: 5px;
+}
+.section-table table {
+  width: 100%;
+  font-family: "montserrat";
+  border-collapse: collapse;
+}
+.section-table table th,
+.section-table table td {
+  padding: 8px;
+  text-align: center;
+  border-radius: 1px;
+}
+
+.section-table table th {
   position: sticky;
   top: 0;
   background: #2d6a4f;
   color: #fff;
 }
-.table td {
+.section-table table td {
   font-size: 13px;
 }
-.table button i {
-  color: #fff;
-  font-size: 10px;
-}
-.table td button:hover {
-  background: #74c69d;
-}
-.table td button {
-  transition: all 0.5s ease;
-  border: none;
-  cursor: pointer;
-  background-color: #b7e4c7;
-  padding: 3px 15px;
-  border-radius: 3px;
-}
-.table th,
-.table td {
-  padding: 8px;
-  text-align: center;
-  border-radius: 1px;}
-.table tbody tr:nth-of-type(even) {
+.section-table  .table tbody tr:nth-of-type(even) {
   background-color: #eee;
 }
-.table {
-  border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 15px;
-  min-width: 100%;
-  overflow: hidden;
-  border-radius: 5px 5px 0 0;
-  width: 100%;
+.section-table button{
+  padding: 3px 18px;
+   color: #fff;
+   border: none;
+   border-radius: 3px;
+   cursor: pointer;
 }
-.fa-chevron-down {
-  color: #4b4b4b;
+.section-table button:hover{
+  opacity: 0.7;
+}
+.section-table .edit{
+  color: #fff;
+  background: #74c69d;
+}
+.section-table .delete{
+  color: #fff;
+  background: #c66;
 }
 /* search function for table */
 .search-box {

@@ -432,10 +432,6 @@ ul .list-items:hover i::after {
   border-bottom: solid 1px #999;
 }
 /* button for submit */
-.names button {
-  border: none;
-  background: #fff;
-}
 .button-submit button {
   transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
   display: block;
@@ -445,6 +441,8 @@ ul .list-items:hover i::after {
   border-radius: 4px;
   padding: 5px 30px;
   color: #2d6a4f;
+  border: none;
+  background: #fff;
 }
 .button-submit {
   position: absolute;
@@ -468,90 +466,80 @@ button.btn-submit:hover {
   box-shadow: rgba(45, 106, 79, 0.7) 0 0px 0px 40px inset;
 }
 /* table */
-.table-container {
-  height: 50vh;
- 
-}
-.teachers-lists {
+.teacher-table{
+  position: absolute;
+  bottom: 10px;
   margin-left: 100px;
-  position: relative;
-  text-transform: capitalize;
-  
-
-}
-.table-container::-webkit-scrollbar {
-  width: 8px;
- 
-}
-.table-container::-webkit-scrollbar-thumb {
-  background-color: #bec4ca;
-  border-radius: 5px;
-}
-
-.teachers-table {
-  width: 100%;
-  border-collapse: collapse;
+  width: calc(100% - 100px);
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  overflow-y: auto;
-  height: 500px;  
+  border: 1px solid #dddddd;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
 }
-.table-header {
-  justify-content: space-between;
+.teacher-table .table-header {
   display: flex;
-  font-family: "montserrat";
-  font-weight: 500;
-  color: #666;
-  position: sticky;
-  
-}
-.table thead th {
   font-family: "poppins";
-  background-color: #74c69d;
-  color: #fff;
+  justify-content: space-between;
+  align-items: center;
+}
+.teacher-table .table-header span {
+  font-size: 30px;
+  font-weight: 600;
+  color: #4b4b4b;
+}
+.teacher-table .table-container {
+  max-height: 45vh;
+  overflow-y: scroll;
+  margin-top: 5px;
+}
+.teacher-table .table-container::-webkit-scrollbar {
+  width: 6px;
+}
+.teacher-table .table-container::-webkit-scrollbar-thumb {
+  background-color: #cacaca;
+  border-radius: 5px;
+}
+.teacher-table table {
+  width: 100%;
+  font-family: "montserrat";
+  border-collapse: collapse;
+}
+.teacher-table table th,
+.teacher-table table td {
+  padding: 8px;
   text-align: center;
+  border-radius: 1px;
+}
+
+.teacher-table table th {
   position: sticky;
   top: 0;
-}
-.table td {
-  text-align: center;
-  font-family: "montserrat";
-  font-size: 12px;
-}
-.table button i {
+  background: #2d6a4f;
   color: #fff;
-  font-size: 10px;
 }
-.table td button:hover {
+.teacher-table table td {
+  font-size: 13px;
+}
+.teacher-table  .table tbody tr:nth-of-type(even) {
+  background-color: #eee;
+}
+.teacher-table button{
+  padding: 3px 18px;
+   color: #fff;
+   border: none;
+   border-radius: 3px;
+   cursor: pointer;
+}
+.teacher-table button:hover{
+  opacity: 0.7;
+}
+.teacher-table .edit{
+  color: #fff;
   background: #74c69d;
 }
-.table td button {
-  transition: all 0.5s ease;
-  border: none;
-  cursor: pointer;
-  background-color: #b7e4c7;
-  padding: 3px 15px;
-  border-radius: 3px;
-}
-.table th,
-.table td {
-  padding: 6px 8px;
-}
-.table tbody tr:nth-of-type(even) {
-  background-color: #bbf7d0;
-}
-.table {
-  border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 15px;
-  min-width: 100%;
-  overflow: hidden;
-  border-radius: 5px 5px 0 0;
-  width: 100%;
-}
-.fa-chevron-down {
-  color: #4b4b4b;
+.teacher-table .delete{
+  color: #fff;
+  background: #c66;
 }
 /* search function for table */
 .search-box {
