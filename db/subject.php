@@ -140,7 +140,7 @@ if (isset($_GET['search'])) {
 
       <div class="subject-table">
         <div class="table-header">
-          <span>List of sections</span>
+          <span>List of subjects</span>
           <div class="table-search">
             <form class="search-container">
               <input id="search-box" type="text" class="search-box" name="" />

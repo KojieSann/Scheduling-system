@@ -79,7 +79,7 @@ $total_sections = $row_count['total'];
         <div class="text-logo">
           <div class="main-logo">
             <h1>Start your <input type="text" id="myDay" readonly /></h1>
-            <p>An OCT Schedule maker</p>
+            <p>SHS Scheduling System</p>
           </div>
           <div class="date">
             <input type="text" id="myDate" readonly />
@@ -90,12 +90,15 @@ $total_sections = $row_count['total'];
           </div>
         </div>
         <div class="create-schedule">
-          <button><i class="fa-solid fa-plus"></i> Create new</button>
+          <button>
+            <a href="./generate.php"><i class="fa-solid fa-plus"></i> Create new</a>
+          </button>
         </div>
       </div>
       <div class="content-container">
         <div class="info-date">
           <div class="infos-container">
+
             <div class="infos-wrapper">
               <div class="info-title">
                 <a href="generate.php">Schedules created</a>

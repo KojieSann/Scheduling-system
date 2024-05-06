@@ -1,5 +1,5 @@
 <?php
-include ('connect.php');
+include('connect.php');
 
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
@@ -53,9 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <title>Olivarez College Tagaytay</title>
   <link rel="stylesheet" type="text/css" href="teacher.css?<?php echo time(); ?>" />
   <link rel="icon" type="x-icon" href="./img/olivarez-college-tagaytay-logo.png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -68,27 +66,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
       <ul>
         <li class="list-items">
-          <a href="./generate.php" class="generate"><i class="fa-solid fa-circle-plus"></i><span
-              class="nav-lists">Generate Schedule</span></a>
+          <a href="./generate.php" class="generate"><i class="fa-solid fa-circle-plus"></i><span class="nav-lists">Generate Schedule</span></a>
         </li>
         <li class="list-items">
-          <a href="./dashboard.php" target="_self"><i class="fa-solid fa-tv"></i><span
-              class="nav-lists">Dashboard</span></a>
+          <a href="./dashboard.php" target="_self"><i class="fa-solid fa-tv"></i><span class="nav-lists">Dashboard</span></a>
         </li>
         <li class="list-items">
-          <a href="./teachers.php" class="active" target="_top"><i class="fa-solid fa-chalkboard-user"></i><span
-              class="nav-lists">Teachers</span></a>
+          <a href="./teachers.php" class="active" target="_top"><i class="fa-solid fa-chalkboard-user"></i><span class="nav-lists">Teachers</span></a>
         </li>
         <li class="list-items">
           <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span class="nav-lists">Sections</span></a>
         </li>
         <li class="list-items">
-          <a href="./subject.php" target="_parent"><i class="fa-solid fa-book"></i><span
-              class="nav-lists">Subjects</span></a>
+          <a href="./subject.php" target="_parent"><i class="fa-solid fa-book"></i><span class="nav-lists">Subjects</span></a>
         </li>
         <li>
-          <a href="./login.php" class="logout"><i class="fa-solid fa-right-from-bracket"></i><span
-              class="nav-lists">Logout</span></a>
+          <a href="./login.php" class="logout"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-lists">Logout</span></a>
         </li>
       </ul>
     </nav>
@@ -103,26 +96,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="names">
             <div class="teacher-name">
               <span>First name<span style="color: red; font-size: 1.3em">*</span></span>
-              <input required type="text" class="first-name input" autocomplete="off" name="first_name"
-                value="<?php echo $row['first_name']; ?>" />
+              <input required type="text" class="first-name input" autocomplete="off" name="first_name" value="<?php echo $row['first_name']; ?>" />
             </div>
             <div class="teacher-name">
               <span>Middle name</span>
-              <input type="text" class="middle-name input" autocomplete="off" name="middle_name"
-                value="<?php echo $row['middle_name']; ?>" />
+              <input type="text" class="middle-name input" autocomplete="off" name="middle_name" value="<?php echo $row['middle_name']; ?>" />
             </div>
             <div class="teacher-name">
               <span>Last name<span style="color: red; font-size: 1.3em">*</span></span>
-              <input required type="text" class="last-name input" autocomplete="off" name="last_name"
-                value="<?php echo $row['last_name']; ?>" />
+              <input required type="text" class="last-name input" autocomplete="off" name="last_name" value="<?php echo $row['last_name']; ?>" />
             </div>
             <div class="button-submit"><button type="submit" class="btn-submit">Update</button></div>
           </div>
           <div class="day-time">
             <div class="dropdown-time">
               <span class="input-info">Select time<span style="color: red; font-size: 1.3em">*</span></span>
-              <input required type="text" class="textbox-time input" placeholder="No time selected" readonly name="time"
-                value="<?php echo $row['time']; ?>" />
+              <input required type="text" class="textbox-time input" placeholder="No time selected" readonly name="time" value="<?php echo $row['time']; ?>" />
               <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
 
               <div class="option-time">
@@ -156,8 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="subject-strand">
             <div class="strand-list">
               <span class="input-info">Select strand<span style="color: red; font-size: 1.3em">*</span></span>
-              <input type="text" name="strand" class="textbox-strands input" placeholder="No strand selected" readonly
-                required value="<?php echo $row['strand']; ?>" />
+              <input type="text" name="strand" class="textbox-strands input" placeholder="No strand selected" readonly required value="<?php echo $row['strand']; ?>" />
 
               <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
 
@@ -204,20 +192,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </form>
   </div>
 
-  <div class="teachers-lists">
-
-    <div class="teachers-table">
-
-      <div class="table-header">
-        <h2>List of Instructors</h2>
-        <div class="table-search">
-          <form class="search-container" method="GET">
-            <input id="search-box" type="text" class="search-box" name="search" placeholder="Search...">
-            <label for="search-box"><i class="fa-solid fa-magnifying-glass search-icon"></i></label>
-            <input type="submit" id="search-submit" value="Search">
-          </form>
-        </div>
+  <div class="teacher-table">
+    <div class="table-header">
+      <span>List of instructors</span>
+      <div class="table-search">
+        <form class="search-container">
+          <input id="search-box" type="text" class="search-box" name="" />
+          <label for="search-box"><i class="fa-solid fa-magnifying-glass search-icon"></i></label>
+          <input type="submit" id="search-submit" />
+        </form>
       </div>
+    </div>
+    <div class="table-container">
       <table class="table">
         <thead>
           <tr>
@@ -231,6 +217,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </thead>
         <tbody st>
           <?php
+
           while ($row = $result->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . $row['last_name'] . "</td>";
@@ -238,9 +225,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<td>" . $row['time'] . "</td>";
             echo "<td>" . $row['strand'] . "</td>";
             echo "<td>" . $row['subject'] . "</td>";
-            echo "<td> <a href='edit_page_teachers.php?id=" . $row['id'] . "'><button><i class='fa-solid fa-pen'></i></button></a> 
-                  <a href='delete_teachers.php?id=" . $row['id'] . "'> <button type='submit' name='delete'><i class='fa-solid fa-trash-can'></i></button></a> 
-                  </td>";
+            echo "<td> <a href='edit_page_teachers.php?id=" . $row['id'] . "'><button class='edit'><i class='fa-solid fa-pen'></i></button></a> 
+                    <a href='delete_teachers.php?id=" . $row['id'] . "'> <button class='delete' type='submit' name='delete'><i class='fa-solid fa-trash-can'></i></button></a> 
+                    </td>";
             echo "</tr>";
           }
           ?>

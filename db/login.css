@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;600;700&family=Rubik:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:wght@300&display=swap");
 
 * {
   margin: 0px;
@@ -8,12 +8,12 @@
 
 
 .error {
-  color: yellowgreen;
-  position: relative;
-  top: 53px;
-  font-weight: bold;
-  text-align: center;
-  font-family: "montserrat";
+  color: #e5383b;
+  margin: 5px;
+  border-radius: 3px;
+  font-family: "poppins";
+  font-size: 13px;
+  font-weight: 600;
 }
 .area {
   background: #a3b18a;

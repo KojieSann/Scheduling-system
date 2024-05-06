@@ -58,6 +58,7 @@ nav {
   overflow: hidden;
 }
 .logout {
+    cursor: pointer;
   bottom: 5px;
   position: absolute;
 }
@@ -666,20 +667,20 @@ button.btn-submit:hover {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-.bg-content-logout .btn .noBtn {
+.bg-content-logout .btn .yesBtn {
   box-shadow: 0px 0px 30px rgb(255, 143, 163, 0.5);
   border: 1px solid #ff8fa3;
   background: #fff;
 }
-.bg-content-logout .btn .noBtn:hover {
+.bg-content-logout .btn .yesBtn:hover {
   background: #ff8fa3;
   color: #fff;
 }
-.bg-content-logout .btn .yesBtn:hover {
+.bg-content-logout .btn .noBtn:hover {
   background: #52b788;
   color: #fff;
 }
-.bg-content-logout .btn .yesBtn {
+.bg-content-logout .btn .noBtn {
   box-shadow: 0px 0px 30px rgb(82, 183, 136, 0.5);
   border: 1px solid #52b788;
   background: #fff;
