@@ -27,11 +27,9 @@ document.addEventListener("click", (e) => {
 });
 // table to excel
 function tableToExcel() {
-  var table2excel = new table2excel();
+  var table2excel = new Table2Excel();
   table2excel.export(document.querySelectorAll(".table"));
 }
-
-
 // table to pdf
 function tableToPDF() {
   var table2pdf = document.querySelector(".table");
@@ -56,7 +54,6 @@ closePopup.addEventListener("click", function () {
 // select all for table
 const selectAll = document.getElementById("selectAll");
 const select = document.getElementsByClassName("select");
-
 selectAll.onclick = () => {
   if (selectAll.checked == true) {
     for (let i = 0; i < select.length; i++) {
@@ -70,89 +67,22 @@ selectAll.onclick = () => {
     }
   }
 };
-// day selection for subject
-const monday = document.querySelector(".monday");
-const tuesday = document.querySelector(".tuesday");
-const wednesday = document.querySelector(".wednesday");
-const thursday = document.querySelector(".thursday");
-const friday = document.querySelector(".friday");
-const mondaySlct = document.querySelector(".time-selection-monday");
-const tuesdaySlct = document.querySelector(".time-selection-tuesday");
-const wednesdaySlct = document.querySelector(".time-selection-wednesday");
-const thursdaySlct = document.querySelector(".time-selection-thursday");
-const fridaySlct = document.querySelector(".time-selection-friday");
-monday.addEventListener("click", ()=>{
-  monday.classList.add("active-day");
-  tuesday.classList.remove("active-day");
-  wednesday.classList.remove("active-day");
-  thursday.classList.remove("active-day");
-  friday.classList.remove("active-day");
-  mondaySlct.style.display = "block";
-  tuesdaySlct.style.display = "none";
-  wednesdaySlct.style.display = "none";
-  thursdaySlct.style.display = "none";
-  fridaySlct.style.display = "none";
-});
-tuesday.addEventListener("click", ()=>{
-  monday.classList.remove("active-day");
-  tuesday.classList.add("active-day");
-  wednesday.classList.remove("active-day");
-  thursday.classList.remove("active-day");
-  friday.classList.remove("active-day");
-  mondaySlct.style.display = "none";
-  tuesdaySlct.style.display = "block";
-  wednesdaySlct.style.display = "none";
-  thursdaySlct.style.display = "none";
-  fridaySlct.style.display = "none";
-});
-wednesday.addEventListener("click", ()=>{
-  monday.classList.remove("active-day");
-  tuesday.classList.remove("active-day");
-  wednesday.classList.add("active-day");
-  thursday.classList.remove("active-day");
-  friday.classList.remove("active-day");
-  mondaySlct.style.display = "none";
-  tuesdaySlct.style.display = "none";
-  wednesdaySlct.style.display = "block";
-  thursdaySlct.style.display = "none";
-  fridaySlct.style.display = "none";
-});
-thursday.addEventListener("click", ()=>{
-  monday.classList.remove("active-day");
-  tuesday.classList.remove("active-day");
-  wednesday.classList.remove("active-day");
-  thursday.classList.add("active-day");
-  friday.classList.remove("active-day");
-  mondaySlct.style.display = "none";
-  tuesdaySlct.style.display = "none";
-  wednesdaySlct.style.display = "none";
-  thursdaySlct.style.display = "block";
-  fridaySlct.style.display = "none";
-});
-friday.addEventListener("click", ()=>{
-  monday.classList.remove("active-day");
-  tuesday.classList.remove("active-day");
-  wednesday.classList.remove("active-day");
-  thursday.classList.remove("active-day");
-  friday.classList.add("active-day");
-  mondaySlct.style.display = "none";
-  tuesdaySlct.style.display = "none";
-  wednesdaySlct.style.display = "none";
-  thursdaySlct.style.display = "none";
-  fridaySlct.style.display = "block";
-});
-function toggleButton(day) {
-  var checkbox = document.getElementById(day);
-  var button = document.querySelector("." + day);
-  if (checkbox.checked) {
-    button.classList.remove("not-selected");
-    button.removeAttribute("disabled");
-  } else {
-    button.classList.add("not-selected");
-    
-  }
-}
 // modal for subject
+// to make it draggable hehe
+// const modalSubject = document.querySelector(".modal-content-subject"),
+//   drag = modalSubject.querySelector(".dragable");
+// function ondrag({ movementX, movementY }) {
+//   let getStyle = window.getComputedStyle(modalSubject);
+//   let left = parseInt(getStyle.left);
+//   let top = parseInt(getStyle.top);
+
+//   modalSubject.style.left = `${left + movementX}px`;
+//   modalSubject.style.top = `${top + movementY}px`;
+// }
+// drag.addEventListener("mousedown", () => {
+//   drag.addEventListener("mousemove", ondrag);
+// });
+
 initMultiStepForm();
 function initMultiStepForm() {
   const progressNumber = document.querySelectorAll(".step").length;
@@ -514,3 +444,32 @@ $(document).ready(function(){
       $('.bg-modal-subject').hide();
   });
 });
+
+function updatePreferredDays(selectElement) {
+  var instructorId = selectElement.value;
+
+  fetch('fetch_instructor_availability.php?id=' + instructorId)
+    .then(response => response.json())
+    .then(data => {
+      updateCheckboxes(data.days);
+      updateTime(data.time);
+    });
+}
+
+function updateCheckboxes(preferredDays) {
+  var checkboxes = document.querySelectorAll('.input-wrap input[type="checkbox"]');
+  checkboxes.forEach(function(checkbox) {
+    checkbox.checked = false;
+  });
+
+  preferredDays.forEach(function(day) {
+    document.getElementById(day).checked = true;
+  });
+}
+
+function updateTime(preferredTime) {
+  var timeRadios = document.querySelectorAll('input[name="time"]');
+  timeRadios.forEach(function(radio) {
+    radio.checked = (radio.value === preferredTime);
+  });
+}
