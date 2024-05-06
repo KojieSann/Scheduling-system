@@ -116,7 +116,7 @@ wednesday.addEventListener("click", ()=>{
   wednesdaySlct.style.display = "block";
   thursdaySlct.style.display = "none";
   fridaySlct.style.display = "none";
-})
+});
 thursday.addEventListener("click", ()=>{
   monday.classList.remove("active-day");
   tuesday.classList.remove("active-day");
@@ -128,7 +128,7 @@ thursday.addEventListener("click", ()=>{
   wednesdaySlct.style.display = "none";
   thursdaySlct.style.display = "block";
   fridaySlct.style.display = "none";
-})
+});
 friday.addEventListener("click", ()=>{
   monday.classList.remove("active-day");
   tuesday.classList.remove("active-day");
@@ -140,14 +140,18 @@ friday.addEventListener("click", ()=>{
   wednesdaySlct.style.display = "none";
   thursdaySlct.style.display = "none";
   fridaySlct.style.display = "block";
-})
-// checkbox in applying subjects
-const subjectBtn = document.querySelector(".subj-btn-next");
-const result = document.querySelector(".result")
-subjectBtn.addEventListener('click',() =>{
-  let mondayChckBox = document.querySelector('.monday[type="checkbox"]:checked');
-  result.innerText=mondayChckBox.value
-})
+});
+function toggleButton(day) {
+  var checkbox = document.getElementById(day);
+  var button = document.querySelector("." + day);
+  if (checkbox.checked) {
+    button.classList.remove("not-selected");
+    button.removeAttribute("disabled");
+  } else {
+    button.classList.add("not-selected");
+    
+  }
+}
 // modal for subject
 initMultiStepForm();
 function initMultiStepForm() {

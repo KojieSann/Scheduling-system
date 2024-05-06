@@ -97,28 +97,27 @@ $result_teachers = $conn->query($sql_teachers);
           </div>
           <div class="form-wrapper">
             <div class="form1 data-info">
-              <h1 class="result"></h1>
               <form action="">
                 <div class="input-wrap">
                   <span class="input-header">Choose preferred date</span>
                   <div class="round">
-                    <input type="checkbox" id="monday" class="monday" />
+                    <input type="checkbox" id="monday" onchange="toggleButton('monday')" />
                     <label for="monday">Monday</label>
                   </div>
                   <div class="round">
-                    <input type="checkbox" id="tuesday" class="tuesday" />
+                    <input type="checkbox" id="tuesday" onchange="toggleButton('tuesday')" />
                     <label for="tuesday">Tuesday</label>
                   </div>
                   <div class="round">
-                    <input type="checkbox" id="wednesday" class="wednesday" />
+                    <input type="checkbox" id="wednesday" onchange="toggleButton('wednesday')" />
                     <label for="wednesday">Wednesday</label>
                   </div>
                   <div class="round">
-                    <input type="checkbox" id="thursday" />
+                    <input type="checkbox" id="thursday" onchange="toggleButton('thursday')" />
                     <label for="thursday">Thursday</label>
                   </div>
                   <div class="round">
-                    <input type="checkbox" id="friday" />
+                    <input type="checkbox" id="friday" onchange="toggleButton('friday')" />
                     <label for="friday">Friday</label>
                   </div>
                 </div>
@@ -164,11 +163,11 @@ $result_teachers = $conn->query($sql_teachers);
             <div class="form2 data-info" style="display: none">
               <form action="">
                 <div class="day-selection">
-                  <button type="button" class="not-active monday">Monday</button>
-                  <button type="button" class="tuesday not-active">Tuesday</button>
-                  <button type="button" class="wednesday not-active">Wednesday</button>
+                  <button type="button" class="monday not-active not-selected" disabled>Monday</button>
+                  <button type="button" class="tuesday not-active not-selected" disabled>Tuesday</button>
+                  <button type="button" class="wednesday not-active not-selected" disabled>Wednesday</button>
                   <button type="button" class="not-active thursday not-selected" disabled>Thursday</button>
-                  <button type="button" class="friday not-active">Friday</button>
+                  <button type="button" class="friday not-active not-selected" disabled>Friday</button>
                 </div>
                 <div class="time-selection-monday" style="display: none;">
                   <div class="time-selection">
