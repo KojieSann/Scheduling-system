@@ -463,8 +463,6 @@ window.addEventListener("load", () => {
   MultiselectDropdown(window.MultiselectDropdownOptions);
 });
 
-
-
 document.addEventListener('DOMContentLoaded', function() {
   var nextButtons = document.querySelectorAll('.next');
 
@@ -479,11 +477,10 @@ document.addEventListener('DOMContentLoaded', function() {
           document.getElementById('inputSection').value = section;
           document.getElementById('inputStrand').value = strand;
           document.getElementById('inputGradeLevel').value = gradeLevel;
+        
       });
   });
 });
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
     var applyButtons = document.querySelectorAll('.open-modal');
@@ -516,3 +513,61 @@ $(document).ready(function(){
       $('.bg-modal-subject').hide();
   });
 });
+
+function updatePreferredDays(selectElement) {
+  var instructorId = selectElement.value;
+
+  fetch('fetch_instructor_availability.php?id=' + instructorId)
+    .then(response => response.json())
+    .then(data => {
+      updateCheckboxes(data.days);
+      updateTime(data.time);
+    });
+}
+
+function updateCheckboxes(preferredDays) {
+  var checkboxes = document.querySelectorAll('.input-wrap input[type="checkbox"]');
+  checkboxes.forEach(function(checkbox) {
+    checkbox.checked = false;
+  });
+
+  preferredDays.forEach(function(day) {
+    var checkbox = document.getElementById(day);
+    if (checkbox) {
+      checkbox.checked = true;
+      checkbox.dispatchEvent(new Event('change'));
+    }
+  });
+}
+function updateTime(preferredTime) {
+  var timeRadios = document.querySelectorAll('input[name="time"]');
+  timeRadios.forEach(function(radio) {
+    radio.checked = (radio.value === preferredTime);
+  });
+}
+$(document).ready(function() {
+  var selectedStrands = [];
+
+  function filterSubjects() {
+    $('.section-table tbody tr').each(function() {
+      var subjectStrands = $(this).find('td:nth-child(3)').text().trim().split(',');
+
+      if (selectedStrands.length === 0 || selectedStrands.some(strand => subjectStrands.map(s => s.trim()).includes(strand.trim()))) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  }
+  $('.next').click(function() {
+    selectedStrands = $('#inputStrand').val().split(',');
+    filterSubjects();
+  });
+  $('.prev').click(function() {
+    selectedStrands = [];
+    filterSubjects();
+  });
+  filterSubjects();
+});
+
+

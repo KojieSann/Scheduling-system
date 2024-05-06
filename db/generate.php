@@ -101,7 +101,7 @@ $result_teachers = $conn->query($sql_teachers);
                 <div class="input-wrap">
                   <span class="input-header">Choose preferred date</span>
                   <div class="round">
-                    <input type="checkbox" id="monday" onchange="toggleButton('monday')" />
+                  <input type="checkbox" id="monday" onchange="toggleButton('monday')" />
                     <label for="monday">Monday</label>
                   </div>
                   <div class="round">
@@ -124,31 +124,27 @@ $result_teachers = $conn->query($sql_teachers);
                 <div class="dropdown-instructor">
                   <span class="input-header-instructor">Select the instructor
                   </span>
-                  <select class="subject-select" name="select" multiselect-search="true">
-                    <?php
-                    if ($result_teachers) {
-                      while ($row = $result_teachers->fetch_assoc()) {
-                        $full_name = $row['last_name'] . ' , ' . $row['first_name'];
-                        echo "<option value='" . $full_name . "'>" . $full_name . "</option>";
-                      }
-                    }
-                    ?>
+                  <select class="subject-select" name="select" multiselect-search="true"
+                    onchange="updatePreferredDays(this)">
+                    <option value="" hidden>Select Instructor</option>
+                    <?php while ($row = mysqli_fetch_assoc($result_teachers)): ?>
+                      <option value="<?php echo $row['id']; ?>">
+                        <?php echo $row['first_name'] . ' , ' . $row['last_name']; ?></option>
+                    <?php endwhile; ?>
                   </select>
-
-
                   <div class="radio-time">
                     <div class="radio-list">
                       <div class="radio-item">
-                        <input type="radio" value="AM" name="time" id="am" />
-                        <label for="am">AM</label>
+                      <input type="radio" value="AM" name="time" id="AM" />
+                        <label for="AM">AM</label>
                       </div>
                       <div class="radio-item">
-                        <input type="radio" value="PM" name="time" id="pm" />
-                        <label for="pm">PM</label>
+                        <input type="radio" value="PM" name="time" id="PM" />
+                        <label for="PM">PM</label>
                       </div>
                       <div class="radio-item">
-                        <input type="radio" value="AM-PM" name="time" id="am-pm" />
-                        <label for="am-pm">AM-PM</label>
+                        <input type="radio" value="AM-PM" name="time" id="AM-PM" />
+                        <label for="AM-PM">AM-PM</label>
                       </div>
                     </div>
                   </div>
@@ -163,7 +159,7 @@ $result_teachers = $conn->query($sql_teachers);
             <div class="form2 data-info" style="display: none">
               <form action="">
                 <div class="day-selection">
-                  <button type="button" class="monday not-active not-selected" disabled>Monday</button>
+                <button type="button" class="monday not-selected not-active" disabled>Monday</button>
                   <button type="button" class="tuesday not-active not-selected" disabled>Tuesday</button>
                   <button type="button" class="wednesday not-active not-selected" disabled>Wednesday</button>
                   <button type="button" class="not-active thursday not-selected" disabled>Thursday</button>
