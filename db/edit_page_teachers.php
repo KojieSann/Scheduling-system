@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="main-logo">
         <h1>Edit <span>Instructor</span></h1>
         <div class="edit-container">
-          <a href="./teacher.php">Back</a>
+          <a href="./teachers.php">Back</a>
         </div>
         <i class="fa-solid fa-user"></i>
       </div>

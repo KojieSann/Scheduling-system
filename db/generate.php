@@ -101,7 +101,7 @@ $result_teachers = $conn->query($sql_teachers);
                 <div class="input-wrap">
                   <span class="input-header">Choose preferred date</span>
                   <div class="round">
-                  <input type="checkbox" id="monday" onchange="toggleButton('monday')" />
+                    <input type="checkbox" id="monday" onchange="toggleButton('monday')" />
                     <label for="monday">Monday</label>
                   </div>
                   <div class="round">
@@ -124,10 +124,9 @@ $result_teachers = $conn->query($sql_teachers);
                 <div class="dropdown-instructor">
                   <span class="input-header-instructor">Select the instructor
                   </span>
-                  <select class="subject-select" name="select" multiselect-search="true"
-                    onchange="updatePreferredDays(this)">
+                  <select class="subject-select" name="select" multiselect-search="true" onchange="updatePreferredDays(this)">
                     <option value="" hidden>Select Instructor</option>
-                    <?php while ($row = mysqli_fetch_assoc($result_teachers)): ?>
+                    <?php while ($row = mysqli_fetch_assoc($result_teachers)) : ?>
                       <option value="<?php echo $row['id']; ?>">
                         <?php echo $row['first_name'] . ' , ' . $row['last_name']; ?></option>
                     <?php endwhile; ?>
@@ -135,7 +134,7 @@ $result_teachers = $conn->query($sql_teachers);
                   <div class="radio-time">
                     <div class="radio-list">
                       <div class="radio-item">
-                      <input type="radio" value="AM" name="time" id="AM" />
+                        <input type="radio" value="AM" name="time" id="AM" />
                         <label for="AM">AM</label>
                       </div>
                       <div class="radio-item">
@@ -159,7 +158,7 @@ $result_teachers = $conn->query($sql_teachers);
             <div class="form2 data-info" style="display: none">
               <form action="">
                 <div class="day-selection">
-                <button type="button" class="monday not-selected not-active" disabled>Monday</button>
+                  <button type="button" class="monday not-selected not-active" disabled>Monday</button>
                   <button type="button" class="tuesday not-active not-selected" disabled>Tuesday</button>
                   <button type="button" class="wednesday not-active not-selected" disabled>Wednesday</button>
                   <button type="button" class="not-active thursday not-selected" disabled>Thursday</button>
@@ -482,11 +481,8 @@ $result_teachers = $conn->query($sql_teachers);
         <div class="table-header">
           <span>Schedules</span>
           <div class="table-nav" style="display: none">
-            <button onclick="window.print()">
-              <i class="fa-solid fa-print"></i> Print
-            </button>
-            <button onclick="tableToPDF()">
-              <i class="fa-regular fa-file-pdf"></i> PDF
+            <button onclick="tableToPrint()">
+              <i class="fa-regular fa-file-pdf"></i> Print
             </button>
             <button onclick="tableToExcel()">
               <i class="fa-regular fa-file-excel"></i> Excel
@@ -505,7 +501,7 @@ $result_teachers = $conn->query($sql_teachers);
           <table class="table">
             <thead>
               <tr>
-                <th class="checkboxTbl"><input type="checkbox" id="selectAll" /></th>
+                <th class="checkboxTbl"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()" /></th>
                 <th>Section</th>
                 <th>Strand</th>
                 <th>Schedule</th>
@@ -518,7 +514,7 @@ $result_teachers = $conn->query($sql_teachers);
             </thead>
             <tbody>
               <tr>
-                <td class="checkboxTbl"><input type="checkbox" class="select" /></td>
+                <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
                 <td>Sampaguita</td>
                 <td>HUMSS</td>
                 <td>Mon,Tues,Fri</td>
@@ -559,7 +555,48 @@ $result_teachers = $conn->query($sql_teachers);
                 </td>
               </tr>
               <tr>
-                <td class="checkboxTbl"><input type="checkbox" class="select" /></td>
+                <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
+                <td>Santol</td>
+                <td>GAS</td>
+                <td>Mon,Tues,Fri</td>
+                <td>2nd</td>
+                <td>2024-2025</td>
+                <td>AM</td>
+                <td>Papa Andrei</td>
+                <td class="checkboxTbl">
+                  <div class="dropdown-table">
+                    <span class="icon-right"><i class="fa-solid fa-chevron-right"></i></span>
+                    <div class="option-table">
+                      <div class="option-wrapper">
+                        <div class="option-icon">
+                          <i class="fa-regular fa-eye"></i>
+                        </div>
+                        <span>View</span>
+                      </div>
+                      <div class="option-wrapper">
+                        <div class="option-icon">
+                          <i class="fa-regular fa-pen-to-square"></i>
+                        </div>
+                        <span>Edit</span>
+                      </div>
+                      <div class="option-wrapper">
+                        <div class="option-icon">
+                          <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                        <span>Delete</span>
+                      </div>
+                      <div class="option-wrapper">
+                        <div class="option-icon">
+                          <i class="fa-solid fa-print"></i>
+                        </div>
+                        <span>Print</span>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
                 <td>Santol</td>
                 <td>GAS</td>
                 <td>Mon,Tues,Fri</td>
