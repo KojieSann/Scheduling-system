@@ -633,6 +633,7 @@ $result_teachers = $conn->query($sql_teachers);
       </div>
     </div>
   </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./libraries/html2pdf.bundle.min.js"></script>
   <script src="./libraries/table2excel.js"></script>
   <script src="./generate.js"></script>
