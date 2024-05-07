@@ -59,10 +59,74 @@ $result_teachers = $conn->query($sql_teachers);
         </li>
       </ul>
     </nav>
-    <div class="bg-content-view" style="display: none;">
+    <div class="bg-content-view">
       <div class="content-view">
-        <div class="close-subject"><i class="fa-solid fa-xmark"></i></div>
-
+        <div class="close-view">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="main-inputs">
+          <div class="inputs-container">
+            <div class="inputs">
+              <span>Section</span>
+              <input type="text" readonly>
+            </div>
+            <div class="inputs">
+              <span>Strand</span>
+              <input type="text" readonly>
+            </div>
+            <div class="inputs">
+              <span>Adviser</span>
+              <input type="text" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="view-table">
+          <div class="table-header">
+            <span>Schedule</span>
+            <div class="table-search">
+              <form>
+                <div class="searchSection">
+                  <input type="text" />
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Schedule</th>
+                  <th>Subject</th>
+                  <th>Time In</th>
+                  <th>Time Out</th>
+                  <th>Instructor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Monday</td>
+                  <td>English</td>
+                  <td>08:00 am</td>
+                  <td>09:00 am</td>
+                  <td>papa andrei</td>
+                </tr>
+                <tr>
+                  <td>Monday</td>
+                  <td>Math</td>
+                  <td>09:00 am</td>
+                  <td>10:00 am</td>
+                  <td>papa andrei</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="button-container">
+          <button class="print" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
+          <button class="edit"><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+          <button class="delete"><i class="fa-regular fa-trash-can"></i> Delete</button>
+        </div>
       </div>
     </div>
     <div class="bg-content-logout">
@@ -523,34 +587,26 @@ $result_teachers = $conn->query($sql_teachers);
                 <td>AM</td>
                 <td>Papa Andrei</td>
                 <td class="checkboxTbl">
-                  <div class="dropdown-table">
-                    <span class="icon-right"><i class="fa-solid fa-chevron-right"></i></span>
-                    <div class="option-table">
-                      <div class="option-wrapper">
-                        <div class="option-icon">
-                          <i class="fa-regular fa-eye"></i>
-                        </div>
-                        <span>View</span>
-                      </div>
-                      <div class="option-wrapper">
-                        <div class="option-icon">
-                          <i class="fa-regular fa-pen-to-square"></i>
-                        </div>
-                        <span>Edit</span>
-                      </div>
-                      <div class="option-wrapper">
-                        <div class="option-icon">
-                          <i class="fa-solid fa-trash-can"></i>
-                        </div>
-                        <span>Delete</span>
-                      </div>
-                      <div class="option-wrapper">
-                        <div class="option-icon">
-                          <i class="fa-solid fa-print"></i>
-                        </div>
-                        <span>Print</span>
-                      </div>
-                    </div>
+                  <div class="view-open-modal">
+                    <i class="fa-regular fa-eye"></i>
+                    <span>View</span>
+                  </div>
+                </td>
+
+              </tr>
+              <tr>
+                <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
+                <td>Santol</td>
+                <td>GAS</td>
+                <td>Mon,Tues,Fri</td>
+                <td>2nd</td>
+                <td>2024-2025</td>
+                <td>AM</td>
+                <td>Papa Andrei</td>
+                <td class="checkboxTbl">
+                  <div class="view-open-modal">
+                    <i class="fa-regular fa-eye"></i>
+                    <span>View</span>
                   </div>
                 </td>
               </tr>
@@ -564,75 +620,9 @@ $result_teachers = $conn->query($sql_teachers);
                 <td>AM</td>
                 <td>Papa Andrei</td>
                 <td class="checkboxTbl">
-                  <div class="dropdown-table">
-                    <span class="icon-right"><i class="fa-solid fa-chevron-right"></i></span>
-                    <div class="option-table">
-                      <div class="option-wrapper">
-                        <div class="option-icon">
-                          <i class="fa-regular fa-eye"></i>
-                        </div>
-                        <span>View</span>
-                      </div>
-                      <div class="option-wrapper">
-                        <div class="option-icon">
-                          <i class="fa-regular fa-pen-to-square"></i>
-                        </div>
-                        <span>Edit</span>
-                      </div>
-                      <div class="option-wrapper">
-                        <div class="option-icon">
-                          <i class="fa-solid fa-trash-can"></i>
-                        </div>
-                        <span>Delete</span>
-                      </div>
-                      <div class="option-wrapper">
-                        <div class="option-icon">
-                          <i class="fa-solid fa-print"></i>
-                        </div>
-                        <span>Print</span>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
-                <td>Santol</td>
-                <td>GAS</td>
-                <td>Mon,Tues,Fri</td>
-                <td>2nd</td>
-                <td>2024-2025</td>
-                <td>AM</td>
-                <td>Papa Andrei</td>
-                <td class="checkboxTbl">
-                  <div class="dropdown-table">
-                    <span class="icon-right"><i class="fa-solid fa-chevron-right"></i></span>
-                    <div class="option-table">
-                      <div class="option-wrapper">
-                        <div class="option-icon">
-                          <i class="fa-regular fa-eye"></i>
-                        </div>
-                        <span>View</span>
-                      </div>
-                      <div class="option-wrapper">
-                        <div class="option-icon">
-                          <i class="fa-regular fa-pen-to-square"></i>
-                        </div>
-                        <span>Edit</span>
-                      </div>
-                      <div class="option-wrapper">
-                        <div class="option-icon">
-                          <i class="fa-solid fa-trash-can"></i>
-                        </div>
-                        <span>Delete</span>
-                      </div>
-                      <div class="option-wrapper">
-                        <div class="option-icon">
-                          <i class="fa-solid fa-print"></i>
-                        </div>
-                        <span>Print</span>
-                      </div>
-                    </div>
+                  <div class="view-open-modal">
+                    <i class="fa-regular fa-eye"></i>
+                    <span>View</span>
                   </div>
                 </td>
               </tr>

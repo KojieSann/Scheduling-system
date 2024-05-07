@@ -79,6 +79,15 @@ function tableToPrint() {
   });
 }
 
+// modal for viewing
+const view = document.querySelector(".view-open-modal");
+const closeView = document.querySelector(".close-view");
+view.addEventListener("click", function () {
+  document.querySelector(".bg-content-view").style.display = "flex";
+});
+closeView.addEventListener("click", function () {
+  document.querySelector(".bg-content-view").style.display = "none";
+});
 // popout for the logout
 const logoutButton = document.querySelector(".logout");
 const closePopup = document.querySelector(".noBtn");

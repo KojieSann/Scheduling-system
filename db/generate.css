@@ -8,6 +8,9 @@
   box-sizing: border-box;
 }
 @media print {
+  .schedules-table{
+    display: none;
+  }
   nav {
     display: none;
   }
@@ -21,9 +24,14 @@
   .table-container * {
     visibility: visible;
   }
+  .bg-content-view th,
+  .bg-content-view td{
+    border: 1px solid;
+  }
 }
 body {
   background: #fff;
+
 }
 
 .logo {
@@ -245,8 +253,20 @@ ul .list-items:hover i::after {
   border: 1px solid #52b788;
   background: #fff;
 }
-/* modal for viewing */
 /* table */
+.schedules-table .view-open-modal{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 0;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: none;
+  color: #666;
+  border: 1px solid #666;
+}
 .schedules-table{
   margin-top: 55px;
   width: 100%;
@@ -302,69 +322,8 @@ ul .list-items:hover i::after {
 .schedules-table  .table tbody tr:nth-of-type(even) {
   background-color: #eee;
 }
-.schedules-table button{
-  padding: 3px 18px;
-   color: #fff;
-   border: none;
-   border-radius: 3px;
-   cursor: pointer;
-}
-.table td .toggleDropdown:hover {
-  background-color: rgb(0, 0, 0, 0.1);
-}
-.dropdown-table {
-  height: 25px;
-  width: 25px;
-  border: 1px solid #eeeeee;
-  border-radius: 5px;
-  background: #fff;
-}
-.dropdown-table.activeShow .option-table {
-  display: block;
-}
-.dropdown-table.activeShow .icon-right {
-  transform: rotate(90deg);
-}
-.dropdown-table .icon-right {
-  align-items: center;
-  justify-content: center;
-  padding: 3px 10px;
-  pointer-events: none;
-  transition: all 0.2s ease;
-  position: absolute;
-  right: 60px;
-}
-.dropdown-table .option-table i {
-  font-size: 13px;
-}
-.dropdown-table .option-table {
-  right: 25px;
-  margin-top: 30px;
-  position: absolute;
-  display: none;
-  padding: 6px;
-  background: #fff;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-  overflow: hidden;
-  color: #4b4b4b;
-  z-index: 100;
-  border: 0.5px solid #dddddd;
-}
-.dropdown-table .option-table .option-wrapper {
-  font-family: "montserrat";
-  font-size: 14px;
-  padding: 6px 10px;
-  display: flex;
-  gap: 10px;
-  border-radius: 3px;
-}
 
-.dropdown-table .option-table .option-wrapper:hover {
-  background-color: #e9e9e9;
-}
 /* search function for table */
-
 .search-box {
   transition: width 0.6s, border-radius 0.6s, background 0.6s, box-shadow 0.6s;
   width: 40px;
@@ -902,7 +861,7 @@ form .page .btns button.next {
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  /* display: none; */
+  display: none;
 }
 .bg-modal-subject .modal-content-subject {
   height: 400px;
@@ -915,11 +874,6 @@ form .page .btns button.next {
   border-radius: 20px;
   position: absolute;
   padding: 20px;
-}
-.bg-modal-subject .modal-content-subject .dragable {
-  cursor: move;
-  border-bottom: 1px solid #666;
-  padding: 17px 30px;
 }
 .close-subject i {
   position: absolute;
@@ -1326,4 +1280,166 @@ form .page .btns button.next {
   opacity: 1;
   visibility: visible;
   transform: scale();
+}
+/* modal for viewing */
+.bg-content-view{
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  display: none;
+}
+.bg-content-view .content-view {
+  height: 600px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  background-color: #fff;
+  z-index: 100;
+  border-radius: 20px;
+  position: absolute;
+  padding: 20px;
+}
+
+.bg-content-view .content-view .close-view{
+ padding: 12px 17px;
+  cursor: pointer;
+  position: absolute;
+  color: #c66;
+  border-radius: 50%;
+  align-items: center;
+  font-size: 23px;
+  right: 10px;
+}
+.bg-content-view .content-view input{
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  font-family: "montserrat";
+  font-size: 13px;
+  padding: 10px 15px;
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  border: 0.5px solid #dddddd;
+}
+.bg-content-view .content-view .inputs-container{
+  display: flex;
+  gap: 10px;
+  font-family: "poppins";
+  font-size: 13px;
+  margin: 30px;
+  align-items: center;
+  justify-content: center;
+}
+.bg-content-view .content-view .inputs{
+  display: flex;
+  flex-direction: column;
+}
+.bg-content-view .content-view .button-container{
+  gap: 10px;
+  display: flex;
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+}
+.bg-content-view .content-view .button-container button{
+  cursor: pointer;
+  padding: 5px 17px;
+  background: transparent;
+  border-radius: 3px
+}
+.bg-content-view .content-view .button-container button:hover{
+  opacity: 0.6;
+}
+.bg-content-view .content-view .button-container .delete{
+  border: 1px solid #c66;
+  color: #c66;
+}
+.bg-content-view .content-view .button-container .edit{
+  border: 1px solid #52b788;
+  color: #52b788;
+}
+.bg-content-view .content-view .button-container .print{
+  border: 1px solid #666;
+  color: #666;
+}
+/* table for viewing */
+.view-table{
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #dddddd;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+}
+.view-table .table-header {
+  display: flex;
+  font-family: "poppins";
+  justify-content: space-between;
+  align-items: center;
+}
+.view-table .table-header span {
+  font-size: 25px;
+  font-weight: 600;
+  color: #4b4b4b;
+}
+.view-table .table-container {
+  max-height: 57vh;
+  overflow-y: scroll;
+  margin-top: 5px;
+}
+.view-table .table-container::-webkit-scrollbar {
+  width: 6px;
+}
+.view-table .table-container::-webkit-scrollbar-thumb {
+  background-color: #cacaca;
+  border-radius: 5px;
+}
+.view-table table {
+  width: 100%;
+  font-family: "montserrat";
+  border-collapse: collapse;
+}
+.view-table table th,
+.view-table table td {
+  padding: 8px;
+  text-align: center;
+  border-radius: 1px;
+}
+
+.view-table table th {
+  position: sticky;
+  top: 0;
+  background: #2d6a4f;
+  color: #fff;
+}
+.view-table table td {
+  font-size: 13px;
+}
+.view-table  .table tbody tr:nth-of-type(even) {
+  background-color: #eee;
+}
+.view-table  .searchSection {
+  align-items: center;
+  position: relative;
+  right: 0;
+}
+.view-table  .searchSection input {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  font-family: "montserrat";
+  font-size: 13px;
+  padding: 10px 15px;
+  width: 230px;
+  height: 30px;
+  border-radius: 5px;
+  border: 0.5px solid #dddddd;
+}
+.view-table  .searchSection i {
+  position: relative;
+  right: 28px;
+  pointer-events: none;
+  color: #666;
 }

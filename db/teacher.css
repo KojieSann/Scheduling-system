@@ -8,6 +8,7 @@
 }
 body {
   background: #fff;
+  overflow: hidden;
 }
 .logo {
   margin: 20px 0 40px 20px;
