@@ -397,6 +397,7 @@ $result_teachers = $conn->query($sql_teachers);
                         <th>Action</th>
                       </tr>
                     </thead>
+
                     <tbody>
                       <?php
                       while ($row = $result_sections->fetch_assoc()) {
@@ -405,7 +406,7 @@ $result_teachers = $conn->query($sql_teachers);
                         echo "<td>" . htmlspecialchars($row['strand']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['grade_level']) . "</td>";
                         echo "<td>None</td>";
-                        echo "<td><button class='firstNext next' data-section='" . htmlspecialchars($row['section_name'], ENT_QUOTES) . "' data-strand='" . htmlspecialchars($row['strand'], ENT_QUOTES) . "' data-grade-level='" . htmlspecialchars($row['grade_level'], ENT_QUOTES) . "'>Next <i class='fa-solid fa-angle-right'></i></button></td>";
+                        echo "<td><button type='button' class='firstNext next' data-section='" . htmlspecialchars($row['section_name'], ENT_QUOTES) . "' data-strand='" . htmlspecialchars($row['strand'], ENT_QUOTES) . "' data-grade-level='" . htmlspecialchars($row['grade_level'], ENT_QUOTES) . "'>Next <i class='fa-solid fa-angle-right'></i></button></td>";
                         echo "</tr>";
                       }
                       ?>
@@ -632,7 +633,6 @@ $result_teachers = $conn->query($sql_teachers);
       </div>
     </div>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./libraries/html2pdf.bundle.min.js"></script>
   <script src="./libraries/table2excel.js"></script>
   <script src="./generate.js"></script>

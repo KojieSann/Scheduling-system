@@ -16,15 +16,15 @@ closeModalSubject.addEventListener("click", function () {
   document.querySelector(".bg-modal-subject").style.display = "none";
 });
 
-const dropdownTable = document.querySelector(".dropdown-table");
-dropdownTable.onclick = function () {
-  dropdownTable.classList.toggle("activeShow");
-};
-document.addEventListener("click", (e) => {
-  if (!dropdownTable.contains(e.target) && e.target !== dropdownTable) {
-    dropdownTable.classList.remove("activeShow");
-  }
-});
+// const dropdownTable = document.querySelector(".dropdown-table");
+// dropdownTable.onclick = function () {
+//   dropdownTable.classList.toggle("activeShow");
+// };
+// document.addEventListener("click", (e) => {
+//   if (!dropdownTable.contains(e.target) && e.target !== dropdownTable) {
+//     dropdownTable.classList.remove("activeShow");
+//   }
+// });
 // table to excel
 function tableToExcel() {
   var table2excel = new table2excel();
@@ -34,15 +34,15 @@ function tableToExcel() {
 
 // table to pdf
 function tableToPrint() {
-  // var table2pdf = document.querySelector(".table");
-  // var opt = {
-  //   margin: 1,
-  //   filename: "octScheduleMaker.pdf",
-  //   image: { type: "jpeg", quality: 0.98 },
-  //   html2canvas: { scale: 2 },
-  //   jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-  // };
-  // html2pdf(table2pdf, opt);
+  var table2pdf = document.querySelector(".table");
+  var opt = {
+    margin: 1,
+    filename: "octScheduleMaker.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+  };
+  html2pdf(table2pdf, opt);
   var checkedRows = document.querySelectorAll('.select:checked');
   if (checkedRows.length === 0) {
       alert("Please select at least one row to print.");
@@ -79,15 +79,15 @@ function tableToPrint() {
   });
 }
 
-// modal for viewing
-const view = document.querySelector(".view-open-modal");
-const closeView = document.querySelector(".close-view");
-view.addEventListener("click", function () {
-  document.querySelector(".bg-content-view").style.display = "flex";
-});
-closeView.addEventListener("click", function () {
-  document.querySelector(".bg-content-view").style.display = "none";
-});
+// // modal for viewing
+// const view = document.querySelector(".view-open-modal");
+// const closeView = document.querySelector(".close-view");
+// view.addEventListener("click", function () {
+//   document.querySelector(".bg-content-view").style.display = "flex";
+// });
+// closeView.addEventListener("click", function () {
+//   document.querySelector(".bg-content-view").style.display = "none";
+// });
 // popout for the logout
 const logoutButton = document.querySelector(".logout");
 const closePopup = document.querySelector(".noBtn");
@@ -200,7 +200,7 @@ function toggleButton(day) {
     
   }
 }
-// modal for subject
+// modal for multistep
 initMultiStepForm();
 function initMultiStepForm() {
   const progressNumber = document.querySelectorAll(".step").length;
@@ -277,7 +277,7 @@ function initMultiStepForm() {
     return inputsValid;
   }
 }
-// multistep for modal subject
+//for modal subject
 const bgModalSubject = document.querySelector(".bg-modal-subject");
 const form1 = document.querySelector(".form1");
 const form2 = document.querySelector(".form2");
@@ -299,7 +299,6 @@ submitBtnSubj.addEventListener("click", function () {
   doneStatus.style.display = "block";
   bgModalSubject.style.display = "none";
   inProgress.style.display = "none";
-  console.log("hahahah");
 });
 // dropdown for subject
 var style = document.createElement("style");
