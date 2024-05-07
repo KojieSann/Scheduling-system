@@ -102,6 +102,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <section class="main-content">
       <div class="main-logo">
         <h1>Edit <span>Subject</span></h1>
+        <div class="edit-container">
+          <a href="./subject.php">Back</a>
+        </div>
         <i class="fa-solid fa-user"></i>
       </div>
       <div class="inputs">
@@ -153,6 +156,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="button-submit">
             <button type="submit" class="btn-submit">Update</button>
           </div>
+
+
+
         </form>
       </div>
 
@@ -201,7 +207,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </section>
   </div>
-  <script src="./subject.js"></script>
+  <script src="editSubj.js"></script>
 </body>
 
 </html>

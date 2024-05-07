@@ -265,7 +265,20 @@ function MultiselectDropdown(options) {
 window.addEventListener("load", () => {
   MultiselectDropdown(window.MultiselectDropdownOptions);
 });
+function validateForm() {
+  var firstName = document.querySelector('.first-name').value;
+  var lastName = document.querySelector('.last-name').value;
+  var time = document.querySelector('.textbox-time').value;
+  var strand = document.querySelector('.textbox-strands').value;
+  var subjects = document.querySelector('.subject-select').value;
 
+  if (firstName.trim() === '' || lastName.trim() === '' || time.trim() === '' || strand.trim() === '' || subjects.length === 0) {
+    alert('Please fill in all required fields.');
+    return false;
+  }
+
+  return true;
+}
 // search function for table
 // document.addEventListener("touchstart", function () {}, true);
 // const dropdownStrand = document.querySelector(".strand-list");

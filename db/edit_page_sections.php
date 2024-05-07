@@ -89,6 +89,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <section class="main-content">
       <div class="main-logo">
         <h1>Edit <span>Section</span></h1>
+        <div class="edit-container">
+          <a href="./section.php">Back</a>
+        </div>
         <i class="fa-solid fa-user"></i>
       </div>
       <div class="inputs">

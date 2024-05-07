@@ -218,3 +218,28 @@ function MultiselectDropdown(options) {
 window.addEventListener("load", () => {
   MultiselectDropdown(window.MultiselectDropdownOptions);
 });
+function validateForm() {
+  var subjectName = document.querySelector('[name="subject_name"]').value;
+  var subjectCode = document.querySelector('[name="subject_code"]').value;
+  var schoolYear = document.querySelector('[name="school_year"]').value;
+  var gradeLevel = document.querySelector('.textbox-grade').value;
+  var strand = document.querySelector('.strand-select').value;
+
+  if (subjectName.trim() === '' || subjectCode.trim() === '' || schoolYear.trim() === '' || gradeLevel.trim() === '' || strand.length === 0) {
+    alert('Please fill in all required fields.');
+    return false;
+  }
+  return true;
+}
+function validateFormSection() {
+  var sectionName = document.querySelector('[name="section_name"]').value;
+  var gradeLevel = document.querySelector('[name="grade_level"]').value;
+  var strand = document.querySelector('.textbox-grade').value;
+
+  if (sectionName.trim() === '' || gradeLevel.trim() === '' || strand.trim() === '') {
+    alert('Please fill in all required fields.');
+    return false;
+  }
+
+  return true;
+}

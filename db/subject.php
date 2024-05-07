@@ -90,7 +90,7 @@ if (isset($_GET['search'])) {
         <i class="fa-solid fa-user"></i>
       </div>
       <div class="inputs">
-        <form action="add_subject.php" method="post">
+        <form action="add_subject.php" method="post" onsubmit="return validateForm()">
           <div class="subject-code">
             <div class="subj-code">
               <span>Subject<span style="color: red; font-size: 1.3em">*</span></span>
@@ -110,7 +110,6 @@ if (isset($_GET['search'])) {
               <span class="input-info">Grade Level<span style="color: red; font-size: 1.3em">*</span></span>
               <input type="text" class="textbox-grade input" placeholder="No grade level selected" readonly name="grade_level" />
               <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
-
               <div class="option-grade">
                 <div onclick="show('Grade 11')">Grade 11</div>
                 <div onclick="show('Grade 12')">Grade 12</div>
@@ -121,8 +120,7 @@ if (isset($_GET['search'])) {
             <span class="input-info">
               Strand<span style="color: red; font-size: 1.3em">*</span>
             </span>
-
-            <select name="strand[]" multiple multiselect-select-all="true">
+            <select name="strand[]" multiple multiselect-select-all="true" class="strand-select">
               <option value="GAS">GAS</option>
               <option value="STEM">STEM</option>
               <option value="ICT">ICT</option>

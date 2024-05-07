@@ -89,7 +89,7 @@ if (isset($_GET['search'])) {
         <h1>Add <span>Instructor</span></h1><i class="fa-solid fa-user"></i>
       </div>
       <div class="inputs">
-        <form action="add_teachers.php" method="post">
+        <form action="add_teachers.php" method="post" onsubmit="return validateForm()">
           <div class="names">
             <div class="teacher-name">
               <span>First name<span style="color: red; font-size: 1.3em">*</span></span>

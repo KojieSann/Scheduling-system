@@ -89,15 +89,15 @@ if (isset($_GET['search'])) {
         <i class="fa-solid fa-user"></i>
       </div>
       <div class="inputs">
-        <form action="add_section.php" method="post">
+        <form action="add_section.php" method="post" onsubmit="return validateFormSection()">
           <div class="subject-code">
             <div class="subj-code">
               <span>Section Name<span style="color: red; font-size: 1.3em">*</span></span>
-              <input required type="text" class="first-name" autocomplete="off" name="section_name" />
+              <input type="text" class="first-name" autocomplete="off" name="section_name" />
             </div>
             <div class="subj-code">
               <span>Grade Level<span style="color: red; font-size: 1.3em">*</span></span>
-              <input required type="text" class="first-name" autocomplete="off" name="grade_level" />
+              <input type="text" class="first-name" autocomplete="off" name="grade_level" />
             </div>
           </div>
           <div class="yrlvl-gradelvl">

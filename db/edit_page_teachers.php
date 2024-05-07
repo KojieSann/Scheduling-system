@@ -87,7 +87,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </nav>
     <section class="main-content">
       <div class="main-logo">
-        <h1>Edit <span>Instructor</span></h1><i class="fa-solid fa-user"></i>
+        <h1>Edit <span>Instructor</span></h1>
+        <div class="edit-container">
+          <a href="./teacher.php">Back</a>
+        </div>
+        <i class="fa-solid fa-user"></i>
       </div>
       <div class="inputs">
         <form action="" method="post">
@@ -237,7 +241,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </div>
   </section>
   </div>
-  <script src="./teacher.js"></script>
+  <script src="editTeacher.js"></script>
 </body>
 
 </html>
