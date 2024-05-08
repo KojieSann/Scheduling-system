@@ -94,17 +94,17 @@ if (isset($_GET['search'])) {
           <div class="subject-code">
             <div class="subj-code">
               <span>Subject<span style="color: red; font-size: 1.3em">*</span></span>
-              <input required type="text" class="first-name input" autocomplete="off" name="subject_name" />
+              <input type="text" class="first-name input" autocomplete="off" name="subject_name" />
             </div>
             <div class="subj-code">
               <span>Subject Code<span style="color: red; font-size: 1.3em">*</span></span>
-              <input required type="text" class="first-name input" autocomplete="off" name="subject_code" />
+              <input type="text" class="first-name input" autocomplete="off" name="subject_code" />
             </div>
           </div>
           <div class="yrlvl-gradelvl">
             <div class="year-level">
               <span>School Year<span style="color: red; font-size: 1.3em">*</span></span>
-              <input required type="text" class="first-name input" autocomplete="off" name="school_year" />
+              <input type="text" class="first-name input" autocomplete="off" name="school_year" />
             </div>
             <div class="dropdown-gradelvl">
               <span class="input-info">Grade Level<span style="color: red; font-size: 1.3em">*</span></span>

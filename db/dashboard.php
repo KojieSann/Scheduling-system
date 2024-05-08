@@ -349,7 +349,11 @@ $total_sections = $row_count['total'];
         <div class="section-teacher">
           <div class="section-container">
             <span>Today's Schedule</span>
-            <div class="section-wrapper contents"></div>
+            <div class="section-wrapper contents">
+              <div class="wrapper">
+
+              </div>
+            </div>
           </div>
           <div class="teacher-container">
             <span>Instructors Schedule</span>

@@ -1291,7 +1291,7 @@ form .page .btns button.next {
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  display: none;
+  /* display: none; */
 }
 .bg-content-view .content-view {
   height: 600px;
