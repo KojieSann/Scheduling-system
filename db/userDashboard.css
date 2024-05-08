@@ -6,119 +6,59 @@
   outline: none;
   box-sizing: border-box;
 }
+
 body {
   background: #fff;
-}
-
-.logo {
-  margin: 20px 0 40px 20px;
-  align-items: center;
-  display: flex;
-  transition: all 0, 5s ease;
+  font-family: "poppins";
 }
 .logo img {
   cursor: pointer;
   height: 50px;
   width: 50px;
-  right: 50px;
-}
-
-.logo span {
-  text-align: center;
-  white-space: nowrap;
-  color: #4b4b4b;
-  margin-left: 20px;
-  font-weight: 700;
-  font-size: 17px;
 }
 nav a {
   text-decoration: none;
+  display: flex;
+  gap: 5px;
+  align-items: center;
   color: #4b4b4b;
   font-size: 15px;
-  width: 300px;
-  padding: 10px;
-  position: relative;
-  display: table;
-  font-family: "montserrat";
-  font-weight: 600;
 }
 nav {
-  z-index: 10000;
-  border-top-right-radius: 20px;
   outline: none;
   text-decoration: none;
-  background: #d8f3dc;
-  font-family: "Montserrat";
-  height: 100vh;
-  width: 90px;
-  position: fixed;
-  transition: width 0.2s linear;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
 }
 .logout {
+  padding: 12px;
+  font-size: 15px;
+  background: #ff8fa3;
+  color: #fff;
+  border-radius: 50%;
   cursor: pointer;
-  bottom: 5px;
-  position: absolute;
 }
-nav i {
-  position: relative;
-  width: 70px;
-  height: 40px;
-  top: 14px;
-  font-size: 20px;
-  text-align: center;
+nav ul {
+  display: flex;
+  gap: 15px;
 }
-.nav-lists {
-  position: relative;
-  top: 12px;
-  margin-left: 10px;
-}
-nav a:hover {
-  transition: all 0.1s ease;
-  background: linear-gradient(to right, #95d5b2, transparent);
-  color: #4b4b4b;
-  color: white;
-  border-top-left-radius: 7px;
-  border-bottom-left-radius: 7px;
-}
-nav:hover {
-  width: 260px;
-  transition: all 0.5s ease;
-}
-.active i {
-  color: white;
-}
-ul .list-items .active i::after {
-  width: 8px;
-}
-ul .list-items i::after {
-  position: absolute;
-  content: "";
-  top: 25%;
-  left: 0;
-  width: 0px;
-  height: 75%;
-  transform: translateY(-50%);
-  background-color: #2d6a4f;
-  border-radius: 5px;
-}
-ul .list-items:hover i::after {
-  width: 8px;
-  transition: 0.3s;
+nav ul .list-items{
+  list-style: none;
+  display: flex;
+
 }
 .container {
   display: flex;
 }
-.main-content {
+.main-content{
+  scroll-snap-type: y mandatory;
   height: 100vh;
-  position: relative;
-  width: 100%;
-  padding: 20px;
-  margin-left: 100px;
+  overflow-y: scroll;
 }
+section{
+  padding: 20px;
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+} 
 .header-logo {
   display: flex;
   position: relative;
@@ -139,37 +79,23 @@ ul .list-items:hover i::after {
 .header-logo .text-logo p {
   letter-spacing: 3px;
 }
-.header-logo .create-schedule button i {
-  margin-right: 3px;
-}
-.header-logo .create-schedule button a {
-  text-decoration: none;
-  color: #fff;
-}
-.header-logo .create-schedule button {
-  cursor: pointer;
-  padding: 7px 20px;
-  border: none;
-  border-radius: 10px;
-  background-color: #74c69d;
-  font-size: 1em;
-  font-weight: 400;
-  font-family: "poppins";
-  transition: all 0.3s ease;
-  position: relative;
-  border: 1px solid #74c69d;
-}
-.header-logo .create-schedule button:hover {
-  background-color: rgb(116, 198, 157, 0.8);
-  border: 1px solid #4b4b4b;
-}
+
 /* dates */
+.main-logo .main-logo-wrapper{
+  display: flex;
+}
 .date input{
-  background: transparent;
+  background: none;
+}
+.text-logo {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 10px;
 }
 .header-logo .text-logo .date {
   position: absolute;
-  left: 300px;
+  left: 355px;
   display: flex;
   align-items: center;
 }
@@ -209,7 +135,7 @@ ul .list-items:hover i::after {
 /* waray upay na details */
 .content-container {
   display: flex;
-  gap: 40px;
+  gap: 30px;
 }
 .content-container .info-date {
   width: 68vw;
@@ -218,7 +144,6 @@ ul .list-items:hover i::after {
 .infos-container {
   display: flex;
   gap: 30px;
-
   width: 100%;
 }
 .infos-container .infos-wrapper {
@@ -266,7 +191,7 @@ ul .list-items:hover i::after {
 }
 /* sections and teachers schedules */
 .content-container .section-teacher {
-  width: 19vw;
+  width: 28vw;
   font-family: "poppins";
 }
 .content-container .section-teacher .contents {
@@ -488,4 +413,98 @@ ul .list-items:hover i::after {
   box-shadow: 0px 0px 30px rgb(82, 183, 136, 0.5);
   border: 1px solid #52b788;
   background: #fff;
+}
+/* search function for table */
+.searchSchedule {
+  align-items: center;
+  position: relative;
+  right: 0;
+}
+.searchSchedule input {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  font-family: "montserrat";
+  font-size: 13px;
+  padding: 10px 15px;
+  width: 250px;
+  height: 33px;
+  border-radius: 10px;
+  border: 0.5px solid #dddddd;
+}
+.searchSchedule i {
+  position: relative;
+  right: 28px;
+  pointer-events: none;
+  color: #4b4b4b;
+}
+/* print and delete button for table */
+.table-nav button {
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  background: #fff;
+  border: 1px solid #52b788;
+  font-family: "poppins";
+  font-size: 12px;
+  font-weight: 500;
+  color: #4b4b4b;
+  transition: 0.3s;
+}
+.table-nav button:hover {
+  opacity: 0.6;
+}
+/* tables */
+.main-table{
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #dddddd;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+}
+.main-table .table-header {
+  display: flex;
+  font-family: "poppins";
+  justify-content: space-between;
+  align-items: center;
+}
+.main-table .table-header span {
+  font-size: 30px;
+  font-weight: 600;
+  color: #4b4b4b;
+}
+.main-table .table-container {
+  max-height: 95vh;
+  overflow-y: scroll;
+  margin-top: 5px;
+}
+.main-table .table-container::-webkit-scrollbar {
+  width: 6px;
+}
+.main-table .table-container::-webkit-scrollbar-thumb {
+  background-color: #cacaca;
+  border-radius: 5px;
+}
+.main-table table {
+  width: 100%;
+  font-family: "montserrat";
+  border-collapse: collapse;
+}
+.main-table table th,
+.main-table table td {
+  padding: 8px;
+  text-align: center;
+  border-radius: 1px;
+}
+
+.main-table table th {
+  position: sticky;
+  top: 0;
+  background: #2d6a4f;
+  color: #fff;
+}
+.main-table table td {
+  font-size: 13px;
+}
+.main-table  .table tbody tr:nth-of-type(even) {
+  background-color: #eee;
 }
