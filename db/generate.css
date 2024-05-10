@@ -964,7 +964,7 @@ form .page .btns button.next {
   margin: 20px 0 0 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
-.modal-content-subject .form1 form {
+.modal-content-subject .form1-wrappper {
   display: flex;
 }
 .modal-content-subject .form1 .dropdown-instructor .subject-select {
@@ -1291,7 +1291,7 @@ form .page .btns button.next {
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  /* display: none; */
+  display: none;
 }
 .bg-content-view .content-view {
   height: 600px;

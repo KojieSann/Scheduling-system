@@ -674,3 +674,27 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  const form = document.getElementById('contact_form');
+  const myDiv = document.getElementById('formContainer');
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault(); // Prevents the default form submission behavior
+  const formData = new FormData(form); // Create a FormData object with the form data
+
+  fetch("addSchedule.php", {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    if (response.ok) {
+      myDiv.innerHTML = '<p>Form submitted successfully!</p>';
+    } else {
+      myDiv.innerHTML = '<p>There was an error submitting the form</p>';
+    }
+  })
+  .catch(error => {
+    myDiv.innerHTML = '<p>There was an error submitting the form:'+error+'</p>';
+  });
+});
+

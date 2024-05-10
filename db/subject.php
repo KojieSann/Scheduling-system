@@ -123,6 +123,7 @@ if (isset($_GET['search'])) {
             <select name="strand[]" multiple multiselect-select-all="true" class="strand-select">
               <option value="GAS">GAS</option>
               <option value="STEM">STEM</option>
+              <option value="TVL">TVL</option>
               <option value="ICT">ICT</option>
               <option value="ABM">ABM</option>
               <option value="HUMSS">HUMSS</option>

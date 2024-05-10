@@ -5,7 +5,6 @@ if (!isset($_SESSION['username'])) {
   header("Location: login_page.php");
   exit;
 }
-
 include('connect.php');
 
 $sql_sections = "SELECT * FROM sections";
@@ -106,79 +105,82 @@ $result_teachers = $conn->query($sql_teachers);
     <div class="bg-modal-subject">
       <div class="modal-content-subject">
         <div class="close-subject"><i class="fa-solid fa-xmark"></i></div>
-        <div class="modal-subject-container">
-          <div class="subject-header">
-            <div class="subject-info">
-              <span>Subject</span>
-              <input type="text" id="modalSubjectName" class="headerInput" readonly placeholder="" />
+        <form action="addSchedule.php" method="POST" id="contact_form" name="contact_form">
+
+          <div class="modal-subject-container">
+            <div class="subject-header">
+              <div class="subject-info">
+                <span>Subject</span>
+                <input type="text" id="modalSubjectName" name="modalSubjectName" class="headerInput" readonly />
+              </div>
+              <div class="subject-info">
+                <span>Subject code</span>
+                <input type="text" id="modalSubjectCode" name="modalSubjectCode" class="headerInput" readonly />
+              </div>
             </div>
-            <div class="subject-info">
-              <span>Subject code</span>
-              <input type="text" id="modalSubjectCode" class="headerInput" readonly placeholder="" />
-            </div>
-          </div>
-          <div class="form-wrapper">
-            <div class="form1 data-info">
-              <form action="">
-                <div class="input-wrap">
-                  <span class="input-header">Choose preferred date</span>
-                  <div class="round">
-                    <input type="checkbox" id="monday" onchange="toggleButton('monday')" />
-                    <label for="monday">Monday</label>
+            <div class="form-wrapper">
+              <div class="form1 data-info">
+                <div class="form1-wrappper">
+                  <div class="input-wrap">
+                    <span class="input-header">Choose preferred date</span>
+                    <div class="round">
+                      <input type="checkbox" id="monday" name="days[]" value="Monday" onchange="toggleButton('monday')" />
+                      <label for="monday">Monday</label>
+                    </div>
+                    <div class="round">
+                      <input type="checkbox" id="tuesday" name="days[]" value="Tuesday" onchange="toggleButton('tuesday')" />
+                      <label for="tuesday">Tuesday</label>
+                    </div>
+                    <div class="round">
+                      <input type="checkbox" id="wednesday" name="days[]" value="Wednesday" onchange="toggleButton('wednesday')" />
+                      <label for="wednesday">Wednesday</label>
+                    </div>
+                    <div class="round">
+                      <input type="checkbox" id="thursday" name="days[]" value="Thursday" onchange="toggleButton('thursday')" />
+                      <label for="thursday">Thursday</label>
+                    </div>
+                    <div class="round">
+                      <input type="checkbox" id="friday" name="days[]" value="Friday" onchange="toggleButton('friday')" />
+                      <label for="friday">Friday</label>
+                    </div>
                   </div>
-                  <div class="round">
-                    <input type="checkbox" id="tuesday" onchange="toggleButton('tuesday')" />
-                    <label for="tuesday">Tuesday</label>
-                  </div>
-                  <div class="round">
-                    <input type="checkbox" id="wednesday" onchange="toggleButton('wednesday')" />
-                    <label for="wednesday">Wednesday</label>
-                  </div>
-                  <div class="round">
-                    <input type="checkbox" id="thursday" onchange="toggleButton('thursday')" />
-                    <label for="thursday">Thursday</label>
-                  </div>
-                  <div class="round">
-                    <input type="checkbox" id="friday" onchange="toggleButton('friday')" />
-                    <label for="friday">Friday</label>
-                  </div>
-                </div>
-                <div class="dropdown-instructor">
-                  <span class="input-header-instructor">Select the instructor
-                  </span>
-                  <select class="subject-select" name="select" multiselect-search="true" onchange="updatePreferredDays(this)">
-                    <option value="" hidden>Select Instructor</option>
-                    <?php while ($row = mysqli_fetch_assoc($result_teachers)) : ?>
-                      <option value="<?php echo $row['id']; ?>">
-                        <?php echo $row['first_name'] . ' , ' . $row['last_name']; ?></option>
-                    <?php endwhile; ?>
-                  </select>
-                  <div class="radio-time">
-                    <div class="radio-list">
-                      <div class="radio-item">
-                        <input type="radio" value="AM" name="time" id="AM" />
-                        <label for="AM">AM</label>
-                      </div>
-                      <div class="radio-item">
-                        <input type="radio" value="PM" name="time" id="PM" />
-                        <label for="PM">PM</label>
-                      </div>
-                      <div class="radio-item">
-                        <input type="radio" value="AM-PM" name="time" id="AM-PM" />
-                        <label for="AM-PM">AM-PM</label>
+                  <div class="dropdown-instructor">
+                    <span class="input-header-instructor">Select the instructor
+                    </span>
+                    <select class="subject-select" name="select" multiselect-search="true" onchange="updatePreferredDays(this)">
+                      <option value="" hidden>Select Instructor</option>
+                      <?php while ($row = mysqli_fetch_assoc($result_teachers)) : ?>
+                        <option value="<?php echo $row['id']; ?>">
+                          <?php echo $row['first_name'] . ' , ' . $row['last_name']; ?></option>
+                      <?php endwhile; ?>
+                    </select>
+                    <div class="radio-time">
+                      <div class="radio-list">
+                        <div class="radio-item">
+                          <input type="radio" value="AM" name="time" id="AM" />
+                          <label for="AM">AM</label>
+                        </div>
+                        <div class="radio-item">
+                          <input type="radio" value="PM" name="time" id="PM" />
+                          <label for="PM">PM</label>
+                        </div>
+                        <div class="radio-item">
+                          <input type="radio" value="AM-PM" name="time" id="AM-PM" />
+                          <label for="AM-PM">AM-PM</label>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </form>
-              <div class="btns-wrap">
-                <button type="button" class="subj-btn-next subjBtn">
-                  Next
-                </button>
+
+                <div class="btns-wrap">
+                  <button type="button" class="subj-btn-next subjBtn">
+                    Next
+                  </button>
+                </div>
               </div>
-            </div>
-            <div class="form2 data-info" style="display: none">
-              <form action="">
+              <div class="form2 data-info" style="display: none">
+                <div id="formContainer"></div>
                 <div class="day-selection">
                   <button type="button" class="monday not-selected not-active" disabled>Monday</button>
                   <button type="button" class="tuesday not-active not-selected" disabled>Tuesday</button>
@@ -192,11 +194,11 @@ $result_teachers = $conn->query($sql_teachers);
                     <p>Monday</p>
                     <div class="inTime time">
                       <span>In time</span>
-                      <input type="time" />
+                      <input type="time" name="Monday_in_time" />
                     </div>
                     <div class="outTime time">
                       <span>Out time</span>
-                      <input type="time" />
+                      <input type="time" name="Monday_out_time" />
                     </div>
                     <div class="repeat">
                       <input type="checkbox" name="repeat" />
@@ -209,11 +211,11 @@ $result_teachers = $conn->query($sql_teachers);
                     <p>Tuesday</p>
                     <div class="inTime time">
                       <span>In time</span>
-                      <input type="time" />
+                      <input type="time" name="tuesday_in_time" />
                     </div>
                     <div class="outTime time">
                       <span>Out time</span>
-                      <input type="time" />
+                      <input type="time" name="tuesday_in_time" />
                     </div>
                     <div class="repeat">
                       <input type="checkbox" name="repeat" />
@@ -272,21 +274,20 @@ $result_teachers = $conn->query($sql_teachers);
                     </div>
                   </div>
                 </div>
+                <div class="btns-wrap">
+                  <button type="button" class="subj-btn-back2 subjBtn">
+                    Back
+                  </button>
+                  <button type="submit" name="subjectSubmit" class="subj-btn-submit subjBtn">
+                    <i class="fa-regular fa-floppy-disk"></i> <span> Save</span>
+                  </button>
+                </div>
 
-              </form>
-
-              <div class="btns-wrap">
-                <button type="button" class="subj-btn-back2 subjBtn">
-                  Back
-                </button>
-                <button type="submit" class="subj-btn-submit subjBtn">
-                  <i class="fa-regular fa-floppy-disk"></i> <span> Save</span>
-                </button>
               </div>
-            </div>
 
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
     <div class="bg-modal">
@@ -543,8 +544,8 @@ $result_teachers = $conn->query($sql_teachers);
                 <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
                 <td>Sampaguita</td>
                 <td>HUMSS</td>
-                <td>Monday</td>
-                <td>Math</td>
+                <td>Tuesday</td>
+                <td>Science</td>
                 <td>10:00 am</td>
                 <td>11:00 am</td>
                 <td>1 hour</td>
@@ -561,8 +562,8 @@ $result_teachers = $conn->query($sql_teachers);
                 <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
                 <td>Sampaguita</td>
                 <td>HUMSS</td>
-                <td>Monday</td>
-                <td>English</td>
+                <td>Wednesday</td>
+                <td>Science</td>
                 <td>11:00 am</td>
                 <td>12:00 am</td>
                 <td>1 hour</td>
@@ -582,6 +583,7 @@ $result_teachers = $conn->query($sql_teachers);
       </div>
     </div>
   </div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./libraries/html2pdf.bundle.min.js"></script>
   <script src="./libraries/table2excel.js"></script>
