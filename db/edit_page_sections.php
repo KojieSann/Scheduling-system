@@ -82,10 +82,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <a href="./subject.php"><i class="fa-solid fa-book"></i><span class="nav-lists">Subjects</span></a>
         </li>
         <li>
-          <a href="./login.php" class="logout"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-lists">Logout</span></a>
+          <a class="logout"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-lists">Logout</span></a>
         </li>
       </ul>
     </nav>
+    <div class="bg-content-logout">
+      <div class="content-logout">
+        <img src="./img/shs-logo.png" alt="shs logo" class="shs-logo" />
+        <div class="header-text">
+          <span>Confirm Logout</span>
+          <p style="font-size: 13px">Are you sure you want to logout?</p>
+        </div>
+        <div class="header-img">
+          <img src="./img/undraw_login_re_4vu2.svg" alt="" />
+        </div>
+        <div class="btn">
+          <button class="noBtn">Cancel</button>
+          <a href="logout.php"><button class="yesBtn">Logout</button></a>
+        </div>
+      </div>
+    </div>
     <section class="main-content">
       <div class="main-logo">
         <h1>Edit <span>Section</span></h1>
@@ -95,7 +111,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <i class="fa-solid fa-user"></i>
       </div>
       <div class="inputs">
-
         <form action="" method="post">
           <input type="hidden" name="id" value="<?php echo $id; ?>">
           <div class="subject-code">
@@ -104,17 +119,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <input required type="text" class="first-name" autocomplete="off" name="section_name" value="<?php echo $row['section_name']; ?>" />
             </div>
             <div class="subj-code">
-              <span>Grade Level<span style="color: red; font-size: 1.3em">*</span></span>
-              <input required type="text" class="first-name" autocomplete="off" name="grade_level" value="<?php echo $row['grade_level']; ?>" />
+              <div class="dropdown-gradelvl">
+                <span class="input-info">Grade Level<span style="color: red; font-size: 1.3em">*</span></span>
+                <input type="text" class="textbox-grade input" placeholder="No grade level selected" readonly name="grade_level" value="<?php echo $row['grade_level']; ?>" />
+                <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
+                <div class="option-grade">
+                  <div onclick="reveal('Grade 11')">Grade 11</div>
+                  <div onclick="reveal('Grade 12')">Grade 12</div>
+                </div>
+              </div>
             </div>
+
           </div>
           <div class="yrlvl-gradelvl">
-            <div class="dropdown-gradelvl">
+            <div class="dropdown-strand">
               <span class="input-info">Strand<span style="color: red; font-size: 1.3em">*</span></span>
-              <input type="text" class="textbox-grade" placeholder="Select Strand" name="strand" value="<?php echo $row['strand']; ?>" readonly />
+              <input type="text" class="textbox-strand" placeholder="Select Strand" name="strand" value="<?php echo $row['strand']; ?>" readonly />
               <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
 
-              <div class="option-grade">
+              <div class="option-strand">
                 <div onclick="show('GAS')">GAS</div>
                 <div onclick="show('STEM')">STEM</div>
                 <div onclick="show('TVL')">TVL</div>
@@ -122,6 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div onclick="show('ABM')">ABM</div>
               </div>
             </div>
+
             <div class="button-submit">
               <button type="submit" class="btn-submit">Update</button>
             </div>
@@ -169,7 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
     </section>
   </div>
-  <script src="./subject.js"></script>
+  <script src="./section.js"></script>
 </body>
 
 </html>

@@ -222,7 +222,7 @@ $total_sections = $row_count['total'];
                     <td>2nd</td>
                     <td>2024-2025</td>
                     <td>AM</td>
-                    <td>Papa Andrei</td>
+                    <td>Papa warren</td>
                   </tr>
                   <tr>
                     <td>Sampaguita</td>

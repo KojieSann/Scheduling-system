@@ -7,13 +7,21 @@ logoutButton.addEventListener("click", function () {
 closePopup.addEventListener("click", function () {
   document.querySelector(".bg-content-logout").style.display = "none";
 });
+// dropdown for grade lvl
 function show(anything) {
   document.querySelector(".textbox-grade").value = anything;
 }
-let dropdownStrand = document.querySelector(".dropdown-gradelvl");
-dropdownStrand.onclick = function () {
-  dropdownStrand.classList.toggle("activeShowGLevel");
+const textboxGlvl = document.querySelector(".textbox-grade");
+let dropdowngradeLvl = document.querySelector(".dropdown-gradelvl");
+dropdowngradeLvl.onclick = function () {
+  dropdowngradeLvl.classList.toggle("activeShowGLevel");
 };
+document.addEventListener("click", (e) => {
+  if (!textboxGlvl.contains(e.target) && e.target !== dropdowngradeLvl) {
+      dropdowngradeLvl.classList.remove("activeShowGLevel");
+  }
+});
+
 var style = document.createElement("style");
 style.setAttribute("id", "multiselect_dropdown_styles");
 
@@ -231,15 +239,25 @@ function validateForm() {
   }
   return true;
 }
-function validateFormSection() {
-  var sectionName = document.querySelector('[name="section_name"]').value;
-  var gradeLevel = document.querySelector('[name="grade_level"]').value;
-  var strand = document.querySelector('.textbox-grade').value;
+// search function
 
-  if (sectionName.trim() === '' || gradeLevel.trim() === '' || strand.trim() === '') {
-    alert('Please fill in all required fields.');
-    return false;
-  }
+  const searchInput = document.getElementById('search-box');
+  const tableRows = document.querySelectorAll('.subject-table .table tbody tr');
 
-  return true;
-}
+  searchInput.addEventListener('input', function() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+
+    tableRows.forEach(function(row) {
+      const subjectName = row.querySelector('td:nth-child(1)').textContent.toLowerCase().trim();
+      const subjectCode = row.querySelector('td:nth-child(2)').textContent.toLowerCase().trim();
+      const schoolYear = row.querySelector('td:nth-child(3)').textContent.toLowerCase().trim();
+      const gradeLevel = row.querySelector('td:nth-child(4)').textContent.toLowerCase().trim();
+      const strand = row.querySelector('td:nth-child(5)').textContent.toLowerCase().trim();
+
+      if (subjectName.includes(searchTerm) || subjectCode.includes(searchTerm) || schoolYear.includes(searchTerm) || gradeLevel.includes(searchTerm) || strand.includes(searchTerm)) {
+        row.style.display = 'table-row';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });

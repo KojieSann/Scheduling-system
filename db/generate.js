@@ -45,7 +45,7 @@ function tableToPrint() {
       });
   });
   var printContent = '<table border="1">';
-  printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Schedule</th><th>Sem</th><th>SY</th><th>Time</th><th>Adviser</th></tr></thead>';
+  printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Day</th><th>Subject</th><th>Time in</th><th>Time out</th><th>Duration</th><th>Instructor</th></tr></thead>';
   printContent += '<tbody>';
   checkedRows.forEach(function(row) {
       var rowData = row.closest('tr').querySelectorAll('td:not(.checkboxTbl)');
@@ -190,6 +190,29 @@ function toggleButton(day) {
     
   }
 }
+//  for the repeated checkbox in subject scheduling
+const repeatCheckboxes = document.querySelectorAll('input[type="checkbox"][name="repeat"]');
+repeatCheckboxes.forEach(function(checkbox) {
+  checkbox.addEventListener("change", function() {
+    const timeSelection = checkbox.closest('.time-selection');
+    const inTimeInput = timeSelection.querySelector('.inTime input[type="time"]');
+    const outTimeInput = timeSelection.querySelector('.outTime input[type="time"]');
+    if (this.checked) {
+      const inTimeValue = inTimeInput.value;
+      const outTimeValue = outTimeInput.value;
+      const timeSelections = document.querySelectorAll('.time-selection');
+      timeSelections.forEach(function(selection) {
+        if (selection !== timeSelection) {
+          const inTimeInput = selection.querySelector('.inTime input[type="time"]');
+          const outTimeInput = selection.querySelector('.outTime input[type="time"]');
+          inTimeInput.value = inTimeValue;
+          outTimeInput.value = outTimeValue;
+        }
+      });
+    }
+  });
+});
+
 // modal for multistep
 initMultiStepForm();
 function initMultiStepForm() {
@@ -604,5 +627,50 @@ $(document).ready(function() {
   });
   filterSubjects();
 });
+ 
+// search function for the table
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('search-box');
+  const tableRows = document.querySelectorAll('.schedules-table .table tbody tr');
 
+  searchInput.addEventListener('input', function() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
 
+    tableRows.forEach(function(row) {
+      const section = row.querySelector('td:nth-child(2)').textContent.toLowerCase().trim();
+      const strand = row.querySelector('td:nth-child(3)').textContent.toLowerCase().trim();
+      const day = row.querySelector('td:nth-child(4)').textContent.toLowerCase().trim();
+      const subject = row.querySelector('td:nth-child(5)').textContent.toLowerCase().trim();
+      const timeIn = row.querySelector('td:nth-child(6)').textContent.toLowerCase().trim();
+      const timeOut = row.querySelector('td:nth-child(7)').textContent.toLowerCase().trim();
+      const duration = row.querySelector('td:nth-child(8)').textContent.toLowerCase().trim();
+      const instructor = row.querySelector('td:nth-child(9)').textContent.toLowerCase().trim();
+
+      if (section.includes(searchTerm) || strand.includes(searchTerm) || day.includes(searchTerm) || subject.includes(searchTerm) || timeIn.includes(searchTerm) || timeOut.includes(searchTerm) || duration.includes(searchTerm) || instructor.includes(searchTerm)) {
+        row.style.display = 'table-row';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+});
+
+  // search function for the modal
+  const searchInput = document.getElementById('searchInput');
+  const tableRows = document.querySelectorAll('.section-table tbody tr');
+
+  searchInput.addEventListener('input', function() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+
+    tableRows.forEach(function(row) {
+      const sectionName = row.querySelector('td:nth-child(1)').textContent.toLowerCase().trim();
+      const strand = row.querySelector('td:nth-child(2)').textContent.toLowerCase().trim();
+      const gradeLevel = row.querySelector('td:nth-child(3)').textContent.toLowerCase().trim();
+
+      if (sectionName.includes(searchTerm) || strand.includes(searchTerm) || gradeLevel.includes(searchTerm)) {
+        row.style.display = 'table-row';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });

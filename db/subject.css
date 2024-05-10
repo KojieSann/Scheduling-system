@@ -244,6 +244,7 @@ ul .list-items:hover i::after {
   position: absolute;
   height: 20px;
   width: 20px;
+  pointer-events: none;
 }
 .dropdown-gradelvl.activeShowGLevel .icon-down {
   transform: rotate(180deg);

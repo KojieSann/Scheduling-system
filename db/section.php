@@ -96,17 +96,25 @@ if (isset($_GET['search'])) {
               <input type="text" class="first-name" autocomplete="off" name="section_name" />
             </div>
             <div class="subj-code">
-              <span>Grade Level<span style="color: red; font-size: 1.3em">*</span></span>
-              <input type="text" class="first-name" autocomplete="off" name="grade_level" />
+              <div class="dropdown-gradelvl">
+                <span class="input-info">Grade Level<span style="color: red; font-size: 1.3em">*</span></span>
+                <input type="text" class="textbox-grade input" placeholder="No grade level selected" readonly name="grade_level" />
+                <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
+                <div class="option-grade">
+                  <div onclick="reveal('Grade 11')">Grade 11</div>
+                  <div onclick="reveal('Grade 12')">Grade 12</div>
+                </div>
+              </div>
             </div>
+
           </div>
           <div class="yrlvl-gradelvl">
-            <div class="dropdown-gradelvl">
+            <div class="dropdown-strand">
               <span class="input-info">Strand<span style="color: red; font-size: 1.3em">*</span></span>
-              <input type="text" class="textbox-grade" placeholder="Select Strand" name="strand" readonly />
+              <input type="text" class="textbox-strand" placeholder="Select Strand" name="strand" readonly />
               <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
 
-              <div class="option-grade">
+              <div class="option-strand">
                 <div onclick="show('GAS')">GAS</div>
                 <div onclick="show('STEM')">STEM</div>
                 <div onclick="show('TVL')">TVL</div>
@@ -161,7 +169,7 @@ if (isset($_GET['search'])) {
       </div>
     </section>
   </div>
-  <script src="./subject.js"></script>
+  <script src="./section.js"></script>
 </body>
 
 </html>

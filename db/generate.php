@@ -80,51 +80,9 @@ $result_teachers = $conn->query($sql_teachers);
             </div>
           </div>
         </div>
-        <div class="view-table">
-          <div class="table-header">
-            <span>Schedule</span>
-            <div class="table-search">
-              <form>
-                <div class="searchSection">
-                  <input type="text" />
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="table-container">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Schedule</th>
-                  <th>Subject</th>
-                  <th>Time In</th>
-                  <th>Time Out</th>
-                  <th>Instructor</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Monday</td>
-                  <td>English</td>
-                  <td>08:00 am</td>
-                  <td>09:00 am</td>
-                  <td>papa andrei</td>
-                </tr>
-                <tr>
-                  <td>Monday</td>
-                  <td>Math</td>
-                  <td>09:00 am</td>
-                  <td>10:00 am</td>
-                  <td>papa andrei</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
         <div class="button-container">
           <button class="print" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
-          <button class="edit"><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+          <button class="edit"><i class="fa-regular fa-pen-to-square"></i> Update</button>
           <button class="delete"><i class="fa-regular fa-trash-can"></i> Delete</button>
         </div>
       </div>
@@ -228,6 +186,7 @@ $result_teachers = $conn->query($sql_teachers);
                   <button type="button" class="not-active thursday not-selected" disabled>Thursday</button>
                   <button type="button" class="friday not-active not-selected" disabled>Friday</button>
                 </div>
+
                 <div class="time-selection-monday" style="display: none;">
                   <div class="time-selection">
                     <p>Monday</p>
@@ -241,24 +200,7 @@ $result_teachers = $conn->query($sql_teachers);
                     </div>
                     <div class="repeat">
                       <input type="checkbox" name="repeat" />
-                      <label for="repeat">Same as last schedule</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="time-selection-monday" style="display: none;">
-                  <div class="time-selection">
-                    <p>Monday</p>
-                    <div class="inTime time">
-                      <span>In time</span>
-                      <input type="time" />
-                    </div>
-                    <div class="outTime time">
-                      <span>Out time</span>
-                      <input type="time" />
-                    </div>
-                    <div class="repeat">
-                      <input type="checkbox" name="repeat" />
-                      <label for="repeat">Same as last schedule</label>
+                      <label for="repeat">Copy to all schedule</label>
                     </div>
                   </div>
                 </div>
@@ -275,7 +217,7 @@ $result_teachers = $conn->query($sql_teachers);
                     </div>
                     <div class="repeat">
                       <input type="checkbox" name="repeat" />
-                      <label for="repeat">Same as last schedule</label>
+                      <label for="repeat">Copy to all schedule</label>
                     </div>
                   </div>
                 </div>
@@ -292,7 +234,7 @@ $result_teachers = $conn->query($sql_teachers);
                     </div>
                     <div class="repeat">
                       <input type="checkbox" name="repeat" />
-                      <label for="repeat">Same as last schedule</label>
+                      <label for="repeat">Copy to all schedule</label>
                     </div>
                   </div>
                 </div>
@@ -309,7 +251,7 @@ $result_teachers = $conn->query($sql_teachers);
                     </div>
                     <div class="repeat">
                       <input type="checkbox" name="repeat" />
-                      <label for="repeat">Same as last schedule</label>
+                      <label for="repeat">Copy to all schedule</label>
                     </div>
                   </div>
                 </div>
@@ -326,7 +268,7 @@ $result_teachers = $conn->query($sql_teachers);
                     </div>
                     <div class="repeat">
                       <input type="checkbox" name="repeat" />
-                      <label for="repeat">Same as last schedule</label>
+                      <label for="repeat">Copy to all schedule</label>
                     </div>
                   </div>
                 </div>
@@ -380,7 +322,7 @@ $result_teachers = $conn->query($sql_teachers);
                 <div class="titleSection-header">
                   <div class="title">Select section</div>
                   <div class="searchSection">
-                    <input type="text" />
+                    <input type="text" id="searchInput" placeholder="Search...">
                     <i class="fa-solid fa-magnifying-glass"></i>
                   </div>
                 </div>
@@ -569,11 +511,12 @@ $result_teachers = $conn->query($sql_teachers);
                 <th class="checkboxTbl"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()" /></th>
                 <th>Section</th>
                 <th>Strand</th>
-                <th>Schedule</th>
-                <th>Sem</th>
-                <th>SY</th>
-                <th>Time</th>
-                <th>Adviser</th>
+                <th>Day</th>
+                <th>Subject</th>
+                <th>Time in</th>
+                <th>Time out</th>
+                <th>Duration</th>
+                <th>Instructor</th>
                 <th></th>
               </tr>
             </thead>
@@ -582,51 +525,57 @@ $result_teachers = $conn->query($sql_teachers);
                 <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
                 <td>Sampaguita</td>
                 <td>HUMSS</td>
-                <td>Mon,Tues,Fri</td>
-                <td>2nd</td>
-                <td>2024-2025</td>
-                <td>AM</td>
-                <td>Papa Andrei</td>
+                <td>Monday</td>
+                <td>Science</td>
+                <td>09:00 am</td>
+                <td>10:00 am</td>
+                <td>1 hour</td>
+                <td>Papa janrenze</td>
                 <td class="checkboxTbl">
                   <div class="view-open-modal">
-                    <i class="fa-regular fa-eye"></i>
-                    <span>View</span>
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    <span>Edit</span>
                   </div>
                 </td>
 
               </tr>
               <tr>
                 <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
-                <td>Santol</td>
-                <td>GAS</td>
-                <td>Mon,Tues,Fri</td>
-                <td>2nd</td>
-                <td>2024-2025</td>
-                <td>AM</td>
+                <td>Sampaguita</td>
+                <td>HUMSS</td>
+                <td>Monday</td>
+                <td>Math</td>
+                <td>10:00 am</td>
+                <td>11:00 am</td>
+                <td>1 hour</td>
                 <td>Papa Andrei</td>
                 <td class="checkboxTbl">
                   <div class="view-open-modal">
-                    <i class="fa-regular fa-eye"></i>
-                    <span>View</span>
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    <span>Edit</span>
                   </div>
                 </td>
+
               </tr>
               <tr>
                 <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
-                <td>Santol</td>
-                <td>GAS</td>
-                <td>Mon,Tues,Fri</td>
-                <td>2nd</td>
-                <td>2024-2025</td>
-                <td>AM</td>
-                <td>Papa Andrei</td>
+                <td>Sampaguita</td>
+                <td>HUMSS</td>
+                <td>Monday</td>
+                <td>English</td>
+                <td>11:00 am</td>
+                <td>12:00 am</td>
+                <td>1 hour</td>
+                <td>Papa Aldrin</td>
                 <td class="checkboxTbl">
                   <div class="view-open-modal">
-                    <i class="fa-regular fa-eye"></i>
-                    <span>View</span>
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    <span>Edit</span>
                   </div>
                 </td>
+
               </tr>
+
             </tbody>
           </table>
         </div>

@@ -186,17 +186,17 @@ ul .list-items:hover i::after {
   display: flex;
   flex-direction: column;
 }
-.inputs .dropdown-gradelvl {
+.inputs .dropdown-strand {
   position: relative;
   width: 200px;
   height: 35px;
   margin-bottom: 50px;
 }
-.dropdown-gradelvl .input-info {
+.dropdown-strand .input-info {
   position: relative;
   bottom: 20px;
 }
-.inputs .dropdown-gradelvl input {
+.inputs .dropdown-strand input {
   cursor: pointer;
   position: absolute;
   top: 0;
@@ -206,6 +206,71 @@ ul .list-items:hover i::after {
   outline: none;
   padding: 10px 15px;
   font-size: 13px;
+}
+.dropdown-strand.showStrand .option-strand {
+  display: block;
+}
+.dropdown-strand .option-strand {
+  position: absolute;
+  display: none;
+  top: 50px;
+  width: 60%;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  color: #4b4b4b;
+  z-index: 100;
+  border: 0.5px solid #dddddd;
+}
+.inputs .dropdown-strand .option-strand div {
+  font-family: "montserrat";
+  font-size: 14px;
+  padding: 10px 15px;
+}
+.inputs .dropdown-strand .option-strand div:hover {
+  background-color: #74c69d;
+  color: #fff;
+}
+.dropdown-strand .icon-down {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  left: 165px;
+  top: 8px;
+  transition: all 0.3s ease;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  pointer-events: none;
+}
+.dropdown-strand.showStrand .icon-down {
+  transform: rotate(180deg);
+}
+/* dropdown for grade levl */
+.inputs .dropdown-gradelvl {
+  position: relative;
+  width: 200px;
+  height: 35px;
+  margin-top: 20px;
+}
+.inputs .dropdown-gradelvl .input {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  padding: 10px 15px;
+  font-size: 13px;
+}
+.dropdown-gradelvl .input-info {
+  position: relative;
+  font-size: 20px;
+  bottom: 20px;
+  z-index: 10;
+  color: black;
 }
 .dropdown-gradelvl.activeShowGLevel .option-grade {
   display: block;
@@ -220,7 +285,6 @@ ul .list-items:hover i::after {
   border-radius: 10px;
   overflow: hidden;
   color: #4b4b4b;
-  z-index: 100;
   border: 0.5px solid #dddddd;
 }
 .inputs .dropdown-gradelvl .option-grade div {
@@ -242,6 +306,7 @@ ul .list-items:hover i::after {
   position: absolute;
   height: 20px;
   width: 20px;
+  pointer-events: none;
 }
 .dropdown-gradelvl.activeShowGLevel .icon-down {
   transform: rotate(180deg);

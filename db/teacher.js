@@ -50,14 +50,19 @@ document.addEventListener("click", (e) => {
   }
 });
 // dropdown for strandlists
-
 function reveal(anything) {
   document.querySelector(".textbox-strands").value = anything;
 }
+const textBoxStrand = document.querySelector(".textbox-strands")
 let dropdownStrand = document.querySelector(".strand-list");
 dropdownStrand.onclick = function () {
   dropdownStrand.classList.toggle("activeShowStrand");
 };
+document.addEventListener("click", (e) => {
+  if (!textBoxStrand.contains(e.target) && e.target !== dropdownStrand) {
+    dropdownStrand.classList.remove("activeShowStrand");
+  }
+});
 // dropdown for subject
 var style = document.createElement("style");
 style.setAttribute("id", "multiselect_dropdown_styles");
@@ -280,11 +285,25 @@ function validateForm() {
   return true;
 }
 // search function for table
-// document.addEventListener("touchstart", function () {}, true);
-// const dropdownStrand = document.querySelector(".strand-list");
-// const textboxStrand = document.querySelector(".textbox-strands");
-// document.addEventListener("click", (e) => {
-//   if (!textboxStrand.contains(e.target) && e.target !== dropdownStrand) {
-//     dropdownStrand.classList.remove("activeShowStrand");
-//   }
-// });
+
+  const searchInput = document.getElementById('search-box');
+  const tableRows = document.querySelectorAll('.teacher-table .table tbody tr');
+
+  searchInput.addEventListener('input', function() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+
+    tableRows.forEach(function(row) {
+      const lastName = row.querySelector('td:nth-child(1)').textContent.toLowerCase().trim();
+      const day = row.querySelector('td:nth-child(2)').textContent.toLowerCase().trim();
+      const time = row.querySelector('td:nth-child(3)').textContent.toLowerCase().trim();
+      const strand = row.querySelector('td:nth-child(4)').textContent.toLowerCase().trim();
+      const subjects = row.querySelector('td:nth-child(5)').textContent.toLowerCase().trim();
+
+      if (lastName.includes(searchTerm) || day.includes(searchTerm) || time.includes(searchTerm) || strand.includes(searchTerm) || subjects.includes(searchTerm)) {
+        row.style.display = 'table-row';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+
