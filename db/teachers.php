@@ -125,11 +125,11 @@ if (isset($_GET['search'])) {
             <div class="dropdown-day">
               <span class="input-info">Select day<span style="color: red; font-size: 1.3em;">*</span></span>
               <select name="day[]" multiple multiselect-select-all="true" style="width:200px;">
-                <option value="Monday">MONDAY</option>
-                <option value="Tuesday">TUESDAY</option>
-                <option value="Wednesday">WEDNESDAY</option>
-                <option value="Thursday">THURSDAY</option>
-                <option value="Friday">FRIDAY</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
               </select>
 
             </div>
@@ -159,11 +159,8 @@ if (isset($_GET['search'])) {
               <span class="input-info">Select subject<span style="color: red; font-size: 1.3em">*</span></span>
               <select class="subject-select" name="subject[]" multiple multiselect-select-all="true" multiselect-search="true">
                 <?php
-
                 $sql_subjects = "SELECT * FROM subjects";
                 $result_subjects = $conn->query($sql_subjects);
-
-
                 if ($result_subjects->num_rows > 0) {
                   while ($row_subject = $result_subjects->fetch_assoc()) {
 
@@ -201,6 +198,7 @@ if (isset($_GET['search'])) {
         <thead>
           <tr>
             <th>Last Name</th>
+            <th>First Name</th>
             <th>Day</th>
             <th>Time</th>
             <th>Strand</th>
@@ -214,6 +212,7 @@ if (isset($_GET['search'])) {
           while ($row = $result->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . $row['last_name'] . "</td>";
+            echo "<td>" . $row['first_name'] . "</td>";
             echo "<td>" . $row['day'] . "</td>";
             echo "<td>" . $row['time'] . "</td>";
             echo "<td>" . $row['strand'] . "</td>";

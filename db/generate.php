@@ -6,7 +6,6 @@ if (!isset($_SESSION['username'])) {
   exit;
 }
 include('connect.php');
-
 $sql_sections = "SELECT * FROM sections";
 $result_sections = $conn->query($sql_sections);
 
@@ -15,7 +14,6 @@ $result_subjects = $conn->query($sql_subjects);
 
 $sql_teachers = "SELECT * FROM teachers";
 $result_teachers = $conn->query($sql_teachers);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,18 +65,19 @@ $result_teachers = $conn->query($sql_teachers);
           <div class="inputs-container">
             <div class="inputs">
               <span>Section</span>
-              <input type="text" readonly>
+              <input type="text">
             </div>
             <div class="inputs">
               <span>Strand</span>
-              <input type="text" readonly>
+              <input type="text">
             </div>
             <div class="inputs">
               <span>Adviser</span>
-              <input type="text" readonly>
+              <input type="text">
             </div>
           </div>
         </div>
+
         <div class="button-container">
           <button class="print" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
           <button class="edit"><i class="fa-regular fa-pen-to-square"></i> Update</button>
@@ -106,7 +105,6 @@ $result_teachers = $conn->query($sql_teachers);
       <div class="modal-content-subject">
         <div class="close-subject"><i class="fa-solid fa-xmark"></i></div>
         <form action="addSchedule.php" method="POST" id="contact_form" name="contact_form">
-
           <div class="modal-subject-container">
             <div class="subject-header">
               <div class="subject-info">
@@ -194,11 +192,11 @@ $result_teachers = $conn->query($sql_teachers);
                     <p>Monday</p>
                     <div class="inTime time">
                       <span>In time</span>
-                      <input type="time" name="Monday_in_time" />
+                      <input type="time" name="monday_in_time" />
                     </div>
                     <div class="outTime time">
                       <span>Out time</span>
-                      <input type="time" name="Monday_out_time" />
+                      <input type="time" name="monday_out_time" />
                     </div>
                     <div class="repeat">
                       <input type="checkbox" name="repeat" />
@@ -417,8 +415,6 @@ $result_teachers = $conn->query($sql_teachers);
                     </tbody>
                   </table>
                 </div>
-
-
                 <div class="field btns">
                   <button class="prev-1 prev">Previous</button>
                   <button class="next-1 next">Next</button>
@@ -456,17 +452,34 @@ $result_teachers = $conn->query($sql_teachers);
                     <div class="dropdown-sem">
                       <input type="text" class="textbox-sy" placeholder="Select semester" readonly />
                       <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
-
                       <div class="option">
                         <div onclick="show('1st')">1st</div>
                         <div onclick="show('2nd')">2nd</div>
                       </div>
                     </div>
                   </div>
+                  <div class="finalize-adviser">
+
+                    <span class="title">Choose adviser</span>
+                    <select multiple multiselect-search="true">
+                      <?php
+                      $sql = "SELECT first_name, last_name FROM teachers";
+                      $result = $conn->query($sql);
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                          echo '<option value="' . $row["first_name"] . ' ' . $row["last_name"] . '">' . $row["first_name"] . ' ' . $row["last_name"] . '</option>';
+                        }
+                      } else {
+                        echo "0 results";
+                      }
+                      $conn->close();
+                      ?>
+                    </select>
+                  </div>
                 </div>
                 <div class="field btns">
                   <button class="prev-2 prev">Previous</button>
-                  <button class="submit">Submit</button>
+                  <button class="submit"><i class="fa-regular fa-floppy-disk"></i> Submit</button>
                 </div>
               </div>
 

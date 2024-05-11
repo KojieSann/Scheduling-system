@@ -291,15 +291,10 @@ function initMultiStepForm() {
   }
 }
 //for modal subject
-const bgModalSubject = document.querySelector(".bg-modal-subject");
 const form1 = document.querySelector(".form1");
 const form2 = document.querySelector(".form2");
-const form3 = document.querySelector(".form3");
 const form1NxtBtn = document.querySelector(".subj-btn-next");
 const form2BckBtn = document.querySelector(".subj-btn-back2");
-const submitBtnSubj = document.querySelector(".subj-btn-submit");
-const doneStatus = document.querySelector(".done"),
-  inProgress = document.querySelector(".in-progress");
 form1NxtBtn.addEventListener("click", function () {
   form1.style.display = "none";
   form2.style.display = "block";
@@ -307,11 +302,6 @@ form1NxtBtn.addEventListener("click", function () {
 form2BckBtn.addEventListener("click", function () {
   form2.style.display = "none";
   form1.style.display = "block";
-});
-submitBtnSubj.addEventListener("click", function () {
-  doneStatus.style.display = "block";
-  bgModalSubject.style.display = "none";
-  inProgress.style.display = "none";
 });
 // dropdown for subject
 var style = document.createElement("style");
@@ -354,7 +344,6 @@ function MultiselectDropdown(options) {
     var div = newEl("div", {
       class: "multiselect-dropdown",
       style: {
-        width: config.style?.width ?? el.clientWidth + "px",
         padding: config.style?.padding ?? "",
       },
     });
@@ -627,7 +616,20 @@ $(document).ready(function() {
   });
   filterSubjects();
 });
- 
+//  dropdown for semester
+function show(anything) {
+  document.querySelector(".textbox-sy").value = anything;
+}
+const textBoxStrand = document.querySelector(".textbox-sy")
+let dropdownStrand = document.querySelector(".dropdown-sem");
+dropdownStrand.onclick = function () {
+  dropdownStrand.classList.toggle("activeShow");
+};
+document.addEventListener("click", (e) => {
+  if (!textBoxStrand.contains(e.target) && e.target !== dropdownStrand) {
+    dropdownStrand.classList.remove("activeShow");
+  }
+});
 // search function for the table
 document.addEventListener('DOMContentLoaded', function() {
   const searchInput = document.getElementById('search-box');
@@ -679,8 +681,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const myDiv = document.getElementById('formContainer');
 
 form.addEventListener('submit', (event) => {
-  event.preventDefault(); // Prevents the default form submission behavior
-  const formData = new FormData(form); // Create a FormData object with the form data
+  event.preventDefault();
+  const formData = new FormData(form); 
 
   fetch("addSchedule.php", {
     method: 'POST',
@@ -688,7 +690,7 @@ form.addEventListener('submit', (event) => {
   })
   .then(response => {
     if (response.ok) {
-      myDiv.innerHTML = '<p>Form submitted successfully!</p>';
+      document.querySelector(".bg-modal-subject").style.display = "none";
     } else {
       myDiv.innerHTML = '<p>There was an error submitting the form</p>';
     }
@@ -697,4 +699,3 @@ form.addEventListener('submit', (event) => {
     myDiv.innerHTML = '<p>There was an error submitting the form:'+error+'</p>';
   });
 });
-

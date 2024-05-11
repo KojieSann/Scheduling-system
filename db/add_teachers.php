@@ -28,4 +28,3 @@ $stmt->execute();
 $stmt->close();
 
 header('Location: teachers.php');
-?>
