@@ -322,7 +322,7 @@ $result_schedule = $conn->query($sql_schedule);
             </div>
           </div>
           <div class="form-outer">
-            <form action="#">
+          <form id="scheduleForm" method="POST" action="addAnotherSchedule.php">
               <div class="page slide-page">
                 <div class="titleSection-header">
                   <div class="title">Select section</div>
@@ -426,21 +426,20 @@ $result_schedule = $conn->query($sql_schedule);
                   <button class="next-1 next">Next</button>
                 </div>
               </div>
-              <form id="scheduleForm" method="POST" action="addAnotherSchedule.php">
                 <div class="page details">
                   <div class="title">Finalize the schedule</div>
                   <div class="input-container">
                     <div class="input-wrapper">
                       <span>Section</span>
-                      <input readonly type="text" class="input" />
+                      <input readonly type="text" class="input" name = "inputSection" />
                     </div>
                     <div class="input-wrapper">
                       <span>Strand</span>
-                      <input readonly type="text" class="input" />
+                      <input readonly type="text" class="input" name = "inputStrand" />
                     </div>
                     <div class="input-wrapper">
                       <span>Grade level</span>
-                      <input readonly type="text" class="input" />
+                      <input readonly type="text" class="input" name = "inputGradeLevel" />
                     </div>
                   </div>
                   <hr />
@@ -464,7 +463,7 @@ $result_schedule = $conn->query($sql_schedule);
                     </div>
                     <div class="finalize-adviser">
                       <span class="title">Choose adviser</span>
-                      <select multiple multiselect-search="true" name="advisers[]">
+                      <select multiple multiselect-search="true" name="adviser[]">
                         <?php
                         $sql = "SELECT first_name, last_name FROM teachers";
                         $result = $conn->query($sql);
@@ -485,7 +484,6 @@ $result_schedule = $conn->query($sql_schedule);
                     <button type="submit" class="submit"><i class="fa-regular fa-floppy-disk"></i> Submit</button>
                   </div>
                 </div>
-              </form>
             </form>
           </div>
         </div>

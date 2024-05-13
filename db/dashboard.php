@@ -9,11 +9,9 @@ if (!isset($_SESSION['username'])) {
 $username = $_SESSION['username'];
 include('connect.php');
 
-$sql_count = "SELECT COUNT(*) AS total FROM sections";
-$result_count = $conn->query($sql_count);
-$row_count = $result_count->fetch_assoc();
-$total_sections = $row_count['total'];
 
+$sql_schedule2 = "SELECT * FROM schedule_again";
+$result_schedule2 = $conn->query($sql_schedule2);
 ?>
 
 <!DOCTYPE html>
@@ -105,7 +103,13 @@ $total_sections = $row_count['total'];
                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
               </div>
               <div class="info">
-                <span>0</span>
+                <span><?php
+                  $sql_count = "SELECT COUNT(*) AS total FROM schedules";
+                  $result_count = $conn->query($sql_count);
+                  $row_count = $result_count->fetch_assoc();
+                  $total_sections = $row_count['total'];
+                  echo $total_sections;
+                  ?></span></span>
               </div>
               <div class="info-img">
                 <img src="./img/undraw_schedule_re_2vro.svg" alt="">
@@ -185,162 +189,29 @@ $total_sections = $row_count['total'];
             </div>
             <div class="table-container">
               <table class="table">
-                <thead>
+              <thead>
                   <tr>
                     <th>Section</th>
                     <th>Strand</th>
-                    <th>Schedule</th>
+                    <th># of Subjects</th>
                     <th>Sem</th>
                     <th>SY</th>
-                    <th>Time</th>
                     <th>Adviser</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa warren</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
-                  <tr>
-                    <td>Sampaguita</td>
-                    <td>HUMSS</td>
-                    <td>Mon,Tue,Fri</td>
-                    <td>2nd</td>
-                    <td>2024-2025</td>
-                    <td>AM</td>
-                    <td>Papa Andrei</td>
-                  </tr>
+                  <?php
+              while ($row = $result_schedule2->fetch_assoc()) {
+                echo '<tr>';
+                echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
+                echo '<td>  0 </td>';
+                echo '<td>' . htmlspecialchars($row['sem']) . '</td>';
+                echo '<td>' . htmlspecialchars($row['school_year']) . '</td>';
+                echo '<td>' . htmlspecialchars($row['adviser']) . '</td>';
+                echo '</tr>';
+              }
+                ?>
                 </tbody>
               </table>
             </div>

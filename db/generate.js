@@ -646,6 +646,17 @@ $(document).ready(function() {
   });
   filterSubjects();
 });
+
+$('.next-1').click(function() {
+  var section = $('#inputSection').val();
+  var strand = $('#inputStrand').val();
+  var gradeLevel = $('#inputGradeLevel').val();
+
+  $('.details').find('input[name="inputSection"]').val(section);
+  $('.details').find('input[name="inputStrand"]').val(strand);
+  $('.details').find('input[name="inputGradeLevel"]').val(gradeLevel);
+});
+
 //  dropdown for semester
 function show(anything) {
   document.querySelector(".textbox-sy").value = anything;

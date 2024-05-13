@@ -2,32 +2,26 @@
 include('connect.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $section = $_POST['section'] ?? '';
-    $strand = $_POST['strand'] ?? '';
-    $schoolYear = $_POST['sy'] . '-' . $_POST['sy2'] ?? '';
-    $semester = $_POST['sem'] ?? '';
-    $advisers = $_POST['advisers'] ?? [];
 
-    $advisersJson = json_encode($advisers);
-    if ($advisersJson === false) {
-        echo "Error encoding advisers data";
-        exit();
+    $sem = $_POST['sem'];
+    $school_year1 = $_POST['sy'];
+    $school_year2 = $_POST['sy2'];
+    $advisers = isset($_POST['adviser']) ? $_POST['adviser'] : array();
+
+    $inputSection = isset($_POST['inputSection']) ? $_POST['inputSection'] : '';
+    $inputStrand = isset($_POST['inputStrand']) ? $_POST['inputStrand'] : '';
+
+    $combined_school_year = $school_year1 . '-' . $school_year2;
+
+    $stmt = $conn->prepare("INSERT INTO schedule_again (section, strand ,sem, school_year, adviser) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $inputSection, $inputStrand, $sem, $combined_school_year, $adviser);
+
+    foreach ($advisers as $adviser) {
+        $stmt->execute();
     }
+    header("Location: generate.php");
+    $stmt->close();
 
-    $stmt = $pdo->prepare("INSERT INTO schedule_again (section, strand, school_year, sem, advisers) VALUES (:section, :strand, :schoolYear, :semester, :advisers)");
-    $stmt->bindParam(':section', $section);
-    $stmt->bindParam(':strand', $strand);
-    $stmt->bindParam(':schoolYear', $schoolYear);
-    $stmt->bindParam(':semester', $semester);
-    $stmt->bindParam(':advisers', $advisersJson);
-
-    // Execute the SQL statement
-    if ($stmt->execute()) {
-        echo "Form data inserted successfully!";
-    } else {
-        echo "Error inserting form data";
-    }
-} else {
-    echo "Invalid request";
+    exit();
 }
 ?>
