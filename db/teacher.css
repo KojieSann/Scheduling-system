@@ -139,12 +139,12 @@ ul .list-items:hover i::after {
   text-shadow: 0 5px 20px rgba(216, 243, 220, 0.1);
 }
 .main-content .inputs {
-  margin-top: 60px;
+  margin-top: 10px;
   border-radius: 30px;
   width: 100%;
   display: flex;
   position: relative;
-  height: 40%;
+  height: 30%;
 }
 .main-content .inputs .input {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
@@ -168,6 +168,7 @@ ul .list-items:hover i::after {
   margin: 20px;
   display: flex;
   flex-direction: column;
+
 }
 .main-content .inputs span {
   margin-left: 5px;
@@ -309,17 +310,18 @@ ul .list-items:hover i::after {
 }
 .strand-list .input-info {
   position: absolute;
-  top: -23px;
+  top: 3px;
   font-size: 20px;
 }
 /* subject dropdown */
 .subject-list {
   margin-top: 30px;
+
 }
 .subject-list .input-info {
   font-size: 20px;
   position: absolute;
-  top: 60px;
+  top: 88px;
 }
 .subject-list option {
   padding: 5px;
@@ -339,6 +341,7 @@ ul .list-items:hover i::after {
   font-size: 13px;
   border-radius: 10px;
   border: 0.5px solid #dddddd;
+
 }
 .multiselect-dropdown span.optext,
 .multiselect-dropdown span.placeholder {
@@ -445,6 +448,7 @@ ul .list-items:hover i::after {
   color: #2d6a4f;
   border: none;
   background: #fff;
+  z-index: 0;
 }
 .button-submit {
   position: absolute;
@@ -469,10 +473,8 @@ button.btn-submit:hover {
 }
 /* table */
 .teacher-table{
-  position: absolute;
-  bottom: 10px;
-  margin-left: 100px;
-  width: calc(100% - 100px);
+  margin-top: 20px;
+  width: 100%;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #dddddd;
@@ -699,5 +701,9 @@ button.btn-submit:hover {
   background: #74c69d;
   border-radius: 3px;
 }
-
+.update{
+  position: absolute;
+  left: 310px;
+  top: 40px;
+}
 

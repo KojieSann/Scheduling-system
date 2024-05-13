@@ -66,25 +66,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
       <ul>
         <li class="list-items">
-          <a href="./generate.php" class="generate"><i class="fa-solid fa-circle-plus"></i><span class="nav-lists">Generate Schedule</span></a>
+          <a href="./generate.php"><i class="fa-solid fa-circle-plus"></i><span class="nav-lists">Generate Schedule</span></a>
         </li>
         <li class="list-items">
-          <a href="./dashboard.php" target="_self"><i class="fa-solid fa-tv"></i><span class="nav-lists">Dashboard</span></a>
+          <a href="./dashboard.php"><i class="fa-solid fa-tv"></i><span class="nav-lists">Dashboard</span></a>
         </li>
         <li class="list-items">
-          <a href="./teachers.php" class="active" target="_top"><i class="fa-solid fa-chalkboard-user"></i><span class="nav-lists">Teachers</span></a>
+          <a href="./teachers.php" class="active"><i class="fa-solid fa-chalkboard-user"></i><span class="nav-lists">Teachers</span></a>
         </li>
         <li class="list-items">
           <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span class="nav-lists">Sections</span></a>
         </li>
         <li class="list-items">
-          <a href="./subject.php" target="_parent"><i class="fa-solid fa-book"></i><span class="nav-lists">Subjects</span></a>
+          <a href="./subject.php"><i class="fa-solid fa-book"></i><span class="nav-lists">Subjects</span></a>
         </li>
         <li>
-          <a href="./login.php" class="logout"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-lists">Logout</span></a>
+          <a class="logout"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-lists">Logout</span></a>
         </li>
       </ul>
     </nav>
+    <div class="bg-content-logout">
+      <div class="content-logout">
+        <img src="./img/shs-logo.png" alt="shs logo" class="shs-logo" />
+        <div class="header-text">
+          <span>Confirm Logout</span>
+          <p style="font-size: 13px">Are you sure you want to logout?</p>
+        </div>
+        <div class="header-img">
+          <img src="./img/undraw_login_re_4vu2.svg" alt="" />
+        </div>
+        <div class="btn">
+          <button class="noBtn">Cancel</button>
+          <a href="logout.php"><button class="yesBtn">Logout</button></a>
+        </div>
+      </div>
+    </div>
     <section class="main-content">
       <div class="main-logo">
         <h1>Edit <span>Instructor</span></h1>
@@ -110,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <span>Last name<span style="color: red; font-size: 1.3em">*</span></span>
               <input required type="text" class="last-name input" autocomplete="off" name="last_name" value="<?php echo $row['last_name']; ?>" />
             </div>
-            <div class="button-submit"><button type="submit" class="btn-submit">Update</button></div>
+            <div class="button-submit update"><button type="submit" class="btn-submit">Update</button></div>
           </div>
           <div class="day-time">
             <div class="dropdown-time">
@@ -192,56 +208,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
           </div>
       </div>
-  </div>
-  </form>
-  </div>
+      <div class="teacher-table">
+        <div class="table-header">
+          <span>List of instructors</span>
+          <div class="table-search">
+            <form class="search-container">
+              <input id="search-box" type="text" class="search-box" name="" />
+              <label for="search-box"><i class="fa-solid fa-magnifying-glass search-icon"></i></label>
+              <input type="submit" id="search-submit" />
+            </form>
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Strand</th>
+                <th>Subjects</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody st>
+              <?php
 
-  <div class="teacher-table">
-    <div class="table-header">
-      <span>List of instructors</span>
-      <div class="table-search">
-        <form class="search-container">
-          <input id="search-box" type="text" class="search-box" name="" />
-          <label for="search-box"><i class="fa-solid fa-magnifying-glass search-icon"></i></label>
-          <input type="submit" id="search-submit" />
-        </form>
-      </div>
-    </div>
-    <div class="table-container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Last Name</th>
-            <th>Day</th>
-            <th>Time</th>
-            <th>Strand</th>
-            <th>Subjects</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody st>
-          <?php
-
-          while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row['last_name'] . "</td>";
-            echo "<td>" . $row['day'] . "</td>";
-            echo "<td>" . $row['time'] . "</td>";
-            echo "<td>" . $row['strand'] . "</td>";
-            echo "<td>" . $row['subject'] . "</td>";
-            echo "<td> <a href='edit_page_teachers.php?id=" . $row['id'] . "'><button class='edit'><i class='fa-solid fa-pen'></i></button></a> 
+              while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row['last_name'] . "</td>";
+                echo "<td>" . $row['first_name'] . "</td>";
+                echo "<td>" . $row['day'] . "</td>";
+                echo "<td>" . $row['time'] . "</td>";
+                echo "<td>" . $row['strand'] . "</td>";
+                echo "<td>" . $row['subject'] . "</td>";
+                echo "<td> <a href='edit_page_teachers.php?id=" . $row['id'] . "'><button class='edit'><i class='fa-solid fa-pen'></i></button></a> 
                     <a href='delete_teachers.php?id=" . $row['id'] . "'> <button class='delete' type='submit' name='delete'><i class='fa-solid fa-trash-can'></i></button></a> 
                     </td>";
-            echo "</tr>";
-          }
-          ?>
-        </tbody>
-      </table>
-    </div>
+                echo "</tr>";
+              }
+              ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   </div>
-  </section>
-  </div>
-  <script src="editTeacher.js"></script>
+  <script src="./teacher.js"></script>
 </body>
 
 </html>
