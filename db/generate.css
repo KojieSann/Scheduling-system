@@ -322,7 +322,16 @@ ul .list-items:hover i::after {
 .schedules-table  .table tbody tr:nth-of-type(even) {
   background-color: #eee;
 }
-
+.schedules-table  .table .sort{
+  cursor: pointer;
+}
+.schedules-table  .table .sort i{
+  margin-left: 2px;
+  font-size: 12px;
+}
+.schedules-table  .table .sort:hover{
+  opacity: 0.5;
+}
 /* search function for table */
 .search-box {
   transition: width 0.6s, border-radius 0.6s, background 0.6s, box-shadow 0.6s;

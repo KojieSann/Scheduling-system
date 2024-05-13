@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
   header("Location: login_page.php");
   exit;
 }
-include ('connect.php');
+include('connect.php');
 $sql_sections = "SELECT * FROM sections";
 $result_sections = $conn->query($sql_sections);
 
@@ -17,6 +17,8 @@ $result_teachers = $conn->query($sql_teachers);
 
 $sql_schedule = "SELECT * FROM schedules";
 $result_schedule = $conn->query($sql_schedule);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,9 +29,7 @@ $result_schedule = $conn->query($sql_schedule);
   <title>Olivarez College Tagaytay</title>
   <link rel="stylesheet" href="generate.css" />
   <link rel="icon" type="x-icon" href="./img/olivarez-college-tagaytay-logo.png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -42,15 +42,13 @@ $result_schedule = $conn->query($sql_schedule);
       </div>
       <ul>
         <li class="list-items">
-          <a href="./generate.php" class="active"><i class="fa-solid fa-circle-plus"></i><span
-              class="nav-lists">Generate Schedule</span></a>
+          <a href="./generate.php" class="active"><i class="fa-solid fa-circle-plus"></i><span class="nav-lists">Generate Schedule</span></a>
         </li>
         <li class="list-items">
           <a href="./dashboard.php"><i class="fa-solid fa-tv"></i><span class="nav-lists">Dashboard</span></a>
         </li>
         <li class="list-items">
-          <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i><span
-              class="nav-lists">Teachers</span></a>
+          <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i><span class="nav-lists">Teachers</span></a>
         </li>
         <li class="list-items">
           <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span class="nav-lists">Sections</span></a>
@@ -129,38 +127,32 @@ $result_schedule = $conn->query($sql_schedule);
                   <div class="input-wrap">
                     <span class="input-header">Choose preferred date</span>
                     <div class="round">
-                      <input type="checkbox" id="monday" name="days[]" value="Monday"
-                        onchange="toggleButton('monday')" />
+                      <input type="checkbox" id="monday" name="days[]" value="Monday" onchange="toggleButton('monday')" />
                       <label for="monday">Monday</label>
                     </div>
                     <div class="round">
-                      <input type="checkbox" id="tuesday" name="days[]" value="Tuesday"
-                        onchange="toggleButton('tuesday')" />
+                      <input type="checkbox" id="tuesday" name="days[]" value="Tuesday" onchange="toggleButton('tuesday')" />
                       <label for="tuesday">Tuesday</label>
                     </div>
                     <div class="round">
-                      <input type="checkbox" id="wednesday" name="days[]" value="Wednesday"
-                        onchange="toggleButton('wednesday')" />
+                      <input type="checkbox" id="wednesday" name="days[]" value="Wednesday" onchange="toggleButton('wednesday')" />
                       <label for="wednesday">Wednesday</label>
                     </div>
                     <div class="round">
-                      <input type="checkbox" id="thursday" name="days[]" value="Thursday"
-                        onchange="toggleButton('thursday')" />
+                      <input type="checkbox" id="thursday" name="days[]" value="Thursday" onchange="toggleButton('thursday')" />
                       <label for="thursday">Thursday</label>
                     </div>
                     <div class="round">
-                      <input type="checkbox" id="friday" name="days[]" value="Friday"
-                        onchange="toggleButton('friday')" />
+                      <input type="checkbox" id="friday" name="days[]" value="Friday" onchange="toggleButton('friday')" />
                       <label for="friday">Friday</label>
                     </div>
                   </div>
                   <div class="dropdown-instructor">
                     <span class="input-header-instructor">Select the instructor
                     </span>
-                    <select class="subject-select" name="instructorSelect" multiselect-search="true"
-                      onchange="updatePreferredDays(this)">
+                    <select class="subject-select" name="instructorSelect" multiselect-search="true" onchange="updatePreferredDays(this)">
                       <option value="" hidden>Select Instructor</option>
-                      <?php while ($row = mysqli_fetch_assoc($result_teachers)): ?>
+                      <?php while ($row = mysqli_fetch_assoc($result_teachers)) : ?>
                         <option value="<?php echo $row['id']; ?>">
                           <?php echo $row['first_name'] . ' , ' . $row['last_name']; ?>
                         </option>
@@ -436,19 +428,19 @@ $result_schedule = $conn->query($sql_schedule);
               </div>
               <form id="scheduleForm" method="POST" action="addAnotherSchedule.php">
                 <div class="page details">
-                  <div class="title">Finalize the schedule</div>  
+                  <div class="title">Finalize the schedule</div>
                   <div class="input-container">
                     <div class="input-wrapper">
                       <span>Section</span>
-                      <input readonly type="text" class="input"  />
+                      <input readonly type="text" class="input" />
                     </div>
                     <div class="input-wrapper">
                       <span>Strand</span>
-                      <input readonly type="text" class="input"   />
+                      <input readonly type="text" class="input" />
                     </div>
                     <div class="input-wrapper">
                       <span>Grade level</span>
-                      <input readonly type="text" class="input"  />
+                      <input readonly type="text" class="input" />
                     </div>
                   </div>
                   <hr />
@@ -456,8 +448,7 @@ $result_schedule = $conn->query($sql_schedule);
                     <div class="sy-container">
                       <span class="title">School year</span>
                       <div class="sy">
-                        <input type="text" maxlength="4" name="sy" /><span>-</span><input type="text" maxlength="4"
-                          name="sy2" />
+                        <input type="text" maxlength="4" name="sy" /><span>-</span><input type="text" maxlength="4" name="sy2" />
                       </div>
                     </div>
                     <div class="sem-container">
@@ -513,14 +504,17 @@ $result_schedule = $conn->query($sql_schedule);
       <div class="schedules-table">
         <div class="table-header">
           <span>Schedules</span>
-          <div class="table-nav" style="display: none">
+          <div class="table-nav">
             <button onclick="tableToPrint()">
-              <i class="fa-regular fa-file-pdf"></i> Print
+              <i class="fa-solid fa-print"></i> Print
             </button>
             <button onclick="tableToExcel()">
               <i class="fa-regular fa-file-excel"></i> Excel
             </button>
-            <button><i class="fa-solid fa-trash-can"></i> Delete</button>
+            <button onclick="tableToPDF()">
+              <i class="fa-regular fa-file-pdf"></i> PDF
+            </button>
+            <button onclick="deleteSelectedRows()"><i class=" fa-solid fa-trash-can"></i> Delete</button>
           </div>
           <div class="table-search">
             <form class="search-container">
@@ -531,13 +525,21 @@ $result_schedule = $conn->query($sql_schedule);
           </div>
         </div>
         <div class="table-container">
-          <table class="table">
+          <table id="scheduleTable" class="table">
             <thead>
               <tr>
                 <th class="checkboxTbl"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()" /></th>
-                <th>Section</th>
+                <th>
+                  <div class="sort" onclick="groupSections()">
+                    Section <i class="fa-solid fa-chevron-down"></i>
+                  </div>
+                </th>
                 <th>Strand</th>
-                <th>Day</th>
+                <th>
+                  <div class="sort" onclick="sortTable()">
+                    Day <i class="fa-solid fa-chevron-down"></i>
+                  </div>
+                </th>
                 <th>Subject</th>
                 <th>Time in</th>
                 <th>Time out</th>
@@ -550,7 +552,7 @@ $result_schedule = $conn->query($sql_schedule);
               <?php
               while ($row = $result_schedule->fetch_assoc()) {
                 echo '<tr>';
-                echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>'; // Assuming "id" is the primary key of your table
+                echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
                 echo '<td>' . htmlspecialchars($row['section']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['day']) . '</td>';
@@ -575,7 +577,8 @@ $result_schedule = $conn->query($sql_schedule);
     </div>
   </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+  </script>
   <script src="./libraries/html2pdf.bundle.min.js"></script>
   <script src="./libraries/table2excel.js"></script>
   <script src="./generate.js"></script>

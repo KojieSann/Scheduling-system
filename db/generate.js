@@ -20,64 +20,115 @@ function tableToExcel() {
   var table2excel = new table2excel();
   table2excel.export(document.querySelectorAll(".table"));
 }
-
-
 // table to pdf
-function tableToPrint() {
-  // var table2pdf = document.querySelector(".table");
-  // var opt = {
-  //   margin: 1,
-  //   filename: "octScheduleMaker.pdf",
-  //   image: { type: "jpeg", quality: 0.98 },
-  //   html2canvas: { scale: 2 },
-  //   jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-  // };
-  // html2pdf(table2pdf, opt);
-  var checkedRows = document.querySelectorAll('.select:checked');
-  if (checkedRows.length === 0) {
+function tableToPDF() {
+  var table2pdf = document.querySelector(".table");
+  var checkboxColumns = table2pdf.querySelectorAll(".checkboxTbl");
+  checkboxColumns.forEach(function(column) {
+    column.parentNode.removeChild(column);
+  });
+  var opt = {
+    margin: 1,
+    filename: "octScheduleMaker.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+  };
+  html2pdf(table2pdf, opt);
+  checkboxColumns.forEach(function(column) {
+    column.parentNode.insertBefore(column, table2pdf.querySelector("thead th:nth-child(1)"));
+  });
+}
+  function tableToPrint() {
+    var checkedRows = document.querySelectorAll('.checkboxTbl input:checked');
+    if (checkedRows.length === 0) {
       alert("Please select at least one row to print.");
       return;
-  }
-  checkedRows.forEach(function(row) {
+    }
+    checkedRows.forEach(function(row) {
       var tdElements = row.closest('tr').querySelectorAll('td');
       tdElements.forEach(function(td) {
-          td.classList.add('hide-on-print');
+        td.classList.add('hide-on-print');
       });
-  });
-  var printContent = '<table border="1">';
-  printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Day</th><th>Subject</th><th>Time in</th><th>Time out</th><th>Duration</th><th>Instructor</th></tr></thead>';
-  printContent += '<tbody>';
-  checkedRows.forEach(function(row) {
+    });
+    var printContent = '<table border="1">';
+    printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Day</th><th>Subject</th><th>Time in</th><th>Time out</th><th>Duration</th><th>Instructor</th></tr></thead>';
+    printContent += '<tbody>';
+    checkedRows.forEach(function(row) {
       var rowData = row.closest('tr').querySelectorAll('td:not(.checkboxTbl)');
       printContent += '<tr>';
       rowData.forEach(function(cell) {
-          printContent += '<td>' + cell.textContent + '</td>';
+        printContent += '<td>' + cell.textContent + '</td>';
       });
       printContent += '</tr>';
-  });
-  printContent += '</tbody></table>';
-  var newWindow = window.open('', '_blank');
-  newWindow.document.open();
-  newWindow.document.write('<html><head><title>Checked Rows</title><style>.hide-on-print { display: none; }</style></head><body>' + printContent + '</body></html>');
-  newWindow.document.close();
-  newWindow.print();
-  checkedRows.forEach(function(row) {
+    });
+    printContent += '</tbody></table>';
+    var newWindow = window.open('', '_blank');
+    newWindow.document.open();
+    newWindow.document.write('<html><head><title>Checked Rows</title><style>.hide-on-print { display: none; }</style></head><body>' + printContent + '</body></html>');
+    newWindow.document.close();
+    newWindow.print();
+    checkedRows.forEach(function(row) {
       var tdElements = row.closest('tr').querySelectorAll('td');
       tdElements.forEach(function(td) {
-          td.classList.remove('hide-on-print');
+        td.classList.remove('hide-on-print');
       });
+    });
+  }
+  
+// delete rows
+function deleteSelectedRows() {
+  // Check if any checkboxes are checked
+  var selectedRows = document.querySelectorAll('input[name="selected[]"]:checked');
+
+  if (selectedRows.length === 0) {
+      // Display an error message
+      alert("Please select at least one row to delete.");
+      return; // Stop further execution
+  }
+
+  // Ask for confirmation
+  var confirmed = window.confirm("Are you sure you want to delete the selected rows?");
+
+  // If confirmed, proceed with form submission
+  if (confirmed) {
+      var form = document.createElement("form");
+      form.method = "POST";
+      form.action = "deleteSchedule.php"; // URL of your PHP script
+
+      selectedRows.forEach(function(row) {
+          var input = document.createElement("input");
+          input.type = "hidden";
+          input.name = "selected[]";
+          input.value = row.value;
+          form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+  }
+}
+
+
+// select all for table
+function toggleSelectAll() {
+  var checkboxes = document.querySelectorAll('.checkboxTbl input[type="checkbox"]');
+  var selectAllCheckbox = document.getElementById('selectAll');
+  checkboxes.forEach(function(checkbox) {
+    checkbox.checked = selectAllCheckbox.checked;
   });
 }
 
 // // modal for viewing
-const view = document.querySelector(".view-open-modal");
-const closeView = document.querySelector(".close-view");
-view.addEventListener("click", function () {
-  document.querySelector(".bg-content-view").style.display = "flex";
-});
-closeView.addEventListener("click", function () {
-  document.querySelector(".bg-content-view").style.display = "none";
-});
+// const view = document.querySelector(".view-open-modal");
+// const closeView = document.querySelector(".close-view");
+// view.addEventListener("click", function () {
+//   document.querySelector(".bg-content-view").style.display = "flex";
+// });
+// closeView.addEventListener("click", function () {
+//   document.querySelector(".bg-content-view").style.display = "none";
+// });
+
 // popout for the logout
 const logoutButton = document.querySelector(".logout");
 const closePopup = document.querySelector(".noBtn");
@@ -87,25 +138,6 @@ logoutButton.addEventListener("click", function () {
 closePopup.addEventListener("click", function () {
   document.querySelector(".bg-content-logout").style.display = "none";
 });
-// select all for table
-function toggleTableNav() {
-  var checkboxes = document.querySelectorAll('.select:checked');
-  var tableNav = document.querySelector('.table-nav');
-  if (checkboxes.length >= 2) {
-    tableNav.style.display = 'block';
-  } else {
-    tableNav.style.display = 'none';
-  }
-}
-
-function toggleSelectAll() {
-  var checkboxes = document.querySelectorAll('.select');
-  var selectAllCheckbox = document.getElementById('selectAll');
-  checkboxes.forEach(function(checkbox) {
-    checkbox.checked = selectAllCheckbox.checked;
-  });
-  toggleTableNav();
-}
 // day selection for subject
 const monday = document.querySelector(".monday");
 const tuesday = document.querySelector(".tuesday");
@@ -306,9 +338,7 @@ form2BckBtn.addEventListener("click", function () {
 // dropdown for subject
 var style = document.createElement("style");
 style.setAttribute("id", "multiselect_dropdown_styles");
-
 document.head.appendChild(style);
-
 function MultiselectDropdown(options) {
   var config = {
     search: true,
@@ -698,7 +728,11 @@ form.addEventListener('submit', (event) => {
   })
   .then(response => {
     if (response.ok) {
-      myDiv.innerHTML = '<p>Form submitted successfully!</p>';
+      window.alert("Schedule added successfully");
+      document.querySelector('.bg-modal-subject').style.display = 'none';
+      document.getElementById('contact_form').reset();
+      form2.style.display = "none";
+      form1.style.display = "block";
     } else {
       myDiv.innerHTML = '<p>There was an error submitting the form</p>';
     }
@@ -707,3 +741,76 @@ form.addEventListener('submit', (event) => {
     myDiv.innerHTML = '<p>There was an error submitting the form:'+error+'</p>';
   });
 });
+
+// for sorting the day
+function sortTable() {
+  var table = document.getElementById("scheduleTable");
+  var rows = Array.from(table.getElementsByTagName("tr"));
+  var groupedRows = {
+      Monday: [],
+      Tuesday: [],
+      Wednesday: [],
+      Thursday: [],
+      Friday: []
+  };
+  for (var i = 1; i < rows.length; i++) {
+      var dayCell = rows[i].getElementsByTagName("td")[3];
+      var day = dayCell.textContent.trim();
+      groupedRows[day].push(rows[i]);
+  }
+  while (table.rows.length > 1) {
+      table.deleteRow(1);
+  }
+
+  for (var day in groupedRows) {
+      if (groupedRows.hasOwnProperty(day)) {
+          var rowsForDay = groupedRows[day];
+          for (var j = 0; j < rowsForDay.length; j++) {
+              table.appendChild(rowsForDay[j]);
+          }
+      }
+  }
+
+  var sortedRows = Array.from(table.getElementsByTagName("tr"));
+  sortedRows.forEach(function(row, index) {
+      if (index % 2 === 0) {
+          row.style.backgroundColor = "#eee";
+      } else {
+          row.style.backgroundColor = ""; 
+      }
+  });
+}
+// for grouping sections
+function groupSections() {
+  var table = document.getElementById("scheduleTable");
+  var rows = table.getElementsByTagName("tr");
+  var groupedRows = {};
+  for (var i = 1; i < rows.length; i++) {
+      var sectionCell = rows[i].getElementsByTagName("td")[1]; 
+      var section = sectionCell.textContent.trim();
+      if (!groupedRows[section]) {
+          groupedRows[section] = [];
+      }
+      groupedRows[section].push(rows[i]);
+  }
+  while (table.rows.length > 1) {
+      table.deleteRow(1);
+  }
+  for (var section in groupedRows) {
+      if (groupedRows.hasOwnProperty(section)) {
+          var rowsForSection = groupedRows[section];
+          for (var j = 0; j < rowsForSection.length; j++) {
+              table.appendChild(rowsForSection[j]);
+          }
+      }
+  }
+  var sortedRows = Array.from(table.getElementsByTagName("tr"));
+  sortedRows.forEach(function(row, index) {
+      if (index % 2 === 0) {
+          row.style.backgroundColor = "#eee";
+      } else {
+          row.style.backgroundColor = ""; 
+      }
+  });
+}
+
