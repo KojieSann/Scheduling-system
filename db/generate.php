@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
   header("Location: login_page.php");
   exit;
 }
-include('connect.php');
+include ('connect.php');
 $sql_sections = "SELECT * FROM sections";
 $result_sections = $conn->query($sql_sections);
 
@@ -14,6 +14,9 @@ $result_subjects = $conn->query($sql_subjects);
 
 $sql_teachers = "SELECT * FROM teachers";
 $result_teachers = $conn->query($sql_teachers);
+
+$sql_schedule = "SELECT * FROM schedules";
+$result_schedule = $conn->query($sql_schedule);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +27,9 @@ $result_teachers = $conn->query($sql_teachers);
   <title>Olivarez College Tagaytay</title>
   <link rel="stylesheet" href="generate.css" />
   <link rel="icon" type="x-icon" href="./img/olivarez-college-tagaytay-logo.png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -37,13 +42,15 @@ $result_teachers = $conn->query($sql_teachers);
       </div>
       <ul>
         <li class="list-items">
-          <a href="./generate.php" class="active"><i class="fa-solid fa-circle-plus"></i><span class="nav-lists">Generate Schedule</span></a>
+          <a href="./generate.php" class="active"><i class="fa-solid fa-circle-plus"></i><span
+              class="nav-lists">Generate Schedule</span></a>
         </li>
         <li class="list-items">
           <a href="./dashboard.php"><i class="fa-solid fa-tv"></i><span class="nav-lists">Dashboard</span></a>
         </li>
         <li class="list-items">
-          <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i><span class="nav-lists">Teachers</span></a>
+          <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i><span
+              class="nav-lists">Teachers</span></a>
         </li>
         <li class="list-items">
           <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span class="nav-lists">Sections</span></a>
@@ -122,34 +129,41 @@ $result_teachers = $conn->query($sql_teachers);
                   <div class="input-wrap">
                     <span class="input-header">Choose preferred date</span>
                     <div class="round">
-                      <input type="checkbox" id="monday" name="days[]" value="Monday" onchange="toggleButton('monday')" />
+                      <input type="checkbox" id="monday" name="days[]" value="Monday"
+                        onchange="toggleButton('monday')" />
                       <label for="monday">Monday</label>
                     </div>
                     <div class="round">
-                      <input type="checkbox" id="tuesday" name="days[]" value="Tuesday" onchange="toggleButton('tuesday')" />
+                      <input type="checkbox" id="tuesday" name="days[]" value="Tuesday"
+                        onchange="toggleButton('tuesday')" />
                       <label for="tuesday">Tuesday</label>
                     </div>
                     <div class="round">
-                      <input type="checkbox" id="wednesday" name="days[]" value="Wednesday" onchange="toggleButton('wednesday')" />
+                      <input type="checkbox" id="wednesday" name="days[]" value="Wednesday"
+                        onchange="toggleButton('wednesday')" />
                       <label for="wednesday">Wednesday</label>
                     </div>
                     <div class="round">
-                      <input type="checkbox" id="thursday" name="days[]" value="Thursday" onchange="toggleButton('thursday')" />
+                      <input type="checkbox" id="thursday" name="days[]" value="Thursday"
+                        onchange="toggleButton('thursday')" />
                       <label for="thursday">Thursday</label>
                     </div>
                     <div class="round">
-                      <input type="checkbox" id="friday" name="days[]" value="Friday" onchange="toggleButton('friday')" />
+                      <input type="checkbox" id="friday" name="days[]" value="Friday"
+                        onchange="toggleButton('friday')" />
                       <label for="friday">Friday</label>
                     </div>
                   </div>
                   <div class="dropdown-instructor">
                     <span class="input-header-instructor">Select the instructor
                     </span>
-                    <select class="subject-select" name="select" multiselect-search="true" onchange="updatePreferredDays(this)">
+                    <select class="subject-select" name="instructorSelect" multiselect-search="true"
+                      onchange="updatePreferredDays(this)">
                       <option value="" hidden>Select Instructor</option>
-                      <?php while ($row = mysqli_fetch_assoc($result_teachers)) : ?>
+                      <?php while ($row = mysqli_fetch_assoc($result_teachers)): ?>
                         <option value="<?php echo $row['id']; ?>">
-                          <?php echo $row['first_name'] . ' , ' . $row['last_name']; ?></option>
+                          <?php echo $row['first_name'] . ' , ' . $row['last_name']; ?>
+                        </option>
                       <?php endwhile; ?>
                     </select>
                     <div class="radio-time">
@@ -192,11 +206,11 @@ $result_teachers = $conn->query($sql_teachers);
                     <p>Monday</p>
                     <div class="inTime time">
                       <span>In time</span>
-                      <input type="time" name="monday_in_time" />
+                      <input type="time" name="timeIn[]" />
                     </div>
                     <div class="outTime time">
                       <span>Out time</span>
-                      <input type="time" name="monday_out_time" />
+                      <input type="time" name="timeOut[]" />
                     </div>
                     <div class="repeat">
                       <input type="checkbox" name="repeat" />
@@ -209,11 +223,11 @@ $result_teachers = $conn->query($sql_teachers);
                     <p>Tuesday</p>
                     <div class="inTime time">
                       <span>In time</span>
-                      <input type="time" name="tuesday_in_time" />
+                      <input type="time" name="timeIn[]" />
                     </div>
                     <div class="outTime time">
                       <span>Out time</span>
-                      <input type="time" name="tuesday_in_time" />
+                      <input type="time" name="timeOut[]" />
                     </div>
                     <div class="repeat">
                       <input type="checkbox" name="repeat" />
@@ -226,9 +240,9 @@ $result_teachers = $conn->query($sql_teachers);
                     <p>Wednesday</p>
                     <div class="inTime time">
                       <span>In time</span>
-                      <input type="time" />
+                      <input type="time" name="timeIn[]" />
                     </div>
-                    <div class="outTime time">
+                    <div class="outTime time" name="timeOut[]">
                       <span>Out time</span>
                       <input type="time" />
                     </div>
@@ -243,11 +257,11 @@ $result_teachers = $conn->query($sql_teachers);
                     <p>Thursday</p>
                     <div class="inTime time">
                       <span>In time</span>
-                      <input type="time" />
+                      <input type="time" name="timeIn[]" />
                     </div>
                     <div class="outTime time">
                       <span>Out time</span>
-                      <input type="time" />
+                      <input type="time" name="timeOut[]" />
                     </div>
                     <div class="repeat">
                       <input type="checkbox" name="repeat" />
@@ -260,11 +274,11 @@ $result_teachers = $conn->query($sql_teachers);
                     <p>Friday</p>
                     <div class="inTime time">
                       <span>In time</span>
-                      <input type="time" />
+                      <input type="time" name="timeIn[]" />
                     </div>
                     <div class="outTime time">
                       <span>Out time</span>
-                      <input type="time" />
+                      <input type="time" name="timeOut[]" />
                     </div>
                     <div class="repeat">
                       <input type="checkbox" name="repeat" />
@@ -420,69 +434,67 @@ $result_teachers = $conn->query($sql_teachers);
                   <button class="next-1 next">Next</button>
                 </div>
               </div>
-              <div class="page details">
-                <div class="title">Finalize the schedule</div>
-                <div class="input-container">
-                  <div class="input-wrapper">
-                    <span>Section</span>
-                    <input readonly type="text" class="input" placeholder="Sampaguita
-                        " />
-                  </div>
-                  <div class="input-wrapper">
-                    <span>Strand</span>
-                    <input readonly type="text" class="input" placeholder="HUMSS
-                        " />
-                  </div>
-                  <div class="input-wrapper">
-                    <span>Grade level</span>
-                    <input readonly type="text" class="input" placeholder="Grade 11
-                        " />
-                  </div>
-                </div>
-                <hr />
-                <div class="additional-inputs">
-                  <div class="sy-container">
-                    <span class="title">School year</span>
-                    <div class="sy">
-                      <input type="text" maxlength="4" name="sy" /><span>-</span><input type="text" maxlength="4" name="sy2" />
+              <form id="scheduleForm" method="POST" action="addAnotherSchedule.php">
+                <div class="page details">
+                  <div class="title">Finalize the schedule</div>  
+                  <div class="input-container">
+                    <div class="input-wrapper">
+                      <span>Section</span>
+                      <input readonly type="text" class="input"  />
+                    </div>
+                    <div class="input-wrapper">
+                      <span>Strand</span>
+                      <input readonly type="text" class="input"   />
+                    </div>
+                    <div class="input-wrapper">
+                      <span>Grade level</span>
+                      <input readonly type="text" class="input"  />
                     </div>
                   </div>
-                  <div class="sem-container">
-                    <span class="title">Semester</span>
-                    <div class="dropdown-sem">
-                      <input type="text" class="textbox-sy" placeholder="Select semester" readonly />
-                      <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
-                      <div class="option">
-                        <div onclick="show('1st')">1st</div>
-                        <div onclick="show('2nd')">2nd</div>
+                  <hr />
+                  <div class="additional-inputs">
+                    <div class="sy-container">
+                      <span class="title">School year</span>
+                      <div class="sy">
+                        <input type="text" maxlength="4" name="sy" /><span>-</span><input type="text" maxlength="4"
+                          name="sy2" />
                       </div>
                     </div>
-                  </div>
-                  <div class="finalize-adviser">
-
-                    <span class="title">Choose adviser</span>
-                    <select multiple multiselect-search="true">
-                      <?php
-                      $sql = "SELECT first_name, last_name FROM teachers";
-                      $result = $conn->query($sql);
-                      if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                          echo '<option value="' . $row["first_name"] . ' ' . $row["last_name"] . '">' . $row["first_name"] . ' ' . $row["last_name"] . '</option>';
+                    <div class="sem-container">
+                      <span class="title">Semester</span>
+                      <div class="dropdown-sem">
+                        <input type="text" class="textbox-sy" name="sem" placeholder="Select semester" readonly />
+                        <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
+                        <div class="option">
+                          <div onclick="show('1st')">1st</div>
+                          <div onclick="show('2nd')">2nd</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="finalize-adviser">
+                      <span class="title">Choose adviser</span>
+                      <select multiple multiselect-search="true" name="advisers[]">
+                        <?php
+                        $sql = "SELECT first_name, last_name FROM teachers";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) {
+                          while ($row = $result->fetch_assoc()) {
+                            echo '<option value="' . $row["first_name"] . ' ' . $row["last_name"] . '">' . $row["first_name"] . ' ' . $row["last_name"] . '</option>';
+                          }
+                        } else {
+                          echo "0 results";
                         }
-                      } else {
-                        echo "0 results";
-                      }
-                      $conn->close();
-                      ?>
-                    </select>
+                        $conn->close();
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="field btns">
+                    <button type="button" class="prev-2 prev">Previous</button>
+                    <button type="submit" class="submit"><i class="fa-regular fa-floppy-disk"></i> Submit</button>
                   </div>
                 </div>
-                <div class="field btns">
-                  <button class="prev-2 prev">Previous</button>
-                  <button class="submit"><i class="fa-regular fa-floppy-disk"></i> Submit</button>
-                </div>
-              </div>
-
+              </form>
             </form>
           </div>
         </div>
@@ -535,61 +547,27 @@ $result_teachers = $conn->query($sql_teachers);
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
-                <td>Sampaguita</td>
-                <td>HUMSS</td>
-                <td>Monday</td>
-                <td>Science</td>
-                <td>09:00 am</td>
-                <td>10:00 am</td>
-                <td>1 hour</td>
-                <td>Papa janrenze</td>
-                <td class="checkboxTbl">
+              <?php
+              while ($row = $result_schedule->fetch_assoc()) {
+                echo '<tr>';
+                echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>'; // Assuming "id" is the primary key of your table
+                echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
+                echo '<td>' . htmlspecialchars($row['day']) . '</td>';
+                echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
+                echo '<td>' . htmlspecialchars($row['timeIn']) . '</td>';
+                echo '<td>' . htmlspecialchars($row['timeOut']) . '</td>';
+                echo '<td> none </td>';
+                echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
+                echo '<td class="checkboxTbl">
                   <div class="view-open-modal">
-                    <i class="fa-regular fa-pen-to-square"></i>
-                    <span>Edit</span>
+                  <i class="fa-regular fa-pen-to-square"></i>
+                  <span>Edit</span>
                   </div>
-                </td>
-
-              </tr>
-              <tr>
-                <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
-                <td>Sampaguita</td>
-                <td>HUMSS</td>
-                <td>Tuesday</td>
-                <td>Science</td>
-                <td>10:00 am</td>
-                <td>11:00 am</td>
-                <td>1 hour</td>
-                <td>Papa Andrei</td>
-                <td class="checkboxTbl">
-                  <div class="view-open-modal">
-                    <i class="fa-regular fa-pen-to-square"></i>
-                    <span>Edit</span>
-                  </div>
-                </td>
-
-              </tr>
-              <tr>
-                <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
-                <td>Sampaguita</td>
-                <td>HUMSS</td>
-                <td>Wednesday</td>
-                <td>Science</td>
-                <td>11:00 am</td>
-                <td>12:00 am</td>
-                <td>1 hour</td>
-                <td>Papa Aldrin</td>
-                <td class="checkboxTbl">
-                  <div class="view-open-modal">
-                    <i class="fa-regular fa-pen-to-square"></i>
-                    <span>Edit</span>
-                  </div>
-                </td>
-
-              </tr>
-
+                  </td>';
+                echo '</tr>';
+              }
+              ?>
             </tbody>
           </table>
         </div>

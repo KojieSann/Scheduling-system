@@ -512,6 +512,8 @@ window.addEventListener("load", () => {
 
 document.addEventListener('DOMContentLoaded', function() {
   var nextButtons = document.querySelectorAll('.next');
+  var nextButton = document.querySelector('.next-1');
+  var prevButton = document.querySelector('.prev-1');
 
   nextButtons.forEach(function(button) {
       button.addEventListener('click', function(event) {
@@ -682,15 +684,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
-  const formData = new FormData(form); 
-
+  const inputSectionValue = document.getElementById('inputSection').value;
+  const inputStrandValue = document.getElementById('inputStrand').value;
+  
+  const formData = new FormData(form);
+  
+  formData.append('inputSection', inputSectionValue);
+  formData.append('inputStrand', inputStrandValue);
+  
   fetch("addSchedule.php", {
     method: 'POST',
     body: formData
   })
   .then(response => {
     if (response.ok) {
-      document.querySelector(".bg-modal-subject").style.display = "none";
+      myDiv.innerHTML = '<p>Form submitted successfully!</p>';
     } else {
       myDiv.innerHTML = '<p>There was an error submitting the form</p>';
     }

@@ -1,18 +1,11 @@
 <?php
 session_start();
 
-
-$db_host = 'localhost';
-$db_username = 'root';
-$db_password = '';
-$db_name = 'scheduling_system_db';
-$conn = mysqli_connect($db_host, $db_username, $db_password, $db_name);
-
+include('connect.php');
 
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-
 
 function sanitize_input($input)
 {
@@ -21,7 +14,6 @@ function sanitize_input($input)
     $input = htmlspecialchars($input);
     return $input;
 }
-
 
 function validate_user($username, $password, $conn)
 {
@@ -32,20 +24,28 @@ function validate_user($username, $password, $conn)
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) == 1) {
-        return true;
+        $row = mysqli_fetch_assoc($result);
+        return $row['role'];
     } else {
         return false;
     }
 }
 
-
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if (validate_user($username, $password, $conn)) {
+    $role = validate_user($username, $password, $conn);
+    if ($role === 'admin') {
         $_SESSION['username'] = $username;
-        header("Location: dashboard.php");
+        $_SESSION['role'] = 'admin';
+        header("Location:dashboard.php");
+        exit;
+    } elseif ($role === 'user') {
+        $_SESSION['username'] = $username;
+        $_SESSION['role'] = 'user';
+        header("Location: userDashboard.php");
+        exit;
     } else {
         $_SESSION['error_msg'] = "Invalid username or password!";
         header("Location: login_page.php");
@@ -53,12 +53,10 @@ if (isset($_POST['login'])) {
     }
 }
 
-
 if (isset($_SESSION['error_msg'])) {
     $error_msg = $_SESSION['error_msg'];
     unset($_SESSION['error_msg']);
 }
-
 
 if (isset($_GET['logout'])) {
     session_destroy();
