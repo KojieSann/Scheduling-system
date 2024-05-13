@@ -78,23 +78,21 @@ function tableToPDF() {
   
 // delete rows
 function deleteSelectedRows() {
-  // Check if any checkboxes are checked
   var selectedRows = document.querySelectorAll('input[name="selected[]"]:checked');
-
   if (selectedRows.length === 0) {
-      // Display an error message
+
       alert("Please select at least one row to delete.");
-      return; // Stop further execution
+      return; 
   }
 
-  // Ask for confirmation
+
   var confirmed = window.confirm("Are you sure you want to delete the selected rows?");
 
-  // If confirmed, proceed with form submission
+
   if (confirmed) {
       var form = document.createElement("form");
       form.method = "POST";
-      form.action = "deleteSchedule.php"; // URL of your PHP script
+      form.action = "deleteSchedule.php"; 
 
       selectedRows.forEach(function(row) {
           var input = document.createElement("input");
