@@ -14,7 +14,7 @@ $sql_schedule2 = "SELECT * FROM schedule_again";
 $result_schedule2 = $conn->query($sql_schedule2);
 
 
-$query = "SELECT sa.id, sa.section, sa.strand, COUNT(s.subject) AS subject_count, sa.sem, sa.school_year, sa.adviser
+$query = "SELECT sa.id, sa.section, sa.strand, COUNT(DISTINCT s.subject) AS subject_count, sa.sem, sa.school_year, sa.adviser
   FROM schedule_again sa
   LEFT JOIN schedules s ON s.section = sa.section
   GROUP BY sa.id, sa.section, sa.strand, sa.sem, sa.school_year, sa.adviser;
