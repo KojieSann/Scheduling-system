@@ -664,6 +664,12 @@ form .page .btns button.next {
   position: sticky;
   top: 0;
 }
+
+/* .subject-table td{
+  background-color: #fff0f3;
+  color: #000;
+} */
+
 .section-table td {
   text-align: center;
   font-family: "montserrat";

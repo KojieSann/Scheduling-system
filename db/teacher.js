@@ -197,7 +197,7 @@ function MultiselectDropdown(options) {
           .forEach((t) => div.removeChild(t));
         var sels = Array.from(el.selectedOptions);
         if (
-          sels.length > (el.attributes["multiselect-max-items"]?.value ?? 5)
+          sels.length > (el.attributes["multiselect-max-items"]?.value ?? 2)
         ) {
           div.appendChild(
             newEl("span", {

@@ -288,7 +288,6 @@ $result_schedule = $conn->query($sql_schedule);
                 </div>
 
               </div>
-
             </div>
           </div>
         </form>
@@ -322,7 +321,7 @@ $result_schedule = $conn->query($sql_schedule);
             </div>
           </div>
           <div class="form-outer">
-          <form id="scheduleForm" method="POST" action="addAnotherSchedule.php">
+            <form id="scheduleForm" method="POST" action="addAnotherSchedule.php">
               <div class="page slide-page">
                 <div class="titleSection-header">
                   <div class="title">Select section</div>
@@ -378,35 +377,25 @@ $result_schedule = $conn->query($sql_schedule);
                   </div>
                 </div>
                 <div class="table-container-modal">
-                  <table class="section-table">
+                  <table class="section-table subject-table">
                     <thead>
                       <tr>
                         <th>Subjects</th>
                         <th>Code</th>
                         <th>Strand</th>
                         <th>Grade lvl</th>
-                        <th>Status</th>
+
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
                       while ($row = $result_subjects->fetch_assoc()) {
-                        echo "<tr>";
+                        echo "<tr id=\"row-" . $row['subject_code'] . "\">";
                         echo "<td>" . $row['subject_name'] . "</td>";
                         echo "<td>" . $row['subject_code'] . "</td>";
                         echo "<td>" . $row['strand'] . "</td>";
                         echo "<td>" . $row['grade_level'] . "</td>";
-                        echo "<td class=\"status\">";
-                        echo "<div class=\"subject-progress\">";
-
-                        $statusClass = ($row['status'] == 'done') ? 'done' : 'in-progress';
-                        $statusIcon = ($row['status'] == 'done') ? 'fa-circle-check' : 'fa-clock';
-                        $statusText = ($row['status'] == 'done') ? 'Done' : 'In Progress';
-
-                        echo "<div class=\"$statusClass subject-status\">";
-                        echo "<i class=\"fa-regular $statusIcon\"></i> $statusText";
-                        echo "</div>";
 
                         echo "</div>";
                         echo "</td>";
@@ -419,6 +408,7 @@ $result_schedule = $conn->query($sql_schedule);
                       }
                       ?>
                     </tbody>
+
                   </table>
                 </div>
                 <div class="field btns">
@@ -426,64 +416,64 @@ $result_schedule = $conn->query($sql_schedule);
                   <button class="next-1 next">Next</button>
                 </div>
               </div>
-                <div class="page details">
-                  <div class="title">Finalize the schedule</div>
-                  <div class="input-container">
-                    <div class="input-wrapper">
-                      <span>Section</span>
-                      <input readonly type="text" class="input" name = "inputSection" />
-                    </div>
-                    <div class="input-wrapper">
-                      <span>Strand</span>
-                      <input readonly type="text" class="input" name = "inputStrand" />
-                    </div>
-                    <div class="input-wrapper">
-                      <span>Grade level</span>
-                      <input readonly type="text" class="input" name = "inputGradeLevel" />
-                    </div>
+              <div class="page details">
+                <div class="title">Finalize the schedule</div>
+                <div class="input-container">
+                  <div class="input-wrapper">
+                    <span>Section</span>
+                    <input readonly type="text" class="input" name="inputSection" />
                   </div>
-                  <hr />
-                  <div class="additional-inputs">
-                    <div class="sy-container">
-                      <span class="title">School year</span>
-                      <div class="sy">
-                        <input type="text" maxlength="4" name="sy" /><span>-</span><input type="text" maxlength="4" name="sy2" />
-                      </div>
-                    </div>
-                    <div class="sem-container">
-                      <span class="title">Semester</span>
-                      <div class="dropdown-sem">
-                        <input type="text" class="textbox-sy" name="sem" placeholder="Select semester" readonly />
-                        <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
-                        <div class="option">
-                          <div onclick="show('1st')">1st</div>
-                          <div onclick="show('2nd')">2nd</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="finalize-adviser">
-                      <span class="title">Choose adviser</span>
-                      <select multiple multiselect-search="true" name="adviser[]">
-                        <?php
-                        $sql = "SELECT first_name, last_name FROM teachers";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                          while ($row = $result->fetch_assoc()) {
-                            echo '<option value="' . $row["first_name"] . ' ' . $row["last_name"] . '">' . $row["first_name"] . ' ' . $row["last_name"] . '</option>';
-                          }
-                        } else {
-                          echo "0 results";
-                        }
-                        $conn->close();
-                        ?>
-                      </select>
-                    </div>
+                  <div class="input-wrapper">
+                    <span>Strand</span>
+                    <input readonly type="text" class="input" name="inputStrand" />
                   </div>
-                  <div class="field btns">
-                    <button type="button" class="prev-2 prev">Previous</button>
-                    <button type="submit" class="submit"><i class="fa-regular fa-floppy-disk"></i> Submit</button>
+                  <div class="input-wrapper">
+                    <span>Grade level</span>
+                    <input readonly type="text" class="input" name="inputGradeLevel" />
                   </div>
                 </div>
+                <hr />
+                <div class="additional-inputs">
+                  <div class="sy-container">
+                    <span class="title">School year</span>
+                    <div class="sy">
+                      <input type="text" maxlength="4" name="sy" /><span>-</span><input type="text" maxlength="4" name="sy2" />
+                    </div>
+                  </div>
+                  <div class="sem-container">
+                    <span class="title">Semester</span>
+                    <div class="dropdown-sem">
+                      <input type="text" class="textbox-sy" name="sem" placeholder="Select semester" readonly />
+                      <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
+                      <div class="option">
+                        <div onclick="show('1st')">1st</div>
+                        <div onclick="show('2nd')">2nd</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="finalize-adviser">
+                    <span class="title">Choose adviser</span>
+                    <select multiple multiselect-search="true" name="adviser[]">
+                      <?php
+                      $sql = "SELECT first_name, last_name FROM teachers";
+                      $result = $conn->query($sql);
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                          echo '<option value="' . $row["first_name"] . ' ' . $row["last_name"] . '">' . $row["first_name"] . ' ' . $row["last_name"] . '</option>';
+                        }
+                      } else {
+                        echo "0 results";
+                      }
+                      $conn->close();
+                      ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="field btns">
+                  <button type="button" class="prev-2 prev">Previous</button>
+                  <button type="submit" class="submit"><i class="fa-regular fa-floppy-disk"></i> Submit</button>
+                </div>
+              </div>
             </form>
           </div>
         </div>

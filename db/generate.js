@@ -84,11 +84,7 @@ function deleteSelectedRows() {
       alert("Please select at least one row to delete.");
       return; 
   }
-
-
   var confirmed = window.confirm("Are you sure you want to delete the selected rows?");
-
-
   if (confirmed) {
       var form = document.createElement("form");
       form.method = "POST";
@@ -106,6 +102,28 @@ function deleteSelectedRows() {
       form.submit();
   }
 }
+// for in status in subject modal
+  const modalOpenButtons = document.querySelectorAll('.open-modal');
+  modalOpenButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const subjectCode = this.getAttribute('data-subject-code');
+      const rows = document.querySelectorAll('.selected-row');
+      
+      rows.forEach(row => {
+        row.classList.remove('selected-row');
+      });
+
+      const row = document.getElementById('row-' + subjectCode);
+      row.classList.add('selected-row');
+    });
+  });
+  const formSubmitButton = document.querySelector('.subj-btn-submit');
+  formSubmitButton.addEventListener('click', function() {
+    const selectedRow = document.querySelector('.selected-row');
+    selectedRow.style.backgroundColor = '#d8f3dc';
+  });
+
+
 
 
 // select all for table
@@ -207,6 +225,8 @@ friday.addEventListener("click", ()=>{
   thursdaySlct.style.display = "none";
   fridaySlct.style.display = "block";
 });
+
+
 function toggleButton(day) {
   var checkbox = document.getElementById(day);
   var button = document.querySelector("." + day);
@@ -220,6 +240,7 @@ function toggleButton(day) {
     
   }
 }
+
 //  for the repeated checkbox in subject scheduling
 const repeatCheckboxes = document.querySelectorAll('input[type="checkbox"][name="repeat"]');
 repeatCheckboxes.forEach(function(checkbox) {
@@ -822,4 +843,7 @@ function groupSections() {
       }
   });
 }
+
+
+
 
