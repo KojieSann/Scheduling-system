@@ -496,7 +496,7 @@ $result_schedule = $conn->query($sql_schedule);
             <button onclick="tableToPrint()">
               <i class="fa-solid fa-print"></i> Print
             </button>
-            <button onclick="tableToExcel()">
+            <button id="tableToExcel">
               <i class="fa-regular fa-file-excel"></i> Excel
             </button>
             <button onclick="tableToPDF()">

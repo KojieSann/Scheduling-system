@@ -16,10 +16,10 @@ closeModalSubject.addEventListener("click", function () {
   document.querySelector(".bg-modal-subject").style.display = "none";
 });
 // table to excel
-function tableToExcel() {
-  var table2excel = new table2excel();
-  table2excel.export(document.querySelectorAll(".table"));
-}
+document.getElementById('tableToExcel').addEventListener('click', function(){
+  var table2excel = new Table2Excel();
+  table2excel.export(document.querySelectorAll("#scheduleTable"));
+})
 // table to pdf
 function tableToPDF() {
   var table2pdf = document.querySelector(".table");
@@ -102,7 +102,7 @@ function deleteSelectedRows() {
       form.submit();
   }
 }
-// for in status in subject modal
+// for status in subject modal
   const modalOpenButtons = document.querySelectorAll('.open-modal');
   modalOpenButtons.forEach(button => {
     button.addEventListener('click', function() {
@@ -112,7 +112,6 @@ function deleteSelectedRows() {
       rows.forEach(row => {
         row.classList.remove('selected-row');
       });
-
       const row = document.getElementById('row-' + subjectCode);
       row.classList.add('selected-row');
     });
@@ -123,9 +122,6 @@ function deleteSelectedRows() {
     selectedRow.style.backgroundColor = '#d8f3dc';
   });
 
-
-
-
 // select all for table
 function toggleSelectAll() {
   var checkboxes = document.querySelectorAll('.checkboxTbl input[type="checkbox"]');
@@ -134,6 +130,12 @@ function toggleSelectAll() {
     checkbox.checked = selectAllCheckbox.checked;
   });
 }
+document.querySelectorAll('.table tbody tr').forEach(function(row) {
+  row.addEventListener('click', function() {
+      var checkbox = this.querySelector('.checkboxTbl input[type="checkbox"]');
+      checkbox.checked = !checkbox.checked;
+  });
+});
 
 // // modal for viewing
 // const view = document.querySelector(".view-open-modal");

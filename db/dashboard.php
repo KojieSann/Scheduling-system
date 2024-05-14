@@ -104,12 +104,12 @@ $result_schedule2 = $conn->query($sql_schedule2);
               </div>
               <div class="info">
                 <span><?php
-                  $sql_count = "SELECT COUNT(*) AS total FROM schedules";
-                  $result_count = $conn->query($sql_count);
-                  $row_count = $result_count->fetch_assoc();
-                  $total_sections = $row_count['total'];
-                  echo $total_sections;
-                  ?></span></span>
+                      $sql_count = "SELECT COUNT(*) AS total FROM schedules";
+                      $result_count = $conn->query($sql_count);
+                      $row_count = $result_count->fetch_assoc();
+                      $total_sections = $row_count['total'];
+                      echo $total_sections;
+                      ?></span></span>
               </div>
               <div class="info-img">
                 <img src="./img/undraw_schedule_re_2vro.svg" alt="">
@@ -179,6 +179,18 @@ $result_schedule2 = $conn->query($sql_schedule2);
           <div class="schedule-table">
             <div class="table-header">
               <span>Schedules</span>
+              <div class="table-nav">
+                <button onclick="tableToPrint()">
+                  <i class="fa-solid fa-print"></i> Print
+                </button>
+                <button id="tableToExcel">
+                  <i class="fa-regular fa-file-excel"></i> Excel
+                </button>
+                <button onclick="tableToPDF()">
+                  <i class="fa-regular fa-file-pdf"></i> PDF
+                </button>
+                <button onclick="deleteSelectedRows()"><i class=" fa-solid fa-trash-can"></i> Delete</button>
+              </div>
               <div class="table-search">
                 <form class="search-container">
                   <input id="search-box" type="text" class="search-box" name="" />
@@ -189,8 +201,9 @@ $result_schedule2 = $conn->query($sql_schedule2);
             </div>
             <div class="table-container">
               <table class="table">
-              <thead>
+                <thead>
                   <tr>
+                    <th class="checkboxTbl"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()" /></th>
                     <th>Section</th>
                     <th>Strand</th>
                     <th># of Subjects</th>
@@ -201,21 +214,23 @@ $result_schedule2 = $conn->query($sql_schedule2);
                 </thead>
                 <tbody>
                   <?php
-              while ($row = $result_schedule2->fetch_assoc()) {
-                echo '<tr>';
-                echo '<td>' . htmlspecialchars($row['section']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
-                echo '<td>  0 </td>';
-                echo '<td>' . htmlspecialchars($row['sem']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['school_year']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['adviser']) . '</td>';
-                echo '</tr>';
-              }
-                ?>
+                  while ($row = $result_schedule2->fetch_assoc()) {
+                    echo '<tr>';
+                    echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
+                    echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
+                    echo '<td>  0 </td>';
+                    echo '<td>' . htmlspecialchars($row['sem']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['school_year']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['adviser']) . '</td>';
+                    echo '</tr>';
+                  }
+                  ?>
                 </tbody>
               </table>
             </div>
           </div>
+
         </div>
         <div class="section-teacher">
           <div class="section-container">
@@ -235,6 +250,8 @@ $result_schedule2 = $conn->query($sql_schedule2);
       </div>
     </section>
   </div>
+  <script src="./libraries/table2excel.js"></script>
+  <script src="./libraries/html2pdf.bundle.min.js"></script>
   <script src="./dashboard.js"></script>
 </body>
 

@@ -489,3 +489,19 @@ ul .list-items:hover i::after {
   border: 1px solid #52b788;
   background: #fff;
 }
+.table-nav button {
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: #fff;
+  border: 1px solid #52b788;
+  font-family: "poppins";
+  font-size: 12px;
+  font-weight: 500;
+  color: #4b4b4b;
+  transition: 0.3s;
+}
+.table-nav button:hover {
+  opacity: 0.6;
+}

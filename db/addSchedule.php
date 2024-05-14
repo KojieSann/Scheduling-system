@@ -1,7 +1,8 @@
 <?php
 include('connect.php');
 
-function checkScheduleConflict($newSchedule, $existingSchedules) {
+function checkScheduleConflict($newSchedule, $existingSchedules)
+{
     foreach ($existingSchedules as $schedule) {
         $existingStart = strtotime($schedule['timeIn']);
         $existingEnd = strtotime($schedule['timeOut']);
@@ -29,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $inputSection = $_POST['inputSection'];
         $inputStrand = $_POST['inputStrand'];
         $selectedInstructor = $_POST["instructorSelect"];
-
         $query = "SELECT first_name, last_name FROM teachers WHERE id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $selectedInstructor);
@@ -39,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows === 1) {
             $row = $result->fetch_assoc();
             $instructorName = $row['first_name'] . ' ' . $row['last_name'];
-
             $stmt = $conn->prepare("SELECT timeIn, timeOut FROM schedules WHERE instructor = ?");
             $stmt->bind_param("s", $instructorName);
             $stmt->execute();
@@ -47,10 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $stmt = $conn->prepare("INSERT INTO schedules (section, strand, subject, instructor, day, timeIn, timeOut) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
+
             $numDays = count($_POST["days"]);
 
             for ($i = 0; $i < $numDays; $i++) {
                 $selectedDay = $_POST["days"][$i];
+
                 $timeIn = date("H:i", strtotime($_POST["timeIn"][$i]));
                 $timeOut = date("H:i", strtotime($_POST["timeOut"][$i]));
 
@@ -63,6 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "<script>alert('Schedule conflict detected for $selectedDay in section $inputSection.');</script>";
                     exit();
                 }
+
                 $stmt->bind_param("sssssss", $inputSection, $inputStrand, $subjectName, $instructorName, $selectedDay, $timeIn, $timeOut);
 
                 if (!$stmt->execute()) {
@@ -70,7 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     exit();
                 }
             }
-
             echo "Schedule added successfully.";
             header("Location: generate.php");
             exit();
@@ -79,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     } else {
+
         echo "Please provide all required information.";
     }
 }
-?>
