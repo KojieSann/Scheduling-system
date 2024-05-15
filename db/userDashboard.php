@@ -30,8 +30,22 @@ if (isset($_GET['search'])) {
   $sql = "SELECT * FROM teachers";
   $result = $conn->query($sql);
 }
+$sql_schedule2 = "SELECT * FROM schedule_again";
+$result_schedule2 = $conn->query($sql_schedule2);
+$sql_sections = "SELECT * FROM sections";
+$result_sections = $conn->query($sql_sections);
+
+$sql_subjects = "SELECT * FROM subjects";
+$result_subjects = $conn->query($sql_subjects);
+
+$sql_teachers = "SELECT * FROM teachers";
+$result_teachers = $conn->query($sql_teachers);
+
+$sql_schedule = "SELECT * FROM schedules";
+$result_schedule = $conn->query($sql_schedule);
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +58,7 @@ if (isset($_GET['search'])) {
   <link rel="icon" type="x-icon" href="./img/olivarez-college-tagaytay-logo.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
   <div class="container">
     <div class="bg-content-logout">
@@ -117,7 +132,13 @@ if (isset($_GET['search'])) {
                   <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 </div>
                 <div class="info">
-                  <span>0</span>
+                  <span><?php
+                        $sql_count = "SELECT COUNT(*) AS total FROM schedules";
+                        $result_count = $conn->query($sql_count);
+                        $row_count = $result_count->fetch_assoc();
+                        $total_sections = $row_count['total'];
+                        echo $total_sections;
+                        ?></span></span>
                 </div>
                 <div class="info-img">
                   <img src="./img/undraw_schedule_re_2vro.svg" alt="">
@@ -187,6 +208,17 @@ if (isset($_GET['search'])) {
             <div class="schedule-table">
               <div class="table-header">
                 <span>Schedules</span>
+                <div class="table-nav">
+                  <button onclick="tableToPrint()">
+                    <i class="fa-solid fa-print"></i> Print
+                  </button>
+                  <button id="tableToExcel">
+                    <i class="fa-regular fa-file-excel"></i> Excel
+                  </button>
+                  <button onclick="tableToPDF()">
+                    <i class="fa-regular fa-file-pdf"></i> PDF
+                  </button>
+                </div>
                 <div class="table-search">
                   <form class="search-container">
                     <input id="search-box" type="text" class="search-box" name="" />
@@ -199,160 +231,29 @@ if (isset($_GET['search'])) {
                 <table class="table">
                   <thead>
                     <tr>
+                      <th class="checkboxTbl"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()" /></th>
                       <th>Section</th>
                       <th>Strand</th>
-                      <th>Schedule</th>
+                      <th># of Subjects</th>
                       <th>Sem</th>
                       <th>SY</th>
-                      <th>Time</th>
                       <th>Adviser</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
-                    <tr>
-                      <td>Sampaguita</td>
-                      <td>HUMSS</td>
-                      <td>Mon,Tue,Fri</td>
-                      <td>2nd</td>
-                      <td>2024-2025</td>
-                      <td>AM</td>
-                      <td>Papa Andrei</td>
-                    </tr>
+                    <?php
+                    while ($row = $result_schedule2->fetch_assoc()) {
+                      echo '<tr>';
+                      echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
+                      echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
+                      echo '<td>  0 </td>';
+                      echo '<td>' . htmlspecialchars($row['sem']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['school_year']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['adviser']) . '</td>';
+                      echo '</tr>';
+                    }
+                    ?>
                   </tbody>
                 </table>
               </div>
@@ -372,17 +273,20 @@ if (isset($_GET['search'])) {
         </div>
       </section>
       <section id="schedule">
-        <div class="main-table">
+        <div class="schedules-table main-table">
           <div class="table-header">
             <span>Schedules</span>
-            <div class="table-nav" style="display: none">
+            <div class="table-nav">
               <button onclick="tableToPrint()">
-                <i class="fa-regular fa-file-pdf"></i> Print
+                <i class="fa-solid fa-print"></i> Print
               </button>
-              <button onclick="tableToExcel()">
+              <button id="tableToExcel">
                 <i class="fa-regular fa-file-excel"></i> Excel
               </button>
-              <button><i class="fa-solid fa-trash-can"></i> Delete</button>
+              <button onclick="tableToPDF()">
+                <i class="fa-regular fa-file-pdf"></i> PDF
+              </button>
+              <button onclick="deleteSelectedRows()"><i class=" fa-solid fa-trash-can"></i> Delete</button>
             </div>
             <div class="searchSchedule">
               <form class="search-container">
@@ -392,70 +296,51 @@ if (isset($_GET['search'])) {
             </div>
           </div>
           <div class="table-container">
-            <table class="table">
+            <table id="scheduleTable" class="table">
               <thead>
                 <tr>
                   <th class="checkboxTbl"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()" /></th>
-                  <th>Section</th>
+                  <th>
+                    <div class="sort" onclick="groupSections()">
+                      Section <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                  </th>
                   <th>Strand</th>
-                  <th>Schedule</th>
-                  <th>Sem</th>
-                  <th>SY</th>
-                  <th>Time</th>
-                  <th>Adviser</th>
+                  <th>
+                    <div class="sort" onclick="sortTable()">
+                      Day <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                  </th>
+                  <th>Subject</th>
+                  <th>Time in</th>
+                  <th>Time out</th>
+                  <th>Duration</th>
+                  <th>Instructor</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
-                  <td>Sampaguita</td>
-                  <td>HUMSS</td>
-                  <td>Mon,Tues,Fri</td>
-                  <td>2nd</td>
-                  <td>2024-2025</td>
-                  <td>AM</td>
-                  <td>Papa Andrei</td>
-                  <td class="checkboxTbl">
-                    <div class="view-open-modal">
-                      <i class="fa-regular fa-eye"></i>
-                      <span>View</span>
-                    </div>
-                  </td>
-
-                </tr>
-                <tr>
-                  <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
-                  <td>Santol</td>
-                  <td>GAS</td>
-                  <td>Mon,Tues,Fri</td>
-                  <td>2nd</td>
-                  <td>2024-2025</td>
-                  <td>AM</td>
-                  <td>Papa Andrei</td>
-                  <td class="checkboxTbl">
-                    <div class="view-open-modal">
-                      <i class="fa-regular fa-eye"></i>
-                      <span>View</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="checkboxTbl"><input type="checkbox" class="select" onclick="toggleTableNav()" /></td>
-                  <td>Santol</td>
-                  <td>GAS</td>
-                  <td>Mon,Tues,Fri</td>
-                  <td>2nd</td>
-                  <td>2024-2025</td>
-                  <td>AM</td>
-                  <td>Papa Andrei</td>
-                  <td class="checkboxTbl">
-                    <div class="view-open-modal">
-                      <i class="fa-regular fa-eye"></i>
-                      <span>View</span>
-                    </div>
-                  </td>
-                </tr>
+                <?php
+                while ($row = $result_schedule->fetch_assoc()) {
+                  echo '<tr>';
+                  echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
+                  echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['day']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['timeIn']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['timeOut']) . '</td>';
+                  echo '<td> none </td>';
+                  echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
+                  echo '<td class="checkboxTbl">
+                  <div class="view-open-modal">
+                  <i class="fa-regular fa-pen-to-square"></i>
+                  <span>Edit</span>
+                  </div>
+                  </td>';
+                  echo '</tr>';
+                }
+                ?>
               </tbody>
             </table>
           </div>
@@ -584,7 +469,11 @@ if (isset($_GET['search'])) {
 
     </div>
   </div>
+  <script src="./libraries/table2excel.js"></script>
+  <script src="./libraries/html2pdf.bundle.min.js"></script>
+  <script src="./dashboard.js"></script>
   <script src="./userDashboard.js"></script>
+  <script src="./generate.js"></script>
 </body>
 
 </html>

@@ -107,3 +107,4 @@ function toggleSelectAll() {
   });
   toggleTableNav();
 }
+
