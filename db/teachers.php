@@ -203,24 +203,36 @@ if (isset($_GET['search'])) {
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody st>
+            <tbody>
               <?php
 
-              while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row['last_name'] . "</td>";
-                echo "<td>" . $row['first_name'] . "</td>";
-                echo "<td>" . $row['day'] . "</td>";
-                echo "<td>" . $row['time'] . "</td>";
-                echo "<td>" . $row['strand'] . "</td>";
-                echo "<td>" . $row['subject'] . "</td>";
-                echo "<td> <a href='edit_page_teachers.php?id=" . $row['id'] . "'><button class='edit'><i class='fa-solid fa-pen'></i></button></a> 
-                    <a href='delete_teachers.php?id=" . $row['id'] . "'> <button class='delete' type='submit' name='delete'><i class='fa-solid fa-trash-can'></i></button></a> 
+              $query = "SELECT * FROM teachers ORDER BY id DESC";
+              $result = $conn->query($query);
+
+              if ($result->num_rows > 0) {
+
+                while ($row = $result->fetch_assoc()) {
+                  echo "<tr>";
+                  echo "<td>" . $row['last_name'] . "</td>";
+                  echo "<td>" . $row['first_name'] . "</td>";
+                  echo "<td>" . $row['day'] . "</td>";
+                  echo "<td>" . $row['time'] . "</td>";
+                  echo "<td>" . $row['strand'] . "</td>";
+                  echo "<td>" . $row['subject'] . "</td>";
+                  echo "<td> 
+                    <a href='edit_page_teachers.php?id=" . $row['id'] . "'><button class='edit'><i class='fa-solid fa-pen'></i></button></a> 
+                    <a href='delete_teachers.php?id=" . $row['id'] . "'><button class='delete' type='submit' name='delete'><i class='fa-solid fa-trash-can'></i></button></a> 
                     </td>";
-                echo "</tr>";
+                  echo "</tr>";
+                }
+              } else {
+                echo "<tr><td colspan='7'>No teacher available</td></tr>";
               }
+
+              $conn->close();
               ?>
             </tbody>
+
           </table>
         </div>
       </div>

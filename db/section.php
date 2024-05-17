@@ -149,21 +149,31 @@ if (isset($_GET['search'])) {
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody st>
+            <tbody>
               <?php
+              $query = "SELECT * FROM sections ORDER BY id DESC";
+              $result = $conn->query($query);
+              if ($result->num_rows > 0) {
 
-              while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row['section_name'] . "</td>";
-                echo "<td>" . $row['grade_level'] . "</td>";
-                echo "<td>" . $row['strand'] . "</td>";
-                echo "<td><a href='edit_page_sections.php?id=" . $row['id'] . "'><button class='edit'><i class='fa-solid fa-pen'></i></button></a> 
-                  <a href='delete_sections.php?id=" . $row['id'] . "'> <button  class='delete' type='submit' name='delete'><i class='fa-solid fa-trash-can'></i></button></a> 
-                  </td>";
-                echo "</tr>";
+                while ($row = $result->fetch_assoc()) {
+                  echo "<tr>";
+                  echo "<td>" . $row['section_name'] . "</td>";
+                  echo "<td>" . $row['grade_level'] . "</td>";
+                  echo "<td>" . $row['strand'] . "</td>";
+                  echo "<td> 
+                    <a href='edit_page_sections.php?id=" . $row['id'] . "'><button class='edit'><i class='fa-solid fa-pen'></i></button></a> 
+                    <a href='delete_sections.php?id=" . $row['id'] . "'><button class='delete' type='submit' name='delete'><i class='fa-solid fa-trash-can'></i></button></a> 
+                    </td>";
+                  echo "</tr>";
+                }
+              } else {
+                echo "<tr><td colspan='4'>No section available</td></tr>";
               }
+
+              $conn->close();
               ?>
             </tbody>
+
           </table>
         </div>
       </div>

@@ -130,12 +130,7 @@ function toggleSelectAll() {
     checkbox.checked = selectAllCheckbox.checked;
   });
 }
-document.querySelectorAll('.table tbody tr').forEach(function(row) {
-  row.addEventListener('click', function() {
-      var checkbox = this.querySelector('.checkboxTbl input[type="checkbox"]');
-      checkbox.checked = !checkbox.checked;
-  });
-});
+
 
 // // modal for viewing
 // const view = document.querySelector(".view-open-modal");
@@ -682,9 +677,9 @@ $('.next-1').click(function() {
 
 //  dropdown for semester
 function show(anything) {
-  document.querySelector(".textbox-sy").value = anything;
+  document.querySelector(".textbox-sem").value = anything;
 }
-const textBoxStrand = document.querySelector(".textbox-sy")
+const textBoxStrand = document.querySelector(".textbox-sem")
 let dropdownStrand = document.querySelector(".dropdown-sem");
 dropdownStrand.onclick = function () {
   dropdownStrand.classList.toggle("activeShow");
@@ -692,6 +687,20 @@ dropdownStrand.onclick = function () {
 document.addEventListener("click", (e) => {
   if (!textBoxStrand.contains(e.target) && e.target !== dropdownStrand) {
     dropdownStrand.classList.remove("activeShow");
+  }
+});
+//  dropdown for sy
+function bulaga(anything) {
+  document.querySelector(".textbox-sy").value = anything;
+}
+const textBoxSy = document.querySelector(".textbox-sy")
+let dropdownSy = document.querySelector(".dropdown-sy");
+dropdownSy.onclick = function () {
+  dropdownSy.classList.toggle("activeShowSY");
+};
+document.addEventListener("click", (e) => {
+  if (!textBoxSy.contains(e.target) && e.target !== dropdownSy) {
+    dropdownSy.classList.remove("activeShowSY");
   }
 });
 // search function for the table
@@ -847,5 +856,37 @@ function groupSections() {
 }
 
 
+$(document).ready(function() {
+  // Function to make table cells editable on click
+  $('table#scheduleTable td').click(function() {
+    $(this).prop('contenteditable', true);
+  });
 
+  // Function to handle Enter key press to insert data into the database
+  $('table#scheduleTable td').keypress(function(e) {
+    if (e.which == 13) { // Enter key
+      e.preventDefault();
+      $(this).blur(); // Remove focus from the current cell
+      var rowData = $(this).closest('tr').find('td').map(function() {
+        return $(this).text();
+      }).get();
 
+      // Assuming you have an AJAX function to insert data into the database
+      // Here you should send the data (rowData) to your server-side script for database insertion
+      // Example AJAX call:
+      $.ajax({
+        url: 'editSchedule.php', // Your server-side script URL
+        type: 'POST',
+        data: { rowData: rowData }, // Sending rowData to the server
+        success: function(response) {
+          // Handle success response if needed
+          console.log(response);
+        },
+        error: function(xhr, status, error) {
+          // Handle error if needed
+          console.error(xhr.responseText);
+        }
+      });
+    }
+  });
+});

@@ -804,7 +804,7 @@ form .page .btns button.next {
   width: 250px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   border: 1px solid #dddddd;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .modal-content .form-outer .additional-inputs .finalize-adviser .title{
 top: -50px;
@@ -825,6 +825,71 @@ left: -5px;
 .modal-content .form-outer .additional-inputs .sy input {
   width: 70px;
 }
+
+/* dropdown for sy in finalizing */
+.modal-content .form-outer .additional-inputs .sy-container .option-sy {
+  position: absolute;
+  display: none;
+  top: 40px;
+  height: 150px;
+  width: 60%;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow-y: scroll;
+  color: #4b4b4b;
+  z-index: 100;
+  border: 0.5px solid #dddddd;
+
+}
+.modal-content .form-outer .additional-inputs .sy-container .option-sy::-webkit-scrollbar {
+  width: 3px;
+}
+.modal-content .form-outer .additional-inputs .sy-container .option-sy::-webkit-scrollbar-thumb {
+  background-color: #bec4ca;
+  border-radius: 5px;
+}
+.modal-content .form-outer .additional-inputs .sy-container .option-sy div {
+  font-family: "montserrat";
+  font-size: 14px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.modal-content .form-outer .additional-inputs .sy-container .option-sy div:hover {
+  background: #dfdfdf;
+}
+.additional-inputs .sy-container .dropdown-sy input {
+  cursor: pointer;
+}
+.additional-inputs .sy-container .dropdown-sy .icon-down {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  left: 165px;
+  top: 8px;
+  transition: all 0.3s ease;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  pointer-events: none;
+}
+.modal-content .form-outer .additional-inputs .sy-container .dropdown-sy {
+  position: relative;
+  width: 200px;
+  height: 35px;
+}
+.modal-content
+  .form-outer
+  .additional-inputs
+  .sy-container
+  .dropdown-sy.activeShowSY
+  .option-sy {
+  display: block;
+}
+.additional-inputs .sy-container .dropdown-sy.activeShowSY .icon-down {
+  transform: rotate(180deg);
+}
+/* dropdown for semester in finalizing */
 .modal-content .form-outer .additional-inputs .sem-container {
   margin: 30px;
   align-items: center;

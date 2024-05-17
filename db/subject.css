@@ -176,11 +176,6 @@ ul .list-items:hover i::after {
   font-size: 13px;
   font-family: "montserrat";
 }
-.main-content .yrlvl-gradelvl .year-level {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
 .main-content .yrlvl-gradelvl {
   margin: 20px;
   display: flex;
@@ -190,7 +185,7 @@ ul .list-items:hover i::after {
   position: relative;
   width: 200px;
   height: 35px;
-  margin-top: 20px;
+margin-top: 90px;
 }
 .inputs .dropdown-gradelvl .input {
   cursor: pointer;
@@ -250,10 +245,7 @@ ul .list-items:hover i::after {
 .dropdown-gradelvl.activeShowGLevel .icon-down {
   transform: rotate(180deg);
 }
-button {
-  border: none;
-  background: #fff;
-}
+
 .button-submit button {
   transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
   display: block;
@@ -263,6 +255,8 @@ button {
   border-radius: 4px;
   padding: 5px 30px;
   color: #2d6a4f;
+  border: none;
+  background: #fff;
 }
 .btn-submit {
   top: 60px;
@@ -282,12 +276,14 @@ button.btn-submit:hover {
   box-shadow: rgba(45, 106, 79, 0.7) 0 0px 0px 40px inset;
 }
 .strand-dropdown {
-  margin-top: -90px;
-  margin-left: 20px;
+  position: absolute;
+  top: -5px;
+  display: flex;
+  flex-direction: column;
 }
 .strand-dropdown .input-info {
-  position: absolute;
-  bottom: 100px;
+position: absolute;
+top: -20px;
 }
 select {
   width: 250px;
@@ -396,8 +392,7 @@ select {
   width: 1.15em;
   margin-right: 0.35em;
 }
-.multiselect-dropdown-list div.checked {
-}
+
 .multiselect-dropdown-list div:hover {
   background-color: #b7e4c7;
   border-radius: 10px;

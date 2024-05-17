@@ -139,7 +139,7 @@ ul .list-items:hover i::after {
   text-shadow: 0 5px 20px rgba(216, 243, 220, 0.1);
 }
 .main-content .inputs {
-  margin-top: 10px;
+  margin-top: 20px;
   border-radius: 30px;
   width: 100%;
   display: flex;
@@ -473,7 +473,7 @@ button.btn-submit:hover {
 }
 /* table */
 .teacher-table{
-  margin-top: 20px;
+  margin-top: 30px;
   width: 100%;
   padding: 10px;
   border-radius: 10px;

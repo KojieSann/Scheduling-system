@@ -29,6 +29,7 @@ $result_schedule = $conn->query($sql_schedule);
   <title>Olivarez College Tagaytay</title>
   <link rel="stylesheet" href="generate.css" />
   <link rel="icon" type="x-icon" href="./img/olivarez-college-tagaytay-logo.png" />
+  <script type="text/javascript" src="libraries/jquery.tabledit.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -351,7 +352,7 @@ $result_schedule = $conn->query($sql_schedule);
                         echo "<td>" . htmlspecialchars($row['section_name']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['strand']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['grade_level']) . "</td>";
-                        echo "<td>None</td>";
+                        echo "<td class='scheduleCounter'>None</td>";
                         echo "<td><button type='button' class='firstNext next' data-section='" . htmlspecialchars($row['section_name'], ENT_QUOTES) . "' data-strand='" . htmlspecialchars($row['strand'], ENT_QUOTES) . "' data-grade-level='" . htmlspecialchars($row['grade_level'], ENT_QUOTES) . "'>Next <i class='fa-solid fa-angle-right'></i></button></td>";
                         echo "</tr>";
                       }
@@ -436,14 +437,26 @@ $result_schedule = $conn->query($sql_schedule);
                 <div class="additional-inputs">
                   <div class="sy-container">
                     <span class="title">School year</span>
-                    <div class="sy">
-                      <input type="text" maxlength="4" name="sy" /><span>-</span><input type="text" maxlength="4" name="sy2" />
+                    <div class="dropdown-sy">
+                      <input type="text" class="textbox-sy" name="sem" placeholder="Select school year" readonly />
+                      <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
+                      <div class="option-sy">
+                        <div onclick="bulaga('2024-2025')">2024-2025</div>
+                        <div onclick="bulaga('2025-2026')">2025-2026</div>
+                        <div onclick="bulaga('2026-2027')">2026-2027</div>
+                        <div onclick="bulaga('2027-2028')">2027-2028</div>
+                        <div onclick="bulaga('2028-2029')">2028-2029</div>
+                        <div onclick="bulaga('2030-2031')">2030-2031</div>
+                        <div onclick="bulaga('2031-2032')">2031-2032</div>
+                        <div onclick="bulaga('2033-2034')">2033-2034</div>
+
+                      </div>
                     </div>
                   </div>
                   <div class="sem-container">
                     <span class="title">Semester</span>
                     <div class="dropdown-sem">
-                      <input type="text" class="textbox-sy" name="sem" placeholder="Select semester" readonly />
+                      <input type="text" class="textbox-sem" name="sem" placeholder="Select semester" readonly />
                       <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
                       <div class="option">
                         <div onclick="show('1st')">1st</div>
@@ -531,40 +544,41 @@ $result_schedule = $conn->query($sql_schedule);
                 <th>Subject</th>
                 <th>Time in</th>
                 <th>Time out</th>
-                <th>Duration</th>
                 <th>Instructor</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
               <?php
-              while ($row = $result_schedule->fetch_assoc()) {
-                echo '<tr>';
-                echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
-                echo '<td>' . htmlspecialchars($row['section']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['day']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['timeIn']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['timeOut']) . '</td>';
-                echo '<td> none </td>';
-                echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
-                echo '<td class="checkboxTbl">
-                  <div class="view-open-modal">
-                  <i class="fa-regular fa-pen-to-square"></i>
-                  <span>Edit</span>
-                  </div>
-                  </td>';
-                echo '</tr>';
+              include('connect.php');
+              $query = "SELECT * FROM schedules ORDER BY id DESC";
+              $result_schedule = $conn->query($query);
+              if ($result_schedule->num_rows > 0) {
+
+                while ($row = $result_schedule->fetch_assoc()) {
+                  echo '<tr>';
+                  echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
+                  echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['day']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['timeIn']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['timeOut']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
+                  echo '</tr>';
+                }
+              } else {
+                echo "<tr><td colspan='8'>No teacher available</td></tr>";
               }
+              $conn->close();
               ?>
+
             </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
   </script>
   <script src="./libraries/html2pdf.bundle.min.js"></script>

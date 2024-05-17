@@ -11,21 +11,6 @@ include('connect.php');
 $sql = "SELECT * FROM subjects";
 $result = $conn->query($sql);
 
-function searchTeachers($conn, $searchTerm)
-{
-  $sql = "SELECT * FROM subjects WHERE subject_name LIKE '%$searchTerm%' OR subject_code LIKE '%$searchTerm%' OR school_year LIKE '%$searchTerm%' OR grade_level LIKE '%$searchTerm%'";
-  $result = $conn->query($sql);
-  return $result;
-}
-if (isset($_GET['search'])) {
-  $searchTerm = $_GET['search'];
-  $result = searchTeachers($conn, $searchTerm);
-} else {
-  $sql = "SELECT * FROM subjects";
-  $result = $conn->query($sql);
-}
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,9 +87,19 @@ if (isset($_GET['search'])) {
             </div>
           </div>
           <div class="yrlvl-gradelvl">
-            <div class="year-level">
-              <span>School Year<span style="color: red; font-size: 1.3em">*</span></span>
-              <input type="text" class="first-name input" autocomplete="off" name="school_year" />
+            <div class="strand-dropdown">
+              <span class="input-info">
+                Strand<span style="color: red; font-size: 1.3em">*</span>
+              </span>
+              <select name="strand[]" multiple multiselect-select-all="true" class="strand-select">
+                <option value="GAS">GAS</option>
+                <option value="STEM">STEM</option>
+                <option value="TVL">TVL</option>
+                <option value="ICT">ICT</option>
+                <option value="ABM">ABM</option>
+                <option value="HUMSS">HUMSS</option>
+                <option value="HE">HE</option>
+              </select>
             </div>
             <div class="dropdown-gradelvl">
               <span class="input-info">Grade Level<span style="color: red; font-size: 1.3em">*</span></span>
@@ -116,21 +111,6 @@ if (isset($_GET['search'])) {
               </div>
             </div>
           </div>
-          <div class="strand-dropdown">
-            <span class="input-info">
-              Strand<span style="color: red; font-size: 1.3em">*</span>
-            </span>
-            <select name="strand[]" multiple multiselect-select-all="true" class="strand-select">
-              <option value="GAS">GAS</option>
-              <option value="STEM">STEM</option>
-              <option value="TVL">TVL</option>
-              <option value="ICT">ICT</option>
-              <option value="ABM">ABM</option>
-              <option value="HUMSS">HUMSS</option>
-              <option value="HE">HE</option>
-            </select>
-          </div>
-
           <div class="button-submit">
             <button href="" class="btn-submit">Submit</button>
           </div>
@@ -154,29 +134,39 @@ if (isset($_GET['search'])) {
               <tr>
                 <th>Subject</th>
                 <th>Subject Code</th>
-                <th>School Year</th>
                 <th>Grade Level</th>
                 <th>Strand</th>
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody st>
+            <tbody>
               <?php
 
-              while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row['subject_name'] . "</td>";
-                echo "<td>" . $row['subject_code'] . "</td>";
-                echo "<td>" . $row['school_year'] . "</td>";
-                echo "<td>" . $row['grade_level'] . "</td>";
-                echo "<td>" . $row['strand'] . "</td>";
-                echo "<td> <a href='edit_page_subjects.php?id=" . $row['id'] . "'><button class='edit'><i class='fa-solid fa-pen'></i></button></a> 
-                  <a href='delete_subjects.php?id=" . $row['id'] . "'> <button  class='delete' type='submit' name='delete'><i class='fa-solid fa-trash-can'></i></button></a> 
-                  </td>";
-                echo "</tr>";
+              $query = "SELECT * FROM subjects ORDER BY id DESC";
+
+              $result = $conn->query($query);
+
+              if ($result->num_rows > 0) {
+
+                while ($row = $result->fetch_assoc()) {
+                  echo "<tr>";
+                  echo "<td>" . $row['subject_name'] . "</td>";
+                  echo "<td>" . $row['subject_code'] . "</td>";
+                  echo "<td>" . $row['grade_level'] . "</td>";
+                  echo "<td>" . $row['strand'] . "</td>";
+                  echo "<td> 
+                    <a href='edit_page_subjects.php?id=" . $row['id'] . "'><button class='edit'><i class='fa-solid fa-pen'></i></button></a> 
+                    <a href='delete_subjects.php?id=" . $row['id'] . "'><button class='delete' type='submit' name='delete'><i class='fa-solid fa-trash-can'></i></button></a> 
+                    </td>";
+                  echo "</tr>";
+                }
+              } else {
+                echo "<tr><td colspan='5'>No subject available</td></tr>";
               }
+              $conn->close();
               ?>
             </tbody>
+
           </table>
         </div>
       </div>
