@@ -21,13 +21,12 @@ $query = "SELECT sa.id, sa.section, sa.strand, COUNT(DISTINCT s.subject) AS subj
   LEFT JOIN schedules s ON s.section = sa.section
   GROUP BY sa.id, sa.section, sa.strand, sa.sem, sa.school_year, sa.adviser;
 ";
-
-
 $result_schedule2 = $conn->query($query);
-
 if (!$result_schedule2) {
   die("Query failed: " . $conn->error);
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -253,37 +252,30 @@ if (!$result_schedule2) {
             <span>Today's Schedule</span>
             <div class="section-wrapper contents">
               <div class="wrapper">
-              <table class="table" style="font-size: 12px;, align-text:center;">
-                <thead style="background-color:green;">
-                  <tr>
-                    <th>Section</th>
-                    <th>Strand</th>
-                    <th>Subject</th>
-                    <th>Time</th>
-                    <th>Instructor</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  while ($row = $result_schedule->fetch_assoc()) {
-                    echo '<tr>';
-                    echo '<td>' . htmlspecialchars($row['section']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['timeIn']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
-                    echo '</tr>';
-                  }
-                  ?>
-                </tbody>
-              </table>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Section</th>
+                      <th>Time</th>
+                      <th>Instructor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    while ($row = $result_schedule->fetch_assoc()) {
+                      echo '<tr>';
+                      echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['timeIn']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
+                      echo '</tr>';
+                    }
+                    ?>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
-          <div class="teacher-container">
-            <span>Instructors Schedule</span>
-            <div class="instructors-wrapper contents"></div>
-          </div>
+
         </div>
 
       </div>

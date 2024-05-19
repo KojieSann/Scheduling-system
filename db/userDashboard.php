@@ -231,7 +231,7 @@ $result_schedule = $conn->query($sql_schedule);
                 <table class="table">
                   <thead>
                     <tr>
-                      <th class="checkboxTbl"><input type="checkbox" onclick="toggleSelectAll(1)" /></th>
+                      <th class="checkboxTbl"><input type="checkbox" onclick="toggleSelectAllFirstTable()" /></th>
                       <th>Section</th>
                       <th>Strand</th>
                       <th># of Subjects</th>
@@ -299,7 +299,7 @@ $result_schedule = $conn->query($sql_schedule);
             <table id="scheduleTable" class="table">
               <thead>
                 <tr>
-                  <th class="checkboxTbl"><input type="checkbox" onclick="toggleSelectAll(2)" /></th>
+                  <th class="checkboxTblSched"><input type="checkbox" onclick="toggleSelectAllSecondTable()" /></th>
                   <th>
                     <div class="sort" onclick="groupSections()">
                       Section <i class="fa-solid fa-chevron-down"></i>
@@ -316,14 +316,14 @@ $result_schedule = $conn->query($sql_schedule);
                   <th>Time out</th>
                   <th>Duration</th>
                   <th>Instructor</th>
-                  <th></th>
+
                 </tr>
               </thead>
               <tbody>
                 <?php
                 while ($row = $result_schedule->fetch_assoc()) {
                   echo '<tr>';
-                  echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
+                  echo '<td class="checkboxTblSched"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
                   echo '<td>' . htmlspecialchars($row['section']) . '</td>';
                   echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
                   echo '<td>' . htmlspecialchars($row['day']) . '</td>';
@@ -332,12 +332,7 @@ $result_schedule = $conn->query($sql_schedule);
                   echo '<td>' . htmlspecialchars($row['timeOut']) . '</td>';
                   echo '<td> none </td>';
                   echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
-                  echo '<td class="checkboxTbl">
-                  <div class="view-open-modal">
-                  <i class="fa-regular fa-pen-to-square"></i>
-                  <span>Edit</span>
-                  </div>
-                  </td>';
+
                   echo '</tr>';
                 }
                 ?>

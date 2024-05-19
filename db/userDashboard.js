@@ -43,7 +43,6 @@ document.getElementById("myYear").value = year;
 document.getElementById("myDate").value = date;
 document.getElementById("myDay").value = days[day];
 // table to pdf
-function tableToPrint() {
   // var table2pdf = document.querySelector(".table");
   // var opt = {
   //   margin: 1,
@@ -53,51 +52,105 @@ function tableToPrint() {
   //   jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
   // };
   // html2pdf(table2pdf, opt);
-  var checkedRows = document.querySelectorAll('.select:checked');
-  if (checkedRows.length === 0) {
+  function tableToPrint() {
+    var checkedRows = document.querySelectorAll('.table-container input:checked');
+    if (checkedRows.length === 0) {
+        alert("Please select at least one row to print.");
+        return;
+    }
+    checkedRows.forEach(function (row) {
+        var tdElements = row.closest('tr').querySelectorAll('td');
+        tdElements.forEach(function (td) {
+            td.classList.add('hide-on-print');
+        });
+    });
+    var printContent = '<table border="1">';
+    printContent += '<thead><tr><th>Section</th><th>Strand</th><th># of Subjects</th><th>Sem</th><th>SY</th><th>Adviser</th></tr></thead>';
+    printContent += '<tbody>';
+    checkedRows.forEach(function (row) {
+        var rowData = row.closest('tr').querySelectorAll('td:not(:first-child)');
+        printContent += '<tr>';
+        rowData.forEach(function (cell) {
+            printContent += '<td>' + cell.textContent + '</td>';
+        });
+        printContent += '</tr>';
+    });
+    printContent += '</tbody></table>';
+    var newWindow = window.open('', '_blank');
+    newWindow.document.open();
+    newWindow.document.write('<html><head><title>Checked Rows</title><style>.hide-on-print { display: none; }</style></head><body>' + printContent + '</body></html>');
+    newWindow.document.close();
+    newWindow.print();
+    checkedRows.forEach(function (row) {
+        var tdElements = row.closest('tr').querySelectorAll('td');
+        tdElements.forEach(function (td) {
+            td.classList.remove('hide-on-print');
+        });
+    });
+  }
+  function tableToPrint2() {
+    var checkedRows = document.querySelectorAll('.checkboxTblSched input:checked');
+    if (checkedRows.length === 0) {
       alert("Please select at least one row to print.");
       return;
-  }
-  checkedRows.forEach(function(row) {
+    }
+    checkedRows.forEach(function(row) {
       var tdElements = row.closest('tr').querySelectorAll('td');
       tdElements.forEach(function(td) {
-          td.classList.add('hide-on-print');
+        td.classList.add('hide-on-print');
       });
-  });
-  var printContent = '<table border="1">';
-  printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Schedule</th><th>Sem</th><th>SY</th><th>Time</th><th>Adviser</th></tr></thead>';
-  printContent += '<tbody>';
-  checkedRows.forEach(function(row) {
-      var rowData = row.closest('tr').querySelectorAll('td:not(.checkboxTbl)');
+    });
+    var printContent = '<table border="1">';
+    printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Day</th><th>Subject</th><th>Time in</th><th>Time out</th><th>Duration</th><th>Instructor</th></tr></thead>';
+    printContent += '<tbody>';
+    checkedRows.forEach(function(row) {
+      var rowData = row.closest('tr').querySelectorAll('td:not(.checkboxTblSched)');
       printContent += '<tr>';
       rowData.forEach(function(cell) {
-          printContent += '<td>' + cell.textContent + '</td>';
+        printContent += '<td>' + cell.textContent + '</td>';
       });
       printContent += '</tr>';
-  });
-  printContent += '</tbody></table>';
-  var newWindow = window.open('', '_blank');
-  newWindow.document.open();
-  newWindow.document.write('<html><head><title>Checked Rows</title><style>.hide-on-print { display: none; }</style></head><body>' + printContent + '</body></html>');
-  newWindow.document.close();
-  newWindow.print();
-  checkedRows.forEach(function(row) {
+    });
+    printContent += '</tbody></table>';
+    var newWindow = window.open('', '_blank');
+    newWindow.document.open();
+    newWindow.document.write('<html><head><title>Checked Rows</title><style>.hide-on-print { display: none; }</style></head><body>' + printContent + '</body></html>');
+    newWindow.document.close();
+    newWindow.print();
+    checkedRows.forEach(function(row) {
       var tdElements = row.closest('tr').querySelectorAll('td');
       tdElements.forEach(function(td) {
-          td.classList.remove('hide-on-print');
+        td.classList.remove('hide-on-print');
       });
-  });
-}
+    });
+  }
+  
+  
 // select all for table
-function toggleSelectAll(tableIndex) {
-  var table = document.querySelectorAll('.table')[tableIndex - 1];
+// select all for first table
+function toggleSelectAllFirstTable() {
+  var table = document.querySelectorAll('.table')[0];
   var checkboxes = table.querySelectorAll('.checkboxTbl input[type="checkbox"]');
   var selectAllCheckbox = table.querySelector('.checkboxTbl input[type="checkbox"]:first-child');
+
   checkboxes.forEach(function(checkbox) {
     checkbox.checked = selectAllCheckbox.checked;
   });
+
   toggleTableNav();
 }
+// select all for second table
+function toggleSelectAllSecondTable() {
+  var table = document.querySelectorAll('.table')[1];
+  var checkboxes = table.querySelectorAll('.checkboxTblSched input[type="checkbox"]');
+  var selectAllCheckbox = table.querySelector('.checkboxTblSched input[type="checkbox"]:first-child');
+
+  checkboxes.forEach(function(checkbox) {
+    checkbox.checked = selectAllCheckbox.checked;
+  });
+}
+
+
 
 
 

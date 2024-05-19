@@ -266,10 +266,11 @@ ul .list-items:hover i::after {
 }
 /* sections and teachers schedules */
 .content-container .section-teacher {
-  width: 19vw;
+  width: 20vw;
   font-family: "poppins";
 }
 .content-container .section-teacher .contents {
+  overflow-y: scroll;
   height: 85%;
   width: 95%;
   border-radius: 3px;
@@ -278,18 +279,19 @@ ul .list-items:hover i::after {
   align-items: center;
   justify-content: center;
 }
-.section-teacher .section-container,
-.section-teacher .teacher-container {
-  height: 40vh;
+.content-container .section-teacher .contents table{
+  width: 70%;
+  position: relative;
+}
+.section-teacher .section-container {
+  height: 83vh;
   width: 100%;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   border: 1px solid #dddddd;
   padding: 20px;
 }
-.section-teacher .teacher-container {
-  margin-top: 30px;
-}
+
 /* table */
 .schedule-table {
   margin-top: 10px;

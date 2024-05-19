@@ -347,8 +347,6 @@ $result = $conn->query($query);
                     <i class="fa-solid fa-magnifying-glass"></i>
                   </div>
                 </div>
-
-
                 <div class="table-container-modal">
                   <table class="section-table">
                     <thead>
@@ -360,7 +358,6 @@ $result = $conn->query($query);
                         <th>Action</th>
                       </tr>
                     </thead>
-
                     <tbody>
                       <?php
                       while ($row = $result->fetch_assoc()) {
@@ -401,7 +398,6 @@ $result = $conn->query($query);
                         <th>Code</th>
                         <th>Strand</th>
                         <th>Grade lvl</th>
-
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -413,7 +409,6 @@ $result = $conn->query($query);
                         echo "<td>" . $row['subject_code'] . "</td>";
                         echo "<td>" . $row['strand'] . "</td>";
                         echo "<td>" . $row['grade_level'] . "</td>";
-
                         echo "</div>";
                         echo "</td>";
                         echo "<td>";
@@ -454,7 +449,7 @@ $result = $conn->query($query);
                   <div class="sy-container">
                     <span class="title">School year</span>
                     <div class="dropdown-sy">
-                      <input type="text" class="textbox-sy" name="sem" placeholder="Select school year" readonly />
+                      <input type="text" class="textbox-sy" name="sy" placeholder="Select school year" readonly />
                       <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
                       <div class="option-sy">
                         <div onclick="bulaga('2024-2025')">2024-2025</div>
