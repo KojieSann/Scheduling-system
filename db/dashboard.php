@@ -252,7 +252,6 @@ if (!$result_schedule2) {
             <span>Today's Schedule</span>
             <div class="section-wrapper contents">
               <div class="wrapper">
-<<<<<<< Updated upstream
                 <table class="table">
                   <thead>
                     <tr>
@@ -266,39 +265,13 @@ if (!$result_schedule2) {
                     while ($row = $result_schedule->fetch_assoc()) {
                       echo '<tr>';
                       echo '<td>' . htmlspecialchars($row['section']) . '</td>';
-                      echo '<td>' . htmlspecialchars($row['timeIn']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['time']) . '</td>';
                       echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
                       echo '</tr>';
                     }
                     ?>
                   </tbody>
                 </table>
-=======
-              <table class="table" style="font-size: 12px;, align-text:center;">
-                <thead style="background-color:green;">
-                  <tr>
-                    <th>Section</th>
-                    <th>Strand</th>
-                    <th>Subject</th>
-                    <th>Time</th>
-                    <th>Instructor</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  while ($row = $result_schedule->fetch_assoc()) {
-                    echo '<tr>';
-                    echo '<td>' . htmlspecialchars($row['section']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['time']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
-                    echo '</tr>';
-                  }
-                  ?>
-                </tbody>
-              </table>
->>>>>>> Stashed changes
               </div>
             </div>
           </div>

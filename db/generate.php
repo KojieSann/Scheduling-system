@@ -449,11 +449,8 @@ $result = $conn->query($query);
                   <div class="sy-container">
                     <span class="title">School year</span>
                     <div class="dropdown-sy">
-<<<<<<< Updated upstream
-                      <input type="text" class="textbox-sy" name="sy" placeholder="Select school year" readonly />
-=======
+
                       <input type="text" class="textbox-sy" name="school_year" placeholder="Select school year" readonly />
->>>>>>> Stashed changes
                       <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
                       <div class="option-sy">
                         <div onclick="bulaga('2024-2025')">2024-2025</div>
