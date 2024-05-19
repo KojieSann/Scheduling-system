@@ -449,7 +449,11 @@ $result = $conn->query($query);
                   <div class="sy-container">
                     <span class="title">School year</span>
                     <div class="dropdown-sy">
+<<<<<<< Updated upstream
                       <input type="text" class="textbox-sy" name="sy" placeholder="Select school year" readonly />
+=======
+                      <input type="text" class="textbox-sy" name="school_year" placeholder="Select school year" readonly />
+>>>>>>> Stashed changes
                       <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
                       <div class="option-sy">
                         <div onclick="bulaga('2024-2025')">2024-2025</div>
@@ -554,8 +558,7 @@ $result = $conn->query($query);
                   </div>
                 </th>
                 <th>Subject</th>
-                <th>Time in</th>
-                <th>Time out</th>
+                <th>Time</th>
                 <th>Instructor</th>
               </tr>
             </thead>
@@ -565,7 +568,6 @@ $result = $conn->query($query);
               $query = "SELECT * FROM schedules ORDER BY id DESC";
               $result_schedule = $conn->query($query);
               if ($result_schedule->num_rows > 0) {
-
                 while ($row = $result_schedule->fetch_assoc()) {
                   echo '<tr>';
                   echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
@@ -573,8 +575,7 @@ $result = $conn->query($query);
                   echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
                   echo '<td>' . htmlspecialchars($row['day']) . '</td>';
                   echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
-                  echo '<td>' . htmlspecialchars($row['timeIn']) . '</td>';
-                  echo '<td>' . htmlspecialchars($row['timeOut']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['time']) . '</td>';
                   echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
                   echo '</tr>';
                 }
