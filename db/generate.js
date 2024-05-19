@@ -241,7 +241,7 @@ function toggleButton(day) {
 //  for the repeated checkbox in subject scheduling
 const repeatCheckboxes = document.querySelectorAll('input[type="checkbox"][name="repeat"]');
 repeatCheckboxes.forEach(function(checkbox) {
-  checkbox.addEventListener("change", function() {  
+  checkbox.addEventListener("change", function() {
     const timeSelection = checkbox.closest('.time-selection');
     const inTimeInput = timeSelection.querySelector('.inTime input[type="time"]');
     const outTimeInput = timeSelection.querySelector('.outTime input[type="time"]');
