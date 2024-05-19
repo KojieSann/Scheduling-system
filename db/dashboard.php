@@ -9,6 +9,8 @@ if (!isset($_SESSION['username'])) {
 $username = $_SESSION['username'];
 include('connect.php');
 
+$sql_schedule = "SELECT * FROM schedules";
+$result_schedule = $conn->query($sql_schedule);
 
 $sql_schedule2 = "SELECT * FROM schedule_again";
 $result_schedule2 = $conn->query($sql_schedule2);
@@ -251,7 +253,30 @@ if (!$result_schedule2) {
             <span>Today's Schedule</span>
             <div class="section-wrapper contents">
               <div class="wrapper">
-
+              <table class="table" style="font-size: 12px;, align-text:center;">
+                <thead style="background-color:green;">
+                  <tr>
+                    <th>Section</th>
+                    <th>Strand</th>
+                    <th>Subject</th>
+                    <th>Time</th>
+                    <th>Instructor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  while ($row = $result_schedule->fetch_assoc()) {
+                    echo '<tr>';
+                    echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['timeIn']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
+                    echo '</tr>';
+                  }
+                  ?>
+                </tbody>
+              </table>
               </div>
             </div>
           </div>
