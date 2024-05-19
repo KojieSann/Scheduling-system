@@ -18,7 +18,23 @@ $result_teachers = $conn->query($sql_teachers);
 $sql_schedule = "SELECT * FROM schedules";
 $result_schedule = $conn->query($sql_schedule);
 
+$query = "SELECT 
+        sec.id,
+        sec.section_name,
+        sec.grade_level,
+        sec.strand,
+        COUNT(sch.id) AS schedule_count
+    FROM 
+        sections sec
+    LEFT JOIN 
+        schedules sch 
+    ON 
+        sec.section_name = sch.section
+    GROUP BY 
+        sec.id, sec.section_name, sec.grade_level, sec.strand;
+";
 
+$result = $conn->query($query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -347,12 +363,12 @@ $result_schedule = $conn->query($sql_schedule);
 
                     <tbody>
                       <?php
-                      while ($row = $result_sections->fetch_assoc()) {
+                      while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['section_name']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['strand']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['grade_level']) . "</td>";
-                        echo "<td class='scheduleCounter'>None</td>";
+                        echo '<td>' . htmlspecialchars($row['schedule_count']) . '</td>';
                         echo "<td><button type='button' class='firstNext next' data-section='" . htmlspecialchars($row['section_name'], ENT_QUOTES) . "' data-strand='" . htmlspecialchars($row['strand'], ENT_QUOTES) . "' data-grade-level='" . htmlspecialchars($row['grade_level'], ENT_QUOTES) . "'>Next <i class='fa-solid fa-angle-right'></i></button></td>";
                         echo "</tr>";
                       }
@@ -568,7 +584,7 @@ $result_schedule = $conn->query($sql_schedule);
                   echo '</tr>';
                 }
               } else {
-                echo "<tr><td colspan='8'>No teacher available</td></tr>";
+                echo "<tr><td colspan='8'>No schedule available</td></tr>";
               }
               $conn->close();
               ?>
