@@ -231,7 +231,7 @@ $result_schedule = $conn->query($sql_schedule);
                 <table class="table">
                   <thead>
                     <tr>
-                      <th class="checkboxTbl"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()" /></th>
+                      <th class="checkboxTbl"><input type="checkbox" onclick="toggleSelectAll(1)" /></th>
                       <th>Section</th>
                       <th>Strand</th>
                       <th># of Subjects</th>
@@ -277,13 +277,13 @@ $result_schedule = $conn->query($sql_schedule);
           <div class="table-header">
             <span>Schedules</span>
             <div class="table-nav">
-              <button onclick="tableToPrint()">
+              <button onclick="tableToPrint2()">
                 <i class="fa-solid fa-print"></i> Print
               </button>
               <button id="tableToExcel">
                 <i class="fa-regular fa-file-excel"></i> Excel
               </button>
-              <button onclick="tableToPDF()">
+              <button onclick="tableToPDF2()">
                 <i class="fa-regular fa-file-pdf"></i> PDF
               </button>
               <button onclick="deleteSelectedRows()"><i class=" fa-solid fa-trash-can"></i> Delete</button>
@@ -299,7 +299,7 @@ $result_schedule = $conn->query($sql_schedule);
             <table id="scheduleTable" class="table">
               <thead>
                 <tr>
-                  <th class="checkboxTbl"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()" /></th>
+                  <th class="checkboxTbl"><input type="checkbox" onclick="toggleSelectAll(2)" /></th>
                   <th>
                     <div class="sort" onclick="groupSections()">
                       Section <i class="fa-solid fa-chevron-down"></i>
@@ -465,15 +465,12 @@ $result_schedule = $conn->query($sql_schedule);
           </div>
         </div>
       </section>
-
-
     </div>
   </div>
   <script src="./libraries/table2excel.js"></script>
   <script src="./libraries/html2pdf.bundle.min.js"></script>
-  <script src="./dashboard.js"></script>
   <script src="./userDashboard.js"></script>
-  <script src="./generate.js"></script>
+
 </body>
 
 </html>

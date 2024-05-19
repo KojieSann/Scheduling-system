@@ -704,29 +704,24 @@ document.addEventListener("click", (e) => {
   }
 });
 // search function for the table
-document.addEventListener('DOMContentLoaded', function() {
-  const searchInput = document.getElementById('search-box');
-  const tableRows = document.querySelectorAll('.schedules-table .table tbody tr');
-
-  searchInput.addEventListener('input', function() {
-    const searchTerm = searchInput.value.toLowerCase().trim();
-
-    tableRows.forEach(function(row) {
-      const section = row.querySelector('td:nth-child(2)').textContent.toLowerCase().trim();
-      const strand = row.querySelector('td:nth-child(3)').textContent.toLowerCase().trim();
-      const day = row.querySelector('td:nth-child(4)').textContent.toLowerCase().trim();
-      const subject = row.querySelector('td:nth-child(5)').textContent.toLowerCase().trim();
-      const timeIn = row.querySelector('td:nth-child(6)').textContent.toLowerCase().trim();
-      const timeOut = row.querySelector('td:nth-child(7)').textContent.toLowerCase().trim();
-      const duration = row.querySelector('td:nth-child(8)').textContent.toLowerCase().trim();
-      const instructor = row.querySelector('td:nth-child(9)').textContent.toLowerCase().trim();
-
-      if (section.includes(searchTerm) || strand.includes(searchTerm) || day.includes(searchTerm) || subject.includes(searchTerm) || timeIn.includes(searchTerm) || timeOut.includes(searchTerm) || duration.includes(searchTerm) || instructor.includes(searchTerm)) {
-        row.style.display = 'table-row';
-      } else {
-        row.style.display = 'none';
-      }
-    });
+$(document).ready(function(){
+  $('#search-box').on('input', function(){
+      var searchText = $(this).val().toLowerCase();
+      $('table tbody tr').each(function(){
+          var found = false;
+          $(this).find('td').each(function(){
+              var cellText = $(this).text().toLowerCase();
+              if(cellText.indexOf(searchText) !== -1){
+                  found = true;
+                  return false;
+              }
+          });
+          if(found){
+              $(this).show();
+          }else{
+              $(this).hide();
+          }
+      });
   });
 });
 
@@ -855,35 +850,28 @@ function groupSections() {
   });
 }
 
-
+// edit function
 $(document).ready(function() {
-  // Function to make table cells editable on click
   $('table#scheduleTable td').click(function() {
     $(this).prop('contenteditable', true);
   });
-
-  // Function to handle Enter key press to insert data into the database
   $('table#scheduleTable td').keypress(function(e) {
-    if (e.which == 13) { // Enter key
+    if (e.which == 13) { 
       e.preventDefault();
-      $(this).blur(); // Remove focus from the current cell
+      $(this).blur();
       var rowData = $(this).closest('tr').find('td').map(function() {
         return $(this).text();
       }).get();
 
-      // Assuming you have an AJAX function to insert data into the database
-      // Here you should send the data (rowData) to your server-side script for database insertion
-      // Example AJAX call:
       $.ajax({
-        url: 'editSchedule.php', // Your server-side script URL
+        url: 'editSchedule.php', 
         type: 'POST',
-        data: { rowData: rowData }, // Sending rowData to the server
+        data: { rowData: rowData },
         success: function(response) {
-          // Handle success response if needed
-          console.log(response);
+          window.alert(response);
         },
         error: function(xhr, status, error) {
-          // Handle error if needed
+
           console.error(xhr.responseText);
         }
       });

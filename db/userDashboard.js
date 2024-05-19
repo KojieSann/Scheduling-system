@@ -44,15 +44,15 @@ document.getElementById("myDate").value = date;
 document.getElementById("myDay").value = days[day];
 // table to pdf
 function tableToPrint() {
-  var table2pdf = document.querySelector(".table");
-  var opt = {
-    margin: 1,
-    filename: "octScheduleMaker.pdf",
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-  };
-  html2pdf(table2pdf, opt);
+  // var table2pdf = document.querySelector(".table");
+  // var opt = {
+  //   margin: 1,
+  //   filename: "octScheduleMaker.pdf",
+  //   image: { type: "jpeg", quality: 0.98 },
+  //   html2canvas: { scale: 2 },
+  //   jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+  // };
+  // html2pdf(table2pdf, opt);
   var checkedRows = document.querySelectorAll('.select:checked');
   if (checkedRows.length === 0) {
       alert("Please select at least one row to print.");
@@ -89,22 +89,15 @@ function tableToPrint() {
   });
 }
 // select all for table
-function toggleTableNav() {
-  var checkboxes = document.querySelectorAll('.select:checked');
-  var tableNav = document.querySelector('.table-nav');
-  if (checkboxes.length >= 2) {
-    tableNav.style.display = 'block';
-  } else {
-    tableNav.style.display = 'none';
-  }
-}
-
-function toggleSelectAll() {
-  var checkboxes = document.querySelectorAll('.select');
-  var selectAllCheckbox = document.getElementById('selectAll');
+function toggleSelectAll(tableIndex) {
+  var table = document.querySelectorAll('.table')[tableIndex - 1];
+  var checkboxes = table.querySelectorAll('.checkboxTbl input[type="checkbox"]');
+  var selectAllCheckbox = table.querySelector('.checkboxTbl input[type="checkbox"]:first-child');
   checkboxes.forEach(function(checkbox) {
     checkbox.checked = selectAllCheckbox.checked;
   });
   toggleTableNav();
 }
+
+
 

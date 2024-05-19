@@ -514,7 +514,12 @@ button.btn-submit:hover {
   bottom: 80px;
 }
 .bg-content-logout .header-img img {
-  width: 200px;
+  bottom: 0px;
+  position: absolute;
+  right: -50px;
+  height: 170px;
+  z-index: -10;
+  opacity: 0.2;
 }
 .bg-content-logout .header-text {
   align-items: center;

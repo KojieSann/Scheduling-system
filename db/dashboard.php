@@ -78,7 +78,7 @@ if (!$result_schedule2) {
           <p style="font-size: 13px">Are you sure you want to logout?</p>
         </div>
         <div class="header-img">
-          <img src="./img/undraw_login_re_4vu2.svg" alt="" />
+          <img src="./img/olivarez-college-tagaytay-logo.png" alt="Oct logo">
         </div>
         <div class="btn">
           <button class="noBtn">Cancel</button>

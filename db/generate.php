@@ -99,11 +99,11 @@ $result_schedule = $conn->query($sql_schedule);
           <p style="font-size: 13px">Are you sure you want to logout?</p>
         </div>
         <div class="header-img">
-          <img src="./img/undraw_login_re_4vu2.svg" alt="" />
+          <img src="./img/olivarez-college-tagaytay-logo.png" alt="Oct logo">
         </div>
         <div class="btn">
           <button class="noBtn">Cancel</button>
-          <a href="./login.php"><button class="yesBtn">Logout</button></a>
+          <a href="logout.php"><button class="yesBtn">Logout</button></a>
         </div>
       </div>
     </div>
@@ -515,13 +515,14 @@ $result_schedule = $conn->query($sql_schedule);
             <button onclick="tableToPDF()">
               <i class="fa-regular fa-file-pdf"></i> PDF
             </button>
-            <button onclick="deleteSelectedRows()"><i class=" fa-solid fa-trash-can"></i> Delete</button>
+            <button onclick="deleteSelectedRows()">
+              <i class=" fa-solid fa-trash-can"></i> Delete
+            </button>
           </div>
           <div class="table-search">
             <form class="search-container">
-              <input id="search-box" type="text" class="search-box" name="" />
+              <input id="search-box" type="text" class="search-box" />
               <label for="search-box"><i class="fa-solid fa-magnifying-glass search-icon"></i></label>
-              <input type="submit" id="search-submit" />
             </form>
           </div>
         </div>
@@ -571,11 +572,11 @@ $result_schedule = $conn->query($sql_schedule);
               }
               $conn->close();
               ?>
-
             </tbody>
           </table>
         </div>
       </div>
+
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
