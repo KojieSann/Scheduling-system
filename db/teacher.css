@@ -139,7 +139,7 @@ ul .list-items:hover i::after {
   text-shadow: 0 5px 20px rgba(216, 243, 220, 0.1);
 }
 .main-content .inputs {
-  margin-top: 10px;
+  margin-top: 20px;
   border-radius: 30px;
   width: 100%;
   display: flex;
@@ -310,7 +310,7 @@ ul .list-items:hover i::after {
 }
 .strand-list .input-info {
   position: absolute;
-  top: 3px;
+  top: -9px;
   font-size: 20px;
 }
 /* subject dropdown */
@@ -321,7 +321,7 @@ ul .list-items:hover i::after {
 .subject-list .input-info {
   font-size: 20px;
   position: absolute;
-  top: 88px;
+  top: 75px;
 }
 .subject-list option {
   padding: 5px;

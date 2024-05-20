@@ -102,7 +102,7 @@ $result_schedule = $conn->query($sql_schedule);
         </div>
         <div class="btn">
           <button class="noBtn">Cancel</button>
-          <a href="./login.php"><button class="yesBtn">Logout</button></a>
+          <a href="logout.php"><button class="yesBtn">Logout</button></a>
         </div>
       </div>
     </div>

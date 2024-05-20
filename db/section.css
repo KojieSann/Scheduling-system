@@ -146,7 +146,7 @@ ul .list-items:hover i::after {
   position: relative;
   height: 15%;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 .main-content .inputs input {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
@@ -317,7 +317,7 @@ button {
   background: #fff;
 }
 .button-submit{
-  top: -10px;
+  top: -30px;
   position: absolute;
 }
 .button-submit button {

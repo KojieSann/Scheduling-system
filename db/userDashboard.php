@@ -332,10 +332,7 @@ $result_schedule = $conn->query($sql_schedule);
                   echo '<td>' . htmlspecialchars($row['timeOut']) . '</td>';
                   echo '<td> none </td>';
                   echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
-                  echo '<td class="checkboxTbl">
-                  <div class="view-open-modal">
-                  <i class="fa-regular fa-pen-to-square"></i>
-                  <span>Edit</span>
+                  echo '<td>
                   </div>
                   </td>';
                   echo '</tr>';
@@ -372,7 +369,7 @@ $result_schedule = $conn->query($sql_schedule);
               <tbody st>
                 <?php
 
-                while ($row = $result->fetch_assoc()) {
+                while ($row = $result_teachers->fetch_assoc()) {
                   echo "<tr>";
                   echo "<td>" . $row['last_name'] . "</td>";
                   echo "<td>" . $row['day'] . "</td>";
@@ -410,7 +407,7 @@ $result_schedule = $conn->query($sql_schedule);
               <tbody st>
                 <?php
 
-                while ($row = $result->fetch_assoc()) {
+                while ($row = $result_sections->fetch_assoc()) {
                   echo "<tr>";
                   echo "<td>" . $row['section_name'] . "</td>";
                   echo "<td>" . $row['grade_level'] . "</td>";
@@ -450,7 +447,7 @@ $result_schedule = $conn->query($sql_schedule);
               <tbody st>
                 <?php
 
-                while ($row = $result->fetch_assoc()) {
+                while ($row = $result_subjects->fetch_assoc()) {
                   echo "<tr>";
                   echo "<td>" . $row['subject_name'] . "</td>";
                   echo "<td>" . $row['subject_code'] . "</td>";
