@@ -31,9 +31,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $numDays = count($_POST["days"]);
                     for ($i = 0; $i < $numDays; $i++) {
                         $selectedDay = filter_var($_POST["days"][$i], FILTER_SANITIZE_STRING);
-                        $timeIn = date("h:i A", strtotime($_POST["timeIn"][$i]));
-                        $timeOut = date("h:i A", strtotime($_POST["timeOut"][$i]));
-                        $time = $timeIn . ' - ' . $timeOut;
+                        $timeInRaw = $_POST["timeIn"][$i];
+                        $timeOutRaw = $_POST["timeOut"][$i];
+                        $timeIn = strtotime($timeInRaw);
+                        $timeOut = strtotime($timeOutRaw);
+
+                        if ($timeIn === false || $timeOut === false) {
+                            echo "Error parsing time: Time In: $timeInRaw, Time Out: $timeOutRaw";
+                        } else {
+                            $timeInFormatted = date("h:i A", $timeIn);
+                            $timeOutFormatted = date("h:i A", $timeOut);
+                            $time = $timeInFormatted . ' - ' . $timeOutFormatted;
+                        }
 
                         $stmt->bind_param("ssssss", $inputSection, $inputStrand, $subjectName, $instructorName, $selectedDay, $time);
                         $stmt->execute();
