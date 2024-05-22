@@ -71,6 +71,164 @@ if (!$result_schedule2) {
         </li>
       </ul>
     </nav>
+    <div class="bg-content-view">
+      <div class="content-view">
+        <div class="close-view">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="main-inputs">
+          <div class="inputs-container">
+            <div class="inputs">
+              <span>Section</span>
+              <input type="text" readonly>
+            </div>
+            <div class="inputs">
+              <span>Strand</span>
+              <input type="text" readonly>
+            </div>
+            <div class="inputs">
+              <span>Adviser</span>
+              <input type="text" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="schedules-table">
+          <div class="table-header">
+            <div class="searchSchedule">
+              <form class="search-container">
+                <input type="text" id="searchInput" oninput="searchFunction()" />
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </form>
+            </div>
+          </div>
+          <div class="table-container">
+            <table id="scheduleTable" class="table">
+              <thead>
+                <tr>
+                  <th>
+                    <div class="sort" onclick="groupSections()">
+                      Section <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                  </th>
+                  <th>Strand</th>
+                  <th>
+                    <div class="sort" onclick="sortTable()">
+                      Day <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                  </th>
+                  <th>Subject</th>
+                  <th>Time</th>
+                  <th>Instructor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                </tr>
+                <tr>
+                  <td>aa</td>
+                  <td>ab</td>
+                  <td>ac</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                </tr>
+                <tr>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                </tr>
+                <tr>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                </tr>
+                <tr>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                </tr>
+                <tr>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                </tr>
+                <tr>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                </tr>
+                <tr>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                </tr>
+                <tr>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                </tr>
+                <tr>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                </tr>
+                <tr>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                </tr>
+                <tr>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                  <td>aa</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="button-container">
+          <button class="print" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
+          <button class="delete"><i class="fa-regular fa-trash-can"></i> Delete</button>
+        </div>
+      </div>
+    </div>
     <div class="bg-content-logout">
       <div class="content-logout">
         <img src="./img/shs-logo.png" alt="shs logo" class="shs-logo" />
@@ -225,6 +383,7 @@ if (!$result_schedule2) {
                     <th>Sem</th>
                     <th>SY</th>
                     <th>Adviser</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -238,11 +397,12 @@ if (!$result_schedule2) {
                     echo '<td>' . htmlspecialchars($row['sem']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['school_year']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['adviser']) . '</td>';
-                    echo '</tr>';
+                    echo '<td><button class="view-open-modal">Schedules</button></td>';
                   }
                   ?>
                 </tbody>
               </table>
+
             </div>
           </div>
 

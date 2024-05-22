@@ -52,7 +52,7 @@ function tableToPDF() {
       });
     });
     var printContent = '<table border="1">';
-    printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Day</th><th>Subject</th><th>Time in</th><th>Time out</th><th>Duration</th><th>Instructor</th></tr></thead>';
+    printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Day</th><th>Subject</th><th>Time</th><th>Instructor</th></tr></thead>';
     printContent += '<tbody>';
     checkedRows.forEach(function(row) {
       var rowData = row.closest('tr').querySelectorAll('td:not(.checkboxTbl)');
@@ -65,7 +65,7 @@ function tableToPDF() {
     printContent += '</tbody></table>';
     var newWindow = window.open('', '_blank');
     newWindow.document.open();
-    newWindow.document.write('<html><head><title>Checked Rows</title><style>.hide-on-print { display: none; }</style></head><body>' + printContent + '</body></html>');
+    newWindow.document.write('<html><head><title>OCT Schedule</title><style>.hide-on-print { display: none; }</style></head><body>' + printContent + '</body></html>');
     newWindow.document.close();
     newWindow.print();
     checkedRows.forEach(function(row) {
@@ -131,16 +131,6 @@ function toggleSelectAll() {
   });
 }
 
-
-// // modal for viewing
-// const view = document.querySelector(".view-open-modal");
-// const closeView = document.querySelector(".close-view");
-// view.addEventListener("click", function () {
-//   document.querySelector(".bg-content-view").style.display = "flex";
-// });
-// closeView.addEventListener("click", function () {
-//   document.querySelector(".bg-content-view").style.display = "none";
-// });
 
 // popout for the logout
 const logoutButton = document.querySelector(".logout");

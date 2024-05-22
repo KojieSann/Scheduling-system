@@ -138,7 +138,7 @@ $result_schedule = $conn->query($sql_schedule);
                         $row_count = $result_count->fetch_assoc();
                         $total_sections = $row_count['total'];
                         echo $total_sections;
-                        ?></span></span>
+                        ?></span>
                 </div>
                 <div class="info-img">
                   <img src="./img/undraw_schedule_re_2vro.svg" alt="">

@@ -74,12 +74,7 @@ document.getElementById("myDay").value = days[day];
     checkbox.checked = selectAllCheckbox.checked;
   });
 }
-document.querySelectorAll('.table tbody tr').forEach(function(row) {
-  row.addEventListener('click', function() {
-      var checkbox = this.querySelector('.checkboxTbl input[type="checkbox"]');
-      checkbox.checked = !checkbox.checked;
-  });
-});
+
 
 // table to pdf
 function tableToPDF() {
@@ -166,3 +161,41 @@ document.getElementById('tableToExcel').addEventListener('click', function(){
   var table2excel = new Table2Excel();
   table2excel.export(document.querySelectorAll("table"));
 })
+
+// // modal for viewing
+document.querySelectorAll(".view-open-modal").forEach(function(button) {
+  button.addEventListener("click", function () {
+    document.querySelector(".bg-content-view").style.display = "flex";
+  });
+});
+
+const closeView = document.querySelector(".close-view");
+closeView.addEventListener("click", function () {
+  document.querySelector(".bg-content-view").style.display = "none";
+});
+
+
+function searchFunction() {
+  var input, filter, table, tr, td, i, j, txtValue;
+  input = document.getElementById("searchInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("scheduleTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 1; i < tr.length; i++) { // Start from index 1 to exclude thead
+      var found = false;
+      td = tr[i].getElementsByTagName("td");
+      for (j = 0; j < td.length; j++) {
+          txtValue = td[j].textContent || td[j].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              found = true;
+              break;
+          }
+      }
+      if (found) {
+          tr[i].style.display = "";
+      } else {
+          tr[i].style.display = "none";
+      }
+  }
+}
