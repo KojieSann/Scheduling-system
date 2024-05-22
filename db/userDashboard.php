@@ -19,6 +19,7 @@ $result = $conn->query($sql);
 
 $sql_schedule2 = "SELECT * FROM schedule_again";
 $result_schedule2 = $conn->query($sql_schedule2);
+
 $sql_sections = "SELECT * FROM sections";
 $result_sections = $conn->query($sql_sections);
 
@@ -352,7 +353,7 @@ $result_schedule = $conn->query($sql_schedule);
               </thead>
               <tbody>
                 <?php
-                while ($row = $result->fetch_assoc()) {
+                while ($row = $result_teachers->fetch_assoc()) {
                   echo "<tr>";
                   echo "<td>" . $row['last_name'] . "</td>";
                   echo "<td>" . $row['middle_name'] . "</td>";
@@ -391,7 +392,7 @@ $result_schedule = $conn->query($sql_schedule);
               </thead>
               <tbody st>
                 <?php
-                while ($row = $result->fetch_assoc()) {
+                while ($row = $result_sections->fetch_assoc()) {
                   echo "<tr>";
                   echo "<td>" . $row['section_name'] . "</td>";
                   echo "<td>" . $row['grade_level'] . "</td>";
@@ -430,7 +431,7 @@ $result_schedule = $conn->query($sql_schedule);
               <tbody st>
                 <?php
 
-                while ($row = $result->fetch_assoc()) {
+                while ($row = $result_subjects->fetch_assoc()) {
                   echo "<tr>";
                   echo "<td>" . $row['subject_name'] . "</td>";
                   echo "<td>" . $row['subject_code'] . "</td>";
