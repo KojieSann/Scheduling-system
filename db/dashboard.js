@@ -271,3 +271,35 @@ function groupSections() {
   });
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  const scheduleButtons = document.querySelectorAll('.view-open-modal');
+  const tableRows = document.querySelectorAll('#scheduleTable tbody tr');
+  const searchInput = document.getElementById('search-box');
+
+  let currentSection = null;
+
+  scheduleButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      currentSection = this.getAttribute('data-section');
+      filterTableBySection(currentSection);
+    });
+  });
+
+  searchInput.addEventListener('input', function() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    filterTableBySection(currentSection, searchTerm);
+  });
+
+  function filterTableBySection(section, searchTerm = '') {
+    tableRows.forEach(row => {
+      const matchesSection = !section || row.getAttribute('data-section') === section;
+      const matchesSearch = row.textContent.toLowerCase().includes(searchTerm);
+
+      if (matchesSection && matchesSearch) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+});

@@ -230,24 +230,29 @@ function toggleButton(day) {
 
 //  for the repeated checkbox in subject scheduling
 const repeatCheckboxes = document.querySelectorAll('input[type="checkbox"][name="repeat"]');
-repeatCheckboxes.forEach(function(checkbox) {
-  checkbox.addEventListener("change", function() {
-    const timeSelection = checkbox.closest('.time-selection');
-    const inTimeInput = timeSelection.querySelector('.inTime input[type="time"]');
-    const outTimeInput = timeSelection.querySelector('.outTime input[type="time"]');
-    if (this.checked) {
-      const inTimeValue = inTimeInput.value;
-      const outTimeValue = outTimeInput.value;
-      const timeSelections = document.querySelectorAll('.time-selection');
-      timeSelections.forEach(function(selection) {
-        if (selection !== timeSelection) {
-          const inTimeInput = selection.querySelector('.inTime input[type="time"]');
-          const outTimeInput = selection.querySelector('.outTime input[type="time"]');
-          inTimeInput.value = inTimeValue;
-          outTimeInput.value = outTimeValue;
+repeatCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener("change", function() {
+        const timeSelection = this.closest('.time-selection');
+        const inTimeInput = timeSelection.querySelector('.inTime input[type="time"]');
+        const outTimeInput = timeSelection.querySelector('.outTime input[type="time"]');
+        
+        if (this.checked) {
+            const inTimeValue = inTimeInput.value;
+            const outTimeValue = outTimeInput.value;
+            document.querySelectorAll('.time-selection').forEach(selection => {
+                if (selection !== timeSelection) {
+                    const inTimeInputOther = selection.querySelector('.inTime input[type="time"]');
+                    const outTimeInputOther = selection.querySelector('.outTime input[type="time"]');
+                    inTimeInputOther.value = inTimeValue;
+                    outTimeInputOther.value = outTimeValue; 
+                }
+            });
         }
-      });
-    }
+    });
+});
+document.querySelectorAll('.time-selection input[type="time"]').forEach(input => {
+  input.addEventListener('change', function() {
+      this.setAttribute('value', this.value);
   });
 });
 
@@ -759,6 +764,15 @@ form.addEventListener('submit', (event) => {
       document.getElementById('contact_form').reset();
       form2.style.display = "none";
       form1.style.display = "block";
+
+      document.querySelectorAll('input[type="time"]').forEach(input => {
+        input.value = '';
+      });
+      document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+     
+    
     } else {
       myDiv.innerHTML = '<p>There was an error submitting the form</p>';
     }
@@ -767,6 +781,8 @@ form.addEventListener('submit', (event) => {
     myDiv.innerHTML = '<p>There was an error submitting the form:'+error+'</p>';
   });
 });
+
+
 
 // for sorting the day
 function sortTable() {

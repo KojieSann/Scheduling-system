@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 $username = $_SESSION['username'];
-include('connect.php');
+include ('connect.php');
 
 $sql_schedule = "SELECT * FROM schedules";
 $result_schedule = $conn->query($sql_schedule);
@@ -38,7 +38,9 @@ if (!$result_schedule2) {
   <title>Olivarez College Tagaytay</title>
   <link rel="stylesheet" href="dashboard.css" />
   <link rel="icon" type="x-icon" href="./img/olivarez-college-tagaytay-logo.png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -52,13 +54,16 @@ if (!$result_schedule2) {
       </div>
       <ul>
         <li class="list-items">
-          <a href="./generate.php" class="generate"><i class="fa-solid fa-circle-plus"></i><span class="nav-lists">Generate Schedule</span></a>
+          <a href="./generate.php" class="generate"><i class="fa-solid fa-circle-plus"></i><span
+              class="nav-lists">Generate Schedule</span></a>
         </li>
         <li class="list-items">
-          <a href="./dashboard.php" class="active"><i class="fa-solid fa-tv"></i><span class="nav-lists">Dashboard</span></a>
+          <a href="./dashboard.php" class="active"><i class="fa-solid fa-tv"></i><span
+              class="nav-lists">Dashboard</span></a>
         </li class="list-items">
         <li class="list-items">
-          <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i><span class="nav-lists">Teachers</span></a>
+          <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i><span
+              class="nav-lists">Teachers</span></a>
         </li>
         <li class="list-items">
           <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span class="nav-lists">Sections</span></a>
@@ -122,102 +127,18 @@ if (!$result_schedule2) {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                </tr>
-                <tr>
-                  <td>aa</td>
-                  <td>ab</td>
-                  <td>ac</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                </tr>
-                <tr>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                </tr>
-                <tr>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                </tr>
-                <tr>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                </tr>
-                <tr>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                </tr>
-                <tr>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                </tr>
-                <tr>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                </tr>
-                <tr>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                </tr>
-                <tr>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                </tr>
-                <tr>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                </tr>
-                <tr>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                  <td>aa</td>
-                </tr>
+                <?php
+                while ($row = $result_schedule->fetch_assoc()) {
+                  echo '<tr data-section="' . htmlspecialchars($row['section']) . '">';
+                  echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['day']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['time']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
+                  echo '</tr>';
+                }
+                ?>
               </tbody>
             </table>
           </div>
@@ -276,12 +197,12 @@ if (!$result_schedule2) {
               </div>
               <div class="info">
                 <span><?php
-                      $sql_count = "SELECT COUNT(*) AS total FROM schedules";
-                      $result_count = $conn->query($sql_count);
-                      $row_count = $result_count->fetch_assoc();
-                      $total_sections = $row_count['total'];
-                      echo $total_sections;
-                      ?></span></span>
+                $sql_count = "SELECT COUNT(*) AS total FROM schedules";
+                $result_count = $conn->query($sql_count);
+                $row_count = $result_count->fetch_assoc();
+                $total_sections = $row_count['total'];
+                echo $total_sections;
+                ?></span></span>
               </div>
               <div class="info-img">
                 <img src="./img/undraw_schedule_re_2vro.svg" alt="">
@@ -388,7 +309,7 @@ if (!$result_schedule2) {
                 <tbody>
                   <?php
                   while ($row = $result_schedule2->fetch_assoc()) {
-                    echo '<tr>';
+                    echo '<tr data-section="' . htmlspecialchars($row['section']) . '">';
                     echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
                     echo '<td>' . htmlspecialchars($row['section']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
@@ -396,7 +317,8 @@ if (!$result_schedule2) {
                     echo '<td>' . htmlspecialchars($row['sem']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['school_year']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['adviser']) . '</td>';
-                    echo '<td><button class="view-open-modal">Schedules</button></td>';
+                    echo '<td><button class="view-open-modal" data-section="' . htmlspecialchars($row['section']) . '">Schedules</button></td>';
+                    echo '</tr>';
                   }
                   ?>
                 </tbody>
@@ -443,6 +365,7 @@ if (!$result_schedule2) {
   <script src="./libraries/table2excel.js"></script>
   <script src="./libraries/html2pdf.bundle.min.js"></script>
   <script src="./dashboard.js"></script>
+
 </body>
 
 </html>
