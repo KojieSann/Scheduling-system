@@ -186,11 +186,11 @@
                      <p>Monday</p>
                      <div class="inTime time">
                        <span>In time</span>
-                       <input type="time" name="timeIn[]" />
+                       <input type="time" name="timeInMonday[]" />
                      </div>
                      <div class="outTime time">
                        <span>Out time</span>
-                       <input type="time" name="timeOut[]" />
+                       <input type="time" name="timeOutMonday[]" />
                      </div>
                      <div class="repeat">
                        <input type="checkbox" name="repeat" />
@@ -203,11 +203,11 @@
                      <p>Tuesday</p>
                      <div class="inTime time">
                        <span>In time</span>
-                       <input type="time" name="timeIn[]" />
+                       <input type="time" name="timeInTuesday[]" />
                      </div>
                      <div class="outTime time">
                        <span>Out time</span>
-                       <input type="time" name="timeOut[]" />
+                       <input type="time" name="timeOutTuesday[]" />
                      </div>
                      <div class="repeat">
                        <input type="checkbox" name="repeat" />
@@ -220,11 +220,11 @@
                      <p>Wednesday</p>
                      <div class="inTime time">
                        <span>In time</span>
-                       <input type="time" name="timeIn[]" />
+                       <input type="time" name="timeInWednesday[]" />
                      </div>
-                     <div class="outTime time" name="timeOut[]">
+                     <div class="outTime time">
                        <span>Out time</span>
-                       <input type="time" />
+                       <input type="time"  name="timeOutWednesday[]"/>
                      </div>
                      <div class="repeat">
                        <input type="checkbox" name="repeat" />
@@ -237,11 +237,11 @@
                      <p>Thursday</p>
                      <div class="inTime time">
                        <span>In time</span>
-                       <input type="time" name="timeIn[]" />
+                       <input type="time" name="timeInThursday[]" />
                      </div>
                      <div class="outTime time">
                        <span>Out time</span>
-                       <input type="time" name="timeOut[]" />
+                       <input type="time" name="timeOutThursday[]" />
                      </div>
                      <div class="repeat">
                        <input type="checkbox" name="repeat" />
@@ -254,11 +254,11 @@
                      <p>Friday</p>
                      <div class="inTime time">
                        <span>In time</span>
-                       <input type="time" name="timeIn[]" />
+                       <input type="time" name="timeInFriday[]" />
                      </div>
                      <div class="outTime time">
                        <span>Out time</span>
-                       <input type="time" name="timeOut[]" />
+                       <input type="time" name="timeOutFriday[]" />
                      </div>
                      <div class="repeat">
                        <input type="checkbox" name="repeat" />
@@ -275,7 +275,6 @@
                    </button>
                  </div>
 
-<<<<<<< Updated upstream
                </div>
              </div>
            </div>
@@ -332,281 +331,6 @@
                      </thead>
                      <tbody>
                        <?php
-=======
-                <div class="time-selection-monday" style="display: none;">
-                  <div class="time-selection">
-                    <p>Monday</p>
-                    <div class="inTime time">
-                      <span>In time</span>
-                      <input type="time" name="timeInMonday[]" />
-                    </div>
-                    <div class="outTime time">
-                      <span>Out time</span>
-                      <input type="time" name="timeOutMonday[]" />
-                    </div>
-                    <div class="repeat">
-                      <input type="checkbox" name="repeat" />
-                      <label for="repeat">Copy to all schedule</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="time-selection-tuesday" style="display: none;">
-                  <div class="time-selection">
-                    <p>Tuesday</p>
-                    <div class="inTime time">
-                      <span>In time</span>
-                      <input type="time" name="timeInTuesday[]" />
-                    </div>
-                    <div class="outTime time">
-                      <span>Out time</span>
-                      <input type="time" name="timeOutTuesday[]" />
-                    </div>
-                    <div class="repeat">
-                      <input type="checkbox" name="repeat" />
-                      <label for="repeat">Copy to all schedule</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="time-selection-wednesday" style="display: none;">
-                  <div class="time-selection">
-                    <p>Wednesday</p>
-                    <div class="inTime time">
-                      <span>In time</span>
-                      <input type="time" name="timeInWednesday[]" />
-                    </div>
-                    <div class="outTime time" >
-                      <span>Out time</span>
-                      <input type="time"name="timeOutWednesday[]"/>
-                    </div>
-                    <div class="repeat">
-                      <input type="checkbox" name="repeat" />
-                      <label for="repeat">Copy to all schedule</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="time-selection-thursday" style="display: none;">
-                  <div class="time-selection">
-                    <p>Thursday</p>
-                    <div class="inTime time">
-                      <span>In time</span>
-                      <input type="time" name="timeInThursday[]" />
-                    </div>
-                    <div class="outTime time">
-                      <span>Out time</span>
-                      <input type="time" name="timeOutThursday[]" />
-                    </div>
-                    <div class="repeat">
-                      <input type="checkbox" name="repeat" />
-                      <label for="repeat">Copy to all schedule</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="time-selection-friday" style="display: none;">
-                  <div class="time-selection">
-                    <p>Friday</p>
-                    <div class="inTime time">
-                      <span>In time</span>
-                      <input type="time" name="timeInFriday[]" />
-                    </div>
-                    <div class="outTime time">
-                      <span>Out time</span>
-                      <input type="time" name="timeOutFriday[]" />
-                    </div>
-                    <div class="repeat">
-                      <input type="checkbox" name="repeat" />
-                      <label for="repeat">Copy to all schedule</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="btns-wrap">
-                  <button type="button" class="subj-btn-back2 subjBtn">
-                    Back
-                  </button>
-                  <button type="submit" name="subjectSubmit" class="subj-btn-submit subjBtn">
-                    <i class="fa-regular fa-floppy-disk"></i> <span> Save</span>
-                  </button>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="bg-modal">
-      <div class="modal-content">
-        <div class="close-window"><i class="fa-solid fa-xmark"></i></div>
-        <div class="modal-container">
-          <div class="progress-bar">
-            <div class="step">
-              <p>Section</p>
-              <div class="bullet">
-                <span>1</span>
-              </div>
-              <div class="check fas fa-check"></div>
-            </div>
-            <div class="step">
-              <p>Subjects</p>
-              <div class="bullet">
-                <span>2</span>
-              </div>
-              <div class="check fas fa-check"></div>
-            </div>
-            <div class="step">
-              <p>Finalize</p>
-              <div class="bullet">
-                <span>3</span>
-              </div>
-              <div class="check fas fa-check"></div>
-            </div>
-          </div>
-          <div class="form-outer">
-            <form id="scheduleForm" method="POST" action="addAnotherSchedule.php">
-              <div class="page slide-page">
-                <div class="titleSection-header">
-                  <div class="title">Select section</div>
-                  <div class="searchSection">
-                    <input type="text" id="searchInput" placeholder="Search...">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                  </div>
-                </div>
-                <div class="table-container-modal">
-                  <table class="section-table">
-                    <thead>
-                      <tr>
-                        <th>Section</th>
-                        <th>Strand</th>
-                        <th>Grade lvl</th>
-                        <th>Schedule</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['section_name']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['strand']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['grade_level']) . "</td>";
-                        echo '<td>' . htmlspecialchars($row['schedule_count']) . '</td>';
-                        echo "<td><button type='button' class='firstNext next' data-section='" . htmlspecialchars($row['section_name'], ENT_QUOTES) . "' data-strand='" . htmlspecialchars($row['strand'], ENT_QUOTES) . "' data-grade-level='" . htmlspecialchars($row['grade_level'], ENT_QUOTES) . "'>Next <i class='fa-solid fa-angle-right'></i></button></td>";
-                        echo "</tr>";
-                      }
-                      ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="page">
-                <div class="title">Apply Subjects</div>
-                <div class="input-container">
-                  <div class="input-wrapper">
-                    <span>Section</span>
-                    <input readonly type="text" id="inputSection" class="input" value="" />
-                  </div>
-                  <div class="input-wrapper">
-                    <span>Strand</span>
-                    <input readonly type="text" id="inputStrand" class="input" value="" />
-                  </div>
-                  <div class="input-wrapper">
-                    <span>Grade level</span>
-                    <input readonly type="text" id="inputGradeLevel" class="input" value="" />
-                  </div>
-                </div>
-                <div class="table-container-modal">
-                  <table class="section-table subject-table">
-                    <thead>
-                      <tr>
-                        <th>Subjects</th>
-                        <th>Code</th>
-                        <th>Strand</th>
-                        <th>Grade lvl</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      while ($row = $result_subjects->fetch_assoc()) {
-                        echo "<tr id=\"row-" . $row['subject_code'] . "\">";
-                        echo "<td>" . $row['subject_name'] . "</td>";
-                        echo "<td>" . $row['subject_code'] . "</td>";
-                        echo "<td>" . $row['strand'] . "</td>";
-                        echo "<td>" . $row['grade_level'] . "</td>";
-                        echo "</div>";
-                        echo "</td>";
-                        echo "<td>";
-                        echo "<button type=\"button\" class=\"open-modal\" data-subject-name=\"" . htmlspecialchars($row['subject_name'], ENT_QUOTES) . "\" data-subject-code=\"" . htmlspecialchars($row['subject_code'], ENT_QUOTES) . "\" data-strand=\"" . htmlspecialchars($row['strand'], ENT_QUOTES) . "\" data-grade-level=\"" . htmlspecialchars($row['grade_level'], ENT_QUOTES) . "\">";
-                        echo "Apply";
-                        echo "</button>";
-                        echo "</td>";
-                        echo "</tr>";
-                      }
-                      ?>
-                    </tbody>
-
-                  </table>
-                </div>
-                <div class="field btns">
-                  <button class="prev-1 prev">Previous</button>
-                  <button class="next-1 next">Next</button>
-                </div>
-              </div>
-              <div class="page details">
-                <div class="title">Finalize the schedule</div>
-                <div class="input-container">
-                  <div class="input-wrapper">
-                    <span>Section</span>
-                    <input readonly type="text" class="input" name="inputSection" />
-                  </div>
-                  <div class="input-wrapper">
-                    <span>Strand</span>
-                    <input readonly type="text" class="input" name="inputStrand" />
-                  </div>
-                  <div class="input-wrapper">
-                    <span>Grade level</span>
-                    <input readonly type="text" class="input" name="inputGradeLevel" />
-                  </div>
-                </div>
-                <hr />
-                <div class="additional-inputs">
-                  <div class="sy-container">
-                    <span class="title">School year</span>
-                    <div class="dropdown-sy">
-
-                      <input type="text" class="textbox-sy" name="school_year" placeholder="Select school year" readonly />
-                      <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
-                      <div class="option-sy">
-                        <div onclick="bulaga('2024-2025')">2024-2025</div>
-                        <div onclick="bulaga('2025-2026')">2025-2026</div>
-                        <div onclick="bulaga('2026-2027')">2026-2027</div>
-                        <div onclick="bulaga('2027-2028')">2027-2028</div>
-                        <div onclick="bulaga('2028-2029')">2028-2029</div>
-                        <div onclick="bulaga('2030-2031')">2030-2031</div>
-                        <div onclick="bulaga('2031-2032')">2031-2032</div>
-                        <div onclick="bulaga('2033-2034')">2033-2034</div>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="sem-container">
-                    <span class="title">Semester</span>
-                    <div class="dropdown-sem">
-                      <input type="text" class="textbox-sem" name="sem" placeholder="Select semester" readonly />
-                      <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
-                      <div class="option">
-                        <div onclick="show('1st')">1st</div>
-                        <div onclick="show('2nd')">2nd</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="finalize-adviser">
-                    <span class="title">Choose adviser</span>
-                    <select multiple multiselect-search="true" name="adviser[]">
-                      <?php
-                      $sql = "SELECT first_name, last_name FROM teachers";
-                      $result = $conn->query($sql);
-                      if ($result->num_rows > 0) {
->>>>>>> Stashed changes
                         while ($row = $result->fetch_assoc()) {
                           echo "<tr>";
                           echo "<td>" . htmlspecialchars($row['section_name']) . "</td>";

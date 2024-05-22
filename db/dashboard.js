@@ -270,7 +270,6 @@ function groupSections() {
       }
   });
 }
-
 document.addEventListener('DOMContentLoaded', function() {
   const scheduleButtons = document.querySelectorAll('.view-open-modal');
   const tableRows = document.querySelectorAll('#scheduleTable tbody tr');
@@ -281,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
   scheduleButtons.forEach(button => {
     button.addEventListener('click', function() {
       currentSection = this.getAttribute('data-section');
-      filterTableBySection(currentSection);
+      filterTableBySection(currentSection, searchInput.value.toLowerCase().trim());
     });
   });
 
