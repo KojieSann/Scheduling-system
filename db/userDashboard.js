@@ -150,7 +150,72 @@ function toggleSelectAllSecondTable() {
   });
 }
 
+function searchFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("search-box");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("schedule-table");
+  tr = table.getElementsByTagName("tr");
 
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td");
+    for (var j = 0; j < td.length; j++) {
+      if (td[j]) {
+        txtValue = td[j].textContent || td[j].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          break;
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+}
 
+function searchFunction2() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("search-box-2");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("scheduleTable");
+  tr = table.getElementsByTagName("tr");
 
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td");
+    for (var j = 1; j < td.length; j++) { // Start from 1 to skip checkbox column
+      if (td[j]) {
+        txtValue = td[j].textContent || td[j].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          break;
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+}
+
+function searchTeacher() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("teacher-search-box");
+  filter = input.value.toUpperCase();
+  table = document.querySelector("#teacher .table-container table");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td");
+    for (var j = 0; j < td.length; j++) {
+      if (td[j]) {
+        txtValue = td[j].textContent || td[j].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          break;
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+}
 

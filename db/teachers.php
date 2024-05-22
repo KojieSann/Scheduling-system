@@ -11,20 +11,6 @@ include('connect.php');
 $sql = "SELECT * FROM teachers";
 $result = $conn->query($sql);
 
-function searchTeachers($conn, $searchTerm)
-{
-  $sql = "SELECT * FROM teachers WHERE last_name LIKE '%$searchTerm%' OR day LIKE '%$searchTerm%' OR time LIKE '%$searchTerm%' OR strand LIKE '%$searchTerm%' OR subject LIKE '%$searchTerm%'";
-  $result = $conn->query($sql);
-  return $result;
-}
-if (isset($_GET['search'])) {
-  $searchTerm = $_GET['search'];
-  $result = searchTeachers($conn, $searchTerm);
-} else {
-  $sql = "SELECT * FROM teachers";
-  $result = $conn->query($sql);
-}
-
 ?>
 
 <!DOCTYPE html>
