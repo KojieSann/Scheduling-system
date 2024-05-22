@@ -199,3 +199,75 @@ function searchFunction() {
       }
   }
 }
+// for sorting the day
+function sortTable() {
+  var table = document.getElementById("scheduleTable");
+  var rows = Array.from(table.getElementsByTagName("tr"));
+  var groupedRows = {
+      Monday: [],
+      Tuesday: [],
+      Wednesday: [],
+      Thursday: [],
+      Friday: []
+  };
+  for (var i = 1; i < rows.length; i++) {
+      var dayCell = rows[i].getElementsByTagName("td")[3];
+      var day = dayCell.textContent.trim();
+      groupedRows[day].push(rows[i]);
+  }
+  while (table.rows.length > 1) {
+      table.deleteRow(1);
+  }
+
+  for (var day in groupedRows) {
+      if (groupedRows.hasOwnProperty(day)) {
+          var rowsForDay = groupedRows[day];
+          for (var j = 0; j < rowsForDay.length; j++) {
+              table.appendChild(rowsForDay[j]);
+          }
+      }
+  }
+
+  var sortedRows = Array.from(table.getElementsByTagName("tr"));
+  sortedRows.forEach(function(row, index) {
+      if (index % 2 === 0) {
+          row.style.backgroundColor = "#eee";
+      } else {
+          row.style.backgroundColor = ""; 
+      }
+  });
+}
+// for grouping sections
+function groupSections() {
+  var table = document.getElementById("scheduleTable");
+  var rows = table.getElementsByTagName("tr");
+  var groupedRows = {};
+  for (var i = 1; i < rows.length; i++) {
+      var sectionCell = rows[i].getElementsByTagName("td")[1]; 
+      var section = sectionCell.textContent.trim();
+      if (!groupedRows[section]) {
+          groupedRows[section] = [];
+      }
+      groupedRows[section].push(rows[i]);
+  }
+  while (table.rows.length > 1) {
+      table.deleteRow(1);
+  }
+  for (var section in groupedRows) {
+      if (groupedRows.hasOwnProperty(section)) {
+          var rowsForSection = groupedRows[section];
+          for (var j = 0; j < rowsForSection.length; j++) {
+              table.appendChild(rowsForSection[j]);
+          }
+      }
+  }
+  var sortedRows = Array.from(table.getElementsByTagName("tr"));
+  sortedRows.forEach(function(row, index) {
+      if (index % 2 === 0) {
+          row.style.backgroundColor = "#eee";
+      } else {
+          row.style.backgroundColor = ""; 
+      }
+  });
+}
+
