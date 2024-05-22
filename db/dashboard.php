@@ -143,7 +143,6 @@ if (!$result_schedule2) {
             </table>
           </div>
         </div>
-
         <div class="button-container">
           <button class="print" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
           <button class="delete"><i class="fa-regular fa-trash-can"></i> Delete</button>

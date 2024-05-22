@@ -10,7 +10,6 @@
   nav {
     display: none;
   }
-
   body {
     visibility: hidden;
   }
@@ -452,22 +451,21 @@ ul .list-items:hover i::after {
   z-index: -10;
   opacity: 0.2;
 }
+
 .bg-content-logout .header-img img {
-  bottom: 0px;
+  bottom: 75px;
   position: absolute;
   right: -50px;
   height: 170px;
   z-index: -10;
   opacity: 0.2;
 }
-.bg-content-logout .header-img img {
-  width: 200px;
-}
 .bg-content-logout .header-text {
   align-items: center;
   display: flex;
   flex-direction: column;
   font-family: "poppins";
+  z-index: 100;
 }
 .bg-content-logout .header-text span {
   font-family: "poppins";
@@ -553,14 +551,23 @@ ul .list-items:hover i::after {
 }
 
 .bg-content-view .content-view .close-view{
- padding: 12px 17px;
+  width: 35px;
+  height: 35px;
   cursor: pointer;
   position: absolute;
   color: #c66;
   border-radius: 50%;
   align-items: center;
-  font-size: 23px;
-  right: 10px;
+  justify-content: center;
+  display: flex;
+  font-size: 20px;
+  right: 30px;
+  background: #fff;
+  transition: all 0.1s ease-in;
+}
+.bg-content-view .content-view .close-view:hover{
+  background: #c66;
+  color: #fff;
 }
 .bg-content-view .content-view input{
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);

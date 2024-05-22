@@ -17,19 +17,6 @@ $total_sections = $row_count['total'];
 $sql = "SELECT * FROM teachers";
 $result = $conn->query($sql);
 
-function searchTeachers($conn, $searchTerm)
-{
-  $sql = "SELECT * FROM teachers WHERE last_name LIKE '%$searchTerm%' OR day LIKE '%$searchTerm%' OR time LIKE '%$searchTerm%' OR strand LIKE '%$searchTerm%' OR subject LIKE '%$searchTerm%'";
-  $result = $conn->query($sql);
-  return $result;
-}
-if (isset($_GET['search'])) {
-  $searchTerm = $_GET['search'];
-  $result = searchTeachers($conn, $searchTerm);
-} else {
-  $sql = "SELECT * FROM teachers";
-  $result = $conn->query($sql);
-}
 $sql_schedule2 = "SELECT * FROM schedule_again";
 $result_schedule2 = $conn->query($sql_schedule2);
 $sql_sections = "SELECT * FROM sections";
@@ -38,8 +25,6 @@ $result_sections = $conn->query($sql_sections);
 $sql_subjects = "SELECT * FROM subjects";
 $result_subjects = $conn->query($sql_subjects);
 
-$sql_teachers = "SELECT * FROM teachers";
-$result_teachers = $conn->query($sql_teachers);
 
 $sql_schedule = "SELECT * FROM schedules";
 $result_schedule = $conn->query($sql_schedule);
@@ -205,7 +190,7 @@ $result_schedule = $conn->query($sql_schedule);
                 </div>
               </div>
             </div>
-            <div class="schedule-table">
+            <div class="schedule-table" id="schedule-table">
               <div class="table-header">
                 <span>Schedules</span>
                 <div class="table-nav">
@@ -221,9 +206,8 @@ $result_schedule = $conn->query($sql_schedule);
                 </div>
                 <div class="table-search">
                   <form class="search-container">
-                    <input id="search-box" type="text" class="search-box" name="" />
+                    <input id="search-box" type="text" class="search-box" oninput="searchFunction()" placeholder="Search..." />
                     <label for="search-box"><i class="fa-solid fa-magnifying-glass search-icon"></i></label>
-                    <input type="submit" id="search-submit" />
                   </form>
                 </div>
               </div>
@@ -286,11 +270,10 @@ $result_schedule = $conn->query($sql_schedule);
               <button onclick="tableToPDF2()">
                 <i class="fa-regular fa-file-pdf"></i> PDF
               </button>
-              <button onclick="deleteSelectedRows()"><i class=" fa-solid fa-trash-can"></i> Delete</button>
             </div>
             <div class="searchSchedule">
               <form class="search-container">
-                <input type="text" />
+                <input id="search-box-2" type="text" oninput="searchFunction2()" placeholder="Search..." />
                 <i class="fa-solid fa-magnifying-glass"></i>
               </form>
             </div>
@@ -299,7 +282,7 @@ $result_schedule = $conn->query($sql_schedule);
             <table id="scheduleTable" class="table">
               <thead>
                 <tr>
-                  <th class="checkboxTblSched"><input type="checkbox" onclick="toggleSelectAllSecondTable()" /></th>
+                  <th class="checkboxTbl"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()" /></th>
                   <th>
                     <div class="sort" onclick="groupSections()">
                       Section <i class="fa-solid fa-chevron-down"></i>
@@ -312,29 +295,31 @@ $result_schedule = $conn->query($sql_schedule);
                     </div>
                   </th>
                   <th>Subject</th>
-                  <th>Time in</th>
-                  <th>Time out</th>
-                  <th>Duration</th>
+                  <th>Time</th>
                   <th>Instructor</th>
-
                 </tr>
               </thead>
               <tbody>
                 <?php
-                while ($row = $result_schedule->fetch_assoc()) {
-                  echo '<tr>';
-                  echo '<td class="checkboxTblSched"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
-                  echo '<td>' . htmlspecialchars($row['section']) . '</td>';
-                  echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
-                  echo '<td>' . htmlspecialchars($row['day']) . '</td>';
-                  echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
-                  echo '<td>' . htmlspecialchars($row['timeIn']) . '</td>';
-                  echo '<td>' . htmlspecialchars($row['timeOut']) . '</td>';
-                  echo '<td> none </td>';
-                  echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
-
-                  echo '</tr>';
+                include('connect.php');
+                $query = "SELECT * FROM schedules ORDER BY id DESC";
+                $result_schedule = $conn->query($query);
+                if ($result_schedule->num_rows > 0) {
+                  while ($row = $result_schedule->fetch_assoc()) {
+                    echo '<tr>';
+                    echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
+                    echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['day']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['time']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
+                    echo '</tr>';
+                  }
+                } else {
+                  echo "<tr><td colspan='8'>No schedule available</td></tr>";
                 }
+                $conn->close();
                 ?>
               </tbody>
             </table>
@@ -347,7 +332,7 @@ $result_schedule = $conn->query($sql_schedule);
             <span>List of instructors</span>
             <div class="searchSchedule">
               <form class="search-container">
-                <input type="text" />
+                <input id="teacher-search-box" type="text" oninput="searchTeacher()" placeholder="Search..." />
                 <i class="fa-solid fa-magnifying-glass"></i>
               </form>
             </div>
@@ -357,19 +342,21 @@ $result_schedule = $conn->query($sql_schedule);
               <thead>
                 <tr>
                   <th>Last Name</th>
+                  <th>Middle name</th>
+                  <th>First name</th>
                   <th>Day</th>
                   <th>Time</th>
                   <th>Strand</th>
                   <th>Subjects</th>
-
                 </tr>
               </thead>
-              <tbody st>
+              <tbody>
                 <?php
-
                 while ($row = $result->fetch_assoc()) {
                   echo "<tr>";
                   echo "<td>" . $row['last_name'] . "</td>";
+                  echo "<td>" . $row['middle_name'] . "</td>";
+                  echo "<td>" . $row['first_name'] . "</td>";
                   echo "<td>" . $row['day'] . "</td>";
                   echo "<td>" . $row['time'] . "</td>";
                   echo "<td>" . $row['strand'] . "</td>";
@@ -404,13 +391,11 @@ $result_schedule = $conn->query($sql_schedule);
               </thead>
               <tbody st>
                 <?php
-
                 while ($row = $result->fetch_assoc()) {
                   echo "<tr>";
                   echo "<td>" . $row['section_name'] . "</td>";
                   echo "<td>" . $row['grade_level'] . "</td>";
                   echo "<td>" . $row['strand'] . "</td>";
-
                   echo "</tr>";
                 }
                 ?>
