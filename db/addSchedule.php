@@ -1,11 +1,9 @@
 <?php
-include ('connect.php');
+include('connect.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (
         isset($_POST["days"]) && !empty($_POST["days"]) &&
-        isset($_POST["timeIn"]) && !empty($_POST["timeIn"]) &&
-        isset($_POST["timeOut"]) && !empty($_POST["timeOut"]) &&
         isset($_POST["modalSubjectName"]) && !empty($_POST["modalSubjectName"]) &&
         isset($_POST["instructorSelect"]) && !empty($_POST["instructorSelect"]) &&
         isset($_POST['inputSection']) && !empty($_POST['inputSection']) &&
@@ -15,49 +13,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $inputSection = htmlspecialchars($_POST['inputSection']);
         $inputStrand = htmlspecialchars($_POST['inputStrand']);
         $selectedInstructor = (int) $_POST["instructorSelect"];
+
         $query = "SELECT first_name, last_name FROM teachers WHERE id = ?";
         $stmt = $conn->prepare($query);
+
         if ($stmt) {
             $stmt->bind_param("i", $selectedInstructor);
             $stmt->execute();
             $result = $stmt->get_result();
+
             if ($result->num_rows === 1) {
                 $row = $result->fetch_assoc();
                 $instructorName = $row['first_name'] . ' ' . $row['last_name'];
+                $stmt->close();
 
                 $insertQuery = "INSERT INTO schedules (section, strand, subject, instructor, day, time) VALUES (?, ?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($insertQuery);
+
                 if ($stmt) {
-                    $numDays = count($_POST["days"]);
-                    for ($i = 0; $i < $numDays; $i++) {
-                        $selectedDay = filter_var($_POST["days"][$i], FILTER_SANITIZE_STRING);
-                        $timeInRaw = $_POST["timeIn"][$i];
-                        $timeOutRaw = $_POST["timeOut"][$i];
-                        $timeIn = strtotime($timeInRaw);
-                        $timeOut = strtotime($timeOutRaw);
+                    foreach ($_POST["days"] as $day) {
+                        $selectedDay = htmlspecialchars($day);
+                        $timeInArray = $_POST["timeIn" . $selectedDay];
+                        $timeOutArray = $_POST["timeOut" . $selectedDay];
 
-                        if ($timeIn === false || $timeOut === false) {
-                            echo "Error parsing time: Time In: $timeInRaw, Time Out: $timeOutRaw";
-                        } else {
-                            $timeInFormatted = date("h:i A", $timeIn);
-                            $timeOutFormatted = date("h:i A", $timeOut);
-                            $time = $timeInFormatted . ' - ' . $timeOutFormatted;
+                        for ($i = 0; $i < count($timeInArray); $i++) {
+                            $timeIn = strtotime($timeInArray[$i]);
+                            $timeOut = strtotime($timeOutArray[$i]);
+
+                            if ($timeIn !== false && $timeOut !== false) {
+                                $time = date("h:i A", $timeIn) . ' - ' . date("h:i A", $timeOut);
+                                
+                                $stmt->bind_param("ssssss", $inputSection, $inputStrand, $subjectName, $instructorName, $selectedDay, $time);
+                                if (!$stmt->execute()) {
+                                    echo "Failed to add schedule for $selectedDay at $time: " . $stmt->error . "<br>";
+                                }
+                            } else {
+                                echo "Error parsing time for $selectedDay.<br>";
+                            }
                         }
-
-                        $stmt->bind_param("ssssss", $inputSection, $inputStrand, $subjectName, $instructorName, $selectedDay, $time);
-                        $stmt->execute();
                     }
 
-                    echo "Schedule added successfully.";
+                    echo "Schedules processed successfully.";
+                    $stmt->close();
                 } else {
-                    echo "Error preparing insert statement.";
+                    echo "Error preparing insert statement: " . $conn->error;
                 }
             } else {
                 echo "Instructor not found.";
             }
-            $stmt->close();
         } else {
-            echo "Error preparing select statement.";
+            echo "Error preparing select statement: " . $conn->error;
         }
     } else {
         echo "Please provide all required information.";
@@ -66,4 +71,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: generate.php");
     exit();
 }
+
 ?>
