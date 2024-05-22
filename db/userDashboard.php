@@ -14,8 +14,8 @@ $result_count = $conn->query($sql_count);
 $row_count = $result_count->fetch_assoc();
 $total_sections = $row_count['total'];
 
-$sql = "SELECT * FROM teachers";
-$result = $conn->query($sql);
+$sql_schedule = "SELECT * FROM teachers";
+$result_teachers = $conn->query($sql_schedule);
 
 $sql_schedule2 = "SELECT * FROM schedule_again";
 $result_schedule2 = $conn->query($sql_schedule2);
@@ -25,7 +25,6 @@ $result_sections = $conn->query($sql_sections);
 
 $sql_subjects = "SELECT * FROM subjects";
 $result_subjects = $conn->query($sql_subjects);
-
 
 $sql_schedule = "SELECT * FROM schedules";
 $result_schedule = $conn->query($sql_schedule);
@@ -430,7 +429,6 @@ $result_schedule = $conn->query($sql_schedule);
               </thead>
               <tbody st>
                 <?php
-
                 while ($row = $result_subjects->fetch_assoc()) {
                   echo "<tr>";
                   echo "<td>" . $row['subject_name'] . "</td>";
