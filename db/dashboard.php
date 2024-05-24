@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 $username = $_SESSION['username'];
-include ('connect.php');
+include('connect.php');
 
 $sql_schedule = "SELECT * FROM schedules";
 $result_schedule = $conn->query($sql_schedule);
@@ -38,9 +38,7 @@ if (!$result_schedule2) {
   <title>Olivarez College Tagaytay</title>
   <link rel="stylesheet" href="dashboard.css" />
   <link rel="icon" type="x-icon" href="./img/olivarez-college-tagaytay-logo.png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -48,33 +46,19 @@ if (!$result_schedule2) {
   <div class="container">
     <nav>
       <div class="logo">
-        <img src="./img/olivarez-college-tagaytay-logo.png" alt="" />
-        <span>Olivarez College <br />
-          Tagaytay</span>
+        <img src="./img/olivarez-college-tagaytay-logo.png" alt="oct logo">
       </div>
-      <ul>
-        <li class="list-items">
-          <a href="./generate.php" class="generate"><i class="fa-solid fa-circle-plus"></i><span
-              class="nav-lists">Generate Schedule</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./dashboard.php" class="active"><i class="fa-solid fa-tv"></i><span
-              class="nav-lists">Dashboard</span></a>
-        </li class="list-items">
-        <li class="list-items">
-          <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i><span
-              class="nav-lists">Teachers</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span class="nav-lists">Sections</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./subject.php"><i class="fa-solid fa-book"></i><span class="nav-lists">Subjects</span></a>
-        </li>
-        <li>
-          <a class="logout"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-lists">Logout</span></a>
-        </li>
-      </ul>
+      <div class="public">
+        <a href="./generate.php"><i class="fa-solid fa-circle-plus"></i><span>Create schedule</span></a>
+        <a href="./dashboard.php" class="active"> <i class="fa-solid fa-tv"></i><span>Dashboard</span></a>
+        <a href="./subject.php"><i class="fa-solid fa-book"></i><span>Subjects</span></a>
+        <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span>Sections</span></a>
+        <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i> <span>Teachers</span></a>
+
+      </div>
+      <div class="admin">
+        <a class="logout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+      </div>
     </nav>
     <div class="bg-content-view">
       <div class="content-view">
@@ -110,11 +94,7 @@ if (!$result_schedule2) {
             <table id="scheduleTable" class="table">
               <thead>
                 <tr>
-                  <th>
-                    <div class="sort" onclick="groupSections()">
-                      Section <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                  </th>
+                  <th>Section</th>
                   <th>Strand</th>
                   <th>
                     <div class="sort" onclick="sortTable()">
@@ -197,12 +177,12 @@ if (!$result_schedule2) {
               </div>
               <div class="info">
                 <span><?php
-                $sql_count = "SELECT COUNT(*) AS total FROM schedules";
-                $result_count = $conn->query($sql_count);
-                $row_count = $result_count->fetch_assoc();
-                $total_sections = $row_count['total'];
-                echo $total_sections;
-                ?></span></span>
+                      $sql_count = "SELECT COUNT(*) AS total FROM schedules";
+                      $result_count = $conn->query($sql_count);
+                      $row_count = $result_count->fetch_assoc();
+                      $total_sections = $row_count['total'];
+                      echo $total_sections;
+                      ?></span></span>
               </div>
               <div class="info-img">
                 <img src="./img/undraw_schedule_re_2vro.svg" alt="">

@@ -28,30 +28,19 @@ $result = $conn->query($sql);
   <div class="container">
     <nav>
       <div class="logo">
-        <img src="./img/olivarez-college-tagaytay-logo.png" alt="" />
-        <span>Olivarez College <br />
-          Tagaytay</span>
+        <img src="./img/olivarez-college-tagaytay-logo.png" alt="oct logo">
       </div>
-      <ul>
-        <li class="list-items">
-          <a href="./generate.php"><i class="fa-solid fa-circle-plus"></i><span class="nav-lists">Generate Schedule</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./dashboard.php"><i class="fa-solid fa-tv"></i><span class="nav-lists">Dashboard</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i><span class="nav-lists">Teachers</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span class="nav-lists">Sections</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./subject.php" class="active"><i class="fa-solid fa-book"></i><span class="nav-lists">Subjects</span></a>
-        </li>
-        <li>
-          <a class="logout"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-lists">Logout</span></a>
-        </li>
-      </ul>
+      <div class="public">
+        <a href="./generate.php"><i class="fa-solid fa-circle-plus"></i><span>Create schedule</span></a>
+        <a href="./dashboard.php"> <i class="fa-solid fa-tv"></i><span>Dashboard</span></a>
+        <a href="./subject.php" class="active"><i class="fa-solid fa-book"></i><span>Subjects</span></a>
+        <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span>Sections</span></a>
+        <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i> <span>Teachers</span></a>
+
+      </div>
+      <div class="admin">
+        <a class="logout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+      </div>
     </nav>
     <div class="bg-content-logout">
       <div class="content-logout">
@@ -75,7 +64,8 @@ $result = $conn->query($sql);
         <i class="fa-solid fa-user"></i>
       </div>
       <div class="inputs">
-        <form action="add_subject.php" method="post" onsubmit="return validateForm()">
+        <form name="subjectForm" action="add_subject.php" method="post" onsubmit="return validateForm()">
+
           <div class="subject-code">
             <div class="subj-code">
               <span>Subject<span style="color: red; font-size: 1.3em">*</span></span>

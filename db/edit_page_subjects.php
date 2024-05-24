@@ -74,30 +74,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="container">
     <nav>
       <div class="logo">
-        <img src="./img/olivarez-college-tagaytay-logo.png" alt="" />
-        <span>Olivarez College <br />
-          Tagaytay</span>
+        <img src="./img/olivarez-college-tagaytay-logo.png" alt="oct logo">
       </div>
-      <ul>
-        <li class="list-items">
-          <a href="./generate.php"><i class="fa-solid fa-circle-plus"></i><span class="nav-lists">Generate Schedule</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./dashboard.php"><i class="fa-solid fa-tv"></i><span class="nav-lists">Dashboard</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i><span class="nav-lists">Teachers</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span class="nav-lists">Sections</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./subject.php" class="active"><i class="fa-solid fa-book"></i><span class="nav-lists">Subjects</span></a>
-        </li>
-        <li>
-          <a href="./login.php" class="logout"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-lists">Logout</span></a>
-        </li>
-      </ul>
+      <div class="public">
+        <a href="./generate.php"><i class="fa-solid fa-circle-plus"></i><span>Create schedule</span></a>
+        <a href="./dashboard.php"> <i class="fa-solid fa-tv"></i><span>Dashboard</span></a>
+        <a href="./subject.php" class="active"><i class="fa-solid fa-book"></i><span>Subjects</span></a>
+        <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span>Sections</span></a>
+        <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i> <span>Teachers</span></a>
+
+      </div>
+      <div class="admin">
+        <a class="logout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+      </div>
     </nav>
     <section class="main-content">
       <div class="main-logo">

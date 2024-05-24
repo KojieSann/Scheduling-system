@@ -237,39 +237,6 @@ function sortTable() {
       }
   });
 }
-// for grouping sections
-function groupSections() {
-  var table = document.getElementById("scheduleTable");
-  var rows = table.getElementsByTagName("tr");
-  var groupedRows = {};
-  for (var i = 1; i < rows.length; i++) {
-      var sectionCell = rows[i].getElementsByTagName("td")[1]; 
-      var section = sectionCell.textContent.trim();
-      if (!groupedRows[section]) {
-          groupedRows[section] = [];
-      }
-      groupedRows[section].push(rows[i]);
-  }
-  while (table.rows.length > 1) {
-      table.deleteRow(1);
-  }
-  for (var section in groupedRows) {
-      if (groupedRows.hasOwnProperty(section)) {
-          var rowsForSection = groupedRows[section];
-          for (var j = 0; j < rowsForSection.length; j++) {
-              table.appendChild(rowsForSection[j]);
-          }
-      }
-  }
-  var sortedRows = Array.from(table.getElementsByTagName("tr"));
-  sortedRows.forEach(function(row, index) {
-      if (index % 2 === 0) {
-          row.style.backgroundColor = "#eee";
-      } else {
-          row.style.backgroundColor = ""; 
-      }
-  });
-}
 document.addEventListener('DOMContentLoaded', function() {
   const scheduleButtons = document.querySelectorAll('.view-open-modal');
   const tableRows = document.querySelectorAll('#scheduleTable tbody tr');

@@ -91,7 +91,6 @@ $result_schedule = $conn->query($sql_schedule);
                   Schedules
                 </a>
               </li>
-
               <li class="list-items">
                 <a href="#teacher"><span class="nav-lists">Teachers</span></a>
               </li>
@@ -215,7 +214,6 @@ $result_schedule = $conn->query($sql_schedule);
                 <table class="table">
                   <thead>
                     <tr>
-                      <th class="checkboxTbl"><input type="checkbox" onclick="toggleSelectAllFirstTable()" /></th>
                       <th>Section</th>
                       <th>Strand</th>
                       <th># of Subjects</th>
@@ -228,7 +226,6 @@ $result_schedule = $conn->query($sql_schedule);
                     <?php
                     while ($row = $result_schedule2->fetch_assoc()) {
                       echo '<tr>';
-                      echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
                       echo '<td>' . htmlspecialchars($row['section']) . '</td>';
                       echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
                       echo '<td>  0 </td>';
@@ -282,7 +279,8 @@ $result_schedule = $conn->query($sql_schedule);
             <table id="scheduleTable" class="table">
               <thead>
                 <tr>
-                  <th class="checkboxTbl"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()" /></th>
+                  <th class="checkboxTbl"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()" />
+                  </th>
                   <th>
                     <div class="sort" onclick="groupSections()">
                       Section <i class="fa-solid fa-chevron-down"></i>
@@ -375,7 +373,7 @@ $result_schedule = $conn->query($sql_schedule);
             <span>List of sections</span>
             <div class="searchSchedule">
               <form class="search-container">
-                <input type="text" />
+                <input id="section-search-box" type="text" oninput="searchSection()" placeholder="Search..." />
                 <i class="fa-solid fa-magnifying-glass"></i>
               </form>
             </div>
@@ -410,7 +408,7 @@ $result_schedule = $conn->query($sql_schedule);
             <span>List of subjects</span>
             <div class="searchSchedule">
               <form class="search-container">
-                <input type="text" />
+                <input id="subject-search-box" type="text" oninput="searchSubject()" placeholder="Search..." />
                 <i class="fa-solid fa-magnifying-glass"></i>
               </form>
             </div>
@@ -421,7 +419,6 @@ $result_schedule = $conn->query($sql_schedule);
                 <tr>
                   <th>Subject</th>
                   <th>Subject Code</th>
-                  <th>School Year</th>
                   <th>Grade Level</th>
                   <th>Strand</th>
 
@@ -433,7 +430,6 @@ $result_schedule = $conn->query($sql_schedule);
                   echo "<tr>";
                   echo "<td>" . $row['subject_name'] . "</td>";
                   echo "<td>" . $row['subject_code'] . "</td>";
-                  echo "<td>" . $row['school_year'] . "</td>";
                   echo "<td>" . $row['grade_level'] . "</td>";
                   echo "<td>" . $row['strand'] . "</td>";
                   echo "</tr>";

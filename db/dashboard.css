@@ -26,104 +26,85 @@ body {
   background: #fff;
 }
 
-.logo {
-  margin: 20px 0 40px 20px;
-  align-items: center;
-  display: flex;
-  transition: all 0, 5s ease;
-}
-.logo img {
-  cursor: pointer;
-  height: 50px;
-  width: 50px;
-  right: 50px;
-}
-
-.logo span {
-  text-align: center;
-  white-space: nowrap;
-  color: #4b4b4b;
-  margin-left: 20px;
-  font-weight: 700;
-  font-size: 17px;
-}
-nav a {
-  text-decoration: none;
-  color: #4b4b4b;
-  font-size: 15px;
-  width: 300px;
-  padding: 10px;
-  position: relative;
-  display: table;
-  font-family: "montserrat";
-  font-weight: 600;
-}
-nav {
-  z-index: 10000;
-  border-top-right-radius: 20px;
-  outline: none;
-  text-decoration: none;
-  background: #d8f3dc;
-  font-family: "Montserrat";
+nav{
+  width: max-content;
+  border-radius: 10px ;
+  background-color: #d8f3dc;
+  box-shadow: 0px 0px 30px #d8f3dc;
   height: 100vh;
-  width: 90px;
-  position: fixed;
-  transition: width 0.2s linear;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
 }
-.logout {
+nav div{
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+nav .logo img{
   cursor: pointer;
-  bottom: 5px;
+  margin-top: 20px;
+  width: 50px;
+}
+.public{
+  padding-bottom: 80px !important;
+}
+.admin{
   position: absolute;
+  bottom: 0;
+  border-top: 1px solid #4b4b4b;
 }
-nav i {
+nav a{
   position: relative;
-  width: 70px;
-  height: 40px;
-  top: 14px;
-  font-size: 20px;
-  text-align: center;
-}
-.nav-lists {
-  position: relative;
-  top: 12px;
-  margin-left: 10px;
-}
-nav a:hover {
-  transition: all 0.1s ease;
-  background: linear-gradient(to right, #95d5b2, transparent);
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-family: 'poppins';
   color: #4b4b4b;
-  color: white;
-  border-top-left-radius: 7px;
-  border-bottom-left-radius: 7px;
+  cursor: pointer;
 }
-nav:hover {
-  width: 260px;
-  transition: all 0.5s ease;
+nav i{
+  font-size: 20px;
 }
-.active i {
-  color: white;
+nav a:hover, nav .active{
+  background-color:#95d5b2 ;
+  color: #fff;
 }
-ul .list-items .active i::after {
-  width: 8px;
-}
-ul .list-items i::after {
+nav a span{
+  z-index: 10000;
+  font-size: 15px;
+  white-space: nowrap;
+  padding: 10px 20px;
+  border-radius: 6px;
+  background-color: #52b788;
+  color: #fff;
   position: absolute;
-  content: "";
-  top: 25%;
-  left: 0;
-  width: 0px;
-  height: 75%;
-  transform: translateY(-50%);
-  background-color: #2d6a4f;
-  border-radius: 5px;
+  left: 150%;
+  top: 50%;
+  transform-origin: left;
+  --scale:0;
+  opacity: 0;
+  transform: translateY(-59%) scale(var(--scale));
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
-ul .list-items:hover i::after {
-  width: 8px;
-  transition: 0.3s;
+nav a:hover span{
+  --scale:1;
+  opacity: 1;
+}
+nav a span::before{
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  background-color: inherit;
+  left: 0;
+  top: 50%;
+  transform: translate(-40%,-50%)rotate(45deg);
 }
 .container {
   display: flex;
@@ -133,7 +114,6 @@ ul .list-items:hover i::after {
   position: relative;
   width: 100%;
   padding: 20px;
-  margin-left: 100px;
 }
 .header-logo {
   display: flex;
@@ -535,7 +515,7 @@ ul .list-items:hover i::after {
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  /* display: none; */
+  display: none;
 }
 .bg-content-view .content-view {
   height: 600px;

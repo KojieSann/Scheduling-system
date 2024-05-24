@@ -126,29 +126,16 @@ document.getElementById("myDay").value = days[day];
   }
   
   
-// select all for table
-// select all for first table
-function toggleSelectAllFirstTable() {
-  var table = document.querySelectorAll('.table')[0];
-  var checkboxes = table.querySelectorAll('.checkboxTbl input[type="checkbox"]');
-  var selectAllCheckbox = table.querySelector('.checkboxTbl input[type="checkbox"]:first-child');
-
-  checkboxes.forEach(function(checkbox) {
-    checkbox.checked = selectAllCheckbox.checked;
-  });
-
-  toggleTableNav();
+// select all
+function toggleSelectAll() {
+  var checkboxes = document.querySelectorAll('#scheduleTable tbody input[type="checkbox"]');
+  var selectAllCheckbox = document.getElementById('selectAll');
+  
+  for (var i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].checked = selectAllCheckbox.checked;
+  }
 }
-// select all for second table
-function toggleSelectAllSecondTable() {
-  var table = document.querySelectorAll('.table')[1];
-  var checkboxes = table.querySelectorAll('.checkboxTblSched input[type="checkbox"]');
-  var selectAllCheckbox = table.querySelector('.checkboxTblSched input[type="checkbox"]:first-child');
 
-  checkboxes.forEach(function(checkbox) {
-    checkbox.checked = selectAllCheckbox.checked;
-  });
-}
 
 function searchFunction() {
   var input, filter, table, tr, td, i, txtValue;
@@ -219,3 +206,47 @@ function searchTeacher() {
   }
 }
 
+function searchSubject() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("subject-search-box");
+  filter = input.value.toUpperCase();
+  table = document.querySelector("#subject .table-container table");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td");
+    for (var j = 0; j < td.length; j++) {
+      if (td[j]) {
+        txtValue = td[j].textContent || td[j].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          break;
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+}
+function searchSection() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("section-search-box");
+  filter = input.value.toUpperCase();
+  table = document.querySelector("#section .table-container table");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td");
+    for (var j = 0; j < td.length; j++) {
+      if (td[j]) {
+        txtValue = td[j].textContent || td[j].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          break;
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+}
