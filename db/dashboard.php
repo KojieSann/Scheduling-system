@@ -169,7 +169,6 @@ if (!$result_schedule2) {
       <div class="content-container">
         <div class="info-date">
           <div class="infos-container">
-
             <div class="infos-wrapper">
               <div class="info-title">
                 <a href="generate.php">Schedules created</a>
@@ -256,12 +255,6 @@ if (!$result_schedule2) {
                 <button onclick="tableToPrint()">
                   <i class="fa-solid fa-print"></i> Print
                 </button>
-                <button id="tableToExcel">
-                  <i class="fa-regular fa-file-excel"></i> Excel
-                </button>
-                <button onclick="tableToPDF()">
-                  <i class="fa-regular fa-file-pdf"></i> PDF
-                </button>
                 <button onclick="deleteSelectedRows()"><i class=" fa-solid fa-trash-can"></i> Delete</button>
               </div>
               <div class="table-search">
@@ -306,39 +299,17 @@ if (!$result_schedule2) {
 
             </div>
           </div>
-
         </div>
         <div class="section-teacher">
           <div class="section-container">
-            <span>Today's Schedule</span>
+            <span>Teachers</span>
             <div class="section-wrapper contents">
               <div class="wrapper">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Section</th>
-                      <th>Time</th>
-                      <th>Instructor</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    while ($row = $result_schedule->fetch_assoc()) {
-                      echo '<tr>';
-                      echo '<td>' . htmlspecialchars($row['section']) . '</td>';
-                      echo '<td>' . htmlspecialchars($row['time']) . '</td>';
-                      echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
-                      echo '</tr>';
-                    }
-                    ?>
-                  </tbody>
-                </table>
+                <img src="" alt="">
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   </div>

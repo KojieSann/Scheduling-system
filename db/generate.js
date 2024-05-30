@@ -12,6 +12,14 @@ const closeModalSubject = document.querySelector(".close-subject");
 modalSubject.addEventListener("click", function () {
   document.querySelector(".bg-modal-subject").style.display = "flex";
 });
+const closeNotif = document.querySelector(".bg-modal-success .close")
+closeNotif.addEventListener("click", function () {
+  document.querySelector(".bg-modal-success").style.display = "none";
+});
+const closeFailed = document.querySelector(".bg-modal-failed .closeFailed ")
+closeFailed.addEventListener("click", function () {
+  document.querySelector(".bg-modal-failed").style.display = "none";
+});
 closeModalSubject.addEventListener("click", function () {
   document.querySelector(".bg-modal-subject").style.display = "none";
 });
@@ -271,7 +279,7 @@ function initMultiStepForm() {
   const stepsNumber = pages.length;
 
   if (progressNumber !== stepsNumber) {
-    console.warn("bubu ampotaaaa");
+    console.warn("There was an error in the page");
   }
 
   document.documentElement.style.setProperty("--stepNumber", stepsNumber);
@@ -310,10 +318,7 @@ function initMultiStepForm() {
     progressCheck[current - 1].classList.add("active");
     progressText[current - 1].classList.add("active");
     current += 1;
-    setTimeout(function () {
-      alert("KAGALING AHHHHH!!");
-      location.reload();
-    }, 800);
+
   });
 
   function validateInputs(ths) {
@@ -332,6 +337,28 @@ function initMultiStepForm() {
     }
     return inputsValid;
   }
+
+  
+$(document).on('click', '.create', function() {
+  // Show the modal
+  $('.bg-modal').show();
+  $('.bg-modal-success').hide();
+  // Reset the form
+  $('#scheduleForm')[0].reset();
+  
+  // Move progress bar to the first step
+  for (let i = 0; i < bullet.length; i++) {
+    bullet[i].classList.remove("active");
+  }
+  for (let i = 0; i < progressCheck.length; i++) {
+    progressCheck[i].classList.remove("active");
+  }
+  for (let i = 0; i < progressText.length; i++) {
+    progressText[i].classList.remove("active");
+  }
+  current = 1;
+  slidePage.style.marginLeft = `0%`;
+});
 }
 //for modal subject
 const form1 = document.querySelector(".form1");
@@ -684,6 +711,20 @@ document.addEventListener("click", (e) => {
     dropdownStrand.classList.remove("activeShow");
   }
 });
+//  dropdown for adviser
+function adviser(anything) {
+  document.querySelector(".textbox-adviser").value = anything;
+}
+const textBoxadviser = document.querySelector(".textbox-adviser")
+let dropdownadviser = document.querySelector(".dropdown-adviser");
+dropdownadviser.onclick = function () {
+  dropdownadviser.classList.toggle("activeShowAdviser");
+};
+document.addEventListener("click", (e) => {
+  if (!textBoxadviser.contains(e.target) && e.target !== dropdownadviser) {
+    dropdownadviser.classList.remove("activeShowAdviser");
+  }
+});
 //  dropdown for sy
 function bulaga(anything) {
   document.querySelector(".textbox-sy").value = anything;
@@ -743,6 +784,7 @@ $(document).ready(function(){
   const form = document.getElementById('contact_form');
   const myDiv = document.getElementById('formContainer');
 
+  
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   const inputSectionValue = document.getElementById('inputSection').value;
@@ -771,8 +813,6 @@ form.addEventListener('submit', (event) => {
       document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         checkbox.checked = false;
       });
-     
-    
     } else {
       myDiv.innerHTML = '<p>There was an error submitting the form</p>';
     }
@@ -884,3 +924,61 @@ $(document).ready(function() {
     }
   });
 });
+
+
+function confetti() {
+  $.each($(".particletext.confetti"), function(){
+     var confetticount = ($(this).width()/50)*10;
+     for(var i = 0; i <= confetticount; i++) {
+        $(this).append('<span class="particle c' + $.rnd(1,2) + '" style="top:' + $.rnd(10,50) + '%; left:' + $.rnd(0,100) + '%;width:' + $.rnd(6,8) + 'px; height:' + $.rnd(3,4) + 'px;animation-delay: ' + ($.rnd(0,30)/10) + 's;"></span>');
+     }
+  });
+}
+jQuery.rnd = function(m,n) {
+     m = parseInt(m);
+     n = parseInt(n);
+     return Math.floor( Math.random() * (n - m + 1) ) + m;
+}
+confetti();
+
+
+function submitForm() {
+  event.preventDefault();
+
+  var isEmpty = false;
+  $('.required').each(function() {
+    if ($(this).val() === '') {
+      isEmpty = true;
+      return false;
+    }
+  });
+
+  if (isEmpty) {
+    $('.bg-modal-failed').show();
+    return;
+  }
+
+  var formData = $('#scheduleForm').serialize();
+
+  $.ajax({
+    type: 'POST',
+    url: $('#scheduleForm').attr('action'),
+    data: formData,
+    success: function(response) {
+      $('.bg-modal-success').show();
+      $('.bg-modal').hide();
+    },
+    error: function(xhr, status, error) {
+      $('.bg-modal-failed').show();
+      console.log(error);
+    }
+  });
+}
+
+$(document).on('click', '.submit', function() {
+  submitForm();
+});
+
+
+
+

@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             if ($timeIn !== false && $timeOut !== false) {
                                 $time = date("h:i A", $timeIn) . ' - ' . date("h:i A", $timeOut);
-                                
+
                                 $stmt->bind_param("ssssss", $inputSection, $inputStrand, $subjectName, $instructorName, $selectedDay, $time);
                                 if (!$stmt->execute()) {
                                     echo "Failed to add schedule for $selectedDay at $time: " . $stmt->error . "<br>";
@@ -71,5 +71,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: generate.php");
     exit();
 }
-
-?>

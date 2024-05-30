@@ -76,25 +76,7 @@ document.getElementById("myDay").value = days[day];
 }
 
 
-// table to pdf
-function tableToPDF() {
-  var table2pdf = document.querySelector(".table");
-  var checkboxColumns = table2pdf.querySelectorAll(".checkboxTbl");
-  checkboxColumns.forEach(function(column) {
-    column.parentNode.removeChild(column);
-  });
-  var opt = {
-    margin: 1,
-    filename: "octScheduleMaker.pdf",
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-  };
-  html2pdf(table2pdf, opt);
-  checkboxColumns.forEach(function(column) {
-    column.parentNode.insertBefore(column, table2pdf.querySelector("thead th:nth-child(1)"));
-  });
-}
+
 function tableToPrint() {
   var checkedRows = document.querySelectorAll('.table-container input:checked');
   if (checkedRows.length === 0) {
@@ -157,11 +139,6 @@ function deleteSelectedRows() {
       form.submit();
   }
 }
-document.getElementById('tableToExcel').addEventListener('click', function(){
-  var table2excel = new Table2Excel();
-  table2excel.export(document.querySelectorAll("table"));
-})
-
 // // modal for viewing
 document.querySelectorAll(".view-open-modal").forEach(function(button) {
   button.addEventListener("click", function () {
@@ -173,7 +150,6 @@ const closeView = document.querySelector(".close-view");
 closeView.addEventListener("click", function () {
   document.querySelector(".bg-content-view").style.display = "none";
 });
-
 
 function searchFunction() {
   var input, filter, table, tr, td, i, j, txtValue;
@@ -201,42 +177,31 @@ function searchFunction() {
 }
 // for sorting the day
 function sortTable() {
-  var table = document.getElementById("scheduleTable");
-  var rows = Array.from(table.getElementsByTagName("tr"));
-  var groupedRows = {
-      Monday: [],
-      Tuesday: [],
-      Wednesday: [],
-      Thursday: [],
-      Friday: []
-  };
-  for (var i = 1; i < rows.length; i++) {
-      var dayCell = rows[i].getElementsByTagName("td")[3];
-      var day = dayCell.textContent.trim();
-      groupedRows[day].push(rows[i]);
-  }
-  while (table.rows.length > 1) {
-      table.deleteRow(1);
-  }
-
-  for (var day in groupedRows) {
-      if (groupedRows.hasOwnProperty(day)) {
-          var rowsForDay = groupedRows[day];
-          for (var j = 0; j < rowsForDay.length; j++) {
-              table.appendChild(rowsForDay[j]);
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("scheduleTable");
+  switching = true;
+  while (switching) {
+      switching = false;
+      rows = table.getElementsByTagName("TR");
+      for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("TD")[2];
+          y = rows[i + 1].getElementsByTagName("TD")[2];
+          var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+          var xIndex = days.indexOf(x.innerHTML);
+          var yIndex = days.indexOf(y.innerHTML);
+          if (xIndex > yIndex) {
+              shouldSwitch = true;
+              break;
           }
       }
-  }
-
-  var sortedRows = Array.from(table.getElementsByTagName("tr"));
-  sortedRows.forEach(function(row, index) {
-      if (index % 2 === 0) {
-          row.style.backgroundColor = "#eee";
-      } else {
-          row.style.backgroundColor = ""; 
+      if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
       }
-  });
+  }
 }
+
 document.addEventListener('DOMContentLoaded', function() {
   const scheduleButtons = document.querySelectorAll('.view-open-modal');
   const tableRows = document.querySelectorAll('#scheduleTable tbody tr');

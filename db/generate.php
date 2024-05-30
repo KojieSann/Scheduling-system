@@ -83,6 +83,37 @@
          </div>
        </div>
      </div>
+     <div class="bg-modal-success">
+       <div class="success-content">
+         <div class="successLogo">
+           <div class="textcontainer">
+             <span class="particletext confetti"><i class="fa-solid fa-circle-check"></i></span>
+             <p>Schedule created <span style="color: #2d6a4f; font-size:20px;">successfully!</span></p>
+             <p style="font-size: 11px; font-weight:400;">View the added schedule in the dashboard <br> or make some more!</p>
+           </div>
+
+         </div>
+         <div class="btn-content">
+           <button class="close">Close</button>
+           <button class="create">Create again</button>
+         </div>
+       </div>
+     </div>
+     <div class="bg-modal-failed" style="display: none; z-index:100000;">
+       <div class="success-content">
+         <div class="successLogo">
+           <div class="textcontainer">
+             <i class="fa-solid fa-circle-xmark failed"></i>
+             <p>Schedule creation <span style="color: #ba181b; font-size:20px;">failed! </span></p>
+             <p style="font-size: 11px; font-weight:400;">Seems like there is an error while creating a schedule <br>try checking the schedules or completely <br>filling up the required fieds</p>
+           </div>
+
+         </div>
+         <div class="btn-content">
+           <button class="closeFailed close">Close</button>
+         </div>
+       </div>
+     </div>
      <div class="bg-modal-subject">
        <div class="modal-content-subject">
          <div class="close-subject"><i class="fa-solid fa-xmark"></i></div>
@@ -298,7 +329,7 @@
              </div>
            </div>
            <div class="form-outer">
-             <form id="scheduleForm" method="POST" action="addAnotherSchedule.php">
+             <div class="oct-schedule">
                <div class="page slide-page">
                  <div class="titleSection-header">
                    <div class="title">Select section</div>
@@ -380,7 +411,6 @@
                         }
                         ?>
                      </tbody>
-
                    </table>
                  </div>
                  <div class="field btns">
@@ -389,77 +419,85 @@
                  </div>
                </div>
                <div class="page details">
-                 <div class="title">Finalize the schedule</div>
-                 <div class="input-container">
-                   <div class="input-wrapper">
-                     <span>Section</span>
-                     <input readonly type="text" class="input" name="inputSection" />
+                 <form id="scheduleForm" method="POST" action="addAnotherSchedule.php">
+                   <div class="title">Finalize the schedule</div>
+                   <div class="input-container">
+                     <div class="input-wrapper">
+                       <span>Section</span>
+                       <input readonly type="text" class="input required" name="inputSection" />
+                     </div>
+                     <div class="input-wrapper">
+                       <span>Strand</span>
+                       <input readonly type="text" class="input required" name="inputStrand" />
+                     </div>
+                     <div class="input-wrapper">
+                       <span>Grade level</span>
+                       <input readonly type="text" class="input required" name="inputGradeLevel" />
+                     </div>
                    </div>
-                   <div class="input-wrapper">
-                     <span>Strand</span>
-                     <input readonly type="text" class="input" name="inputStrand" />
-                   </div>
-                   <div class="input-wrapper">
-                     <span>Grade level</span>
-                     <input readonly type="text" class="input" name="inputGradeLevel" />
-                   </div>
-                 </div>
-                 <hr />
-                 <div class="additional-inputs">
-                   <div class="sy-container">
-                     <span class="title">School year</span>
-                     <div class="dropdown-sy">
+                   <hr />
+                   <div class="additional-inputs">
+                     <div class="sy-container">
+                       <span class="title">School year</span>
+                       <div class="dropdown-sy">
 
-                       <input type="text" class="textbox-sy" name="school_year" placeholder="Select school year" readonly />
-                       <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
-                       <div class="option-sy">
-                         <div onclick="bulaga('2024-2025')">2024-2025</div>
-                         <div onclick="bulaga('2025-2026')">2025-2026</div>
-                         <div onclick="bulaga('2026-2027')">2026-2027</div>
-                         <div onclick="bulaga('2027-2028')">2027-2028</div>
-                         <div onclick="bulaga('2028-2029')">2028-2029</div>
-                         <div onclick="bulaga('2030-2031')">2030-2031</div>
-                         <div onclick="bulaga('2031-2032')">2031-2032</div>
-                         <div onclick="bulaga('2033-2034')">2033-2034</div>
+                         <input type="text" class="textbox-sy required" name="school_year" placeholder="Select school year" readonly />
+                         <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
+                         <div class="option-sy">
+                           <div onclick="bulaga('2024-2025')">2024-2025</div>
+                           <div onclick="bulaga('2025-2026')">2025-2026</div>
+                           <div onclick="bulaga('2026-2027')">2026-2027</div>
+                           <div onclick="bulaga('2027-2028')">2027-2028</div>
+                           <div onclick="bulaga('2028-2029')">2028-2029</div>
+                           <div onclick="bulaga('2030-2031')">2030-2031</div>
+                           <div onclick="bulaga('2031-2032')">2031-2032</div>
+                           <div onclick="bulaga('2033-2034')">2033-2034</div>
 
+                         </div>
+                       </div>
+                     </div>
+                     <div class="sem-container">
+                       <span class="title">Semester</span>
+                       <div class="dropdown-sem">
+                         <input type="text" class="textbox-sem required" name="sem" placeholder="Select semester" readonly />
+                         <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
+                         <div class="option">
+                           <div onclick="show('1st')">1st</div>
+                           <div onclick="show('2nd')">2nd</div>
+                         </div>
+                       </div>
+                     </div>
+                     <div class="adviser-container">
+                       <span class="title">Semester</span>
+                       <div class="dropdown-adviser">
+                         <input type="text" class="textbox-adviser required" name="adviser" placeholder="Select adviser" readonly />
+                         <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
+                         <div class="option">
+                           <?php
+                            include('connect.php');
+                            $sql = "SELECT first_name, last_name FROM teachers";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+
+                              while ($row = $result->fetch_assoc()) {
+
+                                echo '<div onclick="adviser(\'' . $row["first_name"] . ' ' . $row["last_name"] . '\')">' . $row["first_name"] . ' ' . $row["last_name"] . '</div>';
+                              }
+                            } else {
+                              echo "0 results";
+                            }
+                            ?>
+                         </div>
                        </div>
                      </div>
                    </div>
-                   <div class="sem-container">
-                     <span class="title">Semester</span>
-                     <div class="dropdown-sem">
-                       <input type="text" class="textbox-sem" name="sem" placeholder="Select semester" readonly />
-                       <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
-                       <div class="option">
-                         <div onclick="show('1st')">1st</div>
-                         <div onclick="show('2nd')">2nd</div>
-                       </div>
-                     </div>
+                   <div class="field btns">
+                     <button type="button" class="prev-2 prev">Previous</button>
+                     <button type="submit" class="submit"><i class="fa-regular fa-floppy-disk"></i> Submit</button>
                    </div>
-                   <div class="finalize-adviser">
-                     <span class="title">Choose adviser</span>
-                     <select multiple multiselect-search="true" name="adviser[]">
-                       <?php
-                        $sql = "SELECT first_name, last_name FROM teachers";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                          while ($row = $result->fetch_assoc()) {
-                            echo '<option value="' . $row["first_name"] . ' ' . $row["last_name"] . '">' . $row["first_name"] . ' ' . $row["last_name"] . '</option>';
-                          }
-                        } else {
-                          echo "0 results";
-                        }
-                        $conn->close();
-                        ?>
-                     </select>
-                   </div>
-                 </div>
-                 <div class="field btns">
-                   <button type="button" class="prev-2 prev">Previous</button>
-                   <button type="submit" class="submit"><i class="fa-regular fa-floppy-disk"></i> Submit</button>
-                 </div>
+                 </form>
                </div>
-             </form>
+             </div>
            </div>
          </div>
        </div>
@@ -549,8 +587,8 @@
      </div>
    </div>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-   </script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="./libraries/html2pdf.bundle.min.js"></script>
    <script src="./libraries/table2excel.js"></script>
    <script src="./generate.js"></script>
