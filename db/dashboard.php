@@ -69,15 +69,15 @@ if (!$result_schedule2) {
           <div class="inputs-container">
             <div class="inputs">
               <span>Section</span>
-              <input type="text" readonly>
+              <input type="text" name="section" readonly>
             </div>
             <div class="inputs">
               <span>Strand</span>
-              <input type="text" readonly>
+              <input type="text" name="strand" readonly>
             </div>
             <div class="inputs">
               <span>Adviser</span>
-              <input type="text" readonly>
+              <input type="text" name="adviser" readonly>
             </div>
           </div>
         </div>
@@ -125,7 +125,10 @@ if (!$result_schedule2) {
         </div>
         <div class="button-container">
           <button class="print" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
-          <button class="delete"><i class="fa-regular fa-trash-can"></i> Delete</button>
+          <form method="POST" action="deleteSectionsDashboard.php">
+            <input type="hidden" name="section_id" value="SECTION_ID_HERE" />
+            <button type="submit" class="delete"><i class="fa-regular fa-trash-can"></i> Delete</button>
+          </form>
         </div>
       </div>
     </div>
@@ -290,7 +293,7 @@ if (!$result_schedule2) {
                     echo '<td>' . htmlspecialchars($row['sem']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['school_year']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['adviser']) . '</td>';
-                    echo '<td><button class="view-open-modal" data-section="' . htmlspecialchars($row['section']) . '">Schedules</button></td>';
+                    echo '<td><button class="view-open-modal" data-section="' . htmlspecialchars($row['section']) . '" data-strand="' . htmlspecialchars($row['strand']) . '" data-adviser="' . htmlspecialchars($row['adviser']) . '">Schedules</button></td>';
                     echo '</tr>';
                   }
                   ?>
@@ -305,7 +308,35 @@ if (!$result_schedule2) {
             <span>Teachers</span>
             <div class="section-wrapper contents">
               <div class="wrapper">
+<<<<<<< Updated upstream
                 <img src="" alt="">
+=======
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Section</th>
+                      <th>Subject</th>
+                      <th>Time</th>
+                      <th>Instructor</th>
+                    </tr>
+                  </thead>
+                  <tbody style="font-size:13px;">
+                    <?php
+                    $today = date('l'); // Gets the current day of the week, e.g., "Wednesday"
+                    $sql_schedule = "SELECT * FROM schedules WHERE day = '$today'";
+                    $result_schedule = $conn->query($sql_schedule);
+                    while ($row = $result_schedule->fetch_assoc()) {
+                      echo '<tr>';
+                      echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['time']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
+                      echo '</tr>';
+                    }
+                    ?>
+                  </tbody>
+                </table>
+>>>>>>> Stashed changes
               </div>
             </div>
           </div>

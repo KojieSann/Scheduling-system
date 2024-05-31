@@ -202,6 +202,52 @@ function sortTable() {
   }
 }
 
+<<<<<<< Updated upstream
+=======
+  var sortedRows = Array.from(table.getElementsByTagName("tr"));
+  sortedRows.forEach(function(row, index) {
+      if (index % 2 === 0) {
+          row.style.backgroundColor = "#eee";
+      } else {
+          row.style.backgroundColor = ""; 
+      }
+  });
+}
+// for grouping sections
+function groupSections() {
+  var table = document.getElementById("scheduleTable");
+  var rows = table.getElementsByTagName("tr");
+  var groupedRows = {};
+  for (var i = 1; i < rows.length; i++) {
+      var sectionCell = rows[i].getElementsByTagName("td")[1]; 
+      var section = sectionCell.textContent.trim();
+      if (!groupedRows[section]) {
+          groupedRows[section] = [];
+      }
+      groupedRows[section].push(rows[i]);
+  }
+  while (table.rows.length > 1) {
+      table.deleteRow(1);
+  }
+  for (var section in groupedRows) {
+      if (groupedRows.hasOwnProperty(section)) {
+          var rowsForSection = groupedRows[section];
+          for (var j = 0; j < rowsForSection.length; j++) {
+              table.appendChild(rowsForSection[j]);
+          }
+      }
+  }
+  var sortedRows = Array.from(table.getElementsByTagName("tr"));
+  sortedRows.forEach(function(row, index) {
+      if (index % 2 === 0) {
+          row.style.backgroundColor = "#eee";
+      } else {
+          row.style.backgroundColor = ""; 
+      }
+  });
+}
+
+>>>>>>> Stashed changes
 document.addEventListener('DOMContentLoaded', function() {
   const scheduleButtons = document.querySelectorAll('.view-open-modal');
   const tableRows = document.querySelectorAll('#scheduleTable tbody tr');
@@ -209,28 +255,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let currentSection = null;
 
+  // Event listeners for each schedule button to set the current section
   scheduleButtons.forEach(button => {
     button.addEventListener('click', function() {
       currentSection = this.getAttribute('data-section');
-      filterTableBySection(currentSection, searchInput.value.toLowerCase().trim());
+      // Clear search input when a new section is selected
+      searchInput.value = '';
+      filterTableBySection(currentSection);
     });
   });
 
+  // Event listener for search input changes
   searchInput.addEventListener('input', function() {
     const searchTerm = searchInput.value.toLowerCase().trim();
     filterTableBySection(currentSection, searchTerm);
   });
 
+  // Function to filter table rows based on section and search term
   function filterTableBySection(section, searchTerm = '') {
     tableRows.forEach(row => {
-      const matchesSection = !section || row.getAttribute('data-section') === section;
-      const matchesSearch = row.textContent.toLowerCase().includes(searchTerm);
-
-      if (matchesSection && matchesSearch) {
-        row.style.display = '';
+      const sectionMatches = row.getAttribute('data-section') === section;
+  
+      if (sectionMatches) {
+        const searchMatches = row.textContent.toLowerCase().includes(searchTerm);
+        row.style.display = searchMatches ? '' : 'none';
       } else {
         row.style.display = 'none';
       }
     });
   }
 });
+document.addEventListener('DOMContentLoaded', function () {
+  const scheduleButtons = document.querySelectorAll('.view-open-modal');
+
+  scheduleButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const section = this.getAttribute('data-section');
+      const strand = this.getAttribute('data-strand');
+      const adviser = this.getAttribute('data-adviser');
+
+      document.querySelector('input[name="section"]').value = section;
+      document.querySelector('input[name="strand"]').value = strand;
+      document.querySelector('input[name="adviser"]').value = adviser;
+    });
+  });
+});
+
+

@@ -17,8 +17,15 @@ $total_sections = $row_count['total'];
 $sql_schedule = "SELECT * FROM teachers";
 $result_teachers = $conn->query($sql_schedule);
 
-$sql_schedule2 = "SELECT * FROM schedule_again";
-$result_schedule2 = $conn->query($sql_schedule2);
+$query = "SELECT sa.id, sa.section, sa.strand, COUNT(DISTINCT s.subject) AS subject_count, sa.sem, sa.school_year, sa.adviser
+  FROM schedule_again sa
+  LEFT JOIN schedules s ON s.section = sa.section
+  GROUP BY sa.id, sa.section, sa.strand, sa.sem, sa.school_year, sa.adviser;
+";
+$result_schedule2 = $conn->query($query);
+if (!$result_schedule2) {
+  die("Query failed: " . $conn->error);
+}
 
 $sql_sections = "SELECT * FROM sections";
 $result_sections = $conn->query($sql_sections);
@@ -112,7 +119,7 @@ $result_schedule = $conn->query($sql_schedule);
 
               <div class="infos-wrapper">
                 <div class="info-title">
-                  <a href="generate.php">Schedules created</a>
+                  <a href="#schedule">Schedules created</a>
                   <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 </div>
                 <div class="info">
@@ -130,7 +137,7 @@ $result_schedule = $conn->query($sql_schedule);
               </div>
               <div class="infos-wrapper">
                 <div class="info-title">
-                  <a href="subject.php">Subjects in total</a>
+                  <a href="#subject">Subjects in total</a>
                   <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 </div>
                 <div class="info">
@@ -150,7 +157,7 @@ $result_schedule = $conn->query($sql_schedule);
               </div>
               <div class="infos-wrapper">
                 <div class="info-title">
-                  <a href="section.php">Sections applied</a>
+                  <a href="#section">Sections applied</a>
                   <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 </div>
                 <div class="info">
@@ -170,7 +177,7 @@ $result_schedule = $conn->query($sql_schedule);
               </div>
               <div class="infos-wrapper">
                 <div class="info-title">
-                  <a href="teachers.php">Teachers added</a>
+                  <a href="#teacher">Teachers added</a>
                   <i class="fa-solid fa-arrow-right-to-bracket"></i>
                 </div>
                 <div class="info">
@@ -228,7 +235,7 @@ $result_schedule = $conn->query($sql_schedule);
                       echo '<tr>';
                       echo '<td>' . htmlspecialchars($row['section']) . '</td>';
                       echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
-                      echo '<td>  0 </td>';
+                      echo '<td>'  . htmlspecialchars($row['subject_count']) . '</td>';
                       echo '<td>' . htmlspecialchars($row['sem']) . '</td>';
                       echo '<td>' . htmlspecialchars($row['school_year']) . '</td>';
                       echo '<td>' . htmlspecialchars($row['adviser']) . '</td>';
