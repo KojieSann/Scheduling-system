@@ -202,8 +202,6 @@ function sortTable() {
   }
 }
 
-<<<<<<< Updated upstream
-=======
   var sortedRows = Array.from(table.getElementsByTagName("tr"));
   sortedRows.forEach(function(row, index) {
       if (index % 2 === 0) {
@@ -212,7 +210,7 @@ function sortTable() {
           row.style.backgroundColor = ""; 
       }
   });
-}
+
 // for grouping sections
 function groupSections() {
   var table = document.getElementById("scheduleTable");
@@ -247,7 +245,6 @@ function groupSections() {
   });
 }
 
->>>>>>> Stashed changes
 document.addEventListener('DOMContentLoaded', function() {
   const scheduleButtons = document.querySelectorAll('.view-open-modal');
   const tableRows = document.querySelectorAll('#scheduleTable tbody tr');
@@ -285,9 +282,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
 document.addEventListener('DOMContentLoaded', function () {
   const scheduleButtons = document.querySelectorAll('.view-open-modal');
-
   scheduleButtons.forEach(button => {
     button.addEventListener('click', function () {
       const section = this.getAttribute('data-section');
@@ -302,3 +299,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+
+
+ 

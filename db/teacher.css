@@ -290,7 +290,7 @@ nav a span::before{
 }
 .strand-list .input-info {
   position: absolute;
-  top: 0px;
+  top: 12px;
   font-size: 20px;
 }
 /* subject dropdown */
@@ -301,7 +301,7 @@ nav a span::before{
 .subject-list .input-info {
   font-size: 20px;
   position: absolute;
-  top: 85px;
+  top: 95px;
 }
 .subject-list option {
   padding: 5px;

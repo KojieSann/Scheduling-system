@@ -313,13 +313,7 @@ function initMultiStepForm() {
       current -= 1;
     });
   }
-  submitButton.addEventListener("click", function () {
-    bullet[current - 1].classList.add("active");
-    progressCheck[current - 1].classList.add("active");
-    progressText[current - 1].classList.add("active");
-    current += 1;
 
-  });
 
   function validateInputs(ths) {
     let inputsValid = true;
@@ -339,14 +333,50 @@ function initMultiStepForm() {
   }
 
   
+function submitForm() {
+  event.preventDefault();
+
+  var isEmpty = false;
+  $('.required').each(function() {
+    if ($(this).val() === '') {
+      isEmpty = true;
+      return false;
+    }
+  });
+
+  if (isEmpty) {
+    $('.bg-modal-failed').show();
+    return;
+  }
+
+  var formData = $('#scheduleForm').serialize();
+  $.ajax({
+    type: 'POST',
+    url: $('#scheduleForm').attr('action'),
+    data: formData,
+    success: function(response) {
+      bullet[current - 1].classList.add("active");
+      progressCheck[current - 1].classList.add("active");
+      progressText[current - 1].classList.add("active");
+      current += 1;
+      $('.bg-modal-success').show();
+      $('.bg-modal').hide();
+    },
+    error: function(xhr, status, error) {
+      $('.bg-modal-failed').show();
+      console.log(error);
+    }
+  });
+}
+$(document).on('click', '.submit', function() {
+  submitForm();
+});
+
 $(document).on('click', '.create', function() {
-  // Show the modal
+
   $('.bg-modal').show();
   $('.bg-modal-success').hide();
-  // Reset the form
   $('#scheduleForm')[0].reset();
-  
-  // Move progress bar to the first step
   for (let i = 0; i < bullet.length; i++) {
     bullet[i].classList.remove("active");
   }
@@ -941,43 +971,6 @@ jQuery.rnd = function(m,n) {
 }
 confetti();
 
-
-function submitForm() {
-  event.preventDefault();
-
-  var isEmpty = false;
-  $('.required').each(function() {
-    if ($(this).val() === '') {
-      isEmpty = true;
-      return false;
-    }
-  });
-
-  if (isEmpty) {
-    $('.bg-modal-failed').show();
-    return;
-  }
-
-  var formData = $('#scheduleForm').serialize();
-
-  $.ajax({
-    type: 'POST',
-    url: $('#scheduleForm').attr('action'),
-    data: formData,
-    success: function(response) {
-      $('.bg-modal-success').show();
-      $('.bg-modal').hide();
-    },
-    error: function(xhr, status, error) {
-      $('.bg-modal-failed').show();
-      console.log(error);
-    }
-  });
-}
-
-$(document).on('click', '.submit', function() {
-  submitForm();
-});
 
 
 

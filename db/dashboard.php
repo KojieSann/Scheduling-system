@@ -5,9 +5,37 @@ if (!isset($_SESSION['username'])) {
   header("Location: login_page.php");
   exit;
 }
-
 $username = $_SESSION['username'];
 include('connect.php');
+
+$sql = "
+    SELECT
+        day,
+        COUNT(*) AS count
+    FROM
+        schedules
+    GROUP BY
+        day;
+";
+
+$result = $conn->query($sql);
+
+$weekday_counts = array();
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while ($row = $result->fetch_assoc()) {
+    $weekday_counts[$row["day"]] = $row["count"];
+  }
+} else {
+  $weekday_counts = array(
+    "Monday" => 0,
+    "Tuesday" => 0,
+    "Wednesday" => 0,
+    "Thursday" => 0,
+    "Friday" => 0
+  );
+}
 
 $sql_schedule = "SELECT * FROM schedules";
 $result_schedule = $conn->query($sql_schedule);
@@ -16,17 +44,15 @@ $sql_schedule2 = "SELECT * FROM schedule_again";
 $result_schedule2 = $conn->query($sql_schedule2);
 
 
-$query = "SELECT sa.id, sa.section, sa.strand, COUNT(DISTINCT s.subject) AS subject_count, sa.sem, sa.school_year, sa.adviser
+$query = "SELECT sa.id, sa.section, sa.strand, sa.grade_level, COUNT(DISTINCT s.subject) AS subject_count, sa.sem, sa.school_year, sa.adviser
   FROM schedule_again sa
   LEFT JOIN schedules s ON s.section = sa.section
-  GROUP BY sa.id, sa.section, sa.strand, sa.sem, sa.school_year, sa.adviser;
+  GROUP BY sa.id, sa.section, sa.strand, sa.grade_level,  sa.sem, sa.school_year, sa.adviser;
 ";
 $result_schedule2 = $conn->query($query);
 if (!$result_schedule2) {
   die("Query failed: " . $conn->error);
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -275,6 +301,7 @@ if (!$result_schedule2) {
                     <th class="checkboxTbl"><input type="checkbox" id="selectAll" onclick="toggleSelectAll()" /></th>
                     <th>Section</th>
                     <th>Strand</th>
+                    <th>Grade level</th>
                     <th># of Subjects</th>
                     <th>Sem</th>
                     <th>SY</th>
@@ -289,6 +316,7 @@ if (!$result_schedule2) {
                     echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
                     echo '<td>' . htmlspecialchars($row['section']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['grade_level']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['subject_count']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['sem']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['school_year']) . '</td>';
@@ -303,51 +331,84 @@ if (!$result_schedule2) {
             </div>
           </div>
         </div>
-        <div class="section-teacher">
-          <div class="section-container">
-            <span>Teachers</span>
-            <div class="section-wrapper contents">
-              <div class="wrapper">
-<<<<<<< Updated upstream
-                <img src="" alt="">
-=======
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Section</th>
-                      <th>Subject</th>
-                      <th>Time</th>
-                      <th>Instructor</th>
-                    </tr>
-                  </thead>
-                  <tbody style="font-size:13px;">
-                    <?php
-                    $today = date('l'); // Gets the current day of the week, e.g., "Wednesday"
-                    $sql_schedule = "SELECT * FROM schedules WHERE day = '$today'";
-                    $result_schedule = $conn->query($sql_schedule);
-                    while ($row = $result_schedule->fetch_assoc()) {
-                      echo '<tr>';
-                      echo '<td>' . htmlspecialchars($row['section']) . '</td>';
-                      echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
-                      echo '<td>' . htmlspecialchars($row['time']) . '</td>';
-                      echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
-                      echo '</tr>';
-                    }
-                    ?>
-                  </tbody>
-                </table>
->>>>>>> Stashed changes
+        <div class="pieUser-container">
+          <div class="pie-container">
+            <div class="pie-header">
+              <div class="pie-icon">
+                <i class="fa-regular fa-sun"></i>
+              </div>
+              <div class="pie-text">
+                <span>Days</span>
+                <p>Create your schedules!</p>
               </div>
             </div>
+            <div id="pie-chart"></div>
+          </div>
+          <div class="user">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Section</th>
+                  <th>Subject</th>
+                  <th>Time</th>
+                  <th>Instructor</th>
+                </tr>
+              </thead>
+              <tbody style="font-size:13px;">
+                <?php
+                $today = date('l'); // Gets the current day of the week, e.g., "Wednesday"
+                $sql_schedule = "SELECT * FROM schedules WHERE day = '$today'";
+                $result_schedule = $conn->query($sql_schedule);
+                while ($row = $result_schedule->fetch_assoc()) {
+                  echo '<tr>';
+                  echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['time']) . '</td>';
+                  echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
+                  echo '</tr>';
+                }
+                ?>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </section>
   </div>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="./libraries/table2excel.js"></script>
   <script src="./libraries/html2pdf.bundle.min.js"></script>
   <script src="./dashboard.js"></script>
+  <script>
+    var data = [{
+      values: <?php echo json_encode(array_fill(0, count($weekday_counts), 1)); ?>,
+      labels: <?php echo json_encode(array_keys($weekday_counts)); ?>,
+      hole: 0.6,
+      type: 'pie',
+      marker: {
+        colors: ['#e76f51', '#f4a261', '#e9c46a', '#2a9d8f', '#264653']
+      }
+    }];
 
+    var layout = {
+      height: 285,
+      width: 290,
+      images: [{
+        source: './img/shs-logo.png',
+        xref: 'paper',
+        yref: 'paper',
+        x: 0.5,
+        y: 0.5,
+        sizex: 0.5,
+        sizey: 0.5,
+        xanchor: 'center',
+        yanchor: 'middle',
+        opacity: 0.9
+      }]
+    };
+
+    Plotly.newPlot('pie-chart', data, layout);
+  </script>
 </body>
 
 </html>
