@@ -103,7 +103,7 @@ function tableToPrint() {
   printContent += '</tbody></table>';
   var newWindow = window.open('', '_blank');
   newWindow.document.open();
-  newWindow.document.write('<html><head><title>Checked Rows</title><style>.hide-on-print { display: none; }</style></head><body>' + printContent + '</body></html>');
+  newWindow.document.write('<html><head><title>Print page</title><style>.hide-on-print { display: none; }</style></head><body>' + printContent + '</body></html>');
   newWindow.document.close();
   newWindow.print();
   checkedRows.forEach(function (row) {
@@ -202,14 +202,6 @@ function sortTable() {
   }
 }
 
-  var sortedRows = Array.from(table.getElementsByTagName("tr"));
-  sortedRows.forEach(function(row, index) {
-      if (index % 2 === 0) {
-          row.style.backgroundColor = "#eee";
-      } else {
-          row.style.backgroundColor = ""; 
-      }
-  });
 
 // for grouping sections
 function groupSections() {
@@ -298,7 +290,18 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+// switch user and table
+ const userSwitch = document.querySelector(".user-wrapper");
+ const userBtnSwitch = document.querySelector(".close-user");
+ const tableSwitch = document.querySelector(".table-wrapper");
+ const tableBtnSwitch = document.querySelector(".switch-user");
+ userBtnSwitch.addEventListener("click", function () {
+  userSwitch.style.display = "none";
+  tableSwitch.style.display = "block"
 
-
-
+ });
+tableBtnSwitch.addEventListener("click", function () {
+  userSwitch.style.display = "flex";
+  tableSwitch.style.display = "none"
+ });
  

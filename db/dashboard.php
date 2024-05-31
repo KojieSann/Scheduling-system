@@ -17,9 +17,7 @@ $sql = "
     GROUP BY
         day;
 ";
-
 $result = $conn->query($sql);
-
 $weekday_counts = array();
 
 if ($result->num_rows > 0) {
@@ -302,7 +300,7 @@ if (!$result_schedule2) {
                     <th>Section</th>
                     <th>Strand</th>
                     <th>Grade level</th>
-                    <th># of Subjects</th>
+                    <th># of Subj</th>
                     <th>Sem</th>
                     <th>SY</th>
                     <th>Adviser</th>
@@ -345,31 +343,46 @@ if (!$result_schedule2) {
             <div id="pie-chart"></div>
           </div>
           <div class="user">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Section</th>
-                  <th>Subject</th>
-                  <th>Time</th>
-                  <th>Instructor</th>
-                </tr>
-              </thead>
-              <tbody style="font-size:13px;">
-                <?php
-                $today = date('l'); // Gets the current day of the week, e.g., "Wednesday"
-                $sql_schedule = "SELECT * FROM schedules WHERE day = '$today'";
-                $result_schedule = $conn->query($sql_schedule);
-                while ($row = $result_schedule->fetch_assoc()) {
-                  echo '<tr>';
-                  echo '<td>' . htmlspecialchars($row['section']) . '</td>';
-                  echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
-                  echo '<td>' . htmlspecialchars($row['time']) . '</td>';
-                  echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
-                  echo '</tr>';
-                }
-                ?>
-              </tbody>
-            </table>
+            <div class="user-wrapper">
+              <div class="close-user">
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+
+              <div class="user-logo">
+                <img src="./img/man.png" alt="">
+              </div>
+              <span>Admin</span>
+              <div class="user-btn"> <button>Tutorial</button></div>
+            </div>
+            <div class="table-wrapper" style="display: none;">
+              <button class="switch-user">User</button>
+              <div class="table-container">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Instructor</th>
+                      <th>Subject</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody style="font-size:13px;">
+                    <?php
+                    $today = date('l'); // Gets the current day of the week, e.g., "Wednesday"
+                    $sql_schedule = "SELECT * FROM schedules WHERE day = '$today'";
+                    $result_schedule = $conn->query($sql_schedule);
+                    while ($row = $result_schedule->fetch_assoc()) {
+                      echo '<tr>';
+                      echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['time']) . '</td>';
+                      echo '</tr>';
+                    }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
