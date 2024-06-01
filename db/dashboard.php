@@ -21,7 +21,6 @@ $result = $conn->query($sql);
 $weekday_counts = array();
 
 if ($result->num_rows > 0) {
-  // output data of each row
   while ($row = $result->fetch_assoc()) {
     $weekday_counts[$row["day"]] = $row["count"];
   }
@@ -388,14 +387,16 @@ if (!$result_schedule2) {
       </div>
     </section>
   </div>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
   <script src="./libraries/table2excel.js"></script>
   <script src="./libraries/html2pdf.bundle.min.js"></script>
   <script src="./dashboard.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script>
+    var weekdayCounts = <?php echo json_encode($weekday_counts); ?>;
     var data = [{
-      values: <?php echo json_encode(array_fill(0, count($weekday_counts), 1)); ?>,
-      labels: <?php echo json_encode(array_keys($weekday_counts)); ?>,
+      values: Object.values(weekdayCounts),
+      labels: Object.keys(weekdayCounts),
       hole: 0.6,
       type: 'pie',
       marker: {

@@ -121,6 +121,8 @@ nav a span::before{
   align-items: center;
   justify-content: space-between;
   bottom: 15px;
+  height: 10vh;
+  width: 100%;
 }
 .header-logo .text-logo {
   position: relative;
@@ -206,6 +208,8 @@ nav a span::before{
 .content-container {
   display: flex;
   gap: 15px;
+  height: 85vh;
+  width: 100%;
 }
 .content-container .info-date {
   width: 68vw;
@@ -218,7 +222,7 @@ nav a span::before{
 }
 .infos-container .infos-wrapper {
   height: 150px;
-  width: 250px;
+  width: 25%;
   border: 1px solid #dddddd;
   border-radius: 10px;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
@@ -274,6 +278,10 @@ nav a span::before{
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 .pie-container .pie-header{
   display: flex;
@@ -284,6 +292,8 @@ nav a span::before{
   font-family: 'poppins';
   align-items: center;
   pointer-events: none;
+  top: 10px;
+  left: 5px;
 }
 .pie-container .pie-icon{
   height: 40px;

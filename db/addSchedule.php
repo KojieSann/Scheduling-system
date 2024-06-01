@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $instructorName = $row['first_name'] . ' ' . $row['last_name'];
                 $stmt->close();
 
-                $insertQuery = "INSERT INTO schedules (section, strand, subject, instructor, day, time) VALUES (?, ?, ?, ?, ?, ?)";
+                $insertQuery = "INSERT INTO schedules (section, strand, subject, instructor, day, duration, time) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($insertQuery);
 
                 if ($stmt) {
@@ -41,9 +41,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $timeOut = strtotime($timeOutArray[$i]);
 
                             if ($timeIn !== false && $timeOut !== false) {
+
+                                $timeDiffInSeconds = $timeOut - $timeIn;
+                                $timeDiffInMinutes = round($timeDiffInSeconds / 60); // Convert to minutes
+
+                                // Concatenate "minutes" with the duration
+                                $durationWithUnit = $timeDiffInMinutes . " Minutes";
+
                                 $time = date("h:i A", $timeIn) . ' - ' . date("h:i A", $timeOut);
 
-                                $stmt->bind_param("ssssss", $inputSection, $inputStrand, $subjectName, $instructorName, $selectedDay, $time);
+                                $stmt->bind_param("sssssss", $inputSection, $inputStrand, $subjectName, $instructorName, $selectedDay, $durationWithUnit, $time);
                                 if (!$stmt->execute()) {
                                     echo "Failed to add schedule for $selectedDay at $time: " . $stmt->error . "<br>";
                                 }

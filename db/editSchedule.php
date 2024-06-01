@@ -1,28 +1,22 @@
 <?php
 include('connect.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['rowData'])) {
-    $rowData = $_POST['rowData'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = $_POST['id'];
+    $section = $_POST['section'];
+    $strand = $_POST['strand'];
+    $day = $_POST['day'];
+    $subject = $_POST['subject'];
+    $time = $_POST['time'];
+    $instructor = $_POST['instructor'];
 
-    // Check if $rowData is an array and has at least 7 elements
-    if (is_array($rowData) && count($rowData) >= 6) {
-        // Prepare the SQL statement
-        $stmt = $conn->prepare("UPDATE schedules SET section=?, strand=?, day=?, subject=?, instructor=?, time=? WHERE id=?");
+    $update_query = "UPDATE schedules SET section='$section', strand='$strand', day='$day', subject='$subject', time='$time', instructor='$instructor' WHERE id='$id'";
 
-        // Bind parameters by reference
-        $stmt->bind_param("ssssssi", $rowData[1], $rowData[2], $rowData[3], $rowData[4], $rowData[5], $rowData[6], $rowData[0]);
-
-        if ($stmt->execute()) {
-            echo "Data updated successfully!";
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-        
-        $stmt->close();
+    if (mysqli_query($conn, $update_query)) {
+        echo "Schedule updated successfully!";
     } else {
-        echo "Invalid input data.";
+        echo "Error updating schedule: " . mysqli_error($conn);
     }
-
-    $conn->close();
+} else {
+    echo "Invalid request method!";
 }
-?>

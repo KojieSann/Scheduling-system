@@ -33,8 +33,35 @@
     GROUP BY 
         sec.id, sec.section_name, sec.grade_level, sec.strand;
 ";
-
   $result = $conn->query($query);
+
+  if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $query = mysqli_query($conn, "SELECT * FROM schedules WHERE id = '$id'");
+    $row = mysqli_fetch_assoc($query);
+  } else {
+    echo "Schedule updated successfully!";
+    exit();
+  }
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = $_POST['id'];
+    $section = $_POST['section'];
+    $strand = $_POST['strand'];
+    $day = $_POST['day'];
+    $subject = $_POST['subject'];
+    $time = $_POST['time'];
+    $instructor = $_POST['instructor'];
+
+    $update_query = "UPDATE schedules SET section='$section', strand='$strand,day='$day',subject='$subject',time='$time',instructor='$instructor'  WHERE id='$id'";
+
+    if (mysqli_query($conn, $update_query)) {
+      header("Location: generate.php?id=$id");
+      exit();
+    } else {
+      echo "Error updating record: " . mysqli_error($conn);
+    }
+  }
   ?>
  <!DOCTYPE html>
  <html lang="en">
@@ -99,7 +126,7 @@
          </div>
        </div>
      </div>
-     <div class="bg-modal-failed" style="display: none; z-index:100000;">
+     <div class="bg-modal-failed" style="display: none; z-index:10000;">
        <div class="success-content">
          <div class="successLogo">
            <div class="textcontainer">
@@ -554,9 +581,12 @@
                  </th>
                  <th>Subject</th>
                  <th>Time</th>
+                 <th>Duration</th>
                  <th>Instructor</th>
+                 <th>Action</th>
                </tr>
              </thead>
+
              <tbody>
                <?php
                 include('connect.php');
@@ -564,14 +594,16 @@
                 $result_schedule = $conn->query($query);
                 if ($result_schedule->num_rows > 0) {
                   while ($row = $result_schedule->fetch_assoc()) {
-                    echo '<tr>';
+                    echo '<tr class="clickable-row" data-schedule-id="' . $row['id'] . '">';
                     echo '<td class="checkboxTbl"><input type="checkbox" name="selected[]" value="' . $row['id'] . '" /></td>';
-                    echo '<td>' . htmlspecialchars($row['section']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['day']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['time']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['instructor']) . '</td>';
+                    echo '<td class="editable">' . htmlspecialchars($row['section']) . '</td>';
+                    echo '<td class="editable">' . htmlspecialchars($row['strand']) . '</td>';
+                    echo '<td class="editable">' . htmlspecialchars($row['day']) . '</td>';
+                    echo '<td class="editable">' . htmlspecialchars($row['subject']) . '</td>';
+                    echo '<td class="editable">' . htmlspecialchars($row['time']) . '</td>';
+                    echo '<td class="editable">' . htmlspecialchars($row['duration']) . '</td>';
+                    echo '<td class="editable">' . htmlspecialchars($row['instructor']) . '</td>';
+                    echo '<td><button class="apply">Apply</button></td>';
                     echo '</tr>';
                   }
                 } else {
@@ -591,6 +623,8 @@
    <script src="./libraries/html2pdf.bundle.min.js"></script>
    <script src="./libraries/table2excel.js"></script>
    <script src="./generate.js"></script>
+
  </body>
+
 
  </html>

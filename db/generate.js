@@ -232,7 +232,6 @@ function toggleButton(day) {
     button.classList.add("not-selected");
     button.classList.remove("not-active");
     button.setAttribute("disabled","");
-    
   }
 }
 
@@ -972,6 +971,70 @@ jQuery.rnd = function(m,n) {
 confetti();
 
 
+$(document).ready(function() {
+  $('body').on('dblclick', '.editable', function() {
+    var currentElement = $(this);
+    var originalContent = currentElement.text();
+    var inputField = $('<input>', {
+      type: 'text',
+      value: originalContent,
+      blur: function() {
+        var newContent = $(this).val();
+        currentElement.text(newContent);
 
+      },
+      keyup: function(event) {
+        if (event.which === 13) {
+          $(this).blur();
+        }
+      }
+    }).appendTo(currentElement.empty()).focus();
+  });
+
+  $('body').on('click', '.clickable-row', function() {
+    $(this).addClass('highlight').siblings().removeClass('highlight');
+  });
+});
+
+$(document).ready(function() {
+  $('form').keypress(function(event) {
+    return event.keyCode != 13;
+  });
+
+  $('.apply').click(function(event) {
+    event.preventDefault();
+
+    var row = $(this).closest('tr');
+
+    var scheduleId = row.data('schedule-id');
+    var section = row.find('td:eq(1)').text();
+    var strand = row.find('td:eq(2)').text();
+    var day = row.find('td:eq(3)').text();
+    var subject = row.find('td:eq(4)').text();
+    var time = row.find('td:eq(5)').text();
+    var instructor = row.find('td:eq(6)').text();
+
+    $.ajax({
+      url: 'edit_schedule.php',
+      type: 'POST',
+      data: {
+        id: scheduleId,
+        section: section,
+        strand: strand,
+        day: day,
+        subject: subject,
+        time: time,
+        instructor: instructor
+      },
+      success: function(response) {
+        alert('Schedule updated successfully!');
+      },
+      error: function(xhr, status, error) {
+        console.error(error);
+        alert('Error updating schedule. Please try again.');
+      }
+    });
+  });
+});
 
 
