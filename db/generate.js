@@ -926,50 +926,33 @@ function groupSections() {
 }
 
 // edit function
-$(document).ready(function() {
-  $('table#scheduleTable td').click(function() {
-    $(this).prop('contenteditable', true);
-  });
-  $('table#scheduleTable td').keypress(function(e) {
-    if (e.which == 13) { 
-      e.preventDefault();
-      $(this).blur();
-      var rowData = $(this).closest('tr').find('td').map(function() {
-        return $(this).text();
-      }).get();
+// $(document).ready(function() {
+//   $('table#scheduleTable td').click(function() {
+//     $(this).prop('contenteditable', true);
+//   });
+//   $('table#scheduleTable td').keypress(function(e) {
+//     if (e.which == 13) { 
+//       e.preventDefault();
+//       $(this).blur();
+//       var rowData = $(this).closest('tr').find('td').map(function() {
+//         return $(this).text();
+//       }).get();
 
-      $.ajax({
-        url: 'editSchedule.php', 
-        type: 'POST',
-        data: { rowData: rowData },
-        success: function(response) {
-          window.alert(response);
-        },
-        error: function(xhr, status, error) {
+//       $.ajax({
+//         url: 'editSchedule.php', 
+//         type: 'POST',
+//         data: { rowData: rowData },
+//         success: function(response) {
+//           window.alert(response);
+//         },
+//         error: function(xhr, status, error) {
 
-          console.error(xhr.responseText);
-        }
-      });
-    }
-  });
-});
-
-
-function confetti() {
-  $.each($(".particletext.confetti"), function(){
-     var confetticount = ($(this).width()/50)*10;
-     for(var i = 0; i <= confetticount; i++) {
-        $(this).append('<span class="particle c' + $.rnd(1,2) + '" style="top:' + $.rnd(10,50) + '%; left:' + $.rnd(0,100) + '%;width:' + $.rnd(6,8) + 'px; height:' + $.rnd(3,4) + 'px;animation-delay: ' + ($.rnd(0,30)/10) + 's;"></span>');
-     }
-  });
-}
-jQuery.rnd = function(m,n) {
-     m = parseInt(m);
-     n = parseInt(n);
-     return Math.floor( Math.random() * (n - m + 1) ) + m;
-}
-confetti();
-
+//           console.error(xhr.responseText);
+//         }
+//       });
+//     }
+//   });
+// });
 
 $(document).ready(function() {
   $('body').on('dblclick', '.editable', function() {
@@ -1015,7 +998,7 @@ $(document).ready(function() {
     var instructor = row.find('td:eq(6)').text();
 
     $.ajax({
-      url: 'edit_schedule.php',
+      url: 'editSchedule.php',
       type: 'POST',
       data: {
         id: scheduleId,
@@ -1037,4 +1020,39 @@ $(document).ready(function() {
   });
 });
 
+
+function confetti() {
+  $.each($(".particletext.confetti"), function(){
+     var confetticount = ($(this).width()/50)*10;
+     for(var i = 0; i <= confetticount; i++) {
+        $(this).append('<span class="particle c' + $.rnd(1,2) + '" style="top:' + $.rnd(10,50) + '%; left:' + $.rnd(0,100) + '%;width:' + $.rnd(6,8) + 'px; height:' + $.rnd(3,4) + 'px;animation-delay: ' + ($.rnd(0,30)/10) + 's;"></span>');
+     }
+  });
+}
+jQuery.rnd = function(m,n) {
+     m = parseInt(m);
+     n = parseInt(n);
+     return Math.floor( Math.random() * (n - m + 1) ) + m;
+}
+confetti();
+
+function expandDiv() {
+  var container = document.querySelector('.table-subject');
+  container.classList.add('expanded');
+  var icon = document.querySelector('.icon');
+  icon.style.display = 'none';
+  document.querySelector('.close-table').style.display = 'flex';
+  document.getElementById('scheduleTableSubj').style.display = 'block';
+  document.querySelector('.searchSchedule').style.display = 'block';
+  document.querySelector('.tableSub-container').style.display = 'block';
+}
+function closeDiv() {
+  var container = document.querySelector('.table-subject');
+  container.classList.remove('expanded');
+  var icon = document.querySelector('.icon');
+  icon.style.display = 'block';
+  document.querySelector('.close-table').style.display = 'none';
+  document.getElementById('scheduleTableSubj').style.display = 'none';
+  document.querySelector('.searchSchedule').style.display = 'none';
+}
 

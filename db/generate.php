@@ -35,33 +35,33 @@
 ";
   $result = $conn->query($query);
 
-  if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $query = mysqli_query($conn, "SELECT * FROM schedules WHERE id = '$id'");
-    $row = mysqli_fetch_assoc($query);
-  } else {
-    echo "Schedule updated successfully!";
-    exit();
-  }
+  // if (isset($_GET['id'])) {
+  //   $id = $_GET['id'];
+  //   $query = mysqli_query($conn, "SELECT * FROM schedules WHERE id = '$id'");
+  //   $row = mysqli_fetch_assoc($query);
+  // } else {
+  //   echo "Schedule updated successfully!";
+  //   exit();
+  // }
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = $_POST['id'];
-    $section = $_POST['section'];
-    $strand = $_POST['strand'];
-    $day = $_POST['day'];
-    $subject = $_POST['subject'];
-    $time = $_POST['time'];
-    $instructor = $_POST['instructor'];
+  // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  //   $id = $_POST['id'];
+  //   $section = $_POST['section'];
+  //   $strand = $_POST['strand'];
+  //   $day = $_POST['day'];
+  //   $subject = $_POST['subject'];
+  //   $time = $_POST['time'];
+  //   $instructor = $_POST['instructor'];
 
-    $update_query = "UPDATE schedules SET section='$section', strand='$strand,day='$day',subject='$subject',time='$time',instructor='$instructor'  WHERE id='$id'";
+  //   $update_query = "UPDATE schedules SET section='$section', strand='$strand,day='$day',subject='$subject',time='$time',instructor='$instructor'  WHERE id='$id'";
 
-    if (mysqli_query($conn, $update_query)) {
-      header("Location: generate.php?id=$id");
-      exit();
-    } else {
-      echo "Error updating record: " . mysqli_error($conn);
-    }
-  }
+  //   if (mysqli_query($conn, $update_query)) {
+  //     header("Location: generate.php?id=$id");
+  //     exit();
+  //   } else {
+  //     echo "Error updating record: " . mysqli_error($conn);
+  //   }
+  // }
   ?>
  <!DOCTYPE html>
  <html lang="en">
@@ -142,6 +142,55 @@
        </div>
      </div>
      <div class="bg-modal-subject">
+       <div class="tableSubject-container">
+         <div class="table-subject" onclick="expandDiv()">
+           <div class="tableSub-container">
+             <div class="searchSchedule">
+               <input id="search-box-2" type="text" placeholder="Search" />
+               <i class="fa-solid fa-magnifying-glass"></i>
+             </div>
+             <table id="scheduleTableSubj" class="table">
+               <thead>
+                 <tr>
+                   <th>Section</th>
+                   <th>Strand</th>
+                   <th>Day</th>
+                   <th>Subject</th>
+                   <th>Time</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <?php
+                  include('connect.php');
+                  $query = "SELECT * FROM schedules ORDER BY id DESC";
+                  $result_schedule = $conn->query($query);
+                  if ($result_schedule->num_rows > 0) {
+                    while ($row = $result_schedule->fetch_assoc()) {
+                      echo '<tr>';
+                      echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['day']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
+                      echo '<td>' . htmlspecialchars($row['time']) . '</td>';
+                      echo '</tr>';
+                    }
+                  } else {
+                    echo "<tr><td colspan='8'>No schedule available</td></tr>";
+                  }
+                  $conn->close();
+                  ?>
+               </tbody>
+             </table>
+           </div>
+           <div class="icon">
+             <i class="fa-solid fa-table"></i>
+           </div>
+         </div>
+         <div class="close-table" onclick="closeDiv()">
+           <i class="fa-solid fa-xmark"></i>
+         </div>
+       </div>
+
        <div class="modal-content-subject">
          <div class="close-subject"><i class="fa-solid fa-xmark"></i></div>
          <form action="addSchedule.php" method="POST" id="contact_form" name="contact_form">
@@ -555,6 +604,7 @@
              <button onclick="deleteSelectedRows()">
                <i class=" fa-solid fa-trash-can"></i> Delete
              </button>
+             <button class="apply"><i class="fa-regular fa-floppy-disk"></i> Apply</button>
            </div>
            <div class="table-search">
              <form class="search-container">
@@ -583,7 +633,6 @@
                  <th>Time</th>
                  <th>Duration</th>
                  <th>Instructor</th>
-                 <th>Action</th>
                </tr>
              </thead>
 
@@ -601,9 +650,8 @@
                     echo '<td class="editable">' . htmlspecialchars($row['day']) . '</td>';
                     echo '<td class="editable">' . htmlspecialchars($row['subject']) . '</td>';
                     echo '<td class="editable">' . htmlspecialchars($row['time']) . '</td>';
-                    echo '<td class="editable">' . htmlspecialchars($row['duration']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['duration']) . '</td>';
                     echo '<td class="editable">' . htmlspecialchars($row['instructor']) . '</td>';
-                    echo '<td><button class="apply">Apply</button></td>';
                     echo '</tr>';
                   }
                 } else {
