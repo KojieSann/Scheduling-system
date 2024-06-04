@@ -1056,3 +1056,25 @@ function closeDiv() {
   document.querySelector('.searchSchedule').style.display = 'none';
 }
 
+function searchSchedule() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("search-box-2");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("scheduleTableSubj");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td");
+    for (var j = 0; j < td.length; j++) {
+      var cell = td[j];
+      if (cell) {
+        txtValue = cell.textContent || cell.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          break;
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+}

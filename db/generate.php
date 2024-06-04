@@ -146,7 +146,7 @@
          <div class="table-subject" onclick="expandDiv()">
            <div class="tableSub-container">
              <div class="searchSchedule">
-               <input id="search-box-2" type="text" placeholder="Search" />
+               <input id="search-box-2" type="text" placeholder="Search" oninput="searchSchedule()" />
                <i class="fa-solid fa-magnifying-glass"></i>
              </div>
              <table id="scheduleTableSubj" class="table">
@@ -190,7 +190,6 @@
            <i class="fa-solid fa-xmark"></i>
          </div>
        </div>
-
        <div class="modal-content-subject">
          <div class="close-subject"><i class="fa-solid fa-xmark"></i></div>
          <form action="addSchedule.php" method="POST" id="contact_form" name="contact_form">
@@ -276,7 +275,6 @@
                    <button type="button" class="not-active thursday not-selected" disabled>Thursday</button>
                    <button type="button" class="friday not-active not-selected" disabled>Friday</button>
                  </div>
-
                  <div class="time-selection-monday" style="display: none;">
                    <div class="time-selection">
                      <p>Monday</p>
