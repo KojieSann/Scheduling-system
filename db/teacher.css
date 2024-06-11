@@ -144,6 +144,9 @@ nav a span::before{
   align-items: center;
   width: 100%;
 }
+.main-content .names{
+  position: relative;
+}
 .main-content .names .teacher-name {
   margin: 20px;
   display: flex;
@@ -284,24 +287,25 @@ nav a span::before{
 }
 .strand-list {
   margin-top: -10px;
+  position: relative;
 }
 .subject-strand {
   margin-top: -45px;
 }
 .strand-list .input-info {
   position: absolute;
-  top: 12px;
+  top: -20px;
   font-size: 20px;
 }
 /* subject dropdown */
 .subject-list {
   margin-top: 30px;
-
+  position: relative;
 }
 .subject-list .input-info {
   font-size: 20px;
   position: absolute;
-  top: 95px;
+  top: -20px;
 }
 .subject-list option {
   padding: 5px;
@@ -686,6 +690,6 @@ button.btn-submit:hover {
 .update{
   position: absolute;
   left: 310px;
-  top: 30px;
+  top: 55px;
 }
 

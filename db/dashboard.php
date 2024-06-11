@@ -171,6 +171,166 @@ if (!$result_schedule2) {
         </div>
       </div>
     </div>
+    <div class="bg-content-tutorial">
+      <div class="content-tutorial">
+        <div class="tutorialPage page1">
+          <div class="progressBar">
+            <div class="progress activePage"></div>
+            <div class="progress">
+              <div class="progressCreateWrapper">
+                <div class="progressCreate"></div>
+                <div class="progressCreate"></div>
+                <div class="progressCreate"></div>
+              </div>
+            </div>
+            <div class="progress"></div>
+          </div>
+          <div class="tuts-content">
+            <div class="tutorialTitle">
+              Factor to make before creating a schedule
+            </div>
+            <img style="width: 800px;" src="./img/page1img.png" alt="">
+            <div class="tutorial-info">
+              <p>Before Creating a schedule you must first create <span>Section</span>, <span>Subject</span> and the <span>Instructors</span>. keep in mind that you must first create a subject before a teacher.</p>
+            </div>
+          </div>
+          <div class="btn-tutorial">
+            <button class="nxtTutsPage">Next</button>
+          </div>
+        </div>
+        <div class="tutorialPage page2">
+          <div class="progressBar">
+            <div class="progress"></div>
+            <div class="progress activePage">
+              <div class="progressCreateWrapper">
+                <div class="progressCreate"></div>
+                <div class="progressCreate"></div>
+                <div class="progressCreate"></div>
+              </div>
+            </div>
+            <div class="progress"></div>
+          </div>
+          <div class="tuts-content">
+            <div class="tutorialTitle">
+              Create schedule tab
+            </div>
+            <img style="width: 600px; top: 110px; position: absolute;" src="./img/page2img.jpg" alt="">
+            <div class="tutorial-info">
+              <p style="font-size: 12px;">In the creating schedule page this image will show first. as you can see we have numerous buttons with various functions. To <span>print</span> first select the checkboxes you want to print or you can select all to print all. You can also convert it into <span>EXCEL</span> and <span>PDF</span>. To <span>Delete</span> check the checkboxes you want to delete then press the button delete. and lastly the <span>Edit</span> function, double click the cell you want to edit then a text box will show, then after you can press the button <span>apply</span> to save the changes</p>
+            </div>
+          </div>
+          <div class="btn-tutorial">
+            <button class="bckTutsPage">Back</button>
+            <button class="nxtTutsPage2">Next</button>
+          </div>
+        </div>
+        <div class="tutorialPage page3">
+          <div class="progressBar">
+            <div class="progress"></div>
+            <div class="progress">
+              <div class="progressCreateWrapper">
+                <div class="progressCreate activePageCreate"></div>
+                <div class="progressCreate"></div>
+                <div class="progressCreate"></div>
+              </div>
+            </div>
+            <div class="progress"></div>
+          </div>
+          <div class="tuts-content">
+            <div class="tutorialTitle">
+              Create schedule tab 1.2
+            </div>
+            <img style="width: 700px; top: 110px; position: absolute;" src="./img/page3img.png" alt="">
+            <div class="tutorial-info">
+              <p>Now to create a <span>Schedule</span> click the <span>Add new</span> button then a modal will show just like in the image. Choose a section you want to create a schedule to by clicking <span>next</span>, then it wil take you to a next step which is applying a <span>Subject</span> for that section.</p>
+            </div>
+          </div>
+          <div class="btn-tutorial">
+            <button class="bckTutsPage2">Back</button>
+            <button class="nxtTutsPage3">Next</button>
+          </div>
+        </div>
+        <div class="tutorialPage page4">
+          <div class="progressBar">
+            <div class="progress"></div>
+            <div class="progress">
+              <div class="progressCreateWrapper">
+                <div class="progressCreate"></div>
+                <div class="progressCreate activePageCreate"></div>
+                <div class="progressCreate"></div>
+              </div>
+            </div>
+            <div class="progress"></div>
+          </div>
+          <div class="tuts-content">
+            <div class="tutorialTitle">
+              Create schedule tab 1.3
+            </div>
+            <img style="width: 630px; top: 90px; position: absolute;" src="./img/page4img.png" alt="">
+            <div class="tutorial-info">
+              <p style="font-size: 12px;">Now when clicking the <span>apply</span> button on a particular subject a new modal will open. First select an <span>instructor</span> which automatically check the day that instructor are only available, <i style="font-size: 12px;">keep in mind that you can change that day by checking the checkbox but will not change on the teacher table.</i> After that click the <span>next</span> button. Which takes you to the next step which is <span>applying time</span> for that subject after that you can check the <span>checkbox</span> to save time and copy it to all the days.</p>
+            </div>
+          </div>
+          <div class="btn-tutorial">
+            <button class="bckTutsPage3">Back</button>
+            <button class="nxtTutsPage4">Next</button>
+          </div>
+        </div>
+        <div class="tutorialPage page5">
+          <div class="progressBar">
+            <div class="progress"></div>
+            <div class="progress">
+              <div class="progressCreateWrapper">
+                <div class="progressCreate"></div>
+                <div class="progressCreate"></div>
+                <div class="progressCreate activePageCreate"></div>
+              </div>
+            </div>
+            <div class="progress"></div>
+          </div>
+          <div class="tuts-content">
+            <div class="tutorialTitle">
+              Create schedule tab 1.4
+            </div>
+            <img style="width: 700px; top: 110px; position: absolute;" src="./img/page5img.jpg" alt="">
+            <div class="tutorial-info">
+              <p>After a success of creating schedule. The row of that <span>subject</span> will be <span>green</span> to help you keep track on your progress.</p>
+            </div>
+          </div>
+          <div class="btn-tutorial">
+            <button class="bckTutsPage4">Back</button>
+            <button class="nxtTutsPage5">Next</button>
+          </div>
+        </div>
+        <div class="tutorialPage page6">
+          <div class="progressBar">
+            <div class="progress"></div>
+            <div class="progress">
+              <div class="progressCreateWrapper">
+                <div class="progressCreate"></div>
+                <div class="progressCreate"></div>
+                <div class="progressCreate"></div>
+              </div>
+            </div>
+            <div class="progress activePage"></div>
+
+          </div>
+          <div class="tuts-content">
+            <div class="tutorialTitle">
+              Finalize the scheduling
+            </div>
+            <img style="width: 650px; top: 110px; position: absolute;" src="./img/page6img.jpg" alt="">
+            <div class="tutorial-info">
+              <p>For the last step choose a <span>School year</span>, <span>Semester</span>, and <span>Adviser</span> for that section. You can go to the dashboard and click the schedules for that section to filter out the other sections schedules </p>
+            </div>
+          </div>
+          <div class="btn-tutorial">
+            <button class="bckTutsPage5">Back</button>
+            <button class="closeTutsPage">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <section class="main-content">
       <div class="header-logo">
         <div class="text-logo">
@@ -351,7 +511,7 @@ if (!$result_schedule2) {
                 <img src="./img/man.png" alt="">
               </div>
               <span>Admin</span>
-              <div class="user-btn"> <button>Tutorial</button></div>
+              <div class="user-btn"> <button class="openTutorial">Tutorial</button></div>
             </div>
             <div class="table-wrapper" style="display: none;">
               <button class="switch-user">User</button>
@@ -387,7 +547,6 @@ if (!$result_schedule2) {
       </div>
     </section>
   </div>
-
   <script src="./libraries/table2excel.js"></script>
   <script src="./libraries/html2pdf.bundle.min.js"></script>
   <script src="./dashboard.js"></script>
