@@ -305,3 +305,49 @@ tableBtnSwitch.addEventListener("click", function () {
   tableSwitch.style.display = "none"
  });
  
+
+ document.querySelector('.openTutorial').addEventListener('click', function (){
+  document.querySelector('.bg-content-tutorial').style.display = "flex";
+ })
+  let currentPage = 1;
+  const pages = document.querySelectorAll(".tutorialPage");
+
+  function showPage(pageNumber) {
+    pages.forEach(page => {
+      page.style.display = "none";
+    });
+    document.querySelector(`.page${pageNumber}`).style.display = "flex";
+  }
+  function nextPage() {
+    if (currentPage < pages.length) {
+        currentPage++;
+        showPage(currentPage);
+    }
+}
+
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+    }
+}
+
+document.querySelector(".nxtTutsPage").addEventListener("click", nextPage);
+document.querySelector(".nxtTutsPage2").addEventListener("click", nextPage);
+document.querySelector(".nxtTutsPage3").addEventListener("click", nextPage);
+document.querySelector(".nxtTutsPage4").addEventListener("click", nextPage); // New next button for the fifth page
+document.querySelector(".nxtTutsPage5").addEventListener("click", nextPage); // New next button for the fifth page
+document.querySelector(".bckTutsPage").addEventListener("click", prevPage);
+document.querySelector(".bckTutsPage2").addEventListener("click", prevPage);
+document.querySelector(".bckTutsPage3").addEventListener("click", prevPage);
+document.querySelector(".bckTutsPage4").addEventListener("click", prevPage); // New previous button for the fifth page
+document.querySelector(".bckTutsPage5").addEventListener("click", prevPage); // New previous button for the fifth page
+
+document.querySelector(".closeTutsPage").addEventListener("click", () => {
+    document.querySelector('.bg-content-tutorial').style.display = "none";
+    currentPage = 1;
+    showPage(currentPage);
+});
+
+showPage(1);
+
