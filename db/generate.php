@@ -62,7 +62,12 @@
   //     echo "Error updating record: " . mysqli_error($conn);
   //   }
   // }
-  ?>
+
+
+
+?>
+
+  
  <!DOCTYPE html>
  <html lang="en">
 
@@ -153,30 +158,30 @@
                <thead>
                  <tr>
                    <th>Section</th>
-                   <th>Strand</th>
                    <th>Day</th>
                    <th>Subject</th>
                    <th>Time</th>
+                   <th>Instructor</th>
                  </tr>
                </thead>
                <tbody>
                  <?php
+               
                   include('connect.php');
                   $query = "SELECT * FROM schedules ORDER BY id DESC";
                   $result_schedule = $conn->query($query);
                   if ($result_schedule->num_rows > 0) {
                     while ($row = $result_schedule->fetch_assoc()) {
-                      echo '<tr>';
-                      echo '<td>' . htmlspecialchars($row['section']) . '</td>';
-                      echo '<td>' . htmlspecialchars($row['strand']) . '</td>';
-                      echo '<td>' . htmlspecialchars($row['day']) . '</td>';
-                      echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
-                      echo '<td>' . htmlspecialchars($row['time']) . '</td>';
-                      echo '</tr>';
+                        echo '<td>' . htmlspecialchars($row['section']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['day']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['subject']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['time']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['instructor']) . '</td>'; 
+                        echo '</tr>';
                     }
-                  } else {
+                } else {
                     echo "<tr><td colspan='8'>No schedule available</td></tr>";
-                  }
+                }
                   $conn->close();
                   ?>
                </tbody>
@@ -659,6 +664,7 @@
                 ?>
              </tbody>
            </table>
+         
          </div>
        </div>
 
@@ -670,6 +676,49 @@
    <script src="./libraries/table2excel.js"></script>
    <script src="./generate.js"></script>
 
+
+   <script> const applyButton = document.querySelector('.apply');
+          const scheduleTable = document.querySelector('#scheduleTable');
+
+          applyButton.addEventListener('click', () => {
+  const tableData = [];
+  const rows = scheduleTable.rows;
+
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const scheduleId = row.dataset.scheduleId;
+    const cells = row.cells;
+
+    const scheduleData = {
+      id: scheduleId,
+      section: cells[1].textContent,
+      strand: cells[2].textContent,
+      day: cells[3].textContent,
+      subject: cells[4].textContent,
+      time: cells[5].textContent,
+      duration: cells[6].textContent,
+      instructor: cells[7].textContent,
+    };
+
+    tableData.push(scheduleData);
+  }
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'update_schedules.php', true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      console.log('Schedules updated successfully!');
+    } else {
+      console.error('Error updating schedules:', xhr.statusText);
+    }
+  };
+
+  xhr.send(JSON.stringify(tableData));
+});</script>
+
+   
  </body>
 
 
