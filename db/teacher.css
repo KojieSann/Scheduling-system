@@ -267,7 +267,7 @@ nav a span::before{
   z-index: 100;
   position: absolute;
   display: none;
-  width: 10%;
+  width: 35%;
   background: #fff;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   border-radius: 10px;

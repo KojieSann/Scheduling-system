@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2024 at 02:47 PM
+-- Generation Time: Jun 17, 2024 at 04:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,24 +38,6 @@ CREATE TABLE `schedules` (
   `instructor` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `schedules`
---
-
-INSERT INTO `schedules` (`id`, `section`, `strand`, `day`, `subject`, `time`, `duration`, `instructor`) VALUES
-(450, ' Sitaw', 'TVL', 'Monday', 'Science', '10:00 AM - 11:00 AM', '60 minutes', 'Andrei Belamide'),
-(451, ' Sitaw', 'TVL', 'Tuesday', 'Science', '10:00 AM - 11:30 AM', '90 minutes', 'Andrei Belamide'),
-(452, ' Sitaw', 'TVL', 'Monday', 'Art', '10:00 AM - 11:00 AM', '60 minutes', 'Lester Quinagutan'),
-(453, ' Sitaw', 'TVL', 'Tuesday', 'Art', '10:00 AM - 11:00 AM', '60 minutes', 'Lester Quinagutan'),
-(454, ' Sitaw', 'TVL', 'Wednesday', 'Art', '10:00 AM - 11:00 AM', '60 minutes', 'Lester Quinagutan'),
-(455, ' Sitaw', 'TVL', 'Thursday', 'Art', '10:00 AM - 11:00 AM', '60 minutes', 'Lester Quinagutan'),
-(456, ' Sitaw', 'TVL', 'Friday', 'Art', '10:00 AM - 11:00 AM', '60 minutes', 'Lester Quinagutan'),
-(457, 'Ampalaya', 'STEM', 'Monday', 'English101', '08:00 AM - 11:30 AM', '210 Minutes', 'Juan Dela cruz'),
-(458, 'Ampalaya', 'STEM', 'Tuesday', 'English101', '09:00 AM - 11:00 AM', '120 Minutes', 'Juan Dela cruz'),
-(459, 'Ampalaya', 'STEM', 'Wednesday', 'English101', '12:00 AM - 11:30 AM', '690 Minutes', 'Juan Dela cruz'),
-(460, 'Ampalaya', 'STEM', 'Thursday', 'English101', '04:00 PM - 09:00 PM', '300 Minutes', 'Juan Dela cruz'),
-(461, 'Ampalaya', 'STEM', 'Friday', 'English101', '11:00 AM - 12:00 AM', '-660 Minutes', 'Juan Dela cruz');
-
 -- --------------------------------------------------------
 
 --
@@ -71,14 +53,6 @@ CREATE TABLE `schedule_again` (
   `school_year` varchar(25) NOT NULL,
   `adviser` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `schedule_again`
---
-
-INSERT INTO `schedule_again` (`id`, `section`, `strand`, `grade_level`, `sem`, `school_year`, `adviser`) VALUES
-(32, ' Sitaw', 'TVL', 'Grade 11', '1st', '2024-2025', 'Lester Quinagutan'),
-(33, 'Ampalaya', 'STEM', 'Grade 11', '1st', '2024-2025', 'Andrei Belamide');
 
 -- --------------------------------------------------------
 
@@ -122,7 +96,7 @@ CREATE TABLE `subjects` (
 
 INSERT INTO `subjects` (`id`, `subject_name`, `subject_code`, `grade_level`, `strand`) VALUES
 (71, 'Math', 'Math101', 'Grade 12', 'GAS'),
-(72, 'English101', '202', 'Grade 12', 'GAS, STEM'),
+(72, 'English', '202', 'Grade 12', 'GAS, STEM'),
 (73, 'Science', 'SCI', 'Grade 12', 'GAS, STEM, TVL, ICT, ABM'),
 (74, 'PE', 'ICELLE', 'Grade 12', 'GAS, STEM, ICT, ABM'),
 (77, 'Art', 'Art101', 'Grade 11', 'GAS, STEM, TVL, ICT, ABM, HUMSS, HE');
@@ -149,13 +123,10 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `first_name`, `middle_name`, `last_name`, `day`, `time`, `strand`, `subject`) VALUES
-(158, 'Lester', '', 'Quinagutan', 'Monday, Tuesday, Wednesday, Thursday, Friday', 'AM-PM', 'GAS', 'Math'),
-(159, 'Andrei', '', 'Belamide', 'Monday, Tuesday', 'PM', 'TVL', 'English101'),
-(160, 'Juan', 'lol', 'Dela cruz', 'Monday, Tuesday, Wednesday, Thursday, Friday', 'AM', 'STEM', 'Math, English101'),
-(161, 'adsf', 'ddd', 'ghgg', 'Monday', 'PM', 'STEM', 'Math, English101, Science'),
-(162, 'u6yu56', 'dvfsdxvdf', '323232', 'Monday, Tuesday, Wednesday, Thursday, Friday', 'PM', 'ICT', 'Math, English101'),
-(163, 'gbg', '', 'bgbgf', 'Monday, Tuesday, Wednesday, Thursday, Friday', 'PM', 'STEM', 'English101'),
-(164, 'jjj', 'jb', 'bnm', 'Monday, Tuesday', 'AM-PM', 'STEM', 'English101');
+(165, 'Susan', 'Davene', 'Connor', 'Monday, Tuesday, Wednesday', 'AM', 'STEM', 'Math, English'),
+(166, 'Boomy', 'B', 'Butler', 'Monday, Tuesday, Wednesday, Thursday', 'AM-PM', 'GAS', 'Science, PE, Art'),
+(167, 'Sarah', 'Timberwood', 'Chesney', 'Monday, Tuesday, Wednesday, Thursday, Friday', 'PM', 'TVL', 'Math, English, Science, PE, Art'),
+(168, 'Peter ', 'Jone', 'White', 'Monday, Tuesday', 'AM-PM', 'GAS', 'Math, English, Science, PE, Art');
 
 -- --------------------------------------------------------
 
@@ -227,13 +198,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=462;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=505;
 
 --
 -- AUTO_INCREMENT for table `schedule_again`
 --
 ALTER TABLE `schedule_again`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `sections`
@@ -251,7 +222,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
 
 --
 -- AUTO_INCREMENT for table `users`

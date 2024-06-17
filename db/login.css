@@ -155,14 +155,18 @@ form {
   display: flex;
 }
 .info {
-  margin-bottom: 3  0px;
+  margin-bottom: 3px;
   font-family: "rubik";
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 .info p {
   font-size: 13px;
 }
 .info h1 {
-  font-size: 30px;
+  font-size: 25px;
+  white-space: nowrap;
 }
 .input-box {
   margin-top: 20px;
