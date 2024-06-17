@@ -532,6 +532,15 @@ nav a span::before{
 .oct-schedule .page .btns button.next {
   margin-left: 3px;
 }
+.next-1 {
+  opacity: 1; 
+  transition: opacity 0.3s ease; 
+}
+
+.next-1:disabled {
+  opacity: 0.5; 
+  cursor: not-allowed; 
+}
 /* step by step process */
 .modal-container .progress-bar {
   align-items: center;
@@ -637,12 +646,6 @@ nav a span::before{
   position: sticky;
   top: 0;
 }
-
-/* .subject-table td{
-  background-color: #fff0f3;
-  color: #000;
-} */
-
 .section-table td {
   text-align: center;
   font-family: "montserrat";

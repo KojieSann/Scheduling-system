@@ -50,47 +50,41 @@ function tableToPDF() {
   });
 }
 function tableToPrint() {
-  var checkedRows = document.querySelectorAll(".checkboxTbl input:checked");
+  var checkedRows = document.querySelectorAll('.table-container input:checked');
   if (checkedRows.length === 0) {
-    alert("Please select at least one row to print.");
-    return;
+      alert("Please select at least one row to print.");
+      return;
   }
   checkedRows.forEach(function (row) {
-    var tdElements = row.closest("tr").querySelectorAll("td");
-    tdElements.forEach(function (td) {
-      td.classList.add("hide-on-print");
-    });
+      var tdElements = row.closest('tr').querySelectorAll('td');
+      tdElements.forEach(function (td) {
+          td.classList.add('hide-on-print');
+      });
   });
   var printContent = '<table border="1">';
-  printContent +=
-    "<thead><tr><th>Section</th><th>Strand</th><th>Day</th><th>Subject</th><th>Time</th><th>Instructor</th></tr></thead>";
-  printContent += "<tbody>";
+  printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Day</th><th>Subject</th><th>Time</th><th>Duration</th><th>Instructor</th></tr></thead>';
+  printContent += '<tbody>';
   checkedRows.forEach(function (row) {
-    var rowData = row.closest("tr").querySelectorAll("td:not(.checkboxTbl)");
-    printContent += "<tr>";
-    rowData.forEach(function (cell) {
-      printContent += "<td>" + cell.textContent + "</td>";
-    });
-    printContent += "</tr>";
+      var rowData = row.closest('tr').querySelectorAll('td:not(:first-child)');
+      printContent += '<tr>';
+      rowData.forEach(function (cell) {
+          printContent += '<td>' + cell.textContent + '</td>';
+      });
+      printContent += '</tr>';
   });
-  printContent += "</tbody></table>";
-  var newWindow = window.open("", "_blank");
+  printContent += '</tbody></table>';
+  var newWindow = window.open('', '_blank');
   newWindow.document.open();
-  newWindow.document.write(
-    "<html><head><title>OCT Schedule</title><style>.hide-on-print { display: none; }</style></head><body>" +
-      printContent +
-      "</body></html>"
-  );
+  newWindow.document.write('<html><head><title>Schedule print page</title><style>.hide-on-print { display: none; } </style></head><body>' + printContent + '</body></html>');
   newWindow.document.close();
   newWindow.print();
   checkedRows.forEach(function (row) {
-    var tdElements = row.closest("tr").querySelectorAll("td");
-    tdElements.forEach(function (td) {
-      td.classList.remove("hide-on-print");
-    });
+      var tdElements = row.closest('tr').querySelectorAll('td');
+      tdElements.forEach(function (td) {
+          td.classList.remove('hide-on-print');
+      });
   });
 }
-
 // delete rows
 function deleteSelectedRows() {
   var selectedRows = document.querySelectorAll(
@@ -139,6 +133,51 @@ formSubmitButton.addEventListener("click", function () {
   const selectedRow = document.querySelector(".selected-row");
   selectedRow.style.backgroundColor = "#d8f3dc";
 });
+
+  const nextButton = document.querySelector('.next-1');
+  nextButton.disabled = true;
+  nextButton.addEventListener('click', function(event) {
+    if (!isSubmitButtonClicked()) {
+      event.preventDefault();
+      displayFailedModal();
+    }
+  });
+
+  const prevButton = document.querySelector('.prev-1');
+  prevButton.addEventListener('click', function() {
+
+  });
+
+  function enableNextButton() {
+    nextButton.disabled = false;
+    nextButton.classList.remove('disabled');
+  }
+
+  function disableNextButton() {
+    nextButton.disabled = true;
+    nextButton.classList.add('disabled');
+  }
+
+  function isSubmitButtonClicked() {
+    const selectedRow = document.querySelector('.selected-row');
+    return selectedRow !== null;
+  }
+
+  function displayFailedModal() {
+    const failedModal = document.querySelector('.bg-modal-failed');
+    failedModal.style.display = 'block';
+  }
+
+  const closeFailedButton = document.querySelector('.closeFailed');
+  closeFailedButton.addEventListener('click', function() {
+    const failedModal = document.querySelector('.bg-modal-failed');
+    failedModal.style.display = 'none';
+  });
+
+  disableNextButton(); 
+
+
+
 
 // select all for table
 function toggleSelectAll() {
@@ -1140,3 +1179,4 @@ function searchSchedule() {
     }
   }
 }
+

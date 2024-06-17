@@ -860,7 +860,7 @@ nav a span::before{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* display: none; */
+  display: none;
 }
 .content-tutorial {
   height: 600px;

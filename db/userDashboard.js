@@ -52,6 +52,7 @@ document.getElementById("myDay").value = days[day];
   //   jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
   // };
   // html2pdf(table2pdf, opt);
+
   function tableToPrint() {
     var checkedRows = document.querySelectorAll('.table-container input:checked');
     if (checkedRows.length === 0) {
@@ -65,7 +66,7 @@ document.getElementById("myDay").value = days[day];
         });
     });
     var printContent = '<table border="1">';
-    printContent += '<thead><tr><th>Section</th><th>Strand</th><th># of Subjects</th><th>Sem</th><th>SY</th><th>Adviser</th></tr></thead>';
+    printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Day</th><th>Subject</th><th>Time</th><th>Duration</th><th>Instructor</th></tr></thead>';
     printContent += '<tbody>';
     checkedRows.forEach(function (row) {
         var rowData = row.closest('tr').querySelectorAll('td:not(:first-child)');
@@ -78,7 +79,7 @@ document.getElementById("myDay").value = days[day];
     printContent += '</tbody></table>';
     var newWindow = window.open('', '_blank');
     newWindow.document.open();
-    newWindow.document.write('<html><head><title>Checked Rows</title><style>.hide-on-print { display: none; }</style></head><body>' + printContent + '</body></html>');
+    newWindow.document.write('<html><head><title>Schedule print page</title><style>.hide-on-print { display: none; } </style></head><body>' + printContent + '</body></html>');
     newWindow.document.close();
     newWindow.print();
     checkedRows.forEach(function (row) {
@@ -88,54 +89,16 @@ document.getElementById("myDay").value = days[day];
         });
     });
   }
-  function tableToPrint2() {
-    var checkedRows = document.querySelectorAll('.checkboxTblSched input:checked');
-    if (checkedRows.length === 0) {
-      alert("Please select at least one row to print.");
-      return;
-    }
-    checkedRows.forEach(function(row) {
-      var tdElements = row.closest('tr').querySelectorAll('td');
-      tdElements.forEach(function(td) {
-        td.classList.add('hide-on-print');
-      });
-    });
-    var printContent = '<table border="1">';
-    printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Day</th><th>Subject</th><th>Time in</th><th>Time out</th><th>Duration</th><th>Instructor</th></tr></thead>';
-    printContent += '<tbody>';
-    checkedRows.forEach(function(row) {
-      var rowData = row.closest('tr').querySelectorAll('td:not(.checkboxTblSched)');
-      printContent += '<tr>';
-      rowData.forEach(function(cell) {
-        printContent += '<td>' + cell.textContent + '</td>';
-      });
-      printContent += '</tr>';
-    });
-    printContent += '</tbody></table>';
-    var newWindow = window.open('', '_blank');
-    newWindow.document.open();
-    newWindow.document.write('<html><head><title>Checked Rows</title><style>.hide-on-print { display: none; }</style></head><body>' + printContent + '</body></html>');
-    newWindow.document.close();
-    newWindow.print();
-    checkedRows.forEach(function(row) {
-      var tdElements = row.closest('tr').querySelectorAll('td');
-      tdElements.forEach(function(td) {
-        td.classList.remove('hide-on-print');
-      });
-    });
-  }
-  
-  
-// select all
+// select all for table
 function toggleSelectAll() {
-  var checkboxes = document.querySelectorAll('#scheduleTable tbody input[type="checkbox"]');
-  var selectAllCheckbox = document.getElementById('selectAll');
-  
-  for (var i = 0; i < checkboxes.length; i++) {
-    checkboxes[i].checked = selectAllCheckbox.checked;
-  }
+  var checkboxes = document.querySelectorAll(
+    '.checkboxTbl input[type="checkbox"]'
+  );
+  var selectAllCheckbox = document.getElementById("selectAll");
+  checkboxes.forEach(function (checkbox) {
+    checkbox.checked = selectAllCheckbox.checked;
+  });
 }
-
 
 function searchFunction() {
   var input, filter, table, tr, td, i, txtValue;
@@ -248,5 +211,110 @@ function searchSection() {
         }
       }
     }
+  }
+}
+// switch user and table
+const userSwitch = document.querySelector(".user-wrapper");
+const userBtnSwitch = document.querySelector(".close-user");
+const tableSwitch = document.querySelector(".table-wrapper");
+const tableBtnSwitch = document.querySelector(".switch-user");
+userBtnSwitch.addEventListener("click", function () {
+ userSwitch.style.display = "none";
+ tableSwitch.style.display = "block"
+
+});
+tableBtnSwitch.addEventListener("click", function () {
+ userSwitch.style.display = "flex";
+ tableSwitch.style.display = "none"
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const scheduleButtons = document.querySelectorAll('.view-open-modal');
+  const tableRows = document.querySelectorAll('#scheduleTableView tbody tr');
+  const searchInput = document.getElementById('search-box');
+
+  let currentSection = null;
+
+  // Event listeners for each schedule button to set the current section
+  scheduleButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      currentSection = this.getAttribute('data-section');
+      // Clear search input when a new section is selected
+      searchInput.value = '';
+      filterTableBySection(currentSection);
+    });
+  });
+
+  // Event listener for search input changes
+  searchInput.addEventListener('input', function() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    filterTableBySection(currentSection, searchTerm);
+  });
+
+  // Function to filter table rows based on section and search term
+  function filterTableBySection(section, searchTerm = '') {
+    tableRows.forEach(row => {
+      const sectionMatches = row.getAttribute('data-section') === section;
+  
+      if (sectionMatches) {
+        const searchMatches = row.textContent.toLowerCase().includes(searchTerm);
+        row.style.display = searchMatches ? '' : 'none';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+});
+
+// // modal for viewing
+document.querySelectorAll(".view-open-modal").forEach(function(button) {
+  button.addEventListener("click", function () {
+    document.querySelector(".bg-content-view").style.display = "flex";
+  });
+});
+
+const closeView = document.querySelector(".close-view");
+closeView.addEventListener("click", function () {
+  document.querySelector(".bg-content-view").style.display = "none";
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const scheduleButtons = document.querySelectorAll('.view-open-modal');
+  scheduleButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const section = this.getAttribute('data-section');
+      const strand = this.getAttribute('data-strand');
+      const adviser = this.getAttribute('data-adviser');
+
+      document.querySelector('input[name="section"]').value = section;
+      document.querySelector('input[name="strand"]').value = strand;
+      document.querySelector('input[name="adviser"]').value = adviser;
+    });
+  });
+});
+// for sorting the day
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("scheduleTable");
+  switching = true;
+  while (switching) {
+      switching = false;
+      rows = table.getElementsByTagName("TR");
+      for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+          x = rows[i].getElementsByTagName("TD")[2];
+          y = rows[i + 1].getElementsByTagName("TD")[2];
+          var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+          var xIndex = days.indexOf(x.innerHTML);
+          var yIndex = days.indexOf(y.innerHTML);
+          if (xIndex > yIndex) {
+              shouldSwitch = true;
+              break;
+          }
+      }
+      if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+      }
   }
 }

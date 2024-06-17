@@ -43,4 +43,3 @@ if ($section_name) {
     echo "<script>alert('No Section deleted'); window.location.href='dashboard.php';</script>";
     exit;
 }
-?>
