@@ -2,17 +2,20 @@
 include('connect.php');
 
 // Function to check for schedule conflicts
-function checkForConflicts($conn, $section, $strand, $day, $startTime, $endTime) {
+function checkForConflicts($conn, $section, $strand, $instructor, $day, $startTime, $endTime) {
     // Ensure times are in 24-hour format
     $startTime = date("H:i:s", strtotime($startTime));
     $endTime = date("H:i:s", strtotime($endTime));
 
-    $conflictQuery = "SELECT * FROM schedules WHERE section = ? AND strand = ? AND day = ? AND (
+    $conflictQuery = "SELECT * FROM schedules WHERE 
+        (section = ? AND strand = ? AND day = ?) OR 
+        (instructor = ? AND day = ?) AND (
         (time <= ? AND ADDTIME(time, SEC_TO_TIME(duration * 60)) > ?) OR
         (time < ? AND ADDTIME(time, SEC_TO_TIME(duration * 60)) >= ?)
     )";
     $stmt = $conn->prepare($conflictQuery);
-    $stmt->bind_param("sssssss", $section, $strand, $day, $startTime, $startTime, $endTime, $endTime);
+    // Bind parameters for both section/strand and instructor
+    $stmt->bind_param("sssssssss", $section, $strand, $day, $instructor, $day, $startTime, $startTime, $endTime, $endTime);
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
@@ -62,12 +65,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $duration = ($timeOut - $timeIn) / 60;
 
                     // Check for conflicts
-                    if (!checkForConflicts($conn, $inputSection, $inputStrand, $day, $startTime, $endTime)) {
+                    if (!checkForConflicts($conn, $inputSection, $inputStrand, $instructorName, $day, $startTime, $endTime)) {
                         // Insert schedule if no conflict
-                        insertSchedule($conn, $inputSection, $inputStrand, $subjectName, $instructorName, $day, $duration. ' minutes', $startTime . ' - ' . $endTime);
+                        insertSchedule($conn, $inputSection, $inputStrand, $subjectName, $instructorName, $day, $duration . ' minutes', $startTime . ' - ' . $endTime);
                     } else {
                         http_response_code(409); // Conflict
-                        echo "Conflict detected";
+                        echo "Conflict detected. Check theTable";
                         exit();
                     }
                 }

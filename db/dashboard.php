@@ -148,10 +148,7 @@ if (!$result_schedule2) {
         </div>
         <div class="button-container">
           <button class="print" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
-          <form method="POST" action="deleteSectionsDashboard.php">
-            <input type="hidden" name="section_id" value="SECTION_ID_HERE" />
-            <button type="submit" class="delete"><i class="fa-regular fa-trash-can"></i> Delete</button>
-          </form>
+          <button type="submit"><i class="fa-regular fa-trash-can"></i> Delete</button>
         </div>
       </div>
     </div>
