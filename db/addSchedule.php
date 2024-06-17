@@ -4,9 +4,8 @@ include('connect.php');
 // Function to check for schedule conflicts
 function checkForConflicts($conn, $section, $strand, $instructor, $day, $startTime, $endTime)
 {
-    // Ensure times are in 12-hour format with AM/PM
-    $startTime = date("h:i A", strtotime($startTime));
-    $endTime = date("h:i A", strtotime($endTime));
+    $startTime = date("H:i:s ", strtotime($startTime));
+    $endTime = date("H:i:s", strtotime($endTime));
 
     $conflictQuery = "SELECT * FROM schedules WHERE 
         (section = ? AND strand = ? AND day = ?) OR 
@@ -14,8 +13,8 @@ function checkForConflicts($conn, $section, $strand, $instructor, $day, $startTi
         (time <= ? AND ADDTIME(time, SEC_TO_TIME(duration * 60)) > ?) OR
         (time < ? AND ADDTIME(time, SEC_TO_TIME(duration * 60)) >= ?)
     )";
+
     $stmt = $conn->prepare($conflictQuery);
-    // Bind parameters for both section/strand and instructor
     $stmt->bind_param("sssssssss", $section, $strand, $day, $instructor, $day, $startTime, $startTime, $endTime, $endTime);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -35,13 +34,12 @@ function insertSchedule($conn, $section, $strand, $subject, $instructor, $day, $
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate and sanitize inputs
+
     $subjectName = filter_input(INPUT_POST, "modalSubjectName", FILTER_SANITIZE_STRING);
     $inputSection = filter_input(INPUT_POST, "inputSection", FILTER_SANITIZE_STRING);
     $inputStrand = filter_input(INPUT_POST, "inputStrand", FILTER_SANITIZE_STRING);
     $selectedInstructor = filter_input(INPUT_POST, "instructorSelect", FILTER_VALIDATE_INT);
 
-    // Check if all required fields are filled
     if ($subjectName && $inputSection && $inputStrand && $selectedInstructor) {
         // Get instructor name
         $instructorQuery = "SELECT first_name, last_name FROM teachers WHERE id = ?";
@@ -54,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $row = $result->fetch_assoc();
             $instructorName = $row['first_name'] . ' ' . $row['last_name'];
 
-            // Process each day's schedule
             foreach ($_POST["days"] as $day) {
                 $timeInArray = $_POST["timeIn" . $day];
                 $timeOutArray = $_POST["timeOut" . $day];
@@ -68,10 +65,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     // Check for conflicts
                     if (!checkForConflicts($conn, $inputSection, $inputStrand, $instructorName, $day, $startTime, $endTime)) {
-                        // Insert schedule if no conflict
                         insertSchedule($conn, $inputSection, $inputStrand, $subjectName, $instructorName, $day, $duration . ' minutes', $startTime . ' - ' . $endTime);
                     } else {
-                        http_response_code(409); // Conflict
+                        http_response_code(409); 
                         echo "Conflict detected. Check theTable";
                         exit();
                     }
