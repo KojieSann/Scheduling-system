@@ -42,30 +42,19 @@ if (isset($_GET['search'])) {
   <div class="container">
     <nav>
       <div class="logo">
-        <img src="./img/olivarez-college-tagaytay-logo.png" alt="" />
-        <span>Olivarez College <br />
-          Tagaytay</span>
+        <img src="./img/olivarez-college-tagaytay-logo.png" alt="oct logo">
       </div>
-      <ul>
-        <li class="list-items">
-          <a href="./generate.php"><i class="fa-solid fa-circle-plus"></i><span class="nav-lists">Generate Schedule</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./dashboard.php"><i class="fa-solid fa-tv"></i><span class="nav-lists">Dashboard</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i><span class="nav-lists">Teachers</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./section.php" class="active"><i class="fa-solid fa-users-rectangle"></i><span class="nav-lists">Sections</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./subject.php"><i class="fa-solid fa-book"></i><span class="nav-lists">Subjects</span></a>
-        </li>
-        <li>
-          <a class="logout"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-lists">Logout</span></a>
-        </li>
-      </ul>
+      <div class="public">
+        <a href="./generate.php"><i class="fa-solid fa-circle-plus"></i><span>Create schedule</span></a>
+        <a href="./dashboard.php"> <i class="fa-solid fa-tv"></i><span>Dashboard</span></a>
+        <a href="./subject.php"><i class="fa-solid fa-book"></i><span>Subjects</span></a>
+        <a href="./section.php" class="active"><i class="fa-solid fa-users-rectangle"></i><span>Sections</span></a>
+        <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i> <span>Teachers</span></a>
+
+      </div>
+      <div class="admin">
+        <a class="logout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+      </div>
     </nav>
     <div class="bg-content-logout">
       <div class="content-logout">
@@ -75,7 +64,7 @@ if (isset($_GET['search'])) {
           <p style="font-size: 13px">Are you sure you want to logout?</p>
         </div>
         <div class="header-img">
-          <img src="./img/undraw_login_re_4vu2.svg" alt="" />
+          <img src="./img/olivarez-college-tagaytay-logo.png" alt="Oct logo">
         </div>
         <div class="btn">
           <button class="noBtn">Cancel</button>
@@ -149,21 +138,31 @@ if (isset($_GET['search'])) {
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody st>
+            <tbody>
               <?php
+              $query = "SELECT * FROM sections ORDER BY id DESC";
+              $result = $conn->query($query);
+              if ($result->num_rows > 0) {
 
-              while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row['section_name'] . "</td>";
-                echo "<td>" . $row['grade_level'] . "</td>";
-                echo "<td>" . $row['strand'] . "</td>";
-                echo "<td><a href='edit_page_sections.php?id=" . $row['id'] . "'><button class='edit'><i class='fa-solid fa-pen'></i></button></a> 
-                  <a href='delete_sections.php?id=" . $row['id'] . "'> <button  class='delete' type='submit' name='delete'><i class='fa-solid fa-trash-can'></i></button></a> 
-                  </td>";
-                echo "</tr>";
+                while ($row = $result->fetch_assoc()) {
+                  echo "<tr>";
+                  echo "<td>" . $row['section_name'] . "</td>";
+                  echo "<td>" . $row['grade_level'] . "</td>";
+                  echo "<td>" . $row['strand'] . "</td>";
+                  echo "<td> 
+                    <a href='edit_page_sections.php?id=" . $row['id'] . "'><button class='edit'><i class='fa-solid fa-pen'></i></button></a> 
+                    <a href='delete_sections.php?id=" . $row['id'] . "'><button class='delete' type='submit' name='delete'><i class='fa-solid fa-trash-can'></i></button></a> 
+                    </td>";
+                  echo "</tr>";
+                }
+              } else {
+                echo "<tr><td colspan='4'>No section available</td></tr>";
               }
+
+              $conn->close();
               ?>
             </tbody>
+
           </table>
         </div>
       </div>

@@ -34,104 +34,85 @@ body {
 
 }
 
-.logo {
-  margin: 20px 0 40px 20px;
-  align-items: center;
-  display: flex;
-  transition: all 0, 5s ease;
-}
-.logo img {
-  cursor: pointer;
-  height: 50px;
-  width: 50px;
-  right: 50px;
-}
-
-.logo span {
-  text-align: center;
-  white-space: nowrap;
-  color: #4b4b4b;
-  margin-left: 20px;
-  font-weight: 700;
-  font-size: 17px;
-}
-nav a {
-  text-decoration: none;
-  color: #4b4b4b;
-  font-size: 15px;
-  width: 300px;
-  padding: 10px;
-  position: relative;
-  display: table;
-  font-family: "montserrat";
-  font-weight: 600;
-}
-nav {
-  z-index: 10000;
-  border-top-right-radius: 20px;
-  outline: none;
-  text-decoration: none;
-  background: #d8f3dc;
-  font-family: "Montserrat";
+nav{
+  width: max-content;
+  border-radius: 10px ;
+  background-color: #d8f3dc;
+  box-shadow: 0px 0px 30px #d8f3dc;
   height: 100vh;
-  width: 90px;
-  position: fixed;
-  transition: width 0.2s linear;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
 }
-.logout {
+nav div{
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+nav .logo img{
   cursor: pointer;
-  bottom: 5px;
+  margin-top: 20px;
+  width: 50px;
+}
+.public{
+  padding-bottom: 80px !important;
+}
+.admin{
   position: absolute;
+  bottom: 0;
+  border-top: 1px solid #4b4b4b;
 }
-nav i {
+nav a{
   position: relative;
-  width: 70px;
-  height: 40px;
-  top: 14px;
-  font-size: 20px;
-  text-align: center;
-}
-.nav-lists {
-  position: relative;
-  top: 12px;
-  margin-left: 10px;
-}
-nav a:hover {
-  transition: all 0.1s ease;
-  background: linear-gradient(to right, #95d5b2, transparent);
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-family: 'poppins';
   color: #4b4b4b;
-  color: white;
-  border-top-left-radius: 7px;
-  border-bottom-left-radius: 7px;
+  cursor: pointer;
 }
-nav:hover {
-  width: 260px;
-  transition: all 0.5s ease;
+nav i{
+  font-size: 20px;
 }
-.active i {
-  color: white;
+nav a:hover, nav .active{
+  background-color:#95d5b2 ;
+  color: #fff;
 }
-ul .list-items .active i::after {
-  width: 8px;
-}
-ul .list-items i::after {
+nav a span{
+  z-index: 10000;
+  font-size: 15px;
+  white-space: nowrap;
+  padding: 10px 20px;
+  border-radius: 6px;
+  background-color: #52b788;
+  color: #fff;
   position: absolute;
-  content: "";
-  top: 25%;
-  left: 0;
-  width: 0px;
-  height: 75%;
-  transform: translateY(-50%);
-  background-color: #2d6a4f;
-  border-radius: 5px;
+  left: 150%;
+  top: 50%;
+  transform-origin: left;
+  --scale:0;
+  opacity: 0;
+  transform: translateY(-59%) scale(var(--scale));
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
-ul .list-items:hover i::after {
-  width: 8px;
-  transition: 0.3s;
+nav a:hover span{
+  --scale:1;
+  opacity: 1;
+}
+nav a span::before{
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  background-color: inherit;
+  left: 0;
+  top: 50%;
+  transform: translate(-40%,-50%)rotate(45deg);
 }
 .container {
   display: flex;
@@ -141,7 +122,6 @@ ul .list-items:hover i::after {
   position: relative;
   width: 100%;
   padding: 20px;
-  margin-left: 100px;
 }
 .main-content .main-logo {
   font-family: "montserrat";
@@ -203,7 +183,12 @@ ul .list-items:hover i::after {
   bottom: 80px;
 }
 .bg-content-logout .header-img img {
-  width: 200px;
+  bottom: 0px;
+  position: absolute;
+  right: -50px;
+  height: 170px;
+  z-index: -10;
+  opacity: 0.2;
 }
 .bg-content-logout .header-text {
   align-items: center;
@@ -254,19 +239,6 @@ ul .list-items:hover i::after {
   background: #fff;
 }
 /* table */
-.schedules-table .view-open-modal{
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  padding: 4px 0;
-  border-radius: 3px;
-  cursor: pointer;
-  background-color: none;
-  color: #666;
-  border: 1px solid #666;
-}
 .schedules-table{
   margin-top: 55px;
   width: 100%;
@@ -486,22 +458,23 @@ ul .list-items:hover i::after {
   width: 100%;
   overflow: hidden;
 }
-.modal-container .form-outer form {
+.modal-container .form-outer .oct-schedule {
   display: flex;
   width: calc(100% * var(--stepNumber));
 }
-.form-outer form .page {
+.form-outer .oct-schedule .page {
   width: calc(100% / var(--stepNumber));
   transition: margin-left 0.3s ease-in-out;
+  height: 450px;
 }
-.form-outer form .page .title {
+.form-outer .oct-schedule .page .title {
   text-align: left;
   font-size: 25px;
   font-weight: 600;
   font-family: "poppins";
   color: #333;
 }
-.form-outer form .page .field {
+.form-outer .oct-schedule .page .field {
   width: var(--containerWidth);
   height: 45px;
   margin: 45px 0;
@@ -513,7 +486,7 @@ ul .list-items:hover i::after {
   gap: 30px;
   margin-top: 15px;
 }
-form .page input {
+.oct-schedule .page input {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   font-family: "montserrat";
   font-size: 13px;
@@ -528,10 +501,10 @@ form .page input {
   font-family: "poppins";
   font-size: 12px;
 }
-form .page .field input.invalid-input {
+.oct-schedule .page .field input.invalid-input {
   border-color: red;
 }
-form .page .field button {
+.oct-schedule .page .field button {
   position: relative;
   font-family: "montserrat";
   bottom: 0;
@@ -547,17 +520,26 @@ form .page .field button {
   text-transform: uppercase;
   transition: 0.5s ease;
 }
-form .page .field button:hover {
+.oct-schedule .page .field button:hover {
   background: #2d6a4f;
 }
-form .page .btns button {
+.oct-schedule .page .btns button {
   margin-top: -20px !important;
 }
-form .page .btns button.prev {
+.oct-schedule .page .btns button.prev {
   margin-right: 3px;
 }
-form .page .btns button.next {
+.oct-schedule .page .btns button.next {
   margin-left: 3px;
+}
+.next-1 {
+  opacity: 1; 
+  transition: opacity 0.3s ease; 
+}
+
+.next-1:disabled {
+  opacity: 0.5; 
+  cursor: not-allowed; 
 }
 /* step by step process */
 .modal-container .progress-bar {
@@ -664,12 +646,6 @@ form .page .btns button.next {
   position: sticky;
   top: 0;
 }
-
-/* .subject-table td{
-  background-color: #fff0f3;
-  color: #000;
-} */
-
 .section-table td {
   text-align: center;
   font-family: "montserrat";
@@ -742,27 +718,6 @@ form .page .btns button.next {
   right: 28px;
   pointer-events: none;
 }
-/* done and in progress in subject tab */
-.status {
-  width: 120px;
-  font-family: "poppins";
-  font-weight: 600;
-}
-.status .done {
-  border-radius: 5px;
-  padding: 4px 0;
-  width: 120px;
-  color: #52b788;
-  background: #c9ffe2;
-  display: none;
-}
-.status .in-progress {
-  padding: 4px 0;
-  border-radius: 5px;
-  width: 120px;
-  background: #fae0e4;
-  color: #ff8fa3;
-}
 /* input for additional details  */
 .modal-content .form-outer .additional-inputs {
   display: flex;
@@ -804,14 +759,14 @@ form .page .btns button.next {
   width: 250px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   border: 1px solid #dddddd;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .modal-content .form-outer .additional-inputs .finalize-adviser .title{
-top: -50px;
-left: -5px;
+  top: -50px;
+  left: -5px;
 }
 .modal-content .form-outer .additional-inputs .finalize-adviser input[type="checkbox"]{
-  display: none;
+  width: 10px;
 }
 .modal-content .form-outer .additional-inputs .finalize-adviser .multiselect-dropdown{
   width: 190px;
@@ -825,6 +780,71 @@ left: -5px;
 .modal-content .form-outer .additional-inputs .sy input {
   width: 70px;
 }
+
+/* dropdown for sy in finalizing */
+.modal-content .form-outer .additional-inputs .sy-container .option-sy {
+  position: absolute;
+  display: none;
+  top: 40px;
+  height: 150px;
+  width: 60%;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow-y: scroll;
+  color: #4b4b4b;
+  z-index: 100;
+  border: 0.5px solid #dddddd;
+
+}
+.modal-content .form-outer .additional-inputs .sy-container .option-sy::-webkit-scrollbar {
+  width: 3px;
+}
+.modal-content .form-outer .additional-inputs .sy-container .option-sy::-webkit-scrollbar-thumb {
+  background-color: #bec4ca;
+  border-radius: 5px;
+}
+.modal-content .form-outer .additional-inputs .sy-container .option-sy div {
+  font-family: "montserrat";
+  font-size: 14px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.modal-content .form-outer .additional-inputs .sy-container .option-sy div:hover {
+  background: #dfdfdf;
+}
+.additional-inputs .sy-container .dropdown-sy input {
+  cursor: pointer;
+}
+.additional-inputs .sy-container .dropdown-sy .icon-down {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  left: 165px;
+  top: 8px;
+  transition: all 0.3s ease;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  pointer-events: none;
+}
+.modal-content .form-outer .additional-inputs .sy-container .dropdown-sy {
+  position: relative;
+  width: 200px;
+  height: 35px;
+}
+.modal-content
+  .form-outer
+  .additional-inputs
+  .sy-container
+  .dropdown-sy.activeShowSY
+  .option-sy {
+  display: block;
+}
+.additional-inputs .sy-container .dropdown-sy.activeShowSY .icon-down {
+  transform: rotate(180deg);
+}
+/* dropdown for semester in finalizing */
 .modal-content .form-outer .additional-inputs .sem-container {
   margin: 30px;
   align-items: center;
@@ -888,6 +908,80 @@ left: -5px;
   display: block;
 }
 .additional-inputs .sem-container .dropdown-sem.activeShow .icon-down {
+  transform: rotate(180deg);
+}
+/* dropdown for adviser */
+.modal-content .form-outer .additional-inputs .adviser-container {
+  margin: 30px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  width: 250px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+}
+.modal-content .form-outer .additional-inputs .adviser-container .option {
+  position: absolute;
+  display: none;
+  top: 40px;
+  width: 100%;
+  height: 180px;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow-y: scroll;
+  color: #4b4b4b;
+  z-index: 100;
+  border: 0.5px solid #dddddd;
+}
+.adviser-container .option::-webkit-scrollbar {
+  width: 5px;
+}
+.adviser-container .option::-webkit-scrollbar-thumb {
+  background-color: #bec4ca;
+  border-radius: 5px;
+}
+.modal-content .form-outer .additional-inputs .adviser-container .option div {
+  font-family: "montserrat";
+  font-size: 12px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.modal-content .form-outer .additional-inputs .adviser-container .option div:hover {
+  background: #dfdfdf;
+}
+.additional-inputs .adviser-container .dropdown-adviser input {
+  cursor: pointer;
+}
+.additional-inputs .adviser-container .dropdown-adviser .icon-down {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  left: 165px;
+  top: 8px;
+  transition: all 0.3s ease;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  pointer-events: none;
+}
+.modal-content .form-outer .additional-inputs .adviser-container .dropdown-adviser {
+  position: relative;
+  width: 200px;
+  height: 35px;
+}
+.modal-content
+  .form-outer
+  .additional-inputs
+  .adviser-container
+  .dropdown-adviser.activeShowAdviser
+  .option {
+  display: block;
+}
+.additional-inputs .adviser-container .dropdown-adviser.activeShowAdviser .icon-down {
   transform: rotate(180deg);
 }
 /* modal for subject */
@@ -1320,11 +1414,12 @@ left: -5px;
   visibility: visible;
   transform: scale();
 }
-/* modal for viewing */
-.bg-content-view{
+
+/* success modal */
+.bg-modal-success {
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.05);
   position: absolute;
   top: 0;
   z-index: 1000;
@@ -1332,153 +1427,208 @@ left: -5px;
   flex-direction: column;
   display: none;
 }
-.bg-content-view .content-view {
-  height: 600px;
+
+.success-content{
+  height: 320px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 900px;
+  width: 400px;
   background-color: #fff;
   z-index: 100;
   border-radius: 20px;
   position: absolute;
   padding: 20px;
-}
-
-.bg-content-view .content-view .close-view{
- padding: 12px 17px;
-  cursor: pointer;
-  position: absolute;
-  color: #c66;
-  border-radius: 50%;
-  align-items: center;
-  font-size: 23px;
-  right: 10px;
-}
-.bg-content-view .content-view input{
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  font-family: "montserrat";
-  font-size: 13px;
-  padding: 10px 15px;
-  width: 200px;
-  height: 30px;
-  border-radius: 5px;
-  border: 0.5px solid #dddddd;
-}
-.bg-content-view .content-view .inputs-container{
-  display: flex;
-  gap: 10px;
-  font-family: "poppins";
-  font-size: 13px;
-  margin: 30px;
-  align-items: center;
-  justify-content: center;
-}
-.bg-content-view .content-view .inputs{
   display: flex;
   flex-direction: column;
-}
-.bg-content-view .content-view .button-container{
-  gap: 10px;
-  display: flex;
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
-}
-.bg-content-view .content-view .button-container button{
-  cursor: pointer;
-  padding: 5px 17px;
-  background: transparent;
-  border-radius: 3px
-}
-.bg-content-view .content-view .button-container button:hover{
-  opacity: 0.6;
-}
-.bg-content-view .content-view .button-container .delete{
-  border: 1px solid #c66;
-  color: #c66;
-}
-.bg-content-view .content-view .button-container .edit{
-  border: 1px solid #52b788;
-  color: #52b788;
-}
-.bg-content-view .content-view .button-container .print{
-  border: 1px solid #666;
-  color: #666;
-}
-/* table for viewing */
-.view-table{
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #dddddd;
-  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
-}
-.view-table .table-header {
-  display: flex;
-  font-family: "poppins";
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
 }
-.view-table .table-header span {
-  font-size: 25px;
+.success-content .successLogo i{
+  font-size: 100px;
+  color: #52b788;
+
+}
+.success-content .successLogo .failed{
+  font-size: 100px;
+  color: #e5383b;
+}
+.success-content .successLogo{
+  position: absolute;
+  top: 10px;
+  font-family: 'poppins';
   font-weight: 600;
-  color: #4b4b4b;
+  font-size: 17px;
+  color: #333;
 }
-.view-table .table-container {
-  max-height: 57vh;
+.success-content .btn-content{
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  gap: 10px;
+}
+.success-content .btn-content button{
+  cursor: pointer;
+  border: none;
+  font-family: 'poppins';
+  font-weight: 500;
+  border-radius: 3px;
+}
+.success-content .btn-content button:hover{
+  opacity: 0.5;
+}
+.success-content .btn-content .close{
+  padding: 5px 25px;
+  border: 1px solid #bec4ca;
+  background: none;
+}
+.success-content .btn-content .create{
+  padding: 5px 50px;
+  background: #52b788;
+  color: #fff;
+}
+.textcontainer {
+  padding: 40px 0;
+  text-align: center;
+}
+.particletext {
+  text-align: center;
+  font-size: 48px;
+  position: relative;
+}
+.particletext.confetti > .particle {
+  opacity: 0;
+  position: absolute;
+  animation: confetti 3s ease-in infinite;
+}
+.particletext.confetti > .particle.c1 {
+  background-color: rgba(76, 175, 80, 0.5);
+}
+.particletext.confetti > .particle.c2 {
+  background-color: rgba(156, 39, 176, 0.5);
+}
+@keyframes confetti {
+  0% {
+    opacity: 0;
+    transform: translateY(0%) rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  35% {
+    transform: translateY(-800%) rotate(270deg);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(2000%) rotate(1440deg);
+  }
+}
+
+.table-subject {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  display: flex;
+  transition: all 0.3s ease;
+  border-radius: 15px;
+  color: #333;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+  margin: 20px 10px;
+  position: relative;
+  cursor: pointer;
+}
+.table-subject .icon {
+  font-size: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.table-subject.expanded {
+  width: 365px;
+  height: 500px;
+  cursor: default;
+}
+.tableSubject-container .close-table{
+  position: absolute;
+  top: 10px;
+  left: 360px;
+  font-size: 15px;
+  height: 30px;
+  width: 30px;
+  background: #4b4b4b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+}
+.tableSubject-container .tableSub-container {
+  max-height: 450px;
   overflow-y: scroll;
-  margin-top: 5px;
+  margin-top: 15px;
+  padding: 5px;
+  overflow-x: hidden;
+  display: none;
 }
-.view-table .table-container::-webkit-scrollbar {
+.tableSubject-container .tableSub-container::-webkit-scrollbar {
   width: 6px;
 }
-.view-table .table-container::-webkit-scrollbar-thumb {
+.tableSubject-container .tableSub-container::-webkit-scrollbar-thumb {
   background-color: #cacaca;
   border-radius: 5px;
 }
-.view-table table {
+.tableSubject-container table {
   width: 100%;
   font-family: "montserrat";
   border-collapse: collapse;
 }
-.view-table table th,
-.view-table table td {
-  padding: 8px;
+.tableSubject-container table th,
+.tableSubject-container table td {
+  padding: 5px 3px;
   text-align: center;
   border-radius: 1px;
 }
 
-.view-table table th {
+.tableSubject-container table th {
   position: sticky;
   top: 0;
   background: #2d6a4f;
   color: #fff;
+  font-size: 14px;
 }
-.view-table table td {
-  font-size: 13px;
+.tableSubject-container table td {
+  font-size: 10px;
 }
-.view-table  .table tbody tr:nth-of-type(even) {
+.tableSubject-container  .table tbody tr:nth-of-type(even) {
   background-color: #eee;
 }
-.view-table  .searchSection {
+.tableSubject-container  .searchSchedule {
   align-items: center;
   position: relative;
-  right: 0;
+  left: 70px;
+  margin-bottom: 10px;
+  display: none;
 }
-.view-table  .searchSection input {
+.tableSubject-container  .searchSchedule input {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   font-family: "montserrat";
-  font-size: 13px;
+  font-size: 12px;
   padding: 10px 15px;
-  width: 230px;
-  height: 30px;
-  border-radius: 5px;
+  width: 200px;
+  height: 28px;
+  border-radius: 8px;
   border: 0.5px solid #dddddd;
 }
-.view-table  .searchSection i {
+.tableSubject-container  .searchSchedule i {
   position: relative;
   right: 28px;
   pointer-events: none;
-  color: #666;
+  color: #4b4b4b;
 }

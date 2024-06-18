@@ -103,7 +103,7 @@ if (isset($_GET['logout'])) {
 
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="info">
-                    <h1>Welcome Back!</h1>
+                    <h1>SHS Scheduling System</h1>
                     <p>Please Login to your account</p>
                 </div>
                 <div class="login-input">

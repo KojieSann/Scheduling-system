@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2024 at 11:35 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jun 17, 2024 at 04:23 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,39 @@ SET time_zone = "+00:00";
 --
 -- Database: `scheduling_system_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `schedules`
+--
+
+CREATE TABLE `schedules` (
+  `id` int(11) NOT NULL,
+  `section` varchar(30) NOT NULL,
+  `strand` varchar(30) NOT NULL,
+  `day` varchar(30) NOT NULL,
+  `subject` varchar(30) NOT NULL,
+  `time` varchar(30) NOT NULL,
+  `duration` varchar(30) NOT NULL,
+  `instructor` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `schedule_again`
+--
+
+CREATE TABLE `schedule_again` (
+  `id` int(11) NOT NULL,
+  `section` varchar(25) NOT NULL,
+  `strand` varchar(25) NOT NULL,
+  `grade_level` varchar(250) NOT NULL,
+  `sem` varchar(25) NOT NULL,
+  `school_year` varchar(25) NOT NULL,
+  `adviser` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -39,17 +72,9 @@ CREATE TABLE `sections` (
 --
 
 INSERT INTO `sections` (`id`, `section_name`, `grade_level`, `strand`) VALUES
-(6, 'tyrtydawdw', 'nbbb', 'TVL'),
-(7, 'bsit311daw', '3rdDAWD', 'GAS'),
-(8, 'dad', 'dwadADWA', 'STEM'),
-(9, 'dawd', 'awdaww', 'STEM'),
-(10, 'dawdaaaaaaaaa', 'awdawdaadwdaDAWD', 'TVL'),
-(12, 'bsit311', '3rd', 'TVL'),
-(13, 'dad', 'dwad', 'STEM'),
-(14, 'bsit311aaa', '3rd', 'TVL'),
-(15, 'tyrty', 'nbbb', 'STEM'),
-(16, 'dawd', 'adawda', 'GAS'),
-(17, 'dwad', 'awdawd', 'STEM');
+(24, ' Sitaw', 'Grade 11', 'TVL'),
+(25, 'Ampalaya', 'Grade 11', 'STEM'),
+(26, 'Kalabaw', 'Grade 11', 'ABM');
 
 -- --------------------------------------------------------
 
@@ -61,22 +86,20 @@ CREATE TABLE `subjects` (
   `id` int(11) NOT NULL,
   `subject_name` varchar(255) NOT NULL,
   `subject_code` varchar(255) NOT NULL,
-  `school_year` varchar(255) NOT NULL,
   `grade_level` varchar(255) NOT NULL,
-  `strand` varchar(255) NOT NULL,
-  `status` enum('done','in_progress') DEFAULT NULL
+  `strand` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `subjects`
 --
 
-INSERT INTO `subjects` (`id`, `subject_name`, `subject_code`, `school_year`, `grade_level`, `strand`, `status`) VALUES
-(60, 'dawd', 'awd', '2004', 'Grade 11', 'STEM', NULL),
-(61, 'dawd', 'awd', '2004', 'Grade 11', 'TVL, ICT', NULL),
-(62, 'dawd', 'awd', '2004', 'Grade 11', 'ABM', NULL),
-(63, 'dawd', 'awd', '2004', 'Grade 11', 'HUMSS', NULL),
-(64, 'dawd', 'awd', '2004', 'Grade 11', 'HE', NULL);
+INSERT INTO `subjects` (`id`, `subject_name`, `subject_code`, `grade_level`, `strand`) VALUES
+(71, 'Math', 'Math101', 'Grade 12', 'GAS'),
+(72, 'English', '202', 'Grade 12', 'GAS, STEM'),
+(73, 'Science', 'SCI', 'Grade 12', 'GAS, STEM, TVL, ICT, ABM'),
+(74, 'PE', 'ICELLE', 'Grade 12', 'GAS, STEM, ICT, ABM'),
+(77, 'Art', 'Art101', 'Grade 11', 'GAS, STEM, TVL, ICT, ABM, HUMSS, HE');
 
 -- --------------------------------------------------------
 
@@ -100,18 +123,10 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `first_name`, `middle_name`, `last_name`, `day`, `time`, `strand`, `subject`) VALUES
-(121, 'daw', 'daw', 'dawd', 'Monday, Friday', 'AM-PM', 'TVL', 'tewtwet, tewtwet'),
-(122, 'daw', 'daw', 'dawd', 'Friday', 'AM-PM', 'TVL', 'hhhhhh'),
-(123, 'dawd', 'dawda', 'dawd', 'Monday', 'PM', 'GAS', 'hhhhhh'),
-(124, 'dawd', 'dawda', 'dawd', 'Monday', 'PM', 'GAS', 'ENGLISH'),
-(125, 'dawd', 'dawda', 'dawd', 'Monday', 'PM', 'GAS', 'ENGLISH'),
-(127, 'dawd', 'dawda', 'dawd', 'Tuesday', 'PM', 'GAS', 'ENGLISH'),
-(128, 'dawd', 'dawda', 'dawd', 'Tuesday', 'PM', 'GAS', 'ENGLISH'),
-(129, 'dawd', 'awd', 'daw', 'Monday', 'PM', 'STEM', 'tewtwet, tewtwet'),
-(137, 'daw', 'dawd', 'wadw', 'Monday, Tuesday', 'PM', 'STEM', 'tewtwet, tewtwet, English, Math'),
-(138, 'dwa', 'adwaw', 'dawdwa', 'Monday, Tuesday, Wednesday, Thursday, Friday', 'AM-PM', 'TVL', 'tewtwet, tewtwet, English, Math'),
-(139, 'dawd', 'awdaw', 'dawda', 'Monday, Tuesday', 'PM', 'TVL', 'tewtwet, tewtwet, English'),
-(140, 'Aldrin', '', 'Dayuta', 'Monday, Tuesday', 'PM', 'STEM', 'English, Math');
+(165, 'Susan', 'Davene', 'Connor', 'Monday, Tuesday, Wednesday', 'AM', 'STEM', 'Math, English'),
+(166, 'Boomy', 'B', 'Butler', 'Monday, Tuesday, Wednesday, Thursday', 'AM-PM', 'GAS', 'Science, PE, Art'),
+(167, 'Sarah', 'Timberwood', 'Chesney', 'Monday, Tuesday, Wednesday, Thursday, Friday', 'PM', 'TVL', 'Math, English, Science, PE, Art'),
+(168, 'Peter ', 'Jone', 'White', 'Monday, Tuesday', 'AM-PM', 'GAS', 'Math, English, Science, PE, Art');
 
 -- --------------------------------------------------------
 
@@ -120,22 +135,35 @@ INSERT INTO `teachers` (`id`, `first_name`, `middle_name`, `last_name`, `day`, `
 --
 
 CREATE TABLE `users` (
-  `user_id` int(10) NOT NULL,
-  `username` varchar(16) NOT NULL,
-  `password` varchar(16) NOT NULL
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('admin','user') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`) VALUES
-(1, 'admin', '123'),
-(3, 'admin', '123456');
+INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
+(1, 'admin', 'admin123', 'admin'),
+(2, 'user1', 'user123', 'user');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `schedules`
+--
+ALTER TABLE `schedules`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `schedule_again`
+--
+ALTER TABLE `schedule_again`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sections`
@@ -159,35 +187,48 @@ ALTER TABLE `teachers`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `schedules`
+--
+ALTER TABLE `schedules`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=505;
+
+--
+-- AUTO_INCREMENT for table `schedule_again`
+--
+ALTER TABLE `schedule_again`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

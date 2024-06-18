@@ -38,16 +38,16 @@ if (isset($_GET['search'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (isset($_POST['id'], $_POST['subject_name'], $_POST['subject_code'], $_POST['school_year'], $_POST['grade_level'],  $_POST['strand'])) {
+  if (isset($_POST['id'], $_POST['subject_name'], $_POST['subject_code'],  $_POST['grade_level'],  $_POST['strand'])) {
     $id = $_POST['id'];
     $subject_name = $_POST['subject_name'];
     $subject_code = $_POST['subject_code'];
-    $school_year = $_POST['school_year'];
+
     $grade_level = $_POST['grade_level'];
     $strand = isset($_POST['strand']) ? implode(", ", $_POST['strand']) : '';
 
-    $stmt = $conn->prepare("UPDATE subjects SET subject_name=?, subject_code=?, school_year=?, grade_level=?, strand=? WHERE id=?");
-    $stmt->bind_param("sssssi", $subject_name, $subject_code, $school_year, $grade_level, $strand, $id);
+    $stmt = $conn->prepare("UPDATE subjects SET subject_name=?, subject_code=?, grade_level=?, strand=? WHERE id=?");
+    $stmt->bind_param("ssssi", $subject_name, $subject_code, $grade_level, $strand, $id);
     if ($stmt->execute()) {
       header("Location: edit_page_subjects.php?id=$id");
       exit();
@@ -74,30 +74,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="container">
     <nav>
       <div class="logo">
-        <img src="./img/olivarez-college-tagaytay-logo.png" alt="" />
-        <span>Olivarez College <br />
-          Tagaytay</span>
+        <img src="./img/olivarez-college-tagaytay-logo.png" alt="oct logo">
       </div>
-      <ul>
-        <li class="list-items">
-          <a href="./generate.php"><i class="fa-solid fa-circle-plus"></i><span class="nav-lists">Generate Schedule</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./dashboard.php"><i class="fa-solid fa-tv"></i><span class="nav-lists">Dashboard</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i><span class="nav-lists">Teachers</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span class="nav-lists">Sections</span></a>
-        </li>
-        <li class="list-items">
-          <a href="./subject.php" class="active"><i class="fa-solid fa-book"></i><span class="nav-lists">Subjects</span></a>
-        </li>
-        <li>
-          <a href="./login.php" class="logout"><i class="fa-solid fa-right-from-bracket"></i><span class="nav-lists">Logout</span></a>
-        </li>
-      </ul>
+      <div class="public">
+        <a href="./generate.php"><i class="fa-solid fa-circle-plus"></i><span>Create schedule</span></a>
+        <a href="./dashboard.php"> <i class="fa-solid fa-tv"></i><span>Dashboard</span></a>
+        <a href="./subject.php" class="active"><i class="fa-solid fa-book"></i><span>Subjects</span></a>
+        <a href="./section.php"><i class="fa-solid fa-users-rectangle"></i><span>Sections</span></a>
+        <a href="./teachers.php"><i class="fa-solid fa-chalkboard-user"></i> <span>Teachers</span></a>
+
+      </div>
+      <div class="admin">
+        <a class="logout"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+      </div>
     </nav>
     <section class="main-content">
       <div class="main-logo">
@@ -121,10 +110,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
           </div>
           <div class="yrlvl-gradelvl">
-            <div class="year-level">
-              <span>School Year<span style="color: red; font-size: 1.3em">*</span></span>
-              <input required type="text" class="first-name input" autocomplete="off" name="school_year" value="<?php echo $row['school_year']; ?>" />
+            <div class="strand-dropdown">
+              <span class="input-info">
+                Strand<span style="color: red; font-size: 1.3em">*</span>
+              </span>
+
+              <select name="strand[]" multiple multiselect-select-all="true">
+                <?php
+                $selected_strand = explode(", ", $row['strand']);
+                $strands = array("GAS", "STEM", "TVL", "ICT", "ABM");
+                foreach ($strands as $strand) {
+                  $selected = in_array($strand, $selected_strand) ? 'selected' : '';
+                  echo "<option value='$strand' $selected>$strand</option>";
+                }
+                ?>
+              </select>
             </div>
+
             <div class="dropdown-gradelvl">
               <span class="input-info">Grade Level<span style="color: red; font-size: 1.3em">*</span></span>
               <input type="text" class="textbox-grade input" placeholder="No grade level selected" readonly name="grade_level" value="<?php echo $row['grade_level']; ?>" />
@@ -135,22 +137,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div onclick="show('Grade 12')">Grade 12</div>
               </div>
             </div>
-          </div>
-          <div class="strand-dropdown">
-            <span class="input-info">
-              Strand<span style="color: red; font-size: 1.3em">*</span>
-            </span>
-
-            <select name="strand[]" multiple multiselect-select-all="true">
-              <?php
-              $selected_strand = explode(", ", $row['strand']);
-              $strands = array("GAS", "STEM", "TVL", "ICT", "ABM");
-              foreach ($strands as $strand) {
-                $selected = in_array($strand, $selected_strand) ? 'selected' : '';
-                echo "<option value='$strand' $selected>$strand</option>";
-              }
-              ?>
-            </select>
           </div>
 
           <div class="button-submit">
@@ -179,7 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <tr>
                 <th>Subject</th>
                 <th>Subject Code</th>
-                <th>School Year</th>
+
                 <th>Grade Level</th>
                 <th>Strand</th>
                 <th>Action</th>
@@ -192,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<tr>";
                 echo "<td>" . $row['subject_name'] . "</td>";
                 echo "<td>" . $row['subject_code'] . "</td>";
-                echo "<td>" . $row['school_year'] . "</td>";
+
                 echo "<td>" . $row['grade_level'] . "</td>";
                 echo "<td>" . $row['strand'] . "</td>";
                 echo "<td> <a href='edit_page_subjects.php?id=" . $row['id'] . "'><button class='edit'><i class='fa-solid fa-pen'></i></button></a> 
