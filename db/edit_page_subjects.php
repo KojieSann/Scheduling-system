@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <select name="strand[]" multiple multiselect-select-all="true">
                 <?php
                 $selected_strand = explode(", ", $row['strand']);
-                $strands = array("GAS", "STEM", "TVL", "ICT", "ABM");
+                $strands = array("STEM","HUMSS", "TVL-ICT", "TVL-HE", "ABM");
                 foreach ($strands as $strand) {
                   $selected = in_array($strand, $selected_strand) ? 'selected' : '';
                   echo "<option value='$strand' $selected>$strand</option>";

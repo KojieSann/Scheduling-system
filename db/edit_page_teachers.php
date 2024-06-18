@@ -159,16 +159,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <span class="icon-down"><i class="fa-solid fa-chevron-down"></i></span>
 
               <div class="options-strand">
-                <div onclick="reveal('GAS')">GAS
-                </div>
-                <div onclick="reveal('STEM')">STEM
-                </div>
-                <div onclick="reveal('TVL')">TVL
-                </div>
-                <div onclick="reveal('ICT')">ICT
-                </div>
-                <div onclick="reveal('ABM')">ABM
-                </div>
+                <div onclick="reveal('STEM')">STEM</div>
+                <div onclick="reveal('TVL-ICT')">TVL-ICT</div>
+                <div onclick="reveal('TVL-HE')">TVL-HE</div>
+                <div onclick="reveal('ABM')">ABM</div>
+                <div onclick="reveal('HUMSS')">HUMSS</div>
               </div>
             </div>
             <div class="subject-list">

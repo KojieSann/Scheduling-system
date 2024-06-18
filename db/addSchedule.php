@@ -59,8 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 for ($i = 0; $i < count($timeInArray); $i++) {
                     $timeIn = strtotime($timeInArray[$i]);
                     $timeOut = strtotime($timeOutArray[$i]);
-                    $startTime = date("h:i A", $timeIn);
-                    $endTime = date("h:i A", $timeOut);
+                    $startTime = date("H:i", $timeIn);
+                    $endTime = date("H:i", $timeOut);
                     $duration = ($timeOut - $timeIn) / 60;
 
                     // Check for conflicts

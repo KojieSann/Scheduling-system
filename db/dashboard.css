@@ -460,7 +460,7 @@ nav a span::before{
   color: #4b4b4b;
 }
 .schedule-table .table-container {
-  max-height: 50vh;
+  max-height: 47vh;
   overflow-y: scroll;
   margin-top: 5px;
 }

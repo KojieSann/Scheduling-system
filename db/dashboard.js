@@ -90,7 +90,7 @@ function tableToPrint() {
       });
   });
   var printContent = '<table border="1">';
-  printContent += '<thead><tr><th>Section</th><th>Strand</th><th># of Subjects</th><th>Sem</th><th>SY</th><th>Adviser</th></tr></thead>';
+  printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Grade level</th><th># of Subjects</th><th>Sem</th><th>SY</th><th>Adviser</th></tr></thead>';
   printContent += '<tbody>';
   checkedRows.forEach(function (row) {
       var rowData = row.closest('tr').querySelectorAll('td:not(:first-child)');

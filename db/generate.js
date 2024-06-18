@@ -134,47 +134,47 @@ formSubmitButton.addEventListener("click", function () {
   selectedRow.style.backgroundColor = "#d8f3dc";
 });
 
-  const nextButton = document.querySelector('.next-1');
-  nextButton.disabled = true;
-  nextButton.addEventListener('click', function(event) {
-    if (!isSubmitButtonClicked()) {
-      event.preventDefault();
-      displayFailedModal();
-    }
-  });
+  // const nextButton = document.querySelector('.next-1');
+  // nextButton.disabled = true;
+  // nextButton.addEventListener('click', function(event) {
+  //   if (!isSubmitButtonClicked()) {
+  //     event.preventDefault();
+  //     displayFailedModal();
+  //   }
+  // });
 
-  const prevButton = document.querySelector('.prev-1');
-  prevButton.addEventListener('click', function() {
+  // const prevButton = document.querySelector('.prev-1');
+  // prevButton.addEventListener('click', function() {
 
-  });
+  // });
 
-  function enableNextButton() {
-    nextButton.disabled = false;
-    nextButton.classList.remove('disabled');
-  }
+  // function enableNextButton() {
+  //   nextButton.disabled = false;
+  //   nextButton.classList.remove('disabled');
+  // }
 
-  function disableNextButton() {
-    nextButton.disabled = true;
-    nextButton.classList.add('disabled');
-  }
+  // function disableNextButton() {
+  //   nextButton.disabled = true;
+  //   nextButton.classList.add('disabled');
+  // }
 
-  function isSubmitButtonClicked() {
-    const selectedRow = document.querySelector('.selected-row');
-    return selectedRow !== null;
-  }
+  // function isSubmitButtonClicked() {
+  //   const selectedRow = document.querySelector('.selected-row');
+  //   return selectedRow !== null;
+  // }
 
-  function displayFailedModal() {
-    const failedModal = document.querySelector('.bg-modal-failed');
-    failedModal.style.display = 'block';
-  }
+  // function displayFailedModal() {
+  //   const failedModal = document.querySelector('.bg-modal-failed');
+  //   failedModal.style.display = 'block';
+  // }
 
-  const closeFailedButton = document.querySelector('.closeFailed');
-  closeFailedButton.addEventListener('click', function() {
-    const failedModal = document.querySelector('.bg-modal-failed');
-    failedModal.style.display = 'none';
-  });
+  // const closeFailedButton = document.querySelector('.closeFailed');
+  // closeFailedButton.addEventListener('click', function() {
+  //   const failedModal = document.querySelector('.bg-modal-failed');
+  //   failedModal.style.display = 'none';
+  // });
 
-  disableNextButton(); 
+  // disableNextButton(); 
 
 
 
@@ -1011,35 +1011,6 @@ function groupSections() {
     }
   });
 }
-
-// edit function
-// $(document).ready(function() {
-//   $('table#scheduleTable td').click(function() {
-//     $(this).prop('contenteditable', true);
-//   });
-//   $('table#scheduleTable td').keypress(function(e) {
-//     if (e.which == 13) {
-//       e.preventDefault();
-//       $(this).blur();
-//       var rowData = $(this).closest('tr').find('td').map(function() {
-//         return $(this).text();
-//       }).get();
-
-//       $.ajax({
-//         url: 'editSchedule.php',
-//         type: 'POST',
-//         data: { rowData: rowData },
-//         success: function(response) {
-//           window.alert(response);
-//         },
-//         error: function(xhr, status, error) {
-
-//           console.error(xhr.responseText);
-//         }
-//       });
-//     }
-//   });
-// });
 
 $(document).ready(function () {
   $("body").on("dblclick", ".editable", function () {

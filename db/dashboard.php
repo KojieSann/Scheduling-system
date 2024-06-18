@@ -148,7 +148,7 @@ if (!$result_schedule2) {
         </div>
         <div class="button-container">
           <button class="print" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
-          <button type="submit"><i class="fa-regular fa-trash-can"></i> Delete</button>
+          <!-- <button type="submit"><i class="fa-regular fa-trash-can"></i> Delete</button> -->
         </div>
       </div>
     </div>

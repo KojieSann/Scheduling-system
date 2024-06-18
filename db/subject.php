@@ -81,14 +81,13 @@ $result = $conn->query($sql);
               <span class="input-info">
                 Strand<span style="color: red; font-size: 1.3em">*</span>
               </span>
-              <select name="strand[]" multiple multiselect-select-all="true" class="strand-select">
-                <option value="GAS">GAS</option>
+              <select name="strand[]" multiple multiselect-select-all="true" class="strand-select">             
                 <option value="STEM">STEM</option>
-                <option value="TVL">TVL</option>
-                <option value="ICT">ICT</option>
+                <option value="TVL-ICT">TVL-ICT</option>
+                <option value="TVL-HE">TVL-HE</option>
                 <option value="ABM">ABM</option>
                 <option value="HUMSS">HUMSS</option>
-                <option value="HE">HE</option>
+                
               </select>
             </div>
             <div class="dropdown-gradelvl">

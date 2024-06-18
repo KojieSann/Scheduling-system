@@ -127,7 +127,7 @@
          </div>
          <div class="btn-content">
            <button class="close">Close</button>
-           <button class="create">Create again</button>
+          <a href="dashboard.php"><button class="create">Go to Dashboard</button></a> 
          </div>
        </div>
      </div>
