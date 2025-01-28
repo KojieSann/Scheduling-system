@@ -35,36 +35,6 @@
 ";
   $result = $conn->query($query);
 
-  // if (isset($_GET['id'])) {
-  //   $id = $_GET['id'];
-  //   $query = mysqli_query($conn, "SELECT * FROM schedules WHERE id = '$id'");
-  //   $row = mysqli_fetch_assoc($query);
-  // } else {
-  //   echo "Schedule updated successfully!";
-  //   exit();
-  // }
-
-  // if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  //   $id = $_POST['id'];
-  //   $section = $_POST['section'];
-  //   $strand = $_POST['strand'];
-  //   $day = $_POST['day'];
-  //   $subject = $_POST['subject'];
-  //   $time = $_POST['time'];
-  //   $instructor = $_POST['instructor'];
-
-  //   $update_query = "UPDATE schedules SET section='$section', strand='$strand,day='$day',subject='$subject',time='$time',instructor='$instructor'  WHERE id='$id'";
-
-  //   if (mysqli_query($conn, $update_query)) {
-  //     header("Location: generate.php?id=$id");
-  //     exit();
-  //   } else {
-  //     echo "Error updating record: " . mysqli_error($conn);
-  //   }
-  // }
-
-
-
   ?>
 
 
@@ -503,15 +473,15 @@
                    <div class="input-container">
                      <div class="input-wrapper">
                        <span>Section</span>
-                       <input readonly type="text" class="input required" name="inputSection" />
+                       <input readonly type="text" class="input" name="inputSection" />
                      </div>
                      <div class="input-wrapper">
                        <span>Strand</span>
-                       <input readonly type="text" class="input required" name="inputStrand" />
+                       <input readonly type="text" class="input" name="inputStrand" />
                      </div>
                      <div class="input-wrapper">
                        <span>Grade level</span>
-                       <input readonly type="text" class="input required" name="inputGradeLevel" />
+                       <input readonly type="text" class="input" name="inputGradeLevel" />
                      </div>
                    </div>
                    <hr />

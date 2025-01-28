@@ -134,50 +134,6 @@ formSubmitButton.addEventListener("click", function () {
   selectedRow.style.backgroundColor = "#d8f3dc";
 });
 
-  // const nextButton = document.querySelector('.next-1');
-  // nextButton.disabled = true;
-  // nextButton.addEventListener('click', function(event) {
-  //   if (!isSubmitButtonClicked()) {
-  //     event.preventDefault();
-  //     displayFailedModal();
-  //   }
-  // });
-
-  // const prevButton = document.querySelector('.prev-1');
-  // prevButton.addEventListener('click', function() {
-
-  // });
-
-  // function enableNextButton() {
-  //   nextButton.disabled = false;
-  //   nextButton.classList.remove('disabled');
-  // }
-
-  // function disableNextButton() {
-  //   nextButton.disabled = true;
-  //   nextButton.classList.add('disabled');
-  // }
-
-  // function isSubmitButtonClicked() {
-  //   const selectedRow = document.querySelector('.selected-row');
-  //   return selectedRow !== null;
-  // }
-
-  // function displayFailedModal() {
-  //   const failedModal = document.querySelector('.bg-modal-failed');
-  //   failedModal.style.display = 'block';
-  // }
-
-  // const closeFailedButton = document.querySelector('.closeFailed');
-  // closeFailedButton.addEventListener('click', function() {
-  //   const failedModal = document.querySelector('.bg-modal-failed');
-  //   failedModal.style.display = 'none';
-  // });
-
-  // disableNextButton(); 
-
-
-
 
 // select all for table
 function toggleSelectAll() {
@@ -452,6 +408,7 @@ const form1 = document.querySelector(".form1");
 const form2 = document.querySelector(".form2");
 const form1NxtBtn = document.querySelector(".subj-btn-next");
 const form2BckBtn = document.querySelector(".subj-btn-back2");
+
 form1NxtBtn.addEventListener("click", function () {
   form1.style.display = "none";
   form2.style.display = "block";
@@ -460,6 +417,8 @@ form2BckBtn.addEventListener("click", function () {
   form2.style.display = "none";
   form1.style.display = "block";
 });
+
+
 // dropdown for subject
 var style = document.createElement("style");
 style.setAttribute("id", "multiselect_dropdown_styles");
@@ -667,8 +626,7 @@ window.addEventListener("load", () => {
 
 document.addEventListener("DOMContentLoaded", function () {
   var nextButtons = document.querySelectorAll(".next");
-  var nextButton = document.querySelector(".next-1");
-  var prevButton = document.querySelector(".prev-1");
+
 
   nextButtons.forEach(function (button) {
     button.addEventListener("click", function (event) {
@@ -681,6 +639,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("inputSection").value = section;
       document.getElementById("inputStrand").value = strand;
       document.getElementById("inputGradeLevel").value = gradeLevel;
+
     });
   });
 });
@@ -777,7 +736,7 @@ $(document).ready(function () {
     selectedStrands = $("#inputStrand").val().split(",");
     filterSubjects();
   });
-  $(".prev").click(function () {
+  $(".prev-1").click(function () {
     selectedStrands = [];
     filterSubjects();
   });
@@ -792,6 +751,17 @@ $(".next-1").click(function () {
   $(".details").find('input[name="inputSection"]').val(section);
   $(".details").find('input[name="inputStrand"]').val(strand);
   $(".details").find('input[name="inputGradeLevel"]').val(gradeLevel);
+});
+
+$(".prev-2").click(function () {
+
+  var section = $('.details input[name="inputSection"]').val();
+  var strand = $('.details input[name="inputStrand"]').val();
+  var gradeLevel = $('.details input[name="inputGradeLevel"]').val();
+
+  $("#inputSection").val(section);
+  $("#inputStrand").val(strand);
+  $("#inputGradeLevel").val(gradeLevel);
 });
 
 //  dropdown for semester
@@ -929,7 +899,6 @@ form.addEventListener("submit", (event) => {
       if (conflictMessage) {
         window.alert(conflictMessage);
         expandDiv()
-        // filterConflicts()
       }
     })
     .catch((error) => {
