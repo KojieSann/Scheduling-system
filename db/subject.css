@@ -11,14 +11,14 @@ body {
   overflow: hidden;
 }
 
-nav{
+nav {
   width: max-content;
-  border-radius: 10px ;
+  border-radius: 10px;
   background-color: #d8f3dc;
   box-shadow: 0px 0px 30px #d8f3dc;
   height: 100vh;
 }
-nav div{
+nav div {
   padding: 10px;
   display: flex;
   flex-flow: column nowrap;
@@ -26,20 +26,20 @@ nav div{
   align-items: center;
   justify-content: space-between;
 }
-nav .logo img{
+nav .logo img {
   cursor: pointer;
   margin-top: 20px;
   width: 50px;
 }
-.public{
+.public {
   padding-bottom: 80px !important;
 }
-.admin{
+.admin {
   position: absolute;
   bottom: 0;
   border-top: 1px solid #4b4b4b;
 }
-nav a{
+nav a {
   position: relative;
   width: 50px;
   height: 50px;
@@ -48,18 +48,19 @@ nav a{
   align-items: center;
   justify-content: center;
   display: flex;
-  font-family: 'poppins';
+  font-family: "poppins";
   color: #4b4b4b;
   cursor: pointer;
 }
-nav i{
+nav i {
   font-size: 20px;
 }
-nav a:hover, nav .active{
-  background-color:#95d5b2 ;
+nav a:hover,
+nav .active {
+  background-color: #95d5b2;
   color: #fff;
 }
-nav a span{
+nav a span {
   z-index: 10000;
   font-size: 15px;
   white-space: nowrap;
@@ -71,16 +72,16 @@ nav a span{
   left: 150%;
   top: 50%;
   transform-origin: left;
-  --scale:0;
+  --scale: 0;
   opacity: 0;
   transform: translateY(-59%) scale(var(--scale));
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
-nav a:hover span{
-  --scale:1;
+nav a:hover span {
+  --scale: 1;
   opacity: 1;
 }
-nav a span::before{
+nav a span::before {
   content: "";
   position: absolute;
   width: 14px;
@@ -89,7 +90,7 @@ nav a span::before{
   background-color: inherit;
   left: 0;
   top: 50%;
-  transform: translate(-40%,-50%)rotate(45deg);
+  transform: translate(-40%, -50%) rotate(45deg);
 }
 .container {
   display: flex;
@@ -98,7 +99,6 @@ nav a span::before{
   position: relative;
   width: 100%;
   padding: 20px;
-
 }
 .main-content .main-logo {
   font-family: "montserrat";
@@ -127,7 +127,6 @@ nav a span::before{
   display: flex;
   position: relative;
   height: 13%;
-
 }
 .main-content .inputs .input:focus {
   border: 1px solid #74c69d;
@@ -166,7 +165,7 @@ nav a span::before{
   position: relative;
   width: 200px;
   height: 35px;
-margin-top: 90px;
+  margin-top: 90px;
 }
 .inputs .dropdown-gradelvl .input {
   cursor: pointer;
@@ -263,8 +262,8 @@ button.btn-submit:hover {
   flex-direction: column;
 }
 .strand-dropdown .input-info {
-position: absolute;
-top: -20px;
+  position: absolute;
+  top: -20px;
 }
 select {
   width: 250px;
@@ -390,7 +389,7 @@ select {
   border-bottom: solid 1px #999;
 }
 /* table */
-.subject-table{
+.subject-table {
   margin-top: 50px;
   width: 100%;
   padding: 10px;
@@ -410,7 +409,7 @@ select {
   color: #4b4b4b;
 }
 .subject-table .table-container {
-  max-height: 58vh;
+  max-height: 55vh;
   overflow-y: scroll;
   margin-top: 5px;
 }
@@ -442,24 +441,24 @@ select {
 .subject-table table td {
   font-size: 13px;
 }
-.subject-table  .table tbody tr:nth-of-type(even) {
+.subject-table .table tbody tr:nth-of-type(even) {
   background-color: #eee;
 }
-.subject-table button{
+.subject-table button {
   padding: 3px 18px;
-   color: #fff;
-   border: none;
-   border-radius: 3px;
-   cursor: pointer;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 }
-.subject-table button:hover{
+.subject-table button:hover {
   opacity: 0.7;
 }
-.subject-table .edit{
+.subject-table .edit {
   color: #fff;
   background: #74c69d;
 }
-.subject-table .delete{
+.subject-table .delete {
   color: #fff;
   background: #c66;
 }
@@ -487,7 +486,7 @@ select {
 }
 .search-box:focus {
   transition: width 0.6s cubic-bezier(0, 1.22, 0.66, 1.39), border-radius 0.6s,
-  background 0.6s;
+    background 0.6s;
   border: none;
   outline: none;
   box-shadow: none;
@@ -611,17 +610,16 @@ select {
   border: 1px solid #52b788;
   background: #fff;
 }
-.edit-container{
+.edit-container {
   margin-left: auto;
   margin-right: 40px;
 }
-.edit-container a{
+.edit-container a {
   text-decoration: none;
-  font-family: 'poppins';
+  font-family: "poppins";
   font-family: 500;
   color: #fff;
   padding: 3px 25px;
   background: #74c69d;
   border-radius: 3px;
 }
-
