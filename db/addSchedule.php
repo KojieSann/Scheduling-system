@@ -1,28 +1,45 @@
 <?php
 include('connect.php');
 
-// Function to check for schedule conflicts
 function checkForConflicts($conn, $section, $strand, $instructor, $day, $startTime, $endTime)
 {
-    $startTime = date("H:i:s ", strtotime($startTime));
+    $startTime = date("H:i:s", strtotime($startTime));
     $endTime = date("H:i:s", strtotime($endTime));
-
+    
+    // Corrected SQL query with time conditions for both section and instructor
     $conflictQuery = "SELECT * FROM schedules WHERE 
-        (section = ? AND strand = ? AND day = ?) OR 
-        (instructor = ? AND day = ?) AND (
-        (time <= ? AND ADDTIME(time, SEC_TO_TIME(duration * 60)) > ?) OR
-        (time < ? AND ADDTIME(time, SEC_TO_TIME(duration * 60)) >= ?)
-    )";
-
+        (
+            section = ? AND strand = ? AND day = ? 
+            AND (
+                (SUBSTRING_INDEX(time, ' - ', 1) < ? AND ADDTIME(SUBSTRING_INDEX(time, ' - ', 1), SEC_TO_TIME(duration * 60)) > ?) 
+                OR 
+                (SUBSTRING_INDEX(time, ' - ', 1) < ? AND ADDTIME(SUBSTRING_INDEX(time, ' - ', 1), SEC_TO_TIME(duration * 60)) > ?)
+            )
+        ) 
+        OR 
+        (
+            instructor = ? AND day = ? 
+            AND (
+                (SUBSTRING_INDEX(time, ' - ', 1) < ? AND ADDTIME(SUBSTRING_INDEX(time, ' - ', 1), SEC_TO_TIME(duration * 60)) > ?) 
+                OR 
+                (SUBSTRING_INDEX(time, ' - ', 1) < ? AND ADDTIME(SUBSTRING_INDEX(time, ' - ', 1), SEC_TO_TIME(duration * 60)) > ?)
+            )
+        )";
+    
     $stmt = $conn->prepare($conflictQuery);
-    $stmt->bind_param("sssssssss", $section, $strand, $day, $instructor, $day, $startTime, $startTime, $endTime, $endTime);
+    
+    $stmt->bind_param("sssssssssssss", 
+        $section, $strand, $day, 
+        $endTime, $startTime, $endTime, $startTime,
+        $instructor, $day,
+        $endTime, $startTime, $endTime, $startTime
+    );
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
 
     return $result->num_rows > 0;
 }
-
 // Function to insert a new schedule
 function insertSchedule($conn, $section, $strand, $subject, $instructor, $day, $duration, $time)
 {
