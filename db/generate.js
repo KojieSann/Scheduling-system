@@ -711,6 +711,7 @@ function updateTime(preferredTime) {
 }
 $(document).ready(function () {
   var selectedStrands = [];
+  var selectedGradeLevel = "";
 
   function filterSubjects() {
     $(".section-table tbody tr").each(function () {
@@ -720,26 +721,41 @@ $(document).ready(function () {
         .trim()
         .split(",");
 
-      if (
+      var gradeLevel = $(this)
+        .find("td:nth-child(4)")
+        .text()
+        .trim();
+
+      // Check if the row matches the selected strands AND grade level
+      var matchesStrands =
         selectedStrands.length === 0 ||
         selectedStrands.some((strand) =>
           subjectStrands.map((s) => s.trim()).includes(strand.trim())
-        )
-      ) {
+        );
+
+      var matchesGradeLevel =
+        selectedGradeLevel === "" || selectedGradeLevel === gradeLevel;
+
+      if (matchesStrands && matchesGradeLevel) {
         $(this).show();
       } else {
         $(this).hide();
       }
     });
   }
+
   $(".next").click(function () {
     selectedStrands = $("#inputStrand").val().split(",");
+    selectedGradeLevel = $("#inputGradeLevel").val();
     filterSubjects();
   });
+
   $(".prev-1").click(function () {
     selectedStrands = [];
+    selectedGradeLevel = "";
     filterSubjects();
   });
+
   filterSubjects();
 });
 
@@ -754,7 +770,6 @@ $(".next-1").click(function () {
 });
 
 $(".prev-2").click(function () {
-
   var section = $('.details input[name="inputSection"]').val();
   var strand = $('.details input[name="inputStrand"]').val();
   var gradeLevel = $('.details input[name="inputGradeLevel"]').val();
@@ -763,7 +778,6 @@ $(".prev-2").click(function () {
   $("#inputStrand").val(strand);
   $("#inputGradeLevel").val(gradeLevel);
 });
-
 //  dropdown for semester
 function show(anything) {
   document.querySelector(".textbox-sem").value = anything;
