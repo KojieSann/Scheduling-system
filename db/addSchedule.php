@@ -6,7 +6,6 @@ function checkForConflicts($conn, $section, $strand, $instructor, $day, $startTi
     $startTime = date("H:i:s", strtotime($startTime));
     $endTime = date("H:i:s", strtotime($endTime));
     
-    // Corrected SQL query with time conditions for both section and instructor
     $conflictQuery = "SELECT * FROM schedules WHERE 
         (
             section = ? AND strand = ? AND day = ? 
@@ -40,7 +39,6 @@ function checkForConflicts($conn, $section, $strand, $instructor, $day, $startTi
 
     return $result->num_rows > 0;
 }
-// Function to insert a new schedule
 function insertSchedule($conn, $section, $strand, $subject, $instructor, $day, $duration, $time)
 {
     $insertQuery = "INSERT INTO schedules (section, strand, subject, instructor, day, duration, time) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -58,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $selectedInstructor = filter_input(INPUT_POST, "instructorSelect", FILTER_VALIDATE_INT);
 
     if ($subjectName && $inputSection && $inputStrand && $selectedInstructor) {
-        // Get instructor name
         $instructorQuery = "SELECT first_name, last_name FROM teachers WHERE id = ?";
         $stmt = $conn->prepare($instructorQuery);
         $stmt->bind_param("i", $selectedInstructor);
@@ -80,7 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $endTime = date("H:i", $timeOut);
                     $duration = ($timeOut - $timeIn) / 60;
 
-                    // Check for conflicts
                     if (!checkForConflicts($conn, $inputSection, $inputStrand, $instructorName, $day, $startTime, $endTime)) {
                         insertSchedule($conn, $inputSection, $inputStrand, $subjectName, $instructorName, $day, $duration . ' minutes', $startTime . ' - ' . $endTime);
                     } else {
