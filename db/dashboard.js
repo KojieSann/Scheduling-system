@@ -240,34 +240,30 @@ function groupSections() {
 document.addEventListener('DOMContentLoaded', function() {
   const scheduleButtons = document.querySelectorAll('.view-open-modal');
   const tableRows = document.querySelectorAll('#scheduleTable tbody tr');
-  const searchInput = document.getElementById('search-box');
+  const searchInput = document.getElementById('searchInput');
 
   let currentSection = null;
 
-  // Event listeners for each schedule button to set the current section
   scheduleButtons.forEach(button => {
     button.addEventListener('click', function() {
       currentSection = this.getAttribute('data-section');
-      // Clear search input when a new section is selected
       searchInput.value = '';
       filterTableBySection(currentSection);
     });
   });
 
-  // Event listener for search input changes
   searchInput.addEventListener('input', function() {
     const searchTerm = searchInput.value.toLowerCase().trim();
     filterTableBySection(currentSection, searchTerm);
   });
 
-  // Function to filter table rows based on section and search term
   function filterTableBySection(section, searchTerm = '') {
     tableRows.forEach(row => {
       const sectionMatches = row.getAttribute('data-section') === section;
-  
-      if (sectionMatches) {
-        const searchMatches = row.textContent.toLowerCase().includes(searchTerm);
-        row.style.display = searchMatches ? '' : 'none';
+      const searchMatches = row.textContent.toLowerCase().includes(searchTerm);
+
+      if (sectionMatches && searchMatches) {
+        row.style.display = '';
       } else {
         row.style.display = 'none';
       }
