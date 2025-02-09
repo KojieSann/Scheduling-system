@@ -523,7 +523,7 @@ if (!$result_schedule2) {
                   </thead>
                   <tbody style="font-size:13px;">
                     <?php
-                    $today = date('l'); // Gets the current day of the week, e.g., "Wednesday"
+                    $today = date('l');
                     $sql_schedule = "SELECT * FROM schedules WHERE day = '$today'";
                     $result_schedule = $conn->query($sql_schedule);
                     while ($row = $result_schedule->fetch_assoc()) {
