@@ -21,6 +21,14 @@
   .bg-content-view td{
     border: 1px solid;
   }
+  .table-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto !important;
+    overflow: visible !important;
+  }
 }
 body {
   background: #fff;
