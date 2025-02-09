@@ -24,8 +24,20 @@ closeModalSubject.addEventListener("click", function () {
 });
 // table to excel
 document.getElementById("tableToExcel").addEventListener("click", function () {
+  let originalTable = document.getElementById("scheduleTable");
+  let clonedTable = originalTable.cloneNode(true);
+
+  clonedTable.querySelectorAll("[style*='display: none'], [hidden]").forEach(el => el.remove());
+  clonedTable.style.position = "absolute";
+  clonedTable.style.left = "-9999px";
+  document.body.appendChild(clonedTable);
+
   var table2excel = new Table2Excel();
-  table2excel.export(document.querySelectorAll("#scheduleTable"));
+  table2excel.export([clonedTable]);
+
+  setTimeout(() => {
+    document.body.removeChild(clonedTable);
+  }, 100);
 });
 // table to pdf
 function tableToPDF() {
@@ -55,23 +67,23 @@ function tableToPrint() {
       alert("Please select at least one row to print.");
       return;
   }
-  checkedRows.forEach(function (row) {
-      var tdElements = row.closest('tr').querySelectorAll('td');
-      tdElements.forEach(function (td) {
-          td.classList.add('hide-on-print');
-      });
-  });
+
   var printContent = '<table border="1">';
   printContent += '<thead><tr><th>Section</th><th>Strand</th><th>Day</th><th>Subject</th><th>Time</th><th>Duration</th><th>Instructor</th></tr></thead>';
   printContent += '<tbody>';
+
   checkedRows.forEach(function (row) {
-      var rowData = row.closest('tr').querySelectorAll('td:not(:first-child)');
-      printContent += '<tr>';
-      rowData.forEach(function (cell) {
-          printContent += '<td>' + cell.textContent + '</td>';
-      });
-      printContent += '</tr>';
+      var closestRow = row.closest('tr');
+      if (closestRow.style.display !== 'none') {
+          var rowData = closestRow.querySelectorAll('td:not(:first-child)');
+          printContent += '<tr>';
+          rowData.forEach(function (cell) {
+              printContent += '<td>' + cell.textContent + '</td>';
+          });
+          printContent += '</tr>';
+      }
   });
+
   printContent += '</tbody></table>';
   var newWindow = window.open('', '_blank');
   newWindow.document.open();
@@ -878,7 +890,6 @@ searchInput.addEventListener("input", function () {
 });
 
 
-
 const form = document.getElementById("contact_form");
 const myDiv = document.getElementById("formContainer");
 
@@ -920,7 +931,6 @@ form.addEventListener("submit", (event) => {
         "<p>There was an error submitting the form:" + error + "</p>";
     });
 });
-
 
 
 // for sorting the day
@@ -1133,4 +1143,78 @@ function searchSchedule() {
     }
   }
 }
+
+let previousData = null; // Store previous data
+
+function updateTable(data) {
+    const newDataString = JSON.stringify(data);
+
+    if (previousData === newDataString) {
+        console.log("No changes detected. Skipping table update.");
+        return;
+    }
+
+    previousData = newDataString;
+
+    const tableBody = document.querySelector("#scheduleTable tbody");
+    const tableBodySubj = document.querySelector("#scheduleTableSubj tbody");
+
+    const checkedIds = new Set(
+        [...document.querySelectorAll('#scheduleTable tbody input:checked')].map(input => input.value)
+    );
+
+    const openRowId = document.querySelector(".editing")?.getAttribute("data-schedule-id") || null;
+
+    tableBody.innerHTML = "";
+    tableBodySubj.innerHTML = "";
+
+    data.forEach((row) => {
+        const tr = document.createElement("tr");
+        tr.className = `clickable-row ${row.id === openRowId ? "editing" : ""}`;
+        tr.setAttribute("data-schedule-id", row.id);
+
+        tr.innerHTML = `
+            <td class="checkboxTbl">
+                <input type="checkbox" name="selected[]" value="${row.id}" ${checkedIds.has(row.id) ? "checked" : ""}/>
+            </td>
+            <td class="editable">${row.section}</td>
+            <td class="editable">${row.strand}</td>
+            <td class="editable">${row.day}</td>
+            <td class="editable">${row.subject}</td>
+            <td class="editable">${row.time}</td>
+            <td>${row.duration}</td>
+            <td class="editable">${row.instructor}</td>
+        `;
+        tableBody.appendChild(tr);
+    });
+
+    data.forEach((row) => {
+        const tr = document.createElement("tr");
+        tr.className = "clickable-row";
+        tr.setAttribute("data-schedule-id", row.id);
+
+        tr.innerHTML = `
+            <td class="editable">${row.section}</td>
+            <td class="editable">${row.day}</td>
+            <td class="editable">${row.subject}</td>
+            <td class="editable">${row.time}</td>
+            <td class="editable">${row.instructor}</td>
+        `;
+        tableBodySubj.appendChild(tr);
+    });
+
+    console.log("Table updated successfully.");
+}
+
+const eventSource = new EventSource("sse.php");
+
+eventSource.onmessage = function (event) {
+    const data = JSON.parse(event.data);
+    updateTable(data);
+};
+
+eventSource.onerror = function (error) {
+    console.error("SSE Error:", error);
+    eventSource.close(); 
+};
 

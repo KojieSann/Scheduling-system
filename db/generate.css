@@ -1663,3 +1663,8 @@ nav a span::before {
   pointer-events: none;
   color: #4b4b4b;
 }
+@media print {
+  .no-print {
+      display: none;
+  }
+}

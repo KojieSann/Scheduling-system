@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         insertSchedule($conn, $inputSection, $inputStrand, $subjectName, $instructorName, $day, $duration . ' minutes', $startTime . ' - ' . $endTime);
                     } else {
                         http_response_code(409); 
-                        echo "Conflict detected. Check theTable";
+                        echo "Conflict detected. Check the Table";
                         exit();
                     }
                 }
